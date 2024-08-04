@@ -1,4 +1,4 @@
-import { addToast } from '../Redux/toast'
+import { addOneToastWarning } from '../Redux/toast'
 import { store } from '../store'
 import { TResponseApi } from '../types/axiosResponse'
 import { UserResponse } from '../types/user.type'
@@ -15,7 +15,6 @@ class Auth {
       }
 
       static async register({ email, password }: TAuthParams) {
-            console.log(process.env.REACT_APP_BASE_URL)
 
             return axiosCustom.post<TResponseApi<{ user: UserResponse; access_token: string }>>('/v1/api/auth/register', {
                   email,
@@ -28,7 +27,17 @@ class Auth {
       }
 
       static async refresh_token() {
-            store.dispatch(addToast({ type: 'WARNNING', message: 'Đang gọi để lấy lại access_token', id: Math.random().toString() }))
+            store.dispatch(
+                  addOneToastWarning({
+                        toast_item: {
+                              type: 'WARNING',
+                              core: { message: ' Đang gọi để lấy lại access_token' },
+                              _id: Math.random().toString(),
+                              toast_title: 'Đang xử lí một số tiến trình'
+
+                        },
+                  }),
+            )
             return axiosCustom.post<{ metadata: { token: string } }>('/v1/api/auth/rf', {})
       }
 }

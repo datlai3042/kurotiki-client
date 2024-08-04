@@ -4,7 +4,7 @@ import CartService from '../../apis/cart.service'
 import { Link, useNavigate } from 'react-router-dom'
 import BoxMoney from '../BoxUi/BoxMoney'
 import { useDispatch } from 'react-redux'
-import { addToast } from '../../Redux/toast'
+import { addOneToastWarning } from '../../Redux/toast'
 
 const CartPayMini = () => {
       const [price, setPrice] = useState<number>(0)
@@ -21,7 +21,16 @@ const CartPayMini = () => {
             if (payQuery.isSuccess) {
                   if (payQuery.data.data.metadata.carts.cart_products.length === 0) {
                         dispatch(
-                              addToast({ type: 'WARNNING', message: 'Vui lòng chọn sản phẩm để thanh toán', id: Math.random.toString() }),
+                              addOneToastWarning({
+                                    toast_item: {
+                                          _id: Math.random().toString(),
+                                          type: 'WARNING',
+                                          core: {
+                                                message: 'Vui lòng chọn sản phẩm thanh toán',
+                                          },
+                                          toast_title: 'Thiếu thông tin ',
+                                    },
+                              }),
                         )
                         return
                   }

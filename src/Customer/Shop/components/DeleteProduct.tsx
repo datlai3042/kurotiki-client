@@ -2,8 +2,9 @@ import React from 'react'
 import Portal from '../../../component/Portal'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import ProductApi from '../../../apis/product.api'
-import { useDispatch } from 'react-redux'
-import { addToast } from '../../../Redux/toast'
+import { useDispatch, useSelector } from 'react-redux'
+import { addOneToastError, addOneToastSuccess } from '../../../Redux/toast'
+import { RootState } from '@/src/store'
 
 type TProps = { product_id: string; setModalDeleteProduct: React.Dispatch<React.SetStateAction<boolean>> }
 
@@ -12,20 +13,56 @@ const DeleteProduct = (props: TProps) => {
       const { product_id, setModalDeleteProduct } = props
       const dispatch = useDispatch()
 
+      const user = useSelector((state: RootState) => state.authentication.user)
+
       const deleteProductWithId = useMutation({
             mutationKey: ['deleteProductWithId'],
             mutationFn: (product_id: string) => ProductApi.deleteProductWithId({ product_id }),
             onSuccess: () => {
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Xóa thành công', id: Math.random().toString() }))
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Xóa thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
                   queryClient.invalidateQueries({ queryKey: ['get-product-my-shop'] })
             },
             onError: () => {
-                  dispatch(addToast({ type: 'ERROR', message: 'Xóa không thành công', id: Math.random().toString() }))
+                  dispatch(
+                        addOneToastError({
+                              toast_item: {
+                                    type: 'ERROR',
+                                    core: { message: 'Xóa không thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Có lỗi xảy ra',
+                              },
+                        }),
+                  )
             },
       })
 
       const verifyDeleteProduct = () => {
-            deleteProductWithId.mutate(product_id)
+            if (user) {
+                  const { roles } = user
+                  if (roles.includes('admin')) {
+                        dispatch(
+                              addOneToastError({
+                                    toast_item: {
+                                          type: 'ERROR',
+                                          core: { message: 'Quyền admin hiện không khả dụng' },
+                                          _id: Math.random().toString(),
+                                          toast_title: 'Có lỗi xảy ra',
+                                    },
+                              }),
+                        )
+                  } else {
+                        deleteProductWithId.mutate(product_id)
+                  }
+            }
       }
 
       const handleHideModal = () => {
@@ -43,7 +80,7 @@ const DeleteProduct = (props: TProps) => {
                                           <span className='text-blue-500 font-bold text-[16px]'>{product_id}</span>
                                           <span className='text-blue-400'>{'}'}</span>
                                     </div>
-                                    <div className='flex flex-1  gap-[16px] items-center justify-center'>
+                                    <div className='flex flex-1  gap-[16px] items-center justify-end'>
                                           <button
                                                 className='w-[100px] h-[36px] px-[6px] py-[4px] border-[1px] border-blue-500 flex items-center justify-center text-blue-500 bg-white rounded-lg'
                                                 onClick={handleHideModal}

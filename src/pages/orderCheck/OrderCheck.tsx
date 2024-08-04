@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import OrderService from '../../apis/Order.service'
 import NotFound from '../../component/Errors/NotFound'
@@ -19,17 +19,28 @@ const OrderCheck = () => {
             queryKey: ['get-order', order_id],
             queryFn: () => OrderService.getOrderInfo({ order_id: order_id as string }),
       })
+
+      useEffect(() => {
+            if(getOrderId.isSuccess) {
+
+console.log({products: getOrderId.data?.data.metadata})
+
+            }
+
+
+},[getOrderId.isSuccess])
       if (!order_id) return <NotFound />
       if (!getOrderId.data?.data.metadata.getOrderInfo && getOrderId.isSuccess) return <NotFound />
 
-      const products = getOrderId.data?.data.metadata.getOrderInfo.order_products[0].products
+      const order = getOrderId.data?.data.metadata.getOrderInfo[0]
 
+      
       return (
             <div className='w-[850px] mx-auto bg-[#ffffff] flex flex-col p-[24px_16px_50px] xl:p-[24px_20px_50px] my-[50px]'>
                   {getOrderId.isSuccess && (
                         <React.Fragment>
                               <div className='flex flex-col gap-[36px]'>
-                                    {products?.map((product, index) => (
+                                    {order?.products?.map((product, index) => (
                                           <div className='flex flex-col h-max gap-[40px]' key={product.product_id._id}>
                                                 <div className='relative w-[350px] mx-auto h-[1px] bg-slate-400 mt-[36px]'>
                                                       <p className='absolute top-[-50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-max bg-[#ffffff] px-[12px]'>
@@ -111,7 +122,7 @@ const OrderCheck = () => {
                                           <span>
                                                 {' '}
                                                 {convertDateToStringFull(
-                                                      getOrderId.data?.data.metadata.getOrderInfo.order_products[0]
+                                                      getOrderId.data?.data.metadata.getOrderInfo[0]
                                                             .order_time_payment as Date,
                                                 )}
                                           </span>
@@ -119,7 +130,7 @@ const OrderCheck = () => {
                                     <p className='flex gap-[8px] items-center'>
                                           <span>Tổng giá trị đơn hàng: </span>
                                           <span className='text-slate-800 font-bold text-[24px]'>
-                                                {getOrderId.data?.data.metadata.getOrderInfo.order_products[0].order_total}
+                                                {getOrderId.data?.data.metadata.getOrderInfo[0].order_total}
                                           </span>
                                     </p>
                               </div>

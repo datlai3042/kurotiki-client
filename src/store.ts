@@ -1,14 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import authSlice from './Redux/authSlice'
 
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import uiSlice from './Redux/uiSlice'
 import authenticationSlice from './Redux/authenticationSlice'
-import toast from './Redux/toast'
 import cartSlice from './Redux/cartSlice'
 import categorySlice from './Redux/category.slice'
 import commentSlice from './Redux/comment.slice'
+import toast from './Redux/toast'
+import uiSlice from './Redux/uiSlice'
 
 // const authPersistConfig = {
 //   key: 'auth',

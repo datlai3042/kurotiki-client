@@ -17,13 +17,13 @@ import InputText from '../components/InputText'
 import InputNumber from '../components/InputNumber'
 import Timeline from '../components/Timeline'
 import { useDispatch } from 'react-redux'
-import { addToast } from '../../../Redux/toast'
 import { productBookSchema, productFoodSchema, productSchema } from '../types/product.schema'
 import Book from '../Category/Book/Book'
 import { ProductForm, TCheckDescriptionImage, TProductDetail, TProfileImage } from '../../../types/product/product.type'
 import { TCloudinaryImage } from '../types/cloudinary.typs'
 import ButtonUpload from '../RegisterProductForm/components/ButtonUpload'
 import UpdateMultipleImage from './components/UpdateMultipleImage'
+import { addOneToastError } from '../../../Redux/toast'
 
 //@Props - Product::Book
 
@@ -105,23 +105,43 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
 
             // return
             if (!urlProductMultipleImage.isUploadImage) {
+
                   dispatch(
-                        addToast({
-                              type: 'ERROR',
-                              message: `Upload thêm ${4 - urlProductMultipleImage.numberImage} để đủ 4 ảnh bạn nhé`,
-                              id: Math.random().toString(),
+                        addOneToastError({
+                              toast_item: {
+                                    type: 'ERROR',
+                                    core: {
+                                          message: `Upload thêm ${4 - urlProductMultipleImage.numberImage} để đủ 4 ảnh bạn nhé`,
+
+
+                                     },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Có lỗi xảy ra',
+                              },
                         }),
                   )
+
+                
             }
 
             if (!urlProductThumb.isUploadImage) {
+
+
                   dispatch(
-                        addToast({
-                              type: 'ERROR',
-                              message: 'Hình đại diện sản phẩm là bắt buộc',
-                              id: Math.random().toString(),
+                        addOneToastError({
+                              toast_item: {
+                                    type: 'ERROR',
+                                    core: {
+
+                                          message: 'Hình đại diện sản phẩm là bắt buộc',
+
+                                     },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Có lỗi xảy ra',
+                              },
                         }),
                   )
+                  
             }
 
             // chỉ submit khi có đủ image

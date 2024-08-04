@@ -7,9 +7,9 @@ import CommentItem from './CommentItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { UserResponse } from '../../types/user.type'
-import { addToast } from '../../Redux/toast'
 import { SLATE_TIME_COMMENT_ME_ALL } from '../../constant/staleTime'
 import BoxConfirmDelete from '../BoxUi/confirm/BoxConfirmDelete'
+import { addOneToastSuccess, addOneToastWarning } from '../../Redux/toast'
 
 type TProps = {
       product: TProductDetail
@@ -38,7 +38,18 @@ const CommentMe = (props: TProps) => {
             mutationFn: ({ comment_product_id }: { comment_product_id: string }) => CommentService.deleteComment({ comment_product_id }),
             onSuccess: () => {
                   setOpenBoxDelete(false)
-                  dispatch(addToast({ id: Math.random().toString(), message: 'Đã xóa comment thành công', type: 'SUCCESS' }))
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: 'Đã xóa comment thành công',
+                                    },
+                                    toast_title: 'Đã xóa thành công',
+                                    type: 'SUCCESS',
+                              },
+                        }),
+                  )
                   queryClient.invalidateQueries({
                         queryKey: ['get-all-comment-image'],
                   })
@@ -65,13 +76,35 @@ const CommentMe = (props: TProps) => {
 
             if (ownerProduct === user._id) {
                   dispatch(
-                        addToast({ id: Math.random().toString(), message: 'Bạn không đánh giá sản phẩm của chính mình', type: 'WARNNING' }),
+                        addOneToastWarning({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    type: 'WARNING',
+                                    core: {
+                                          message: 'Bạn không đánh giá sản phẩm của chính mình',
+                                    },
+                                    toast_title: 'Lỗi tiến trình',
+                              },
+                        }),
                   )
+
                   return
             }
 
             if (!user) {
-                  dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: 'Vui lòng đăng nhập để đánh giá sản phẩm' }))
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    type: 'WARNING',
+                                    core: {
+                                          message: 'Vui lòng đăng nhập để đánh giá sản phẩm',
+                                    },
+                                    toast_title: 'Thiếu thông tin xác thực',
+                              },
+                        }),
+                  )
+
                   return
             }
 

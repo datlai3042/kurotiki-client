@@ -58,7 +58,7 @@ const Comment = (props: TProps) => {
                   />
                   {getAllCommentQuery.isSuccess && comments.map((comment) => <CommentItem key={comment._id} comment={comment} />)}
                   {comments.length === 0 && (
-                        <div className='w-full h-[400px] flex items-center justify-center text-[20px] font-semibold'>Không có kết quả</div>
+                        <div className='w-full h-[100px] flex items-center justify-center text-[20px] font-semibold'>Không có kết quả</div>
                   )}
 
                   {getAllCommentQuery.isPending && (

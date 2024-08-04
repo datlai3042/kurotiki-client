@@ -1,17 +1,17 @@
-import React, { SetStateAction, useEffect, useRef, useState } from 'react'
-import { TModeAuth } from './AuthWrapper'
-import { Eye, EyeOff, ShieldX } from 'lucide-react'
-import { useForm } from 'react-hook-form'
-import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import Auth from '../../apis/auth.api'
+import { Eye, EyeOff } from 'lucide-react'
+import React, { SetStateAction, useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { checkAxiosError } from '../../utils/handleAxiosError'
-import TErrorAxios from '../../types/axios.response.error'
+import * as z from 'zod'
+import Auth from '../../apis/auth.api'
 import { doCloseBoxLogin, fetchUser } from '../../Redux/authenticationSlice'
-import { addToast } from '../../Redux/toast'
+import TErrorAxios from '../../types/axios.response.error'
+import { checkAxiosError } from '../../utils/handleAxiosError'
 import BoxLoading from '../BoxUi/BoxLoading'
+import { TModeAuth } from './AuthWrapper'
+import { addOneToastError, addOneToastWarning } from '../../Redux/toast'
 
 type TProps = {
       setModeAuth: React.Dispatch<SetStateAction<TModeAuth>>
@@ -79,10 +79,13 @@ const AuthLogin = (props: TProps) => {
                               error?.response?.data?.detail === 'Not found Email'
                         ) {
                               dispatch(
-                                    addToast({
-                                          id: Math.random().toString(),
-                                          message: 'Không tìm thấy thông tin đăng nhập',
-                                          type: 'ERROR',
+                                    addOneToastError({
+                                          toast_item: {
+                                                type: 'ERROR',
+                                                core: { message: 'Không tìm thấy không tin đăng nhập' },
+                                                _id: Math.random().toString(),
+                                                toast_title: 'Có lỗi xảy ra',
+                                          },
                                     }),
                               )
                         }
@@ -112,20 +115,27 @@ const AuthLogin = (props: TProps) => {
                         subMessage.push(`Field ${key} đã xảy ra lỗi, vui lòng ${errors[key as keyof TFormLogin]?.message}`)
                   })
 
-                  dispatch(addToast({ id: Math.random().toString(), subMessage, message: 'Error', type: 'WARNNING' }))
+                  dispatch(addOneToastWarning({
+                        toast_item: {
+                              type: 'WARNING',
+                              core: { message:subMessage.join(' - ') },
+                              _id: Math.random().toString(),
+                              toast_title: 'Có lỗi xảy ra',
+                        },
+                  }))
             }
       }, [errors, dispatch])
 
       return (
             <div className=' flex flex-col items-center gap-[15px] py-[35px]'>
-                  <h3 className={`text-slate-900 font-black tracking-[5px] text-[24px]`}>Login</h3>
+                  <h3 className={`text-slate-900 font-black tracking-[5px] text-[24px]`}>Đăng nhập</h3>
                   <h4 className={`text-stone-600 italic text-[16px] opacity-80 px-[12px]`}>Đăng nhập để trải nghiệm mua sắm thỏa thích</h4>
                   <form className='flex flex-1 flex-col gap-[20px] mt-[12px] w-[70%]' noValidate onSubmit={handleSubmit(onSubmit)}>
                         <div className='w-full flex flex-col gap-[16px]'>
                               <input
                                     {...register('email')}
                                     type='text'
-                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px] border-slate-900 placeholder:text-stone-500  `}
+                                    className={`h-[42px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-md border-slate-900 placeholder:text-stone-500  `}
                                     placeholder='Email'
                               />
                         </div>
@@ -133,7 +143,7 @@ const AuthLogin = (props: TProps) => {
                               <input
                                     {...register('password')}
                                     type={typePassword}
-                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px] border-slate-900 placeholder:text-stone-500 `}
+                                    className={`h-[42px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-md border-slate-900 placeholder:text-stone-500 `}
                                     placeholder='Mật khẩu'
                               />
                               <span className='absolute right-[5px]' onClick={handleShowHidePassword}>
@@ -148,7 +158,7 @@ const AuthLogin = (props: TProps) => {
                         <div className=''>
                               <p>
                                     Bạn chưa có tài khoản,{' '}
-                                    <span className='underline text-slate-900' onClick={() => setModeAuth('Register')}>
+                                    <span className='underline text-slate-900 hover:cursor-pointer' onClick={() => setModeAuth('Register')}>
                                           đăng kí nhé
                                     </span>
                               </p>
@@ -159,7 +169,7 @@ const AuthLogin = (props: TProps) => {
                               disabled={authLogin.isPending && Object.keys(errors).length > 0}
                               title={Object.keys(errors).length > 0 ? 'Vui lòng nhập thông tin hợp lệ' : `Đăng nhập`}
                         >
-                              <span>Login</span>
+                              <span>Đăng nhập</span>
                               {authLogin.isPending && <BoxLoading />}
                         </button>
                   </form>

@@ -1,16 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Rate } from 'antd'
-import Input from 'antd/es/input/Input'
 import TextArea from 'antd/es/input/TextArea'
 import { Camera, X } from 'lucide-react'
 import React, { SetStateAction, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import CommentService, { AddCommentParam } from '../../apis/comment.service'
 import { StateFile } from '../../apis/shop.api'
 import { TProductDetail } from '../../types/product/product.type'
-import { ModeForm } from './BoxShopForm'
-import { useDispatch } from 'react-redux'
-import { addToast } from '../../Redux/toast'
 import BoxLoading from './BoxLoading'
+import { ModeForm } from './BoxShopForm'
+import { addOneToastError, addOneToastWarning } from '../../Redux/toast'
 
 type TProps = {
       onClose: React.Dispatch<SetStateAction<boolean>>
@@ -62,10 +61,15 @@ const BoxCommentProduct = (props: TProps) => {
 
             onError: () => {
                   dispatch(
-                        addToast({
-                              type: 'ERROR',
-                              id: Math.random().toString(),
-                              message: 'Đã xảy ra lỗi, vui lòng thử lại',
+                        addOneToastError({
+                              toast_item: {
+                                    type: 'ERROR',
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: ' vui lòng thử lại',
+                                    },
+                                    toast_title: 'Đã có lỗi xảy ra',
+                              },
                         }),
                   )
             },
@@ -85,10 +89,15 @@ const BoxCommentProduct = (props: TProps) => {
       const onClickUpload = () => {
             if (public_id) {
                   dispatch(
-                        addToast({
-                              type: 'WARNNING',
-                              id: Math.random().toString(),
-                              message: 'Do dung lượng Cloudinary free của mình sắp hết nên mỗi comment mình set chỉ up 1 ảnh thôi @@',
+                        addOneToastWarning({
+                              toast_item: {
+                                    type: 'WARNING',
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: 'Do dung lượng Cloudinary free của mình sắp hết nên mỗi comment mình set chỉ up 1 ảnh thôi @@',
+                                    },
+                                    toast_title: 'Lỗi upload',
+                              },
                         }),
                   )
                   return

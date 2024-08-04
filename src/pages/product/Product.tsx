@@ -103,7 +103,7 @@ const Product = () => {
                         {getProductWithId.isSuccess && product && (
                               <div className='  flex gap-[16px] xl:gap-[24px] xl:mt-0'>
                                     <div className='w-full xl:w-[74%] flex flex-col gap-[24px]'>
-                                          <div className='top w-full min-h-[1000px] h-max flex flex-col xl:flex-row gap-[24px]'>
+                                          <div className='top w-full min-h-[100px] h-max flex flex-col xl:flex-row gap-[24px]'>
                                                 <div className='xl:w-[40%] static xl:sticky top-[32px] xl:top-[16px] bg-white px-[3px] py-[6px] rounded-lg  h-max flex flex-col gap-[16px] '>
                                                       <ProductDetail product={product} isSuccess={getProductWithId.isSuccess} />
                                                 </div>
@@ -115,7 +115,7 @@ const Product = () => {
                                                       />
                                                 </div>
                                           </div>
-                                          <div className='flex flex-col gap-[10px] comment w-full min-h-[1000px] h-max  bg-[#ffffff] rounded-lg  pb-[50px]'>
+                                          <div className='flex flex-col gap-[10px] comment w-full min-h-[100px] h-max  bg-[#ffffff] rounded-lg  pb-[50px]'>
                                                 <CommentStatistic
                                                       avg={avg || vote || product.product_votes}
                                                       totalComment={totalComment || 0}
@@ -137,7 +137,7 @@ const Product = () => {
                         {getProductWithId.isPending && (
                               <div className='animate-pulse bg-gray-100 flex gap-[24px]'>
                                     <div className=' w-full flex flex-col gap-[24px]'>
-                                          <div className='top w-full min-h-[1000px] h-max flex flex-col xl:flex-row gap-[24px]'>
+                                          <div className='top w-full min-h-[100px] h-max flex flex-col xl:flex-row gap-[24px]'>
                                                 <div className='basis-[40%] bg-gray-100 static min-h-[800px] h-[900px] xl:sticky top-[16px]  p-[8px] rounded-sm   flex flex-col gap-[16px]'>
                                                       <div className='animate-pulse bg-gray-400  basis-[35%] w-full'></div>
                                                       <div className='flex bg-gray-100 h-[50px] gap-[16px]'>
@@ -158,15 +158,14 @@ const Product = () => {
                                                       {/* <ProductIntro product={product} /> */}
                                                 </div>
                                           </div>
-                                          <div className='animate-pulse bg-gray-400 comment w-full h-[1000px] '></div>
+                                          <div className='animate-pulse bg-gray-400 comment w-full h-[100px] '></div>
                                     </div>
-                                    {/* <div className='animate-pulse bg-gray-400 basis-[20%] sticky top-[16px] h-[300px]'></div> */}
+                                    <div className='animate-pulse bg-gray-400 basis-[20%] sticky top-[16px] h-[300px]'></div>
                               </div>
                         )}
                   </div>
                   <ContentProduct />
 
-                  <div className=' bg-black h-[4000px] w-full'></div>
             </div>
       )
 }

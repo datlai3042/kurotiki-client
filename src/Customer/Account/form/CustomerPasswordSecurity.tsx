@@ -2,10 +2,10 @@ import React, { SetStateAction, useState } from 'react'
 import { UserResponse } from '../../../types/user.type'
 import { Eye, EyeOff, FolderKey, X } from 'lucide-react'
 import { useDispatch } from 'react-redux'
-import { addToast } from '../../../Redux/toast'
 import { useMutation } from '@tanstack/react-query'
 import AccountService from '../../../apis/account.service'
 import BoxLoading from '../../../component/BoxUi/BoxLoading'
+import { addOneToastError, addOneToastSuccess, addOneToastWarning } from '../../../Redux/toast'
 
 type TProps = {
       onCheck: React.Dispatch<SetStateAction<boolean>>
@@ -32,7 +32,18 @@ const CustomerPasswordSecurity = (props: TProps) => {
       const onSubmit = (e: React.FormEvent) => {
             e.preventDefault()
             if (!password) {
-                  dispatch(addToast({ id: Math.random().toString(), message: 'Vui lòng nhập mật khẩu', type: 'WARNNING' }))
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    type: 'WARNING',
+                                    core: {
+                                          message: 'Vui lòng nhập mật khẩu',
+                                    },
+                                    toast_title: 'Thiếu thông tin ',
+                              },
+                        }),
+                  )
             }
 
             securiryPasswordMutation.mutate({ password })
@@ -44,10 +55,31 @@ const CustomerPasswordSecurity = (props: TProps) => {
             onSuccess: (axiosResponse) => {
                   const { message } = axiosResponse.data.metadata
                   if (!message) {
-                        dispatch(addToast({ id: Math.random().toString(), message: 'Mật khẩu không đúng', type: 'ERROR' }))
+                        dispatch(
+                              addOneToastError({
+                                    toast_item: {
+                                          type: 'ERROR',
+                                          _id: Math.random().toString(),
+                                          core: {
+                                                message: 'Mật khẩu không đúng',
+                                          },
+                                          toast_title: 'Đã có lỗi xảy ra',
+                                    },
+                              }),
+                        )
                         return
                   }
-                  dispatch(addToast({ id: Math.random().toString(), message: 'Xác thực thành công', type: 'SUCCESS' }))
+
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Xác thực thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
                   onClose(false)
                   onGetPassword(password)
                   onCheck(message)

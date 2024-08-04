@@ -1,15 +1,13 @@
 import React, { SetStateAction, useEffect } from 'react'
 import { TAvatarActions } from '../../../reducer/customer.reducer'
 import { useMutation } from '@tanstack/react-query'
-import { addToast } from '../../../Redux/toast'
 import { UserResponse } from '../../../types/user.type'
 import { ShopResponse } from '../../../types/shop.type'
 import { TResponseApi } from '../../../types/axiosResponse'
 import { AxiosResponse } from 'axios'
 import { useDispatch } from 'react-redux'
-// dispatch(addToast({ type: 'WARNNING', message: 'Không thể xóa avatar mặc định', id: Math.random().toString() }))
+import { addOneToastWarning } from '../../../Redux/toast'
 
-// dispatch(fetchUser({ user: deleteAvatar.data.data.metadata.user }))
 
 export type ResultApiDeleteAvatar = { user: UserResponse } | { shop: ShopResponse }
 export type ResultApiUser = { user: UserResponse }
@@ -47,11 +45,18 @@ const ModelAvatarDelete = (props: TProps) => {
                   return
             }
             dispatch(
-                  addToast({
-                        type: 'WARNNING',
-                        message: 'Không thể xóa avatar mặc định',
-                        id: Math.random().toString(),
-                  }),
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    type: 'WARNING',
+                                    core: {
+                                          message: 'Không thể xóa avatar mặc định',
+                                    },
+                                    toast_title: 'Không thể thực hiện ',
+                              },
+                        }),
+                  ),
             )
       }
 

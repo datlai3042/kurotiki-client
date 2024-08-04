@@ -20,7 +20,7 @@ class OrderService {
       }
 
       static async getOrderInfo({ order_id }: { order_id: string }) {
-            return axiosCustom.get<TResponseApi<{ getOrderInfo: { order_products: OrderItem[] } }>>(
+            return axiosCustom.get<TResponseApi<{ getOrderInfo:OrderItem[]  }>>(
                   `/v1/api/order/get-order-info/${order_id}`,
             )
       }

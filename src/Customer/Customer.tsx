@@ -41,8 +41,9 @@ const Customer = () => {
       const [_, setSectionActive] = useState('/customer/account')
       //@connect state redux
       const user = useSelector((state: RootState) => state.authentication.user)
+      const isLoading = useSelector((state: RootState) => state.authentication.isLoading)
+
       const auth = Boolean(user)
-      const router = useNavigate()
 
       //@check path
       if (pathName === '/customer') return <NotFound />
@@ -60,6 +61,10 @@ const Customer = () => {
       const handleActive = (pathName: string) => {
             setSectionActive(pathName)
       }
+
+
+      if(isLoading) return null
+
 
       //@element
       return (

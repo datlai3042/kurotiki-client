@@ -20,7 +20,7 @@ export interface CartProduct {
       product_id: CartProductRef
       shop_id: CartShopRef
       cart_state: 'active' | 'pending' | 'complete'
-
+      price: number,
       quantity: number
       new_quantity: number
       isSelect: boolean

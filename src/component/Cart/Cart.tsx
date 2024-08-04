@@ -67,22 +67,14 @@ const Cart = () => {
       useEffect(() => {}, [getMyCart.isPending])
 
       if (!user) {
-            if (isLoading) {
-                  return (
-                        <div className='w-full h-[500px]'>
-                              <Loading />
-                        </div>
-                  )
-            } else {
+            
                   return (
                         <div className='h-[calc(100vh-100px)] w-full'>
                               <AuthPermission />
                         </div>
                   )
-            }
       }
 
-      console.log({ selectAll })
 
       return (
             <React.Fragment>

@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import BoxLoading from '../../../component/BoxUi/BoxLoading'
 import { useDispatch } from 'react-redux'
-import { addToast } from '../../../Redux/toast'
 import { useMutation } from '@tanstack/react-query'
 import AccountService from '../../../apis/account.service'
 import { fetchUser } from '../../../Redux/authenticationSlice'
 import { checkAxiosError } from '../../../utils/handleAxiosError'
 import TErrorAxios from '../../../types/axios.response.error'
+import { addOneToastSuccess, addOneToastWarning } from '../../../Redux/toast'
 
 // () => api
 
@@ -69,7 +69,16 @@ const CustomerUpdatePassword = () => {
                   const { message, user } = axiosResponse.data.metadata
                   if (message) {
                         dispatch(fetchUser({ user }))
-                        dispatch(addToast({ id: Math.random().toString(), type: 'SUCCESS', message: 'Cập nhập mật khẩu thành công' }))
+                        dispatch(
+                              addOneToastSuccess({
+                                    toast_item: {
+                                          type: 'SUCCESS',
+                                          core: { message: 'Cập nhập mật khẩu thành công' },
+                                          _id: Math.random().toString(),
+                                          toast_title: 'Thành công',
+                                    },
+                              }),
+                        )
                   }
             },
 
@@ -77,13 +86,37 @@ const CustomerUpdatePassword = () => {
                   if (checkAxiosError<TErrorAxios>(error)) {
                         if (error?.response?.status === 404 && error?.response?.statusText === 'Not Found') {
                               const detail = error.response.data?.detail
-                              dispatch(addToast({ id: Math.random().toString(), message: detail || 'Đã có lỗi xảy ra', type: 'WARNNING' }))
+
+                              dispatch(
+                                    addOneToastWarning({
+                                          toast_item: {
+                                                _id: Math.random().toString(),
+                                                type: 'WARNING',
+                                                core: {
+                                                      message: detail || 'Đã có lỗi xảy ra',
+                                                },
+                                                toast_title: 'Thiếu thông tin ',
+                                          },
+                                    }),
+                              )
                               return
                         }
 
                         if (error?.response?.status === 400 && error?.response?.statusText === 'Bad Request') {
                               const detail = error.response.data?.detail
-                              dispatch(addToast({ id: Math.random().toString(), message: detail || 'Đã có lỗi xảy ra', type: 'WARNNING' }))
+
+                              dispatch(
+                                    addOneToastWarning({
+                                          toast_item: {
+                                                _id: Math.random().toString(),
+                                                type: 'WARNING',
+                                                core: {
+                                                      message: detail || 'Đã có lỗi xảy ra',
+                                                },
+                                                toast_title: 'Thiếu thông tin ',
+                                          },
+                                    }),
+                              )
                               return
                         }
                   }
@@ -97,7 +130,19 @@ const CustomerUpdatePassword = () => {
                         subMessage.push(`Field ${key} đã xảy ra lỗi, vui lòng ${errors[key as keyof TRegisterZodSchema]?.message}`)
                   })
 
-                  dispatch(addToast({ id: Math.random().toString(), subMessage, message: 'Error', type: 'WARNNING' }))
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    type: 'WARNING',
+                                    core: {
+                                          message: subMessage.join(' - '),
+                                    },
+                                    toast_title: 'Thiếu thông tin ',
+                              },
+                        }),
+                  )
+
             }
       }, [errors, dispatch])
 

@@ -27,11 +27,15 @@ const authSlice = createSlice({
       reducers: {
             fetchUser: (state, payload: PayloadAction<{ user: UserResponse | undefined }>) => {
                   state.user = payload.payload.user
-                  state.isLoading = true
+                  state.isLoading = false
             },
 
             onLoading: (state) => {
                   state.isLoading = true
+            },
+
+            endLoading: (state) => {
+                  state.isLoading = false
             },
 
             doLogout: (state) => {
@@ -48,6 +52,6 @@ const authSlice = createSlice({
       },
 })
 
-export const { fetchUser, doLogout, doOpenBoxLogin, doCloseBoxLogin, onLoading } = authSlice.actions
+export const { fetchUser, doLogout, doOpenBoxLogin, doCloseBoxLogin, onLoading, endLoading } = authSlice.actions
 
 export default authSlice.reducer

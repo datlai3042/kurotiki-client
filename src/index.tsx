@@ -1,19 +1,16 @@
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 import { store } from './store'
 
 import App from './App'
-import { PersistGate } from 'redux-persist/integration/react'
-import { checkAxiosError } from './utils/handleAxiosError'
-import TErrorAxios from './types/axios.response.error'
-import { addToast } from './Redux/toast'
-import BoxContainerToast from './component/BoxUi/BoxContainerToast'
 import { doLogout, doOpenBoxLogin } from './Redux/authenticationSlice'
+import TErrorAxios from './types/axios.response.error'
+import { checkAxiosError } from './utils/handleAxiosError'
+import { addOneToastError } from './Redux/toast'
+import ToastProvider from './component/toast/ToastProvider'
 
-// store.dispatch(addToast({ type: 'ERROR', message: '123', id: '1' }))
-// setTimeout(() => {}, 5000)
 
 const rootELement = document.getElementById('root')
 if (!rootELement) throw new Error('Root is invaild')
@@ -39,7 +36,15 @@ const client = new QueryClient({
                                     error?.response.data?.detail === 'Token đã được sử dụng')
                         ) {
                               store.dispatch(
-                                    addToast({ type: 'ERROR', message: 'Refresh Token không hợp lệ', id: Math.random().toString() }),
+                                    addOneToastError({
+                                          toast_item: {
+                                                type: 'ERROR',
+                                                core: { message: 'Refresh Token không hợp lệ' },
+                                                _id: Math.random().toString(),
+                                                toast_title: 'Có lỗi xảy ra'
+
+                                          },
+                                    }),
                               )
                               store.dispatch(doOpenBoxLogin())
                               throw error
@@ -47,12 +52,28 @@ const client = new QueryClient({
                         if (error.response?.status === 401) {
                               if (error.response.data?.detail === 'Đăng nhập thất bại, vui lòng nhập thông tin hợp lệ') {
                                     store.dispatch(
-                                          addToast({ type: 'ERROR', message: error.response.data.detail, id: Math.random().toString() }),
+                                          addOneToastError({
+                                                toast_item: {
+                                                      type: 'ERROR',
+                                                      core: { message: error.response.data.detail },
+                                                      _id: Math.random().toString(),
+                                                      toast_title: 'Có lỗi xảy ra'
+                                                },
+                                          }),
                                     )
                               }
 
                               if (error.response.data?.detail === 'Token hết hạn') {
-                                    store.dispatch(addToast({ type: 'ERROR', message: 'Token hết hạn', id: Math.random().toString() }))
+                                    store.dispatch(
+                                          addOneToastError({
+                                                toast_item: {
+                                                      type: 'ERROR',
+                                                      core: { message: 'Token hết hạn' },
+                                                      _id: Math.random().toString(),
+                                                      toast_title: 'Có lỗi xảy ra'
+                                                },
+                                          }),
+                                    )
                               }
                         }
                   }
@@ -71,27 +92,53 @@ const client = new QueryClient({
                                     error?.response.data?.detail === 'Không tìm thấy tài khoản' ||
                                     error?.response.data?.detail === 'Token đã được sử dụng')
                         ) {
+
                               store.dispatch(
-                                    addToast({ type: 'ERROR', message: 'Refresh Token không hợp lệ', id: Math.random().toString() }),
+                                    addOneToastError({
+                                          toast_item: {
+                                                type: 'ERROR',
+                                                core: { message: 'Refresh Token không hợp lệ' },
+                                                _id: Math.random().toString(),
+                                                toast_title: 'Có lỗi xảy ra'
+
+                                          },
+                                    }),
                               )
                               store.dispatch(doOpenBoxLogin())
                         }
                         if (error.response?.status === 401) {
                               if (error.response.data?.detail === 'Đăng nhập thất bại, vui lòng nhập thông tin hợp lệ') {
                                     store.dispatch(
-                                          addToast({ type: 'ERROR', message: error.response.data.detail, id: Math.random().toString() }),
+                                          addOneToastError({
+                                                toast_item: {
+                                                      type: 'ERROR',
+                                                      core: { message: error.response.data.detail },
+                                                      _id: Math.random().toString(),
+                                                      toast_title: 'Có lỗi xảy ra'
+                                                },
+                                          }),
                                     )
                                     return
                               }
 
                               if (error.response.data?.detail === 'Token hết hạn' && error.response.config.url === 'v1/api/auth/logout') {
                                     store.dispatch(doLogout())
-                                    store.dispatch(addToast({ type: 'ERROR', message: 'Token hết hạn', id: Math.random().toString() }))
+                                    store.dispatch(
+                                          addOneToastError({
+                                                toast_item: {
+                                                      type: 'ERROR',
+                                                      core: { message: 'Token hết hạn' },
+                                                      _id: Math.random().toString(),
+                                                      toast_title: 'Có lỗi xảy ra'
+                                                },
+                                          }),
+                                    )
+                              }
                               }
                         }
                   }
             },
-      }),
+      ),
 })
 
 root.render(
@@ -99,7 +146,7 @@ root.render(
             <BrowserRouter>
                   <QueryClientProvider client={client}>
                         <App />
-                        <BoxContainerToast />
+                        <ToastProvider />
                         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
                   </QueryClientProvider>
             </BrowserRouter>

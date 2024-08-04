@@ -35,7 +35,7 @@ const ProductMedium = (props: TProps) => {
                         <span className='w-[95%] break-words  line-clamp-2 text-[12px] font-normal'>{product.product_name}</span>
                         <Rate disabled allowHalf defaultValue={product.product_votes} className='text-[12px]' />
                   </div>
-                  <span className='px-[10px] flex-1 break-words line-clamp-2 text-[14px] font-medium'>{product.product_price}</span>
+                  <span className='px-[10px] flex-1 break-words line-clamp-2 text-[14px] font-medium'>{product.product_price} VNĐ</span>
                   <div className='h-[40px] flex items-center gap-[8px] px-[10px] pt-[4px] border-t-[1px] border-slate-200'>
                         {ship ? (
                               <img src={logoNow} className='hidden xl:inline w-[30px] h-[16px] rounded-xl' alt='' />

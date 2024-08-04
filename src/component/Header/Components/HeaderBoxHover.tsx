@@ -4,8 +4,8 @@ import { RootState } from '../../../store'
 import { doLogout, doOpenBoxLogin } from '../../../Redux/authenticationSlice'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Auth from '../../../apis/auth.api'
-import { addToast } from '../../../Redux/toast'
 import { UserResponse } from '../../../types/user.type'
+import { addOneToastError, addOneToastSuccess } from '../../../Redux/toast'
 
 function HeaderBoxHover() {
       const navigate = useNavigate()
@@ -18,15 +18,40 @@ function HeaderBoxHover() {
             mutationFn: () => Auth.logout(),
             onSuccess: () => {
                   dispatch(doLogout())
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Đăng xuất thành công', id: Math.random().toString() }))
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    
+                                    core: {
+                                          
+                                           message: 'Đăng xuất thành công'
+                                    },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
+
+                
                   queryClient.removeQueries({ queryKey: ['v1/api/cart/cart-get-my-cart'] })
                   queryClient.removeQueries({
                         queryKey: ['cart-get-count-product'],
                   })
             },
             onError: (error) => {
-                  console.log({ error })
-                  dispatch(addToast({ type: 'ERROR', message: 'Đăng xuất không thành công', id: Math.random().toString() }))
+                  dispatch(
+                        addOneToastError({
+                              toast_item: {
+                                    type: 'ERROR',
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: 'Đăng xuất thành công'
+                                    },
+                                    toast_title: 'Đã có lỗi xảy ra',
+                              },
+                        }),
+                  )
             },
       })
 

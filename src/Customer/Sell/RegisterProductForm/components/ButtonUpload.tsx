@@ -12,7 +12,7 @@ import { ui } from '../ProductFormUpload'
 import { TProfileImage } from '../../../../types/product/product.type'
 import { TCloudinaryImage } from '../../types/cloudinary.typs'
 import { useDispatch } from 'react-redux'
-import { addToast } from '../../../../Redux/toast'
+import { addOneToastSuccess } from '../../../../Redux/toast'
 
 //@Props
 interface IProps {
@@ -115,7 +115,17 @@ const ButtonUpload = (props: IProps) => {
 
       useEffect(() => {
             if (uploadProductThumb.isSuccess) {
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Upload product thumb thành công', id: Math.random().toString() }))
+
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Upload product thumb thành công'},
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
             }
       }, [uploadProductThumb.isSuccess])
 

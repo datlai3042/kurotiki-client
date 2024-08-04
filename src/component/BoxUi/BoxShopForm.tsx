@@ -4,10 +4,10 @@ import { Controller, FormProvider, SubmitHandler, useForm } from 'react-hook-for
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import ShopApi, { RegisterShop, StateFile } from '../../apis/shop.api'
 import { useDispatch } from 'react-redux'
-import { addToast } from '../../Redux/toast'
 import BoxLoading from './BoxLoading'
 import { fetchUser } from '../../Redux/authenticationSlice'
 import TextArea from 'antd/es/input/TextArea'
+import { addOneToastSuccess, addOneToastWarning } from '../../Redux/toast'
 
 type TForm = {
       shop_name: string
@@ -73,7 +73,16 @@ const BoxShopForm = (props: TProps) => {
                   queryClieny.invalidateQueries({
                         queryKey: ['get-my-shop'],
                   })
-                  dispatch(addToast({ id: Math.random().toString(), type: 'SUCCESS', message: 'Cập nhập thành công' }))
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Cập nhập thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
                   dispatch(fetchUser({ user }))
                   onClose(false)
             },
@@ -82,7 +91,18 @@ const BoxShopForm = (props: TProps) => {
       const onSubmit: SubmitHandler<TForm> = (dataForm) => {
             // console.log({ form: dataForm })
             if (!preview && modeForm === 'UPLOAD') {
-                  dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: 'Vui lòng upload hình đại diện' }))
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    type: 'WARNING',
+                                    core: {
+                                          message: 'Vui lòng upload hình đại diện',
+                                    },
+                                    toast_title: 'Thiếu thông tin ',
+                              },
+                        }),
+                  )
                   return
             }
             const formData: RegisterShop = new FormData()

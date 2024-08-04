@@ -9,13 +9,13 @@ import { UserAddress, UserResponse } from '../../../types/user.type'
 import { renderStringAddressDetailV2 } from '../../../utils/address.util'
 import BoxButton from '../BoxButton'
 import { AddressType, CartCurrent, setAddressProduct } from '../../../Redux/cartSlice'
-import { addToast } from '../../../Redux/toast'
 import { CartProduct } from '../../../types/cart.type'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import CartService from '../../../apis/cart.service'
 import { Address } from '../../../types/address.type'
 import AccountService from '../../../apis/account.service'
 import { fetchUser } from '../../../Redux/authenticationSlice'
+import { addOneToastSuccess, addOneToastWarning } from '../../../Redux/toast'
 
 type TProps = {
       setOpenModal: React.Dispatch<SetStateAction<boolean>>
@@ -50,7 +50,17 @@ const BoxConfirmAddress = (props: TProps) => {
             onSuccess: (axiosResponse) => {
                   const { user } = axiosResponse.data.metadata
                   dispatch(fetchUser({ user }))
-                  dispatch(addToast({ id: Math.random().toString(), message: 'Cập nhập địa chỉ thành công', type: 'SUCCESS' }))
+
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Cập nhập địa chỉ thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
                   handleCloseModal()
             },
       })
@@ -82,10 +92,15 @@ const BoxConfirmAddress = (props: TProps) => {
       const onVerifyAddress = () => {
             if (!valueAddress) {
                   dispatch(
-                        addToast({
-                              type: 'WARNNING',
-                              message: `Vui lòng chọn 1 trong ${user?.user_address.length} địa chỉ`,
-                              id: Math.random().toString(),
+                        addOneToastWarning({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    type: 'WARNING',
+                                    core: {
+                                          message: `Vui lòng chọn 1 trong ${user?.user_address.length} địa chỉ`,
+                                    },
+                                    toast_title: 'Thiếu thông tin ',
+                              },
                         }),
                   )
                   return

@@ -43,6 +43,9 @@ export const PDFInvoice = (props: TProps) => {
             footer: { width: '100%', textAlign: 'right' },
       })
 
+
+      console.log({products})
+
       return (
             <PDFViewer showToolbar={false} width={600} height={700}>
                   <Document>

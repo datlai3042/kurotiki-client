@@ -6,8 +6,8 @@ import { TAvatarActions } from '../../../reducer/customer.reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../store'
 import { fetchUser } from '../../../Redux/authenticationSlice'
-import { addToast } from '../../../Redux/toast'
 import { AxiosResponse } from 'axios'
+import { addOneToastSuccess } from '../../../Redux/toast'
 
 //@props
 type TProps = {
@@ -55,7 +55,17 @@ const ModelAvatarUpdate = (props: TProps) => {
             if (onUpdate.isSuccess) {
                   dispatch(fetchUser({ user: onUpdate.data.data.metadata.user }))
                   modeDispatch({ type: 'CLOSE_MODE_AVATAR_UPDATE', payload: { modeAvatarUpdate: false, boxModeAvatar: false } })
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Cập nhập avtar thành công', id: Math.random().toString() }))
+
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Cập nhập avatar thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
             }
             if (onUpdate.isSuccess && onUpdate.data) {
                   console.log({ onUpdate: onUpdate.data.data.metadata.user })

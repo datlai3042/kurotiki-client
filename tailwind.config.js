@@ -108,6 +108,9 @@ module.exports = {
 			colors: {
 				main: "rgb(245, 245, 250)",
 				bgTimeLine: "rgba(92, 167, 226,.1)",
+				"toast-success": "var(--toast-success)",
+				"toast-error": "var(--toast-error)",
+				"toast-warning": "var(--toast-warning)",
 			},
 			fontFamily: {
 				openSans: ["Open Sans"],

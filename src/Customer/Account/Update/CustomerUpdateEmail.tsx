@@ -3,7 +3,6 @@ import { RootState } from '../../../store'
 import { useDispatch, useSelector } from 'react-redux'
 import { UserResponse } from '../../../types/user.type'
 import { useEffect, useRef, useState } from 'react'
-import { addToast } from '../../../Redux/toast'
 import { validateEmail } from '../../../utils/account.utils'
 import CustomerPasswordSecurity from '../form/CustomerPasswordSecurity'
 import { check } from 'prettier'
@@ -11,6 +10,7 @@ import { useMutation } from '@tanstack/react-query'
 import AccountService from '../../../apis/account.service'
 import { fetchUser } from '../../../Redux/authenticationSlice'
 import BoxLoading from '../../../component/BoxUi/BoxLoading'
+import { addOneToastSuccess, addOneToastWarning } from '../../../Redux/toast'
 
 // () => api
 const CustomerUpdateEmail = () => {
@@ -33,16 +33,49 @@ const CustomerUpdateEmail = () => {
             e.preventDefault()
             const checkEmail = validateEmail(email)
             if (!checkEmail) {
-                  dispatch(addToast({ id: Math.random().toString(), message: 'Email không hợp lệ', type: 'WARNNING' }))
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    type: 'WARNING',
+                                    core: {
+                                          message: 'Email không hợp lệ'
+                                    },
+                                    toast_title: 'Thiếu thông tin ',
+                              },
+                        }),
+                  )
                   return
             }
             if (!email) {
-                  dispatch(addToast({ id: Math.random().toString(), message: 'Bạn không thể gửi email rỗng', type: 'WARNNING' }))
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    type: 'WARNING',
+                                    core: {
+                                          message: 'Bạn không thể gửi email rỗng'
+                                    },
+                                    toast_title: 'Thiếu thông tin ',
+                              },
+                        }),
+                  )
                   return
             }
 
             if (email === user?.email) {
-                  dispatch(addToast({ id: Math.random().toString(), message: 'Email không có sự thay đổi', type: 'WARNNING' }))
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    _id: Math.random().toString(),
+                                    type: 'WARNING',
+                                    core: {
+                                          message: 'Email không có sự thay đổi',
+                                    },
+                                    toast_title: 'Thiếu thông tin ',
+                              },
+                        }),
+                  )
                   return
             }
 
@@ -76,7 +109,16 @@ const CustomerUpdateEmail = () => {
             onSuccess: (axiosResponse) => {
                   const { user } = axiosResponse.data.metadata
                   dispatch(fetchUser({ user }))
-                  dispatch(addToast({ id: Math.random().toString(), message: 'Cập nhập Email thành công', type: 'SUCCESS' }))
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Cập nhập Email thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
             },
       })
 

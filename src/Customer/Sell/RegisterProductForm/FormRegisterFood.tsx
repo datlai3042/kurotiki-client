@@ -19,7 +19,6 @@
 // import Timeline from '../components/Timeline'
 // import Book from '../Category/Book/Book'
 // import { useDispatch } from 'react-redux'
-// import { addToast } from '../../../Redux/toast'
 // import { productBookSchema, productSchema } from '../types/product.schema'
 // import { UploadImage, UploadImages } from '../types/product.type'
 
@@ -102,7 +101,6 @@
 //         console.log({ data })
 
 //         if (urlProductMultipleImage.length < 4) {
-//             dispatch(addToast({ type: 'WARNNING', message: 'Xin upload ít nhất 4 hình ảnh mô tả sản phẩm', id: Math.random().toString() }))
 //         }
 
 //         // chỉ submit khi có đủ image

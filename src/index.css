@@ -4,6 +4,13 @@
 @tailwind utilities;
 
 @layer components {
+:root{
+      --toast-success: #4299de;
+      --toast-error: #f4454c;
+      --toast-warning: #ea580c;
+
+}
+
       .isActive {
             background-color: #ceced1;
             color: white !important;
@@ -137,6 +144,8 @@ body::-webkit-scrollbar {
       width: 8px;
       scroll-behavior: smooth;
 }
+
+
 
 /* Track */
 .scrollCustome::-webkit-scrollbar,

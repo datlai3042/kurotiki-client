@@ -5,13 +5,13 @@ import { Rate } from 'antd'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import CartService from '../../apis/cart.service'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToast } from '../../Redux/toast'
 import { RootState } from '../../store'
 import { UserResponse } from '../../types/user.type'
 import { CartCurrent } from '../../Redux/cartSlice'
 import { doOpenBoxLogin } from '../../Redux/authenticationSlice'
 import { Address } from '../../types/address.type'
 import { checkAxiosError } from '../../utils/handleAxiosError'
+import { addOneToastSuccess, addOneToastWarning } from '../../Redux/toast'
 
 type TProps = {
       product: TProductDetail
@@ -47,7 +47,19 @@ const ProductPay = (props: TProps) => {
                               error.response.data.message === 'Bad Request' &&
                               error.response.data.detail === 'Số lượng sản phẩm được chọn nhiều hơn số lượng trong kho'
                         ) {
-                              dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: error.response.data.detail }))
+
+                              dispatch(
+                                    addOneToastWarning({
+                                          toast_item: {
+                                                type: 'WARNING',
+                                                _id: Math.random().toString(),
+                                                core: {
+                                                      message: error.response.data.detail
+                                                },
+                                                toast_title: 'Thiếu thông tin',
+                                          },
+                                    }),
+                              )
                         }
                   }
             },
@@ -71,12 +83,37 @@ const ProductPay = (props: TProps) => {
             }
 
             if (user._id === product.shop_id.owner._id) {
-                  dispatch(addToast({ type: 'WARNNING', message: 'Không thể thêm sản phẩm của chính mình', id: Math.random().toString() }))
+
+
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    type: 'WARNING',
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: 'Không thể thêm sản phẩm của chính mình',
+                                    },
+                                    toast_title: 'Lỗi',
+                              },
+                        }),
+                  )
                   return
             }
 
             if (!Boolean(cartCurrent.cart_current_address)) {
-                  dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: 'Vui lòng chọn địa chỉ trước khi thêm' }))
+
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    type: 'WARNING',
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: 'Vui lòng chọn địa chỉ trước khi thêm'
+                                    },
+                                    toast_title: 'Thiếu thông tin',
+                              },
+                        }),
+                  )
                   setDisableBtn(true)
                   return
             }
@@ -125,7 +162,16 @@ const ProductPay = (props: TProps) => {
 
       useEffect(() => {
             if (cartMutation.isSuccess) {
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Cart', id: Math.random().toString() }))
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Cập nhập thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
                   queryClient.invalidateQueries({
                         queryKey: ['v1/api/cart/cart-get-my-cart'],
                   })

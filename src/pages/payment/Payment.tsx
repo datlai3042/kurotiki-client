@@ -106,7 +106,7 @@ const Payment = () => {
                                                                         orderTotal={dataOrder.order_total}
                                                                   />
                                                             }
-                                                            fileName='hoadoa'
+                                                            fileName='hoadon'
                                                             style={{
                                                                   padding: '12px 16px',
                                                                   backgroundColor: 'black',

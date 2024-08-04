@@ -1,1 +1,1 @@
-export const limitNotification = 2
+export const limitNotification =          5

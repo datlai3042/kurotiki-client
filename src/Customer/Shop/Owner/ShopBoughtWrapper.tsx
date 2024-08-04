@@ -9,7 +9,7 @@ type TProps = {
       shop: ShopResponse
 }
 
-const LIMIT = 1
+const LIMIT = 12
 
 const ShopBoughtWrapper = (props: TProps) => {
       const { shop } = props

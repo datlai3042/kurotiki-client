@@ -6,8 +6,8 @@ import { RootState } from '../../store'
 import { useMutation } from '@tanstack/react-query'
 import Auth from '../../apis/auth.api'
 import { doLogout } from '../../Redux/authenticationSlice'
-import { addToast } from '../../Redux/toast'
 import { UserResponse } from '../../types/user.type'
+import { addOneToastError, addOneToastSuccess } from '../../Redux/toast'
 
 const CustomerRouter = () => {
       const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
@@ -17,11 +17,31 @@ const CustomerRouter = () => {
             mutationFn: () => Auth.logout(),
             onSuccess: () => {
                   dispatch(doLogout())
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Đăng xuất thành công', id: Math.random().toString() }))
+
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Đăng xuất thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
             },
             onError: (error) => {
-                  console.log({ error })
-                  dispatch(addToast({ type: 'ERROR', message: 'Đăng xuất không thành công', id: Math.random().toString() }))
+                  dispatch(
+                        addOneToastError({
+                              toast_item: {
+                                    type: 'ERROR',
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: 'Đăng xuất không thành công',
+                                    },
+                                    toast_title: 'Đã có lỗi xảy ra',
+                              },
+                        }),
+                  )
             },
       })
       const handleLogOut = () => {
@@ -57,7 +77,7 @@ const CustomerRouter = () => {
                   </div>
                   <Link to={'/customer/account'} className='customer-item-bg px-[15px] py-[8px] w-full'>
                         <UserRound />
-                        Account
+                        Tài khoản của tôi
                   </Link>
 
                   <Link to={'/customer/notification'} className='customer-item-bg px-[15px] py-[8px] w-full'>
@@ -84,29 +104,35 @@ const CustomerRouter = () => {
                               Sản phẩm của Shop
                         </Link>
                   )}
-                  <Link to={'/customer/shop/product-list'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
+                  <Link to={'/customer/shop/product-list'} className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[16px] `}>
                         <Store />
 
                         <span>Sản phẩm của Shop</span>
                   </Link>
 
-                  <Link to={'/customer/account/address'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
+                  <Link to={'/customer/account/address'} className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[16px] `}>
                         <MapPinned />
 
                         <span>Số địa chỉ</span>
                   </Link>
 
-                  <Link to={'/customer/account/update/email'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
+                  <Link
+                        to={'/customer/account/update/email'}
+                        className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[16px] `}
+                  >
                         <Mail />
                         <span>Cập nhập Email</span>
                   </Link>
 
-                  <Link to={'/customer/account/update/password'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
+                  <Link
+                        to={'/customer/account/update/password'}
+                        className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[16px] `}
+                  >
                         <Key />
                         <span>Cập nhập mật khẩu</span>
                   </Link>
 
-                  <div className={`customer-item-bg p-[8px]`} onClick={handleLogOut}>
+                  <div className={`customer-item-bg py-[8px] px-[15px] flex items-center gap-[16px]`} onClick={handleLogOut}>
                         <LogIn />
                         <span className=' py-[8px] w-full'>Đăng xuất</span>
                   </div>

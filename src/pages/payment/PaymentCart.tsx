@@ -8,8 +8,8 @@ import { useMutation } from '@tanstack/react-query'
 import OrderService from '../../apis/Order.service'
 import { OrderItem } from '../../types/order.type'
 import { checkAxiosError } from '../../utils/handleAxiosError'
-import { addToast } from '../../Redux/toast'
 import { useDispatch } from 'react-redux'
+import { addOneToastWarning } from '../../Redux/toast'
 
 type TProps = {
       carts: CartResponse
@@ -48,7 +48,19 @@ const PaymentCart = (props: TProps) => {
                               error.response.data.message === 'Bad Request'
                               // error.response.data.detail === 'Số lượng sản phẩm được chọn nhiều hơn số lượng trong kho'
                         ) {
-                              dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: error.response.data.detail }))
+
+                              dispatch(
+                                    addOneToastWarning({
+                                          toast_item: {
+                                                type: 'WARNING',
+                                                _id: Math.random().toString(),
+                                                core: {
+                                                      message: error.response.data.detail
+                                                },
+                                                toast_title: 'Lỗi upload',
+                                          },
+                                    }),
+                              )
                         }
                   }
             },

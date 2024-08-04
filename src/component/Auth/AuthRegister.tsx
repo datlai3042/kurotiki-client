@@ -8,8 +8,8 @@ import { useMutation } from '@tanstack/react-query'
 import Auth from '../../apis/auth.api'
 import { useDispatch } from 'react-redux'
 import { doCloseBoxLogin, fetchUser } from '../../Redux/authenticationSlice'
-import { addToast } from '../../Redux/toast'
 import { checkAxiosError } from '../../utils/handleAxiosError'
+import { addOneToastError, addOneToastSuccess, addOneToastWarning } from '../../Redux/toast'
 type TProps = {
       setModeAuth: React.Dispatch<SetStateAction<TModeAuth>>
 }
@@ -56,7 +56,16 @@ const AuthRegister = (props: TProps) => {
             mutationFn: (data: Omit<TRegisterZodSchema, 'confirm_password'>) => Auth.register(data),
             onSuccess: (res) => {
                   dispatch(fetchUser({ user: res.data.metadata.user }))
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Welcome các bạn đến với project của mình', id: Math.random().toString() }))
+                  dispatch(addOneToastSuccess({
+                        
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Đăng kí thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+
+                  }))
                   dispatch(doCloseBoxLogin())
             },
 
@@ -67,7 +76,13 @@ const AuthRegister = (props: TProps) => {
                               error.response.data.detail === 'Email đã được đăng kí' &&
                               error.response.data.message === 'Bad Request'
                         ) {
-                              dispatch(addToast({ id: Math.random().toString(), type: 'ERROR', message: error.response.data.detail }))
+                              dispatch(addOneToastError({toast_item: 
+                                    { _id: Math.random().toString(), type: 'ERROR', core: {
+                                          message: error.response.data.detail
+
+                                    }, toast_title: 'Có lỗi xảy ra' }
+
+                              }))
                         }
                   }
             },
@@ -108,7 +123,15 @@ const AuthRegister = (props: TProps) => {
                         subMessage.push(`Field ${key} đã xảy ra lỗi, vui lòng ${errors[key as keyof TRegisterZodSchema]?.message}`)
                   })
 
-                  dispatch(addToast({ id: Math.random().toString(), subMessage, message: 'Error', type: 'WARNNING' }))
+                  dispatch(addOneToastWarning({
+                        toast_item: {
+                              type: 'WARNING',
+                              core: { message:subMessage.join(' - ') },
+                              _id: Math.random().toString(),
+                              toast_title: 'Có lỗi xảy ra',
+                        },
+                  }))
+
             }
       }, [errors, dispatch])
 
@@ -116,14 +139,14 @@ const AuthRegister = (props: TProps) => {
 
       return (
             <div className='flex flex-col items-center gap-[15px] py-[35px]'>
-                  <h3 className={`text-slate-900 font-black tracking-[5px] text-[24px]`}>Register</h3>
+                  <h3 className={`text-slate-900 font-black tracking-[5px] text-[24px]`}>Đăng kí</h3>
                   <h4 className={`text-stone-600 italic text-[16px] opacity-80 px-[12px]`}>Đăng kí để cùng trải nghiệm cảm giác mua sắm</h4>
                   <form className='flex flex-1 flex-col gap-[20px] mt-[12px] w-[70%]' onSubmit={handleSubmit(onSubmit)}>
                         <div className='w-full'>
                               <input
                                     {...register('email')}
                                     type='text'
-                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px] border-slate-900 placeholder:text-stone-500  `}
+                                    className={`h-[42px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-md border-slate-900 placeholder:text-stone-500  `}
                                     placeholder='Nhập email của bạn'
                               />
                         </div>
@@ -132,7 +155,7 @@ const AuthRegister = (props: TProps) => {
                               <input
                                     {...register('password')}
                                     type={typePassword}
-                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px] border-slate-900 placeholder:text-stone-500`}
+                                    className={`h-[42px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-md border-slate-900 placeholder:text-stone-500`}
                                     placeholder='Nhập mật khẩu của bạn'
                               />
                               <span className='absolute right-[5px]' onClick={handleShowHidePassword}>
@@ -148,7 +171,7 @@ const AuthRegister = (props: TProps) => {
                               <input
                                     {...register('confirm_password')}
                                     type={typeConfirmPassword}
-                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px] border-slate-900 placeholder:text-stone-500`}
+                                    className={`h-[42px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-md border-slate-900 placeholder:text-stone-500`}
                                     placeholder='Xác nhận lại mật khẩu'
                               />
                               <span className='absolute right-[5px]  ' onClick={handleShowHidePasswordConfirm}>
@@ -163,7 +186,7 @@ const AuthRegister = (props: TProps) => {
                         <div className=''>
                               <p>
                                     Bạn đã có tài khoản, {''}
-                                    <span className='underline text-slate-900' onClick={() => setModeAuth('Login')}>
+                                    <span className='underline text-slate-900 hover:cursor-pointer' onClick={() => setModeAuth('Login')}>
                                           quay lại đăng nhập
                                     </span>
                               </p>
@@ -176,7 +199,7 @@ const AuthRegister = (props: TProps) => {
                                     disabled={!authRegister.isPending && Object.keys(errors).length > 0}
                                     title={Object.keys(errors).length > 0 ? 'Vui lòng nhập thông tin hợp lệ' : `Đăng nhập`}
                               >
-                                    <span>Register</span>
+                                    <span>Đăng kí</span>
                                     {authRegister.isPending && (
                                           <span
                                                 className=' inline-block h-[25px] w-[25px] text-[#ffffff] animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'

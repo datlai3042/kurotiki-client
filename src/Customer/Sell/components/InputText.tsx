@@ -48,7 +48,7 @@ const InputText = <T extends FieldValues>(props: TProps<T>) => {
                         id={id}
                         autoFocus={autofocus}
                         defaultValue={defaultValue && formNested.watch(FieldName as string)}
-                        className='flex-1 border-[1px] border-slate-400 outline-none px-[12px] py-[10px] rounded-[6px]'
+                        className='w-[50%] border-[1px] border-slate-400 outline-none px-[12px] py-[10px] rounded-[6px]'
                   />
                   {showError && errors[FieldName as string] && (
                         <span className={`${styleEffect.fontSizeError} ${styleEffect.colorError}`}>

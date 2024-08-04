@@ -6,6 +6,8 @@ import ProductApi from '../../../../apis/product.api'
 import { useParams } from 'react-router-dom'
 import { TProductDetail } from '../../../../types/product/product.type'
 import FoodUpdate from '../Food/FoodUpdate'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/src/store'
 
 const PermisionProductUpdate = () => {
       const param = useParams()
@@ -15,10 +17,19 @@ const PermisionProductUpdate = () => {
             queryFn: () => ProductApi.protectProduct({ id: product_id as string }),
       })
 
+      const user = useSelector((state: RootState) => state.authentication.user)
+
       useEffect(() => {
             if (protectProduct.isSuccess) {
             }
       }, [protectProduct.isSuccess])
+
+      if (user) {
+            const { roles } = user
+            if (roles.includes('admin')) {
+                  return <div className='w-full h-[400px] flex justify-center items-center bg-[#fff]'>Chế độ chỉnh sửa với admin không khả dụng</div>
+            } 
+      }
 
       return (
             <div className='w-full'>

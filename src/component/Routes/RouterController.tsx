@@ -96,9 +96,9 @@ mx-auto max-w-full md:max-w-[1023px] xl:max-w-[1400px]`}
                                                 <Route path='register-sell' element={<RegisterSell />} />
                                                 <Route path='router' element={<CustomerRouter />} />
                                           </Route>
-                                          <Route path='product/update/:product_id' element={<PermisionProductUpdate />} />
                                           <Route path='query-params' element={<QueryParams />} />
                                     </Routes>
+                                    <Route path='product/update/:product_id' element={<PermisionProductUpdate />} />
                               </div>
 
                               <Route path='*' element={<NotFound />} />

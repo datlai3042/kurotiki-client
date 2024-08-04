@@ -18,12 +18,12 @@ import ButtonUpload from './components/ButtonUpload'
 import InputNumber from '../components/InputNumber'
 import Timeline from '../components/Timeline'
 import { useDispatch } from 'react-redux'
-import { addToast } from '../../../Redux/toast'
 import { productBookSchema, productFoodSchema, productSchema } from '../types/product.schema'
 import { ProductForm, ProductType, TCheckDescriptionImage, TProductDetail, TProfileImage } from '../../../types/product/product.type'
 import UpdateMultipleImage from '../UpdateProductForm/components/UpdateMultipleImage'
 import { Link, useNavigate } from 'react-router-dom'
 import { sleep } from '../../../utils/sleep'
+import { addOneToastError, addOneToastSuccess } from '../../../Redux/toast'
 
 //@Props - Product::Book
 
@@ -108,33 +108,43 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
             // return
             if (!urlProductMultipleImage.isUploadImage) {
                   dispatch(
-                        addToast({
-                              type: 'ERROR',
-                              message: `Upload thêm ${4 - urlProductMultipleImage.numberImage} để đủ 4 ảnh bạn nhé`,
-                              id: Math.random().toString(),
+                        addOneToastError({
+                              toast_item: {
+                                    type: 'ERROR',
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: `Upload thêm ${4 - urlProductMultipleImage.numberImage} để đủ 4 ảnh bạn nhé`,
+                                    },
+                                    toast_title: 'Đã có lỗi xảy ra',
+                              },
                         }),
                   )
             }
 
             if (!urlProductThumb.isUploadImage) {
                   dispatch(
-                        addToast({
-                              type: 'ERROR',
-                              message: 'Hình đại diện sản phẩm là bắt buộc',
-                              id: Math.random().toString(),
+                        addOneToastError({
+                              toast_item: {
+                                    type: 'ERROR',
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: 'Hình đại diện sản phẩm là bắt buộc',
+                                    },
+                                    toast_title: 'Đã có lỗi xảy ra',
+                              },
                         }),
                   )
-            }
 
-            // chỉ submit khi có đủ image
-            if (urlProductThumb.isUploadImage && urlProductMultipleImage.isUploadImage) {
-                  const uploadProduct = {
-                        product_id,
-                        product_name: data.product_name,
-                        product_price: data.product_price,
-                        product_available: data.product_available,
+                  // chỉ submit khi có đủ image
+                  if (urlProductThumb.isUploadImage && urlProductMultipleImage.isUploadImage) {
+                        const uploadProduct = {
+                              product_id,
+                              product_name: data.product_name,
+                              product_price: data.product_price,
+                              product_available: data.product_available,
+                        }
+                        uploadProductFull.mutate({ product_id: product_id, uploadProduct, product_attribute: data.attribute, mode })
                   }
-                  uploadProductFull.mutate({ product_id: product_id, uploadProduct, product_attribute: data.attribute, mode })
             }
       }
 
@@ -153,7 +163,17 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
 
             if (uploadProductFull.isSuccess) {
                   callAgain()
-                  dispatch(addToast({ id: Math.random().toString(), message: 'Bạn đã đăng sãn phẩm thành công', type: 'SUCCESS' }))
+
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Bạn đã đăng sãn phẩm thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
                   queryClient.invalidateQueries()
                   showLink()
             }

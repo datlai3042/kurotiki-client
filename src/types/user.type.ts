@@ -35,7 +35,10 @@ export type UserResponse = {
       isOpenShop?: boolean
       createdAt: Date
       user_address: UserAddress[]
+      roles: UserRoles[]
 }
+
+type UserRoles = 'user' | 'shop' | 'admin'
 
 export type UserAvatarUsed = {
       public_id: string

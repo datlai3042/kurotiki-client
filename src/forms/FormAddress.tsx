@@ -9,11 +9,11 @@ import { Select } from 'antd'
 import InputText from '../Customer/Sell/components/InputText'
 import BoxButton from '../component/BoxUi/BoxButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToast } from '../Redux/toast'
 import AccountService from '../apis/account.service'
 import { doOpenBoxLogin, fetchUser } from '../Redux/authenticationSlice'
 import { RootState } from '../store'
 import { Address } from '../types/address.type'
+import { addOneToastSuccess, addOneToastWarning } from '../Redux/toast'
 
 export type AddressForm = {
       address_type: 'Home' | 'Company' | 'Private'
@@ -68,7 +68,17 @@ const FormAddress = (props: TProps) => {
             onSuccess: (axiosResponse) => {
                   const { user } = axiosResponse.data.metadata
                   dispatch(fetchUser({ user }))
-                  dispatch(addToast({ id: Math.random().toString(), type: 'SUCCESS', message: 'Thêm địa chỉ thành công' }))
+
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Thêm địa chỉ thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
 
                   onSuccessAddAddress && onSuccessAddAddress(user.user_address[user.user_address.length - 1]._id)
                   if (onClose) {
@@ -202,14 +212,20 @@ const FormAddress = (props: TProps) => {
                         }
                         return text
                   }
+
                   dispatch(
-                        addToast({
-                              type: 'WARNNING',
-                              message: 'Vui lòng điền đầy đủ thông tin',
-                              subMessage: renderError(addressForm.formState.errors),
-                              id: Math.random().toString(),
+                        addOneToastWarning({
+                              toast_item: {
+                                    type: 'WARNING',
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: 'Vui lòng điền đầy đủ thông tin',
+                                    },
+                                    toast_title: 'Lỗi upload',
+                              },
                         }),
                   )
+
                   // for (let error in addressForm.formState.errors) {
                   //       console.log(addressForm.formState.errors[error as keyof FieldErrors<AddressForm>]?.message)
                   // }

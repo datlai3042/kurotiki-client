@@ -14,7 +14,17 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"noEmit": true,
-		"jsx": "react-jsx"
+		"jsx": "react-jsx",
+		"allowSyntheticDefaultImports" : true
+,
+		"paths": {
+  "@/*": [
+    "./*"
+  ],
+  "react": [ "./node_modules/@types/react" ]
+},
 	},
+
+	
 	"include": ["src"]
 }

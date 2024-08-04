@@ -1,8 +1,7 @@
-import axios, { AxiosError, type AxiosInstance } from 'axios'
-import Auth from './auth.api'
-import TErrorAxios from '../types/axios.response.error'
+import axios, { type AxiosInstance } from 'axios'
 import { store } from '../store'
-import { addToast } from '../Redux/toast'
+import Auth from './auth.api'
+import { addOneToastError, addOneToastSuccess } from '../Redux/toast'
 
 let retry = false
 let i = 5
@@ -45,7 +44,16 @@ class AxiosCustom {
                         ) {
                               originalRequest.retry = true
                               console.log({ originalRequest })
-                              store.dispatch(addToast({ type: 'ERROR', message: 'Token hết hạn', id: Math.random().toString() }))
+                              store.dispatch(
+                                    addOneToastError({
+                                          toast_item: {
+                                                type: 'ERROR',
+                                                core: { message: 'Token hết hạn' },
+                                                _id: Math.random().toString(),
+                                                toast_title: 'Có lỗi xảy ra',
+                                          },
+                                    }),
+                              )
                               if (!refreshTokenPromise) {
                                     refreshTokenPromise = refreshTokenPromise
                                           ? refreshTokenPromise
@@ -57,12 +65,16 @@ class AxiosCustom {
                               }
                               return refreshTokenPromise!.then((data: any) => {
                                     store.dispatch(
-                                          addToast({
-                                                type: 'SUCCESS',
-                                                message: 'Lấy thành công đang tiến hàng call lại api',
-                                                id: Math.random().toString(),
+                                          addOneToastSuccess({
+                                                toast_item: {
+                                                      type: 'SUCCESS',
+                                                      core: { message: 'Xác thực thành công, tiến hành gọi lại api' },
+                                                      _id: Math.random().toString(),
+                                                      toast_title: 'Xử lí thành công',
+                                                },
                                           }),
                                     )
+
                                     if (
                                           error.response.config.url === 'v1/api/account/update-avatar' ||
                                           error.response.config.url === 'v1/api/product/upload-product-thumb' ||

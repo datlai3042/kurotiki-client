@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { addToast } from '../../../Redux/toast'
+import { addOneToastWarning } from '../../../Redux/toast'
 
 type TProps = {
       title: string[]
@@ -21,11 +21,18 @@ const CategoryTitle = (props: TProps) => {
                                           key={index}
                                           className='w-full px-[16px] py-[10px] border-b-[2px] border-slate-100 '
                                           onClick={() => {
+                                                
+                                                
                                                 dispatch(
-                                                      addToast({
-                                                            id: Math.random().toString(),
-                                                            message: `Danh mục ${p} chưa được xây dựng`,
-                                                            type: 'WARNNING',
+                                                      addOneToastWarning({
+                                                            toast_item: {
+                                                                  type: 'WARNING',
+                                                                  _id: Math.random().toString(),
+                                                                  core: {
+                                                                        message: `Danh mục ${p} chưa được xây dựng`,
+                                                                  },
+                                                                  toast_title: 'Lỗi upload',
+                                                            },
                                                       }),
                                                 )
                                                 onGetNameCategory(p)

@@ -27,6 +27,7 @@
 		"react-redux": "^8.1.1",
 		"react-scripts": "5.0.1",
 		"redux-persist": "^6.0.0",
+		"tiki": "file:",
 		"typescript": "^4.0.0",
 		"use-debounce": "^10.0.0",
 		"web-vitals": "^2.1.4",
@@ -50,7 +51,7 @@
 			"react-app/jest"
 		]
 	},
-	"homepage": "https://minhlq-0928.github.io/deploy-github/",
+	"homepage": "http://localhost:3000",
 	"browserslist": {
 		"production": [
 			">0.2%",
@@ -74,6 +75,10 @@
 		"react-router-dom": "^6.0.0",
 		"tailwindcss": "^3.3.3"
 	},
+	"resolutions": {
+		"@types/react": "17.0.2",
+		"@types/react-dom": "17.0.2"
+	},
 	"types": "./index.d.ts",
 	"description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
 	"main": "tailwind.config.js",
@@ -86,7 +91,6 @@
 	"bugs": {
 		"url": "https://github.com/datlaine/tikiClone/issues"
 	},
-	"homepage": "http://localhost:3000",
 	"keywords": [
 		"tiki-2024"
 	]

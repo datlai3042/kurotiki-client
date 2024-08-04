@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 //@react-router
 import { Link } from 'react-router-dom'
 
 //@react-hook-form
-import { useForm, FormProvider } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 
 //@tanstack query
 import { useMutation } from '@tanstack/react-query'
 
 //@redux-toolkit
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, store } from '../../store'
 import { fetchUser } from '../../Redux/authenticationSlice'
+import { RootState } from '../../store'
 
 //@components
 import CustomerAccountBirth from '../Account/form/CustomerAccountBirth'
@@ -26,12 +26,12 @@ import { checkAxiosError } from '../../utils/handleAxiosError'
 import { sleep } from '../../utils/sleep'
 
 //@icon
-import TErrorAxios from '../../types/axios.response.error'
-import { addToast } from '../../Redux/toast'
-import InputText from '../Sell/components/InputText'
 import AccountService from '../../apis/account.service'
+import TErrorAxios from '../../types/axios.response.error'
 import { UserResponse } from '../../types/user.type'
 import BoxAvatarMode from '../Account/Box/BoxAvatarMode'
+import InputText from '../Sell/components/InputText'
+import { addOneToastSuccess } from '../../Redux/toast'
 
 //@type form
 type TFormCustomer = {
@@ -95,7 +95,17 @@ const CustomerAccount = () => {
                   // console.log('dispatch', { data })
                   dispatch(fetchUser({ user: data.data.metadata.user }))
                   // setShowToast((prev) => !prev)
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Cập nhập thông tin thành công', id: Math.random().toString() }))
+
+                  dispatch(
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: {  message: 'Cập nhập thông tin thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
+                        }),
+                  )
             },
 
             onError: async (error) => {
@@ -145,10 +155,13 @@ const CustomerAccount = () => {
             if (getMe.isSuccess) {
                   // dispatch(fetchUser({ user: getMe.data }))
                   dispatch(
-                        addToast({
-                              type: 'WARNNING',
-                              message: `[Đã cập nhập thành công]`,
-                              id: Math.random().toString(),
+                        addOneToastSuccess({
+                              toast_item: {
+                                    type: 'SUCCESS',
+                                    core: { message: 'Cập nhập thành công' },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Thành công',
+                              },
                         }),
                   )
             }
@@ -211,7 +224,7 @@ const CustomerAccount = () => {
                               </div>
                               {/* @ formLayout - 2 */}
                               <div className='form_user w-full min-h-[50%] sm:min-h-[40%] xl:h-[40%]  max-h-auto mt-[90px] flex xl:mt-[20px]'>
-                                    <div className='flex flex-col w-full gap-[16px] justify-between xl:gap-[32px] lg:pt-[15px] 2xl:pt-[10px]'>
+                                    <div className='flex flex-col w-full gap-[28px] justify-between xl:gap-[32px] lg:pt-[15px] 2xl:pt-[10px]'>
                                           {/* @ field::bob */}
                                           <div className='mb-[30px] flex flex-col md:flex-row justify-between w-full h-[30%] sm:h-[20%] pl-[15px] sm:items-center text-[14px] gap-[20px]'>
                                                 <p className='w-full text-left lg:w-[100px]'>Ngày sinh</p>
@@ -223,7 +236,7 @@ const CustomerAccount = () => {
                                                 <CustomerAccountGender />
                                           </div>
                                           {/* @ form::action -> submit */}
-                                          <div className='w-full mt-0 mb-[24px] xl:mb-0 xl:mt-[50px] flex justify-center xl:block sm:mt-0 pl:[35px] sm:pl-[130px]'>
+                                          <div className='w-full mt-0 mb-[24px] xl:mb-0 xl:mt-[50px] flex xl:justify-center xl:block sm:mt-0 xl:pl:[35px] sm:pl-[130px]'>
                                                 <button
                                                       disabled={updateInfo.isPending}
                                                       className='flex items-center justify-center gap-[6px] ml-0  w-[180px] h-[20px] p-[20px] bg-blue-700 text-white rounded-md'
@@ -247,19 +260,19 @@ const CustomerAccount = () => {
                   </FormProvider>
                   {/* Right */}
                   <div className='hidden xl:block w-[1px] min-h-full bg-slate-200'></div>
-                  <div className='w-full xl:w-[45%] min-h-full '>
+                  <div className='w-full xl:w-[45%] min-h-full flex flex-col gap-[20px]'>
                         {/* @customer::account -> update::email */}
                         <div className='flex flex-col gap-[8px]'>
                               <span className='text-[16px] text-black font-semibold'>Email & liên hệ</span>
 
                               <div className='flex flex-col 2xl:flex-row  2xl:items-center min-h-[20px] pb-[15px] gap-[15px] 2xl:gap-0 '>
-                                    <div className='w-full flex items-center  gap-[16px]'>
-                                          <div className='min-w-[100px]'>Địa chỉ email</div>
-                                          <span className='flex-grow truncate max-w-[180px] underline  font-semibold'>{user.email}</span>
+                                    <div className='w-full flex items-center gap-[8px]  '>
+                                          <div className='min-w-[80px]'>Địa chỉ email</div>
+                                          <span className='flex-grow truncate max-w-[180px] italic'>{user.email}</span>
                                     </div>
                                     <Link
                                           to={'/customer/account/update/email'}
-                                          className='w-[100px]  flex items-center justify-center rounded-md bg-white border-[1px] border-blue-700 text-blue-700 h-[15%] p-[6px] '
+                                          className='w-[100px]  flex items-center justify-center rounded-md bg-white border-[1px] border-blue-700 text-blue-700  p-[6px] '
                                     >
                                           Cập nhập
                                     </Link>
@@ -275,7 +288,7 @@ const CustomerAccount = () => {
                                     </div>
                                     <Link
                                           to={'/customer/account/update/password'}
-                                          className='w-[100px]  flex items-center justify-center rounded-md bg-white border-[1px] border-blue-700 text-blue-700 h-[15%] p-[6px] '
+                                          className='w-[100px]  flex items-center justify-center rounded-md bg-white border-[1px] border-blue-700 text-blue-700  p-[6px] '
                                     >
                                           Cập nhập
                                     </Link>

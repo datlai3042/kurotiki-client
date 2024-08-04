@@ -6,13 +6,13 @@ import BoxModal from '../../../../component/BoxUi/BoxModal'
 
 //@dispatch toast
 import { useDispatch } from 'react-redux'
-import { addToast } from '../../../../Redux/toast'
 
 //@api
 import { useMutation } from '@tanstack/react-query'
 import ProductApi, { IFormDataDeleteImage, IFormDataImage, IFormDataImages } from '../../../../apis/product.api'
 import { ui } from '../ProductFormUpload'
 import { TCheckDescriptionImage } from '../../../../types/product/product.type'
+import { addOneToastWarning } from '../../../../Redux/toast'
 
 //@Props
 interface IProps {
@@ -112,8 +112,18 @@ const ButtonUploadMultiple = (props: IProps) => {
             console.log({ target: e.target.files?.length })
             //@nếu file vượt quá 4 thì xét 3 state chính lại mặc định và mount toast
             if (filePreview.length > 4 || fileProduct.length > 4 || e.target.files!.length > 4) {
-                  dispatch(addToast({ type: 'WARNNING', message: 'Chỉ upload tối đa 4 files', id: Math.random().toString() }))
-
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    type: 'WARNING',
+                                    _id: Math.random().toString(),
+                                    core: {
+                                          message: 'Chỉ upload tối đa 4 files',
+                                    },
+                                    toast_title: 'Lỗi upload',
+                              },
+                        }),
+                  )
                   return
             }
 
@@ -122,10 +132,15 @@ const ButtonUploadMultiple = (props: IProps) => {
                   //@nếu số file người dùng push vào + với số file sẵn có từ lần trước mà quá hơn 4 thì mount toast
                   if (fileProduct.length + e.target.files.length > 4) {
                         dispatch(
-                              addToast({
-                                    type: 'WARNNING',
-                                    message: `Chỉ upload tối đa 4 files ${fileProduct.length}`,
-                                    id: Math.random().toString(),
+                              addOneToastWarning({
+                                    toast_item: {
+                                          type: 'WARNING',
+                                          _id: Math.random().toString(),
+                                          core: {
+                                                message: `Chỉ upload tối đa 4 files ${fileProduct.length}`,
+                                          },
+                                          toast_title: 'Lỗi upload',
+                                    },
                               }),
                         )
                         inputRef!.current!.value = ''
