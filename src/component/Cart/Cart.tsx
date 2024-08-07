@@ -66,15 +66,13 @@ const Cart = () => {
 
       useEffect(() => {}, [getMyCart.isPending])
 
-      if (!user) {
-            
-                  return (
-                        <div className='h-[calc(100vh-100px)] w-full'>
-                              <AuthPermission />
-                        </div>
-                  )
+      if (!user && !getMyCart.isPending) {
+            return (
+                  <div className='h-[calc(100vh-100px)] w-full'>
+                        <AuthPermission />
+                  </div>
+            )
       }
-
 
       return (
             <React.Fragment>

@@ -73,7 +73,9 @@ const OrderHistoryItem = (props: TProps) => {
                                                       </div>
                                                 </div>
                                                 <div style={{ direction: 'rtl' }} className='w-[16%] xl:w-[4%]'>
-                                                      {product.product_id.product_price * product.quantity}
+                                                      {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                                                            .format(product.product_id.product_price * product.quantity)
+                                                            .replace('₫', '')}
                                                 </div>
                                           </div>
                                     </div>
@@ -84,7 +86,11 @@ const OrderHistoryItem = (props: TProps) => {
                               <div className='min-w-[150px] w-max flex flex-col items-end gap-[6px] rtl'>
                                     <p className='flex gap-[4px] text-[16px]'>
                                           <span>Tổng tiền:</span>
-                                          <span style={{ direction: 'rtl' }}>{orderItem.order_total}</span>
+                                          <span style={{ direction: 'rtl' }}>
+                                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                                                      .format(orderItem.order_total)
+                                                      .replace('₫', '')}
+                                          </span>
                                     </p>
                                     <button
                                           className='self-end w-[70px] h-[36px] border-[1px] border-blue-400 text-blue-300 rounded-none flex items-center justify-center text-[14px]'

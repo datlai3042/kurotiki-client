@@ -1,18 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import RouterController from './component/Routes/RouterController'
-import { RootState } from './store'
+import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import AuthWrapper from './component/Auth/AuthWrapper'
+import AuthenticationContext from './component/Context/AuthenticationContext'
+import Footer from './component/Footer/Footer'
 import FooterMobile from './component/Footer/FooterMobile'
 import ScrollToAnchor from './component/Header/Components/ScrollArchor'
-import { useLocation } from 'react-router-dom'
-import './index.css'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import AccountService from './apis/account.service'
-import { checkAxiosError } from './utils/handleAxiosError'
-import { fetchUser, onLoading } from './Redux/authenticationSlice'
-import AuthenticationContext from './component/Context/AuthenticationContext'
+import RouterController from './component/Routes/RouterController'
 import useGetMe from './hooks/me/useGetMe'
+import './index.css'
+import { RootState } from './store'
 function App() {
       const boxLogin = useSelector((state: RootState) => state.authentication.isOpenBoxLogin)
       const [, setShowBoxAuth] = useState(true)
@@ -40,6 +37,9 @@ function App() {
                         <RouterController />
                         <FooterMobile className='block xl:hidden' />
                         <ScrollToAnchor />
+                          <div className='mt-[20px] hidden xl:block mx-auto max-w-full md:max-w-[1023px] xl:max-w-[1400px]'>
+                        <Footer />
+                  </div>
                   </div>
 
                   {boxLogin && <AuthWrapper setShowBoxAuth={setShowBoxAuth} />}

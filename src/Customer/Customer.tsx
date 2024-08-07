@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 //@react router
 import { Link, Outlet, useLocation, useNavigate, useRoutes } from 'react-router-dom'
@@ -46,6 +46,7 @@ const Customer = () => {
       const auth = Boolean(user)
 
       //@check path
+      useEffect(() => {console.log({isLoading, 1: '1'})}, [isLoading])
       if (pathName === '/customer') return <NotFound />
 
       //@filter pathname context
@@ -61,9 +62,9 @@ const Customer = () => {
       const handleActive = (pathName: string) => {
             setSectionActive(pathName)
       }
+      const isLogin = JSON.parse(localStorage.getItem('isLogin') as string) || false
 
-
-      if(isLoading) return null
+      if (isLoading && isLogin) return <div className='w-full h-[400px] animate-pulse bg-gray-200'></div>
 
 
       //@element

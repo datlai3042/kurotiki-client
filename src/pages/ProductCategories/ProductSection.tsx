@@ -67,8 +67,8 @@ const ProductSection = (props: TProps) => {
                                                             }).format(product.product_price)}
                                                       </p>
                                                       <div className='flex flex-col gap-[8px] text-[16px]'>
-                                                            <p>{product.shop_id.shop_name}</p>
-                                                            <p className='break-all'>{product.product_name}</p>
+                                                            <p className='truncate max-w-[90%] text-slate-900 font-bold'>{product.shop_id.shop_name}</p>
+                                                            <p className='break-all line-clamp-2'>{product.product_name}</p>
                                                             <div className='flex flex-col xl:flex-row gap-[8px] text-[14px] xl:items-center'>
                                                                   <Rate
                                                                         disabled
@@ -102,10 +102,14 @@ const ProductSection = (props: TProps) => {
                               </div>
                         </>
                   )}
-                  {products && products.length === 0 && (
+                  {products && products.length === 0 && !getProductCategory.isPending && (
                         <div className='w-full h-[300px] bg-[#ffffff] flex items-center justify-center text-[28px] font-extrabold'>
                               Không tìm thấy sản phẩm
                         </div>
+                  )}
+
+                  {products && getProductCategory.isPending && (
+                        <div className='w-full h-[300px] rounded-lg bg-gray-200 animate-pulse'></div>
                   )}
             </div>
       )

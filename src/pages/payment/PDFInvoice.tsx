@@ -40,7 +40,7 @@ export const PDFInvoice = (props: TProps) => {
                   // alignItems: 'center',
                   gap: 24,
             },
-            footer: { width: '100%', textAlign: 'right' },
+            footer: { width: '100%', textAlign: 'right', fontSize: '24px' },
       })
 
 

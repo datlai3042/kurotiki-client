@@ -1,7 +1,6 @@
-import { Badge, Bike, Building2, Car, Home, ShoppingBag, TentTree } from 'lucide-react'
-import React from 'react'
-import { CartProduct, CartProductRef, CartResponse } from '../../types/cart.type'
+import { Building2, Car, Home, ShoppingBag, TentTree } from 'lucide-react'
 import BoxMoney from '../../component/BoxUi/BoxMoney'
+import { CartProduct } from '../../types/cart.type'
 
 type TProps = {
       product: CartProduct
@@ -18,7 +17,7 @@ const PaymentItem = (props: TProps) => {
             product.cart_address.type === 'Home' ? 'Nhà' : product.cart_address.type === 'Company' ? 'Công ty / cơ quan' : 'Nơi ở riêng tư'
 
       return (
-            <div className='w-full min-h-[200px] xl:min-h-[220px] h-max relative z-[2] border-[1px] border-slate-300 rounded-lg text-[11px] xl:text-[13px]'>
+            <div className='w-full min-h-[300px] xl:min-h-[250px] h-max relative z-[2] border-[1px] border-slate-300 rounded-lg text-[11px] xl:text-[13px]'>
                   <div className='absolute top-[-25px] left-[12px] h-[50px] bg-[#ffffff] z-[3] px-[8px] text-green-600 flex items-center gap-[8px]'>
                         <ShoppingBag />
                         <span>Gói {index}:</span>
@@ -30,9 +29,9 @@ const PaymentItem = (props: TProps) => {
                               <span className='w-max h-full flex items-center'>
                                     {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(14000).replace('₫', '')}
                               </span>
-                              <div className='w-[90%] xl:w-[300px] h-[40px] bg-[#ffffff] border-[2px] border-slate-600 rounded-md flex items-center px-[16px] gap-[8px] text-[14px]'>
+                              <div className='w-[90%] xl:w-[300px] h-[40px] bg-[#ffffff]  rounded-md flex items-center px-[16px] gap-[8px] text-[14px]'>
                                     <Car />
-                                    <span>Được giao bởi Tiki</span>
+                                    <p>Được giao bởi <span className='text-blue-400 font-semibold'>Kurotiki</span></p>
                               </div>
                         </div>
 

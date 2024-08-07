@@ -47,14 +47,13 @@ const ProductPay = (props: TProps) => {
                               error.response.data.message === 'Bad Request' &&
                               error.response.data.detail === 'Số lượng sản phẩm được chọn nhiều hơn số lượng trong kho'
                         ) {
-
                               dispatch(
                                     addOneToastWarning({
                                           toast_item: {
                                                 type: 'WARNING',
                                                 _id: Math.random().toString(),
                                                 core: {
-                                                      message: error.response.data.detail
+                                                      message: error.response.data.detail,
                                                 },
                                                 toast_title: 'Thiếu thông tin',
                                           },
@@ -83,8 +82,6 @@ const ProductPay = (props: TProps) => {
             }
 
             if (user._id === product.shop_id.owner._id) {
-
-
                   dispatch(
                         addOneToastWarning({
                               toast_item: {
@@ -101,14 +98,13 @@ const ProductPay = (props: TProps) => {
             }
 
             if (!Boolean(cartCurrent.cart_current_address)) {
-
                   dispatch(
                         addOneToastWarning({
                               toast_item: {
                                     type: 'WARNING',
                                     _id: Math.random().toString(),
                                     core: {
-                                          message: 'Vui lòng chọn địa chỉ trước khi thêm'
+                                          message: 'Vui lòng chọn địa chỉ trước khi thêm',
                                     },
                                     toast_title: 'Thiếu thông tin',
                               },
@@ -166,7 +162,7 @@ const ProductPay = (props: TProps) => {
                         addOneToastSuccess({
                               toast_item: {
                                     type: 'SUCCESS',
-                                    core: { message: 'Cập nhập thành công' },
+                                    core: { message: 'Đã thêm công vào giỏ hàng' },
                                     _id: Math.random().toString(),
                                     toast_title: 'Thành công',
                               },
@@ -254,7 +250,10 @@ const ProductPay = (props: TProps) => {
                         </p>
                   </div>
                   <div className='w-full h-max flex flex-col gap-[8px]'>
-                        <button className='w-full h-[45px] flex items-center justify-center bg-red-600 text-white rounded-md'>
+                        <button
+                              onClick={handleClickBuy}
+                              className='w-full h-[45px] flex items-center justify-center bg-red-600 text-white rounded-md'
+                        >
                               Mua ngay
                         </button>
                         <button

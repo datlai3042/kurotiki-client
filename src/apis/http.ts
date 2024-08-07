@@ -2,9 +2,11 @@ import axios, { type AxiosInstance } from 'axios'
 import { store } from '../store'
 import Auth from './auth.api'
 import { addOneToastError, addOneToastSuccess } from '../Redux/toast'
+import { url } from 'inspector'
 
 let retry = false
 let i = 5
+const routerAuth = ['/v1/api/auth/login', '/v1/api/auth/register']
 export const REACT_BACK_END_URL = process.env.REACT_APP_MODE === 'DEV' ? 'http://localhost:4000' : 'https://backendtiki.onrender.com'
 let refreshTokenPromise: Promise<any> | null = null // this holds any in-progress token refresh requests
 class AxiosCustom {
@@ -31,9 +33,16 @@ class AxiosCustom {
 
             //response
             this.instance.interceptors.response.use(
-                  (res) => res,
+                  (res) => {
+                        if (routerAuth.includes(res.config.url as string)) {
+                              localStorage.setItem('isLogin', 'true')
+                        }
+                        if (res.config.url === '/v1/api/auth/logout') {
+                              localStorage.removeItem('isLogin')
+                        }
+                        return res
+                  },
                   async (error) => {
-                        console.log({ error })
                         const originalRequest = error.config
 
                         if (

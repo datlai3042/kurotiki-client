@@ -50,7 +50,6 @@ const ProductDescription = (props: TProps) => {
 
                         <pre className='whitespace-pre-wrap break-words '>
                               {product.attribute.description}
-                              lorem*asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
                         </pre>
 
                         {!openMore && (

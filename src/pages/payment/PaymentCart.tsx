@@ -10,6 +10,7 @@ import { OrderItem } from '../../types/order.type'
 import { checkAxiosError } from '../../utils/handleAxiosError'
 import { useDispatch } from 'react-redux'
 import { addOneToastWarning } from '../../Redux/toast'
+import BoxLoading from '../../component/BoxUi/BoxLoading'
 
 type TProps = {
       carts: CartResponse
@@ -48,14 +49,13 @@ const PaymentCart = (props: TProps) => {
                               error.response.data.message === 'Bad Request'
                               // error.response.data.detail === 'Số lượng sản phẩm được chọn nhiều hơn số lượng trong kho'
                         ) {
-
                               dispatch(
                                     addOneToastWarning({
                                           toast_item: {
                                                 type: 'WARNING',
                                                 _id: Math.random().toString(),
                                                 core: {
-                                                      message: error.response.data.detail
+                                                      message: error.response.data.detail,
                                                 },
                                                 toast_title: 'Lỗi upload',
                                           },
@@ -171,6 +171,9 @@ const PaymentCart = (props: TProps) => {
                                           Mua hàng {'('}
                                           {carts?.cart_products.length}
                                           {')'}
+                                          {orderPaymentMutation.isPending && <div className='ml-[8px]'>
+                                                <BoxLoading />
+                                                </div>}
                                     </button>
                               )}
 

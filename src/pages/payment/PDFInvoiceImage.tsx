@@ -23,7 +23,7 @@ export const PDFInvoiceImage = (props: TProps) => {
                   margin: '0 auto',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: 60,
+                  gap: 40,
                   minHeight: 300,
                   height: 'max-content',
                   padding: '30px',
@@ -41,7 +41,7 @@ export const PDFInvoiceImage = (props: TProps) => {
                   // alignItems: 'center',
                   gap: 16,
             },
-            footer: { width: '100%', textAlign: 'right', fontSize: 30 },
+            footer: { width: '100%', textAlign: 'right', fontSize: 20, display: 'flex', gap: '6px', paddingLeft: 12 },
       })
 
       return (
@@ -92,7 +92,9 @@ export const PDFInvoiceImage = (props: TProps) => {
                                                 <Text>Giá: {product.quantity}</Text>
                                                 <Text>Số lượng: {product.quantity}</Text>
                                                 <Text style={{ textAlign: 'right' }}>
-                                                      Thành tiền: {product.product_id.product_price * product.quantity}
+                                                      {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                                                            .format(product.product_id.product_price * product.quantity)
+                                                            .replace('₫', '')}
                                                 </Text>
                                           </View>
 
@@ -111,7 +113,14 @@ export const PDFInvoiceImage = (props: TProps) => {
                                     </View>
                               ))}
                         </View>
-                        <Text style={styles.footer}>Tổng tiền của hóa đơn: {orderTotal}</Text>
+                        <View style={styles.footer}>
+                              <Text>Tổng tiền của hóa đơn:</Text>
+                              <Text>
+                                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                                          .format(orderTotal)
+                                          .replace('₫', '')}
+                              </Text>
+                        </View>
                   </Page>
             </Document>
       )

@@ -179,9 +179,9 @@ const BoxConfirmAddress = (props: TProps) => {
 
       return (
             <Portal>
-                  <div className='fixed inset-0 bg-[rgba(0,0,0,.45)] flex justify-center items-center z-[503]'>
+                  <div className='fixed inset-0 bg-[rgba(0,0,0,.45)] flex justify-center items-center z-[999]'>
                         <div
-                              className='relative w-full xl:w-[600px] min-h-[370px] h-max bg-[#ffffff] p-[12px_8px]  xl:p-[18px_12px] mx-[16px] xl:mx-0 
+                              className='relative w-full xl:w-[600px] min-h-[370px]  max-h-[650px] bg-[#ffffff] p-[12px_8px]  xl:p-[18px_12px] mx-[16px] xl:mx-0 
  rounded'
                         >
                               <div className='flex flex-col gap-[10px] h-full'>
@@ -197,7 +197,7 @@ const BoxConfirmAddress = (props: TProps) => {
                                           {user && user?.user_address && (
                                                 <div
                                                       className={`${
-                                                            valueAddress === 'Other' ? 'h-[100px]' : 'h-max'
+                                                            valueAddress === 'Other' ? 'h-[60px]' : 'h-max'
                                                       } scrollCustome px-[36px] mt-[24px]  overflow-y-auto `}
                                                 >
                                                       <Radio.Group

@@ -18,6 +18,7 @@ import Comment from '../../component/Comment/Comment'
 import CommentImageAll from '../../component/Comment/CommentImageAll'
 import ContentProduct from '../../component/Content/Components/ContentProduct'
 import CommentService from '../../apis/comment.service'
+import Footer from '..//../component/Footer/Footer'
 
 export type TImage = {
       secure_url: string
@@ -166,6 +167,7 @@ const Product = () => {
                   </div>
                   <ContentProduct />
 
+                
             </div>
       )
 }

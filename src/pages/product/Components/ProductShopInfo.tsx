@@ -31,7 +31,7 @@ const ProductShopInfo = (props: TProps) => {
                                           />
                                           <div className='flex  flex-col gap-[6px] xl:gap-[8px]'>
                                                 <div className='w-max flex  flex-col-reverse xl:flex-row gap-[6px]'>
-                                                      <span className='font-medium text-[14px]'>{shop.shop_name}</span>
+                                                      <span className='font-semibold text-[14px]'>{shop.shop_name}</span>
                                                       <img src={ShopLogo} className='w-[80px]' alt='label logo' />
                                                 </div>
                                                 <div className='flex items-center gap-[6px] w-max'>

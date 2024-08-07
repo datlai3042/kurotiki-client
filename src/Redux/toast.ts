@@ -11,7 +11,7 @@ type InitialState = {
 const initialState: InitialState = {
       toast_stack: [],
       toast_queue: [],
-      toast_timer: 6,
+      toast_timer: 600,
       toast_max_show: 4,
 };
 

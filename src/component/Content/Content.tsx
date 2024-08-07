@@ -1,20 +1,16 @@
-import SliderProducts from './Components/SliderProducts'
-import hinhAnhSlider from './utils/Image'
-import Banner from './Components/Banner'
-import SectionProduct from './Components/SectionProduct'
-import TitleProductSection from './Components/TitleProductSection'
-import CountDown from './Components/CountDown'
-import Footer from '../Footer/Footer'
 import { memo } from 'react'
-import SectionProductItem from './Components/SectionProductItem'
-import SliderProductV2 from './Components/SliderProductV2'
+import { useLocation } from 'react-router-dom'
+import Footer from '../Footer/Footer'
+import ContentBook from './Components/ContentBook'
 import ContentLabel from './Components/ContentLabel'
+import ContentProduct from './Components/ContentProduct'
+import CountDown from './Components/CountDown'
 import ProductCare from './Components/ProductCare'
 import ProductGenuineBrand from './Components/ProductGenuineBrand'
-import ContentBook from './Components/ContentBook'
-import ContentFood from './Components/ContentFood'
-import ContentProduct from './Components/ContentProduct'
-import { useLocation } from 'react-router-dom'
+import SectionProduct from './Components/SectionProduct'
+import SectionProductItem from './Components/SectionProductItem'
+import SliderProductV2 from './Components/SliderProductV2'
+import TitleProductSection from './Components/TitleProductSection'
 
 const Content = () => {
       const pathName = useLocation().pathname
@@ -26,7 +22,7 @@ const Content = () => {
                         <Banner />
                   </div> */}
 
-                  <div className='w-full p-[20px_16px_32px]  min-h-[250px] xl:min-h-[400px] h-max bg-[#ffffff] rounded-lg'>
+                  <div className='w-full p-[20px_16px_32px]  min-h-[250px] xl:min-h-[300px] h-max bg-[#ffffff] rounded-lg'>
                         <SliderProductV2 />
                   </div>
 
