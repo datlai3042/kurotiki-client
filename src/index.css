@@ -17,7 +17,7 @@
       }
 
       .custom-product-item {
-            @apply flex flex-col gap-4 py-[16px] h-[300px]  lg:overflow-y-hidden   bg-white rounded-[8px];
+            @apply flex flex-col gap-[20px] py-[16px] h-[300px]  lg:overflow-y-hidden   bg-white rounded-[8px];
       }
 
       .wrapper {

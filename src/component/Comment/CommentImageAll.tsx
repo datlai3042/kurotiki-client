@@ -39,18 +39,12 @@ const CommentImageAll = (props: TProps) => {
             }
       }, [getAllCommentImage.isSuccess, getAllCommentImage.data])
 
-      useEffect(() => {
-            if (openModel) {
-                  document.body.style.overflow = 'hidden'
-            } else {
-                  document.body.style.overflow = 'unset'
-            }
-      }, [openModel])
+    
 
       return (
             <>
                   {getAllCommentImage.isSuccess && getAllCommentImage.data.data.metadata.comment_images.length > 0 && (
-                        <div className=' my-[25px] w-[136px] xl:w-[170px] min-h-[60px] xl:min-h-[120px] h-max flex flex-col gap-[16px]'>
+                        <div className=' my-[25px] mx-[20px] w-[136px] xl:w-[170px] min-h-[100px] xl:min-h-[120px] h-max flex flex-col gap-[16px]'>
                               <h4 className='text-[18px] font-semibold text-slate-900'>Tất cả hình ảnh</h4>
                               {getAllCommentImage.isSuccess && (
                                     <div className='relative w-full h-full flex  gap-[19px] xl:gap-[8px] overflow-x-hidden'>
@@ -73,7 +67,7 @@ const CommentImageAll = (props: TProps) => {
                                                 onClick={() => onClickOpenModel(imageUrl[0].secure_url)}
                                           >
                                                 <div
-                                                      className='absolute z-[5] min-w-[60px] w-full h-full bg-[rgba(0,0,0,.6)] flex items-center justify-center text-white 
+                                                      className='absolute z-[4] min-w-[60px] w-full h-full bg-[rgba(0,0,0,.6)] flex items-center justify-center text-white 
 '
                                                 >
                                                       (+{comment_images?.length})

@@ -67,6 +67,13 @@ const BoxModalImage = (props: TProps) => {
             }
       }, [imageActive, secure_url, transitionDuration])
 
+      useEffect(() => {
+            document.body.style.overflow = 'hidden'
+            return () => {
+                  document.body.style.overflow = 'scroll'
+            }
+      }, [])
+
       const styleEffect = {
             buttonPrev: posImage === 1 ? 'text-gray-500 border-gray-500' : 'text-white border-white-400',
             buttonNext: posImage === secure_url.length ? 'text-gray-500 border-gray-500' : 'text-white border-white-400',
@@ -75,7 +82,7 @@ const BoxModalImage = (props: TProps) => {
 
       return (
             <Portal>
-                  <div className=' fixed inset-0 bg-[rgba(0,0,0,.93)] flex flex-col content-between min-h-screen h-max px-[24px]'>
+                  <div className=' fixed inset-0 bg-[rgba(0,0,0,.93)] z-[6] flex flex-col content-between min-h-screen h-max px-[24px]'>
                         <div className='relative w-full h-[30%]  lg:h-[70%] mt-[100px] xl:mt-[24px]'>
                               <div className='w-full h-full flex justify-center items-center'>
                                     <div className='w-[250px] h-[250px] xl:w-[540px] xl:h-[540px] overflow-x-hidden'>

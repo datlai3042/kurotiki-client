@@ -91,7 +91,7 @@ const Product = () => {
             <div className='flex flex-col w-full text-[12px]'>
                   <div className=' w-full flex flex-col gap-[4px] '>
                         {getProductWithId.data?.data && (
-                              <div className='flex items-center gap-[4px] px-[10px] xl:px-0 text-[16px] pb-[4px]'>
+                              <div className='flex items-center gap-[4px] px-[10px] xl:px-0 text-[16px] pb-[4px] my-[14px]'>
                                     <Link to='/'>Trang chủ</Link>
 
                                     <ChevronRight size={16} color='black' />
@@ -123,7 +123,7 @@ const Product = () => {
                                                       detailComment={detailComment || []}
                                                 />
                                                 <CommentImageAll product_id={product._id} />
-                                                <div className='w-full mt-[16px]'>
+                                                <div className='w-full mt-[16px] px-[20px]'>
                                                       <CommentMe product={product} ownerProduct={product?.shop_id?.owner._id} />
                                                 </div>
                                                 <Comment product_id={product?._id} />

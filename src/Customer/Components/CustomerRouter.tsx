@@ -98,19 +98,19 @@ const CustomerRouter = () => {
                         Đăng kí bán
                   </Link>
 
-                  {user?.verify_email && (
+                  {user?.verify_email && user?.isOpenShop && (
                         <Link to={'/customer/shop/product-list'} className='customer-item-bg px-[15px] py-[8px] w-full'>
                               <Store />
                               Sản phẩm của Shop
                         </Link>
                   )}
-                  <Link to={'/customer/shop/product-list'} className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[16px] `}>
+                  {/* <Link to={'/customer/shop/product-list'} className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[16px] `}>
                         <Store />
 
                         <span>Sản phẩm của Shop</span>
-                  </Link>
+                  </Link> */}
 
-                  <Link to={'/customer/account/address'} className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[16px] `}>
+                  <Link to={'/customer/account/address'} className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[20px] `}>
                         <MapPinned />
 
                         <span>Số địa chỉ</span>
@@ -118,7 +118,7 @@ const CustomerRouter = () => {
 
                   <Link
                         to={'/customer/account/update/email'}
-                        className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[16px] `}
+                        className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[20px] `}
                   >
                         <Mail />
                         <span>Cập nhập Email</span>
@@ -126,13 +126,13 @@ const CustomerRouter = () => {
 
                   <Link
                         to={'/customer/account/update/password'}
-                        className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[16px] `}
+                        className={`customer-item-bg flex items-center py-[8px] px-[15px] gap-[20px] `}
                   >
                         <Key />
                         <span>Cập nhập mật khẩu</span>
                   </Link>
 
-                  <div className={`customer-item-bg py-[8px] px-[15px] flex items-center gap-[16px]`} onClick={handleLogOut}>
+                  <div className={`customer-item-bg py-[8px] px-[15px] flex items-center gap-[20px]`} onClick={handleLogOut}>
                         <LogIn />
                         <span className=' py-[8px] w-full'>Đăng xuất</span>
                   </div>
