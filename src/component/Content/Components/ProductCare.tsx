@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
-import ProductApi from '../../../apis/product.api'
 import { useQuery } from '@tanstack/react-query'
-import ProductSimplify from './ProductSimplify'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import ProductApi from '../../../apis/product.api'
+import ProductLoading from './ProductLoading'
+import ProductSimplify from './ProductSimplify'
 
 const ProductCare = () => {
       const wrapperListProductsRef = useRef<HTMLDivElement>(null)
@@ -33,7 +34,7 @@ const ProductCare = () => {
                   const width = wrapperListProductsRef.current.getBoundingClientRect().width + 20
                   PositionScrollCurrent.current = PositionScrollCurrent.current + width
 
-                  // console.log(Math.trunc(width))
+                  //console.log(([^)]+))
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
             }
@@ -57,7 +58,7 @@ const ProductCare = () => {
       return (
             <div className='relative flex-1 min-h-[298px] h-max max-w-full px-0 xl:px-[18px]'>
                   <div className='max-w-full min-h-[298px] overflow-hidden'>
-                        {products && products?.length > 0 && (
+                        {products && products?.length > 0 && allProduct.isSuccess && (
                               <div
                                     className='gap-[20px] xl:gap-[16px] grid grid-rows-[300px]  grid-flow-col auto-cols-[calc((100%-40px)/2)] sm:auto-cols-[calc((100%-80px)/4)]   xl:auto-cols-[calc((100%-96px)/6)]  h-full overflow-x-scroll xl:overflow-visible '
                                     ref={wrapperListProductsRef}
@@ -68,19 +69,15 @@ const ProductCare = () => {
                                                       <ProductSimplify product={product} />
                                                 </div>
                                           ))}
+                              </div>
+                        )}
 
-                                    {allProduct.isPending && (
-                                          <>
-                                                {Array(6)
-                                                      .fill(0)
-                                                      ?.map((_, index) => (
-                                                            <div
-                                                                  className='animate-pulse w-full h-[300px] rounded-lg bg-slate-400'
-                                                                  key={index}
-                                                            ></div>
-                                                      ))}
-                                          </>
-                                    )}
+                        {allProduct.isPending && (
+                              <div
+                                    className='gap-[20px] xl:gap-[16px] grid grid-rows-[300px]  grid-flow-col auto-cols-[calc((100%-40px)/2)] sm:auto-cols-[calc((100%-80px)/4)]   xl:auto-cols-[calc((100%-96px)/6)]  h-full overflow-x-scroll xl:overflow-visible 
+                        '
+                              >
+                                    <ProductLoading />
                               </div>
                         )}
                         {products && products.length === 0 && (

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { TProductDetail } from '../../types/product/product.type'
-import ProductLabel from './ProductLabel'
-import { Rate } from 'antd'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import CartService from '../../apis/cart.service'
+import { Rate } from 'antd'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../store'
-import { UserResponse } from '../../types/user.type'
-import { CartCurrent } from '../../Redux/cartSlice'
+import CartService from '../../apis/cart.service'
 import { doOpenBoxLogin } from '../../Redux/authenticationSlice'
-import { Address } from '../../types/address.type'
-import { checkAxiosError } from '../../utils/handleAxiosError'
+import { CartCurrent } from '../../Redux/cartSlice'
 import { addOneToastSuccess, addOneToastWarning } from '../../Redux/toast'
+import { RootState } from '../../store'
+import { Address } from '../../types/address.type'
+import { TProductDetail } from '../../types/product/product.type'
+import { UserResponse } from '../../types/user.type'
+import { checkAxiosError } from '../../utils/handleAxiosError'
+import ProductLabel from './ProductLabel'
 
 type TProps = {
       product: TProductDetail
@@ -75,7 +75,6 @@ const ProductPay = (props: TProps) => {
       }
 
       const handleClickBuy = () => {
-            console.log('OK')
             if (!user) {
                   dispatch(doOpenBoxLogin())
                   return
@@ -115,11 +114,10 @@ const ProductPay = (props: TProps) => {
             }
 
             // if (cartCurrent) {
-            //       console.log({ cartCurrent })
+            //      console.log(([^)]+))
             //       return
             // }
 
-            console.log({ product: { ...product, productQuantity, price: product.product_price * (productQuantity || 1) } })
             const formData = new FormData()
             formData.append('product_id', product._id)
             const payload: ProductCart = {
@@ -150,11 +148,8 @@ const ProductPay = (props: TProps) => {
       }
 
       useEffect(() => {
-            console.log('ol')
             setDisableBtn(false)
       }, [cartCurrent.cart_current_address])
-
-      console.log({ productQuantity })
 
       useEffect(() => {
             if (cartMutation.isSuccess) {

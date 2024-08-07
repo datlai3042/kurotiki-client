@@ -1,9 +1,9 @@
-import React, { SetStateAction, useEffect, useMemo, useState } from 'react'
-import Portal from '../Portal'
-import { X } from 'lucide-react'
-import { Radio, RadioChangeEvent, Select } from 'antd'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { Radio, RadioChangeEvent, Select } from 'antd'
+import { X } from 'lucide-react'
+import React, { SetStateAction, useEffect, useMemo, useState } from 'react'
 import LocationApi from '../../apis/location.api'
+import Portal from '../Portal'
 
 type TProps = {
       setOpenModal: React.Dispatch<SetStateAction<boolean>>
@@ -90,8 +90,6 @@ const BoxSelectAdrees = (props: TProps) => {
             setWard(code)
       }
 
-      console.log({ province })
-
       useEffect(() => {
             if (province) {
                   districtApi.mutate(province)
@@ -106,13 +104,10 @@ const BoxSelectAdrees = (props: TProps) => {
             // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [district])
 
-      useEffect(() => {
-            console.log({ data: provinceApi.data?.data })
-      }, [provinceApi.isSuccess, provinceApi.data?.data])
+      useEffect(() => {}, [provinceApi.isSuccess, provinceApi.data?.data])
 
       useEffect(() => {
             if (districtApi.isSuccess) {
-                  console.log({ district: districtApi.data.data.metadata })
             }
       }, [districtApi.isSuccess, districtApi.data?.data.metadata])
 

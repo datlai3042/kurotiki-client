@@ -16,7 +16,7 @@ const OrderHistoryItem = (props: TProps) => {
       const navigate = useNavigate()
 
       const onBuyAgain = () => {
-            // console.log({ products: orderItem.map((product) => product.products[0]) })
+            //console.log(([^)]+))
             const products = orderItem.products
             buyAgainMutation.mutate(products)
       }

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import CartService from '../../apis/cart.service'
-import { Link, useNavigate } from 'react-router-dom'
-import BoxMoney from '../BoxUi/BoxMoney'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import CartService from '../../apis/cart.service'
 import { addOneToastWarning } from '../../Redux/toast'
+import BoxMoney from '../BoxUi/BoxMoney'
 
 const CartPayMini = () => {
       const [price, setPrice] = useState<number>(0)
@@ -40,10 +40,9 @@ const CartPayMini = () => {
       }
 
       useEffect(() => {
-            // console.log({ data: payQuery.data?.data.metadata.carts.cart_products })
+            //console.log(([^)]+))
 
             if (payQuery.isSuccess) {
-                  console.log('Ok')
                   if (payQuery?.data.data.metadata.carts) {
                         setPrice(() => {
                               let result: number = 0

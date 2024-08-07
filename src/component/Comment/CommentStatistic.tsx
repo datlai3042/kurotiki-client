@@ -1,5 +1,5 @@
 import { Rate } from 'antd'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { DetailComment } from '../../apis/product.api'
 
 type TProps = {
@@ -19,7 +19,7 @@ const CommentStatistic = (props: TProps) => {
                   setWidth(width)
             }
       }, [avg, totalComment, detailComment])
-      // console.log({ width:  })
+      //console.log(([^)]+))
 
       return (
             <div className='w-[300px] h-max flex items-center py-[16px] px-[20px]'>

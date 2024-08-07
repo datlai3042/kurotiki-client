@@ -1,5 +1,8 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import img1 from '../assets/img/ThuongHieuChinhHang/item_1.jpg'
+import img10 from '../assets/img/ThuongHieuChinhHang/item_10.jpg'
+import img11 from '../assets/img/ThuongHieuChinhHang/item_11.jpg'
+import img12 from '../assets/img/ThuongHieuChinhHang/item_12.jpg'
 import img2 from '../assets/img/ThuongHieuChinhHang/item_2.jpg'
 import img3 from '../assets/img/ThuongHieuChinhHang/item_3.jpg'
 import img4 from '../assets/img/ThuongHieuChinhHang/item_4.jpg'
@@ -8,9 +11,6 @@ import img6 from '../assets/img/ThuongHieuChinhHang/item_6.jpg'
 import img7 from '../assets/img/ThuongHieuChinhHang/item_7.jpg'
 import img8 from '../assets/img/ThuongHieuChinhHang/item_8.jpg'
 import img9 from '../assets/img/ThuongHieuChinhHang/item_9.jpg'
-import img10 from '../assets/img/ThuongHieuChinhHang/item_10.jpg'
-import img11 from '../assets/img/ThuongHieuChinhHang/item_11.jpg'
-import img12 from '../assets/img/ThuongHieuChinhHang/item_12.jpg'
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -36,7 +36,7 @@ const ProductGenuineBrand = () => {
                   const width = wrapperListProductsRef.current.getBoundingClientRect().width
                   PositionScrollCurrent.current = PositionScrollCurrent.current + width
 
-                  // console.log(Math.trunc(width))
+                  //console.log(([^)]+))
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
             }

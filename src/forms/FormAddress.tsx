@@ -1,19 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { Select } from 'antd'
 import React, { SetStateAction, useEffect, useMemo, useState } from 'react'
 import { Controller, FieldErrors, FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { addressSchemaForm } from '../schema/addressForm.schema'
-import { UserResponse } from '../types/user.type'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import LocationService from '../apis/location.api'
-import { Select } from 'antd'
-import InputText from '../Customer/Sell/components/InputText'
-import BoxButton from '../component/BoxUi/BoxButton'
 import { useDispatch, useSelector } from 'react-redux'
 import AccountService from '../apis/account.service'
+import LocationService from '../apis/location.api'
+import BoxButton from '../component/BoxUi/BoxButton'
+import InputText from '../Customer/Sell/components/InputText'
 import { doOpenBoxLogin, fetchUser } from '../Redux/authenticationSlice'
+import { addOneToastSuccess, addOneToastWarning } from '../Redux/toast'
+import { addressSchemaForm } from '../schema/addressForm.schema'
 import { RootState } from '../store'
 import { Address } from '../types/address.type'
-import { addOneToastSuccess, addOneToastWarning } from '../Redux/toast'
+import { UserResponse } from '../types/user.type'
 
 export type AddressForm = {
       address_type: 'Home' | 'Company' | 'Private'
@@ -88,7 +88,6 @@ const FormAddress = (props: TProps) => {
       })
 
       const onSubmit: SubmitHandler<AddressForm> = (form) => {
-            console.log({ form })
             if (!user) {
                   dispatch(doOpenBoxLogin())
                   return
@@ -194,12 +193,12 @@ const FormAddress = (props: TProps) => {
       }, [district])
 
       useEffect(() => {
-            // console.log({ data: provinceApi.data?.data })
+            //console.log(([^)]+))
       }, [provinceApi.isSuccess, provinceApi.data?.data])
 
       useEffect(() => {
             if (districtApi.isSuccess) {
-                  // console.log({ district: districtApi.data.data.metadata })
+                  //console.log(([^)]+))
             }
       }, [districtApi.isSuccess, districtApi.data?.data.metadata])
 
@@ -227,12 +226,10 @@ const FormAddress = (props: TProps) => {
                   )
 
                   // for (let error in addressForm.formState.errors) {
-                  //       console.log(addressForm.formState.errors[error as keyof FieldErrors<AddressForm>]?.message)
-                  // }
+                  //                   // }
             }
       }, [addressForm.formState.errors])
 
-      console.log({ watch: addressForm.watch(), errors: addressForm.formState.errors })
       return (
             <FormProvider {...addressForm}>
                   <form

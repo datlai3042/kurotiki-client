@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
 export type GeolocationApi = {
       data: {
@@ -28,7 +28,6 @@ export const getGeoLocation = <T>(locationName: string) => {
 }
 
 export const getDataWeather = <T>(geolocation: GeolocationApi) => {
-      console.log({ geolocation })
       return axios.get<T>(
             `https://api.openweathermap.org/data/2.5/weather?lat=${geolocation.data[0].lat}&lon=${geolocation.data[0].lon}&appid=${process.env.REACT_APP_API_KEY_WEATHER}&lang=vi&units=metric`,
       )

@@ -85,7 +85,7 @@ const CustomerUpdateEmail = () => {
             }
             updateEmailMutation.mutate({ password, newEmail: email })
             // const checkEmail = validateEmail(email)
-            // console.log({ checkEmail })
+            //console.log(([^)]+))
       }
 
       useEffect(() => {

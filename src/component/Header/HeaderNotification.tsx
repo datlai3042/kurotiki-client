@@ -24,7 +24,7 @@
 
 //       useEffect(() => {
 //             if (getMyNotification.isSuccess) {
-//                   console.log({ notification: getMyNotification.data.data.metadata.notifications })
+//                  console.log(([^)]+))
 //             }
 //       }, [getMyNotification.isSuccess])
 
@@ -36,12 +36,12 @@
 
 //       useEffect(() => {
 //             const onClickGlobal = (e: MouseEvent) => {
-//                   console.log('run1')
+//                  console.log(([^)]+))
 //                   if (boxNotificationRef.current && !boxNotificationRef.current.contains(e.target as Node)) {
 //                         setShowNotification(false)
 //                   }
 //             }
-//             console.log('run2')
+//            console.log(([^)]+))
 //             if (!showNotification) {
 //                   document.removeEventListener('click', onClickGlobal)
 //                   return

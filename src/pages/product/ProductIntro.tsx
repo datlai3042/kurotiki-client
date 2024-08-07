@@ -53,7 +53,7 @@ const ProductIntro = (props: TProps) => {
             staleTime: STALE_TIME,
       })
 
-      // console.log({ cartCurrent: renderStringAddressDetailV2(address_default[0]) })
+      //console.log(([^)]+))
 
       return (
             <div className='flex flex-col min-h-full h-max gap-[16px] text-[13px]'>

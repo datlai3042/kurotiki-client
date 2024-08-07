@@ -98,7 +98,7 @@
 //     //@hàm submit sản phẩm
 //     const onSubmit = (data: TRegisterFormBook) => {
 //         setFormStateSubmit(true)
-//         console.log({ data })
+//        console.log(([^)]+))
 
 //         if (urlProductMultipleImage.length < 4) {
 //         }
@@ -124,7 +124,7 @@
 //             formData.append('author', data.author)
 //             formData.append('page_number', data.page_number)
 //             formData.append('description', data.description)
-//             console.log({ formData })
+//            console.log(([^)]+))
 //             // uploadProductFull.mutate(formData)
 //         }
 //     }

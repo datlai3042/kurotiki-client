@@ -1,13 +1,13 @@
-import { UseMutationResult, useMutation } from '@tanstack/react-query'
+import { UseMutationResult } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 import { X } from 'lucide-react'
 import React, { SetStateAction, useEffect, useRef, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { TAvatarActions } from '../../../reducer/customer.reducer'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../store'
+import { TAvatarActions } from '../../../reducer/customer.reducer'
 import { fetchUser } from '../../../Redux/authenticationSlice'
-import { AxiosResponse } from 'axios'
 import { addOneToastSuccess } from '../../../Redux/toast'
+import { RootState } from '../../../store'
 
 //@props
 type TProps = {
@@ -46,7 +46,6 @@ const ModelAvatarUpdate = (props: TProps) => {
 
             const objectUrl = URL.createObjectURL(fileAvatar)
             setFilePreview(objectUrl)
-            console.log(objectUrl)
             // free memory when ever this component is unmounted
             return () => URL.revokeObjectURL(objectUrl)
       }, [fileAvatar])
@@ -68,7 +67,6 @@ const ModelAvatarUpdate = (props: TProps) => {
                   )
             }
             if (onUpdate.isSuccess && onUpdate.data) {
-                  console.log({ onUpdate: onUpdate.data.data.metadata.user })
             }
       }, [onUpdate.isSuccess, modeDispatch, onUpdate.data, dispatch])
 
@@ -95,20 +93,17 @@ const ModelAvatarUpdate = (props: TProps) => {
                   setFileAvatar(undefined)
             }
 
-            console.log(e.target.files)
             if (e.target.files) {
                   setFileAvatar(e.target.files[0])
             }
       }
 
       const onSubmit: SubmitHandler<TForm> = (file) => {
-            console.log(file, fileAvatar)
-            // console.log('link', URL.createObjectURL(file.file[0].name))
+            //console.log(([^)]+))
             const formData: any = new FormData()
             formData.append('file', fileAvatar)
             formData.append('user', user)
 
-            console.log('dirty', methods)
             onUpdate.mutate(formData)
       }
 

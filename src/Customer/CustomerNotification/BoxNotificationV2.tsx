@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import { History, Home, Notebook, Store, User } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import BoxBuild from '../../component/BoxUi/BoxBuild'
 import NotificationSection from './NotificationSection'
 
@@ -41,7 +41,6 @@ const BoxNotification = () => {
                         numberTranslate = 0
                   }
                   if (activeNotification.title === 'Thông báo cá nhân') {
-                        console.log('OK')
                         numberTranslate = 1
                   }
 

@@ -1,8 +1,7 @@
-import React from 'react'
-import { NotificationMessage } from '../../../types/notification.type'
 import { Link } from 'react-router-dom'
-import { renderStringNotificationType } from '../../../utils/notification.utit'
+import { NotificationMessage } from '../../../types/notification.type'
 import { convertDateToStringFull } from '../../../utils/date.utils'
+import { renderStringNotificationType } from '../../../utils/notification.utit'
 
 type TProps = {
       notification: NotificationMessage
@@ -10,7 +9,6 @@ type TProps = {
 
 const NotificationSystem = (props: TProps) => {
       const { notification } = props
-      console.log({ notification })
       return (
             <Link to={`/customer/notification#${notification._id}`} className='w-full h-full flex flex-col gap-[8px]'>
                   <p className='w-full flex justify-between'>

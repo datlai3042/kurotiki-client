@@ -1,13 +1,13 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import TextArea from 'antd/es/input/TextArea'
 import { Plus, X } from 'lucide-react'
 import React, { SetStateAction, useEffect, useRef, useState } from 'react'
 import { Controller, FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import ShopApi, { RegisterShop, StateFile } from '../../apis/shop.api'
 import { useDispatch } from 'react-redux'
-import BoxLoading from './BoxLoading'
+import ShopApi, { RegisterShop, StateFile } from '../../apis/shop.api'
 import { fetchUser } from '../../Redux/authenticationSlice'
-import TextArea from 'antd/es/input/TextArea'
 import { addOneToastSuccess, addOneToastWarning } from '../../Redux/toast'
+import BoxLoading from './BoxLoading'
 
 type TForm = {
       shop_name: string
@@ -45,8 +45,6 @@ const BoxShopForm = (props: TProps) => {
                   inputAvatar.current?.click()
             }
       }
-
-      console.log({ errors: form.formState.errors })
 
       const onChangeAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
             // if(!)
@@ -89,7 +87,7 @@ const BoxShopForm = (props: TProps) => {
       })
 
       const onSubmit: SubmitHandler<TForm> = (dataForm) => {
-            // console.log({ form: dataForm })
+            //console.log(([^)]+))
             if (!preview && modeForm === 'UPLOAD') {
                   dispatch(
                         addOneToastWarning({

@@ -1,15 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { SetStateAction, useEffect, useState } from 'react'
-import CommentService from '../../apis/comment.service'
-import BoxCommentProduct from '../BoxUi/BoxCommentProduct'
-import { TProductDetail } from '../../types/product/product.type'
-import CommentItem from './CommentItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../store'
-import { UserResponse } from '../../types/user.type'
+import CommentService from '../../apis/comment.service'
 import { SLATE_TIME_COMMENT_ME_ALL } from '../../constant/staleTime'
-import BoxConfirmDelete from '../BoxUi/confirm/BoxConfirmDelete'
 import { addOneToastSuccess, addOneToastWarning } from '../../Redux/toast'
+import { RootState } from '../../store'
+import { TProductDetail } from '../../types/product/product.type'
+import { UserResponse } from '../../types/user.type'
+import BoxCommentProduct from '../BoxUi/BoxCommentProduct'
+import BoxConfirmDelete from '../BoxUi/confirm/BoxConfirmDelete'
+import CommentItem from './CommentItem'
 
 type TProps = {
       product: TProductDetail
@@ -72,8 +72,6 @@ const CommentMe = (props: TProps) => {
       }
 
       const onOpenModel = (cb: React.Dispatch<SetStateAction<boolean>>) => {
-            console.log({ User: user?._id, owner: ownerProduct })
-
             if (ownerProduct === user._id) {
                   dispatch(
                         addOneToastWarning({

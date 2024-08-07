@@ -1,15 +1,15 @@
-import React, { SetStateAction, useEffect, useState } from 'react'
-import { TModeAuth } from './AuthWrapper'
-import { Eye, EyeOff, ShieldX } from 'lucide-react'
-import * as z from 'zod'
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import Auth from '../../apis/auth.api'
+import { Eye, EyeOff } from 'lucide-react'
+import React, { SetStateAction, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
+import * as z from 'zod'
+import Auth from '../../apis/auth.api'
 import { doCloseBoxLogin, fetchUser } from '../../Redux/authenticationSlice'
-import { checkAxiosError } from '../../utils/handleAxiosError'
 import { addOneToastError, addOneToastSuccess, addOneToastWarning } from '../../Redux/toast'
+import { checkAxiosError } from '../../utils/handleAxiosError'
+import { TModeAuth } from './AuthWrapper'
 type TProps = {
       setModeAuth: React.Dispatch<SetStateAction<TModeAuth>>
 }
@@ -56,16 +56,16 @@ const AuthRegister = (props: TProps) => {
             mutationFn: (data: Omit<TRegisterZodSchema, 'confirm_password'>) => Auth.register(data),
             onSuccess: (res) => {
                   dispatch(fetchUser({ user: res.data.metadata.user }))
-                  dispatch(addOneToastSuccess({
-                        
+                  dispatch(
+                        addOneToastSuccess({
                               toast_item: {
                                     type: 'SUCCESS',
                                     core: { message: 'Đăng kí thành công' },
                                     _id: Math.random().toString(),
                                     toast_title: 'Thành công',
                               },
-
-                  }))
+                        }),
+                  )
                   dispatch(doCloseBoxLogin())
             },
 
@@ -76,13 +76,18 @@ const AuthRegister = (props: TProps) => {
                               error.response.data.detail === 'Email đã được đăng kí' &&
                               error.response.data.message === 'Bad Request'
                         ) {
-                              dispatch(addOneToastError({toast_item: 
-                                    { _id: Math.random().toString(), type: 'ERROR', core: {
-                                          message: error.response.data.detail
-
-                                    }, toast_title: 'Có lỗi xảy ra' }
-
-                              }))
+                              dispatch(
+                                    addOneToastError({
+                                          toast_item: {
+                                                _id: Math.random().toString(),
+                                                type: 'ERROR',
+                                                core: {
+                                                      message: error.response.data.detail,
+                                                },
+                                                toast_title: 'Có lỗi xảy ra',
+                                          },
+                                    }),
+                              )
                         }
                   }
             },
@@ -112,7 +117,6 @@ const AuthRegister = (props: TProps) => {
       }
 
       const onSubmit = (data: TRegisterZodSchema) => {
-            console.log('data', data)
             authRegister.mutate(data)
       }
 
@@ -123,19 +127,18 @@ const AuthRegister = (props: TProps) => {
                         subMessage.push(`Field ${key} đã xảy ra lỗi, vui lòng ${errors[key as keyof TRegisterZodSchema]?.message}`)
                   })
 
-                  dispatch(addOneToastWarning({
-                        toast_item: {
-                              type: 'WARNING',
-                              core: { message:subMessage.join(' - ') },
-                              _id: Math.random().toString(),
-                              toast_title: 'Có lỗi xảy ra',
-                        },
-                  }))
-
+                  dispatch(
+                        addOneToastWarning({
+                              toast_item: {
+                                    type: 'WARNING',
+                                    core: { message: subMessage.join(' - ') },
+                                    _id: Math.random().toString(),
+                                    toast_title: 'Có lỗi xảy ra',
+                              },
+                        }),
+                  )
             }
       }, [errors, dispatch])
-
-      console.log({ errors })
 
       return (
             <div className='flex flex-col items-center gap-[15px] py-[35px]'>
@@ -193,7 +196,6 @@ const AuthRegister = (props: TProps) => {
                         </div>
                         <div className='w-full'>
                               <button
-                                    onClick={() => console.log('click')}
                                     type='submit'
                                     className='flex justify-center items-center gap-[8px] w-full h-[60px] rounded-lg bg-slate-900 text-white disabled:opacity-50 disabled:cursor-not-allowed'
                                     disabled={!authRegister.isPending && Object.keys(errors).length > 0}

@@ -1,18 +1,18 @@
 import React, { SetStateAction, useEffect, useId, useRef, useState } from 'react'
 
 //@api
-import ProductApi, { IFormDataImage } from '../../../../apis/product.api'
 import { useMutation } from '@tanstack/react-query'
+import ProductApi, { IFormDataImage } from '../../../../apis/product.api'
 
 //@icon
 import { Image, View, X } from 'lucide-react'
 //@modal
+import { useDispatch } from 'react-redux'
 import BoxModal from '../../../../component/BoxUi/BoxModal'
-import { ui } from '../ProductFormUpload'
+import { addOneToastSuccess } from '../../../../Redux/toast'
 import { TProfileImage } from '../../../../types/product/product.type'
 import { TCloudinaryImage } from '../../types/cloudinary.typs'
-import { useDispatch } from 'react-redux'
-import { addOneToastSuccess } from '../../../../Redux/toast'
+import { ui } from '../ProductFormUpload'
 
 //@Props
 interface IProps {
@@ -59,7 +59,6 @@ const ButtonUpload = (props: IProps) => {
                         return newObject
                   })
                   setUrlProductThumb(() => {
-                        console.log({ secure_url })
                         const newObject = {} as TProfileImage
                         newObject.isUploadImage = true
                         newObject.FileLength = secure_url ? 1 : 0
@@ -115,12 +114,11 @@ const ButtonUpload = (props: IProps) => {
 
       useEffect(() => {
             if (uploadProductThumb.isSuccess) {
-
                   dispatch(
                         addOneToastSuccess({
                               toast_item: {
                                     type: 'SUCCESS',
-                                    core: { message: 'Upload product thumb thành công'},
+                                    core: { message: 'Upload product thumb thành công' },
                                     _id: Math.random().toString(),
                                     toast_title: 'Thành công',
                               },

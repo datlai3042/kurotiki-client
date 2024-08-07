@@ -1,16 +1,15 @@
-import React, { SetStateAction, useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { CartProduct, CartResponse } from '../../types/cart.type'
-import BoxMoney from '../../component/BoxUi/BoxMoney'
-import { ChevronUp } from 'lucide-react'
-import { Address } from '../../types/address.type'
 import { useMutation } from '@tanstack/react-query'
+import { ChevronUp } from 'lucide-react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { addOneToastWarning } from '../../Redux/toast'
 import OrderService from '../../apis/Order.service'
+import BoxLoading from '../../component/BoxUi/BoxLoading'
+import BoxMoney from '../../component/BoxUi/BoxMoney'
+import { CartProduct, CartResponse } from '../../types/cart.type'
 import { OrderItem } from '../../types/order.type'
 import { checkAxiosError } from '../../utils/handleAxiosError'
-import { useDispatch } from 'react-redux'
-import { addOneToastWarning } from '../../Redux/toast'
-import BoxLoading from '../../component/BoxUi/BoxLoading'
 
 type TProps = {
       carts: CartResponse
@@ -38,7 +37,6 @@ const PaymentCart = (props: TProps) => {
             mutationKey: ['/v1/api/order/order-payment-product'],
             mutationFn: (orders: ParamOrderAdd) => OrderService.orderAddProduct(orders),
             onSuccess: (axiosResponse) => {
-                  console.log({ order: axiosResponse.data.metadata.order_success })
                   const { message, order_success } = axiosResponse.data.metadata
                   onOrderSuccess({ message, order_success })
             },
@@ -70,7 +68,6 @@ const PaymentCart = (props: TProps) => {
             setOpenSeeProduct((prev) => !prev)
       }
 
-      console.log({ product_payment })
       const handleVerifyBuy = () => {
             orderPaymentMutation.mutate({ products: product_payment, order_total: price })
             setDisable(true)
@@ -171,9 +168,11 @@ const PaymentCart = (props: TProps) => {
                                           Mua hàng {'('}
                                           {carts?.cart_products.length}
                                           {')'}
-                                          {orderPaymentMutation.isPending && <div className='ml-[8px]'>
-                                                <BoxLoading />
-                                                </div>}
+                                          {orderPaymentMutation.isPending && (
+                                                <div className='ml-[8px]'>
+                                                      <BoxLoading />
+                                                </div>
+                                          )}
                                     </button>
                               )}
 

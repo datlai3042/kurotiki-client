@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react'
+import { ShopResponse } from '../../../types/shop.type'
+import ProductBestSellerRank from './ProductBestSellerRank'
 import ProductSlider from './ProductSlider'
 import ProductTopSellQuery from './ProductTopSellQuery'
-import ProductBestSellerRank from './ProductBestSellerRank'
 import ShopProductAll from './ShopProductAll'
-import { ShopResponse } from '../../../types/shop.type'
-import Footer from '../../../component/Footer/Footer'
 
 type TProps = {
       shop_id: string
@@ -37,8 +35,6 @@ const ShopStore = (props: TProps) => {
                   </div>
             )
       }
-
-      console.log('re-render')
 
       return (
             <div className='flex flex-col gap-[16px]'>

@@ -1,12 +1,12 @@
-import { X } from 'lucide-react'
-import React, { SetStateAction, useEffect, useState } from 'react'
-import FilterProductVote from '../../pages/ProductCategories/Components/FilterProductVote'
-import FilterProductPrice from '../../pages/ProductCategories/Components/FilterProductPrice'
-import { ProductType } from '../../types/product/product.type'
 import { useMutation } from '@tanstack/react-query'
-import ProductApi from '../../apis/product.api'
+import { X } from 'lucide-react'
+import React, { SetStateAction, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import ProductApi from '../../apis/product.api'
+import FilterProductPrice from '../../pages/ProductCategories/Components/FilterProductPrice'
+import FilterProductVote from '../../pages/ProductCategories/Components/FilterProductVote'
 import { fetchProduct } from '../../Redux/category.slice'
+import { ProductType } from '../../types/product/product.type'
 import BoxLoading from './BoxLoading'
 
 export const MAX_PRICE = 1000000000
@@ -40,7 +40,6 @@ const BoxFilterProduct = (props: TProps) => {
 
       const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault()
-            console.log({ filter })
             const payload: ProductFilter = {
                   product_vote: filter.onVote || 1,
                   minPrice: filter.minPrice || 1,

@@ -1,7 +1,7 @@
-import React, { memo, useEffect, useState } from 'react'
-import BoxCountProduct from './BoxCountProduct'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { memo, useEffect, useState } from 'react'
 import CartService, { TModeChangeQuantityProductCart } from '../../apis/cart.service'
+import BoxCountProduct from './BoxCountProduct'
 
 type TProps = {
       product_id: string
@@ -14,11 +14,7 @@ const WrapperCountProduct = (props: TProps) => {
       const [productQuantity, setProductQuantity] = useState<number | undefined>(cart_quantity)
       const queryClient = useQueryClient()
 
-      console.log({ product_id })
-      console.log({ quantity: productQuantity })
-
       useEffect(() => {
-            console.log('api')
             setProductQuantity(cart_quantity)
       }, [cart_quantity, productQuantity])
 

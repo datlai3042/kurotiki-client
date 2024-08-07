@@ -24,11 +24,9 @@ const NotFound = (props: TProps) => {
 
             if (count > 0) {
                   xoaInter.current = setInterval(() => {
-                        console.log('1000')
                         setCount((prev) => prev - 1)
                   }, 1000)
                   xoaTimout.current = setTimeout(() => {
-                        console.log('inter')
                         navigate(-1)
                   }, 5000)
             }

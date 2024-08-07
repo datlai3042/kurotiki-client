@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { Comment } from '../../types/comment.type'
-import { convertDateToString, convertDateToStringFull } from '../../utils/date.utils'
 import { Rate } from 'antd'
-import { renderLevelVote } from '../../utils/comment.util'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import BoxModalImage from '../../pages/product/BoxModalImage'
 import { TImage } from '../../pages/product/Product'
-import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
+import { Comment } from '../../types/comment.type'
 import { UserResponse } from '../../types/user.type'
+import { renderLevelVote } from '../../utils/comment.util'
+import { convertDateToString, convertDateToStringFull } from '../../utils/date.utils'
 
 type TProps = {
       comment: Comment
@@ -18,7 +18,6 @@ const CommentItem = (props: TProps) => {
       const [openModal, setOpenModal] = useState<boolean>(false)
 
       const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
-      console.log({ comment })
       return (
             <div className='relative flex flex-col xl:flex-row min-h-[250px] h-max py-[32px] xl:py-[16px] border-t-[2px] border-[rgb(245_245_250)] gap-[16px] xl:gap-0'>
                   <div className='w-full  min-h-[50px] flex flex-row  gap-[10px]'>

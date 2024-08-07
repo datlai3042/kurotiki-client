@@ -6,11 +6,10 @@ import { store } from './store'
 
 import App from './App'
 import { doLogout, doOpenBoxLogin } from './Redux/authenticationSlice'
-import TErrorAxios from './types/axios.response.error'
-import { checkAxiosError } from './utils/handleAxiosError'
 import { addOneToastError } from './Redux/toast'
 import ToastProvider from './component/toast/ToastProvider'
-
+import TErrorAxios from './types/axios.response.error'
+import { checkAxiosError } from './utils/handleAxiosError'
 
 const rootELement = document.getElementById('root')
 if (!rootELement) throw new Error('Root is invaild')
@@ -41,8 +40,7 @@ const client = new QueryClient({
                                                 type: 'ERROR',
                                                 core: { message: 'Refresh Token không hợp lệ' },
                                                 _id: Math.random().toString(),
-                                                toast_title: 'Có lỗi xảy ra'
-
+                                                toast_title: 'Có lỗi xảy ra',
                                           },
                                     }),
                               )
@@ -57,7 +55,7 @@ const client = new QueryClient({
                                                       type: 'ERROR',
                                                       core: { message: error.response.data.detail },
                                                       _id: Math.random().toString(),
-                                                      toast_title: 'Có lỗi xảy ra'
+                                                      toast_title: 'Có lỗi xảy ra',
                                                 },
                                           }),
                                     )
@@ -70,7 +68,7 @@ const client = new QueryClient({
                                                       type: 'ERROR',
                                                       core: { message: 'Token hết hạn' },
                                                       _id: Math.random().toString(),
-                                                      toast_title: 'Có lỗi xảy ra'
+                                                      toast_title: 'Có lỗi xảy ra',
                                                 },
                                           }),
                                     )
@@ -81,9 +79,7 @@ const client = new QueryClient({
       }),
       mutationCache: new MutationCache({
             onError: async (error, varibale, context, mutation) => {
-                  console.log({ error, mutation, varibale, context })
                   if (checkAxiosError<TErrorAxios>(error)) {
-                        console.log({ mute: error })
                         if (
                               error?.response?.status === 403 &&
                               error?.response.data?.message === 'Forbidden' &&
@@ -92,15 +88,13 @@ const client = new QueryClient({
                                     error?.response.data?.detail === 'Không tìm thấy tài khoản' ||
                                     error?.response.data?.detail === 'Token đã được sử dụng')
                         ) {
-
                               store.dispatch(
                                     addOneToastError({
                                           toast_item: {
                                                 type: 'ERROR',
                                                 core: { message: 'Refresh Token không hợp lệ' },
                                                 _id: Math.random().toString(),
-                                                toast_title: 'Có lỗi xảy ra'
-
+                                                toast_title: 'Có lỗi xảy ra',
                                           },
                                     }),
                               )
@@ -114,7 +108,7 @@ const client = new QueryClient({
                                                       type: 'ERROR',
                                                       core: { message: error.response.data.detail },
                                                       _id: Math.random().toString(),
-                                                      toast_title: 'Có lỗi xảy ra'
+                                                      toast_title: 'Có lỗi xảy ra',
                                                 },
                                           }),
                                     )
@@ -129,16 +123,15 @@ const client = new QueryClient({
                                                       type: 'ERROR',
                                                       core: { message: 'Token hết hạn' },
                                                       _id: Math.random().toString(),
-                                                      toast_title: 'Có lỗi xảy ra'
+                                                      toast_title: 'Có lỗi xảy ra',
                                                 },
                                           }),
                                     )
                               }
-                              }
                         }
                   }
             },
-      ),
+      }),
 })
 
 root.render(

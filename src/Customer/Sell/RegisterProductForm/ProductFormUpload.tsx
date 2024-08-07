@@ -4,26 +4,25 @@ import React, { useEffect, useState } from 'react'
 import { Check } from 'lucide-react'
 
 //@api
-import ProductApi, { ProductData } from '../../../apis/product.api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import ProductApi, { ProductData } from '../../../apis/product.api'
 
 //@form
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
-import * as z from 'zod'
 
 //@components
-import InputText from '../components/InputText'
-import ButtonUpload from './components/ButtonUpload'
-import InputNumber from '../components/InputNumber'
-import Timeline from '../components/Timeline'
 import { useDispatch } from 'react-redux'
-import { productBookSchema, productFoodSchema, productSchema } from '../types/product.schema'
-import { ProductForm, ProductType, TCheckDescriptionImage, TProductDetail, TProfileImage } from '../../../types/product/product.type'
-import UpdateMultipleImage from '../UpdateProductForm/components/UpdateMultipleImage'
-import { Link, useNavigate } from 'react-router-dom'
-import { sleep } from '../../../utils/sleep'
+import { useNavigate } from 'react-router-dom'
 import { addOneToastError, addOneToastSuccess } from '../../../Redux/toast'
+import { ProductForm, ProductType, TCheckDescriptionImage, TProductDetail, TProfileImage } from '../../../types/product/product.type'
+import { sleep } from '../../../utils/sleep'
+import InputNumber from '../components/InputNumber'
+import InputText from '../components/InputText'
+import Timeline from '../components/Timeline'
+import { productBookSchema, productFoodSchema, productSchema } from '../types/product.schema'
+import UpdateMultipleImage from '../UpdateProductForm/components/UpdateMultipleImage'
+import ButtonUpload from './components/ButtonUpload'
 
 //@Props - Product::Book
 
@@ -99,12 +98,11 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
             mutationKey: ['upload-product-full'],
             mutationFn: (data: ProductData) => ProductApi.uploadProductFull(data, endpointUrl),
       })
-      console.log({ erros: methods.formState.errors })
       //@hàm submit sản phẩm
       const onSubmit = (data: typeof defaultValues) => {
             setFormStateSubmit(true)
 
-            // console.log({ demo: data })
+            //console.log(([^)]+))
             // return
             if (!urlProductMultipleImage.isUploadImage) {
                   dispatch(
@@ -179,7 +177,7 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
             }
       }, [uploadProductFull.isSuccess, queryClient, dispatch, navigate, product_id])
 
-      // console.log({ defaultValues: methods.formState.defaultValues })
+      //console.log(([^)]+))
 
       return (
             <React.Fragment>

@@ -1,15 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import OrderService from '../../apis/Order.service'
-import NotFound from '../../component/Errors/NotFound'
 import BoxMoney from '../../component/BoxUi/BoxMoney'
-import { useSelector } from 'react-redux'
+import NotFound from '../../component/Errors/NotFound'
 import { RootState } from '../../store'
 import { UserResponse } from '../../types/user.type'
-import { convertDateToStringFull } from '../../utils/date.utils'
 import { renderStringAddressDetailV2 } from '../../utils/address.util'
-import { Clock } from 'lucide-react'
+import { convertDateToStringFull } from '../../utils/date.utils'
 
 const OrderCheck = () => {
       const { order_id } = useParams()
@@ -21,20 +20,15 @@ const OrderCheck = () => {
       })
 
       useEffect(() => {
-            if(getOrderId.isSuccess) {
-
-console.log({products: getOrderId.data?.data.metadata})
-
+            if (getOrderId.isSuccess) {
+                  console.log({ products: getOrderId.data?.data.metadata })
             }
-
-
-},[getOrderId.isSuccess])
+      }, [getOrderId.isSuccess])
       if (!order_id) return <NotFound />
       if (!getOrderId.data?.data.metadata.getOrderInfo && getOrderId.isSuccess) return <NotFound />
 
       const order = getOrderId.data?.data.metadata.getOrderInfo[0]
 
-      
       return (
             <div className='w-[850px] mx-auto bg-[#ffffff] flex flex-col p-[24px_16px_50px] xl:p-[24px_20px_50px] my-[50px]'>
                   {getOrderId.isSuccess && (
@@ -122,8 +116,7 @@ console.log({products: getOrderId.data?.data.metadata})
                                           <span>
                                                 {' '}
                                                 {convertDateToStringFull(
-                                                      getOrderId.data?.data.metadata.getOrderInfo[0]
-                                                            .order_time_payment as Date,
+                                                      getOrderId.data?.data.metadata.getOrderInfo[0].order_time_payment as Date,
                                                 )}
                                           </span>
                                     </div>

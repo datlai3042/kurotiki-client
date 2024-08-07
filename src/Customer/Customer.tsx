@@ -1,21 +1,19 @@
 import { memo, useEffect, useState } from 'react'
 
 //@react router
-import { Link, Outlet, useLocation, useNavigate, useRoutes } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 
 //@redux-toolkit
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
 
 //@components
-import CustomerWrapperItem from './Components/CustomerWrapperItem'
 import AuthPermission from '../component/Auth/AuthPermission'
 import NotFound from '../component/Errors/NotFound'
+import CustomerWrapperItem from './Components/CustomerWrapperItem'
 
 //@icon
-import { BellDot, Key, Lock, Mail, MapPinned, NotebookPen, ShoppingBag, ShoppingCart, Store } from 'lucide-react'
-import { UserRound } from 'lucide-react'
-import { UserResponse } from '../types/user.type'
+import { BellDot, Key, Lock, Mail, MapPinned, NotebookPen, ShoppingBag, ShoppingCart, Store, UserRound } from 'lucide-react'
 
 //@const
 const link = [
@@ -46,7 +44,9 @@ const Customer = () => {
       const auth = Boolean(user)
 
       //@check path
-      useEffect(() => {console.log({isLoading, 1: '1'})}, [isLoading])
+      useEffect(() => {
+            console.log({ isLoading, 1: '1' })
+      }, [isLoading])
       if (pathName === '/customer') return <NotFound />
 
       //@filter pathname context
@@ -65,7 +65,6 @@ const Customer = () => {
       const isLogin = JSON.parse(localStorage.getItem('isLogin') as string) || false
 
       if (isLoading && isLogin) return <div className='w-full h-[400px] animate-pulse bg-gray-200'></div>
-
 
       //@element
       return (

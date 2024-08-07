@@ -1,8 +1,7 @@
-import { useRef, useEffect, useState, useCallback } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import PositionIcon from '../../BoxUi/BoxAbsolute'
-import BoxAbsolute from '../../BoxUi/BoxAbsolute'
 import { debounce } from 'lodash'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import BoxAbsolute from '../../BoxUi/BoxAbsolute'
 
 type Props = {
       hinhAnhSlider: string[]
@@ -42,7 +41,7 @@ const SliderProducts = (props: Props) => {
       let widthDefault = useRef<number>(800)
       let heightDefault = useRef<number>(300)
 
-      //debug -> console.log
+      //debug ->console.log(([^)]+))
       let modeDebug = useRef<boolean>(false)
 
       const sleep = (ms: number) => {
@@ -111,8 +110,6 @@ const SliderProducts = (props: Props) => {
                         newPosition = position + -posCurrent.current
                   }
 
-                  console.log('time', time)
-
                   sliderWrapper.current.style.transform = `translate3d(${newPosition}px, 0,0)`
                   sliderWrapper.current.style.transition = `all ${time}s linner`
 
@@ -122,7 +119,6 @@ const SliderProducts = (props: Props) => {
 
                   await sleep(1000)
                   run.current = true
-                  console.log('onClick', posCurrent.current)
             }
       }
 
@@ -176,7 +172,7 @@ const SliderProducts = (props: Props) => {
       useEffect(() => {
             if (window.innerWidth > 1024) {
                   timerId.current = setInterval(() => {
-                        // console.log({ scope: scope.current })
+                        //console.log(([^)]+))
                         if (run.current) {
                               if (sliderWrapper.current) {
                                     if (scope.current === hinhAnhSlider.length || scope.current + 2 > hinhAnhSlider.length - 1) {
@@ -199,7 +195,7 @@ const SliderProducts = (props: Props) => {
                               }
                         }
                   }, 2000)
-                  //     console.log(scope.current)
+                  //    console.log(([^)]+))
             }
             return () => {
                   clearInterval(timerId.current as NodeJS.Timeout)
@@ -213,8 +209,6 @@ const SliderProducts = (props: Props) => {
                   containerRefSlider.current.style.height = `${height || heightDefault.current}px`
             }
       }, [])
-
-      console.log()
 
       return (
             <div

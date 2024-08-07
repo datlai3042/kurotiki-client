@@ -1,17 +1,17 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import React, { SetStateAction, useEffect, useState } from 'react'
-import ShopApi from '../../../apis/shop.api'
-import { STALE_TIME } from '../../../component/Comment/Comment'
-import { TProductDetail } from '../../../types/product/product.type'
-import { getAddressDefault, renderStringAddressDetailV2 } from '../../../utils/address.util'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../store'
-import { UserResponse } from '../../../types/user.type'
-import BoxConfirmAddress from '../../../component/BoxUi/confirm/BoxConfirmAddress'
-import { fetchShopProduct } from '../../../Redux/category.slice'
-import ProductMedium from '../../../component/Content/Components/ProductMedium'
 import ProductApi from '../../../apis/product.api'
+import ShopApi from '../../../apis/shop.api'
+import BoxConfirmAddress from '../../../component/BoxUi/confirm/BoxConfirmAddress'
+import { STALE_TIME } from '../../../component/Comment/Comment'
+import ProductMedium from '../../../component/Content/Components/ProductMedium'
+import { fetchShopProduct } from '../../../Redux/category.slice'
+import { RootState } from '../../../store'
+import { TProductDetail } from '../../../types/product/product.type'
 import { ShopResponse } from '../../../types/shop.type'
+import { UserResponse } from '../../../types/user.type'
+import { getAddressDefault, renderStringAddressDetailV2 } from '../../../utils/address.util'
 
 const LIMIT = 12
 
@@ -93,7 +93,6 @@ const ShopProductAll = (props: TProps) => {
       useEffect(() => {
             if (getProductAll.isSuccess) {
                   const shop_products = getProductAll.data.pages.flatMap((p) => p.data.metadata.shop.shop_products)
-                  console.log({ shop_products })
                   dispatch(fetchShopProduct({ shop_products: shop_products }))
             }
       }, [getProductAll.isSuccess, dispatch, getProductAll.data?.pages])

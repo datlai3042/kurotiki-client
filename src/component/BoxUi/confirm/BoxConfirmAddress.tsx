@@ -1,21 +1,21 @@
-import React, { SetStateAction, useState } from 'react'
-import { X } from 'lucide-react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Radio, RadioChangeEvent } from 'antd'
-import Portal from '../../Portal'
-import FormAddress from '../../../forms/FormAddress'
+import { X } from 'lucide-react'
+import React, { SetStateAction, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import AccountService from '../../../apis/account.service'
+import CartService from '../../../apis/cart.service'
+import FormAddress from '../../../forms/FormAddress'
+import { fetchUser } from '../../../Redux/authenticationSlice'
+import { AddressType, CartCurrent, setAddressProduct } from '../../../Redux/cartSlice'
+import { addOneToastSuccess, addOneToastWarning } from '../../../Redux/toast'
 import { RootState } from '../../../store'
+import { Address } from '../../../types/address.type'
+import { CartProduct } from '../../../types/cart.type'
 import { UserAddress, UserResponse } from '../../../types/user.type'
 import { renderStringAddressDetailV2 } from '../../../utils/address.util'
+import Portal from '../../Portal'
 import BoxButton from '../BoxButton'
-import { AddressType, CartCurrent, setAddressProduct } from '../../../Redux/cartSlice'
-import { CartProduct } from '../../../types/cart.type'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import CartService from '../../../apis/cart.service'
-import { Address } from '../../../types/address.type'
-import AccountService from '../../../apis/account.service'
-import { fetchUser } from '../../../Redux/authenticationSlice'
-import { addOneToastSuccess, addOneToastWarning } from '../../../Redux/toast'
 
 type TProps = {
       setOpenModal: React.Dispatch<SetStateAction<boolean>>
@@ -108,7 +108,6 @@ const BoxConfirmAddress = (props: TProps) => {
 
             if (mode === 'User') {
                   const addressSelector = user?.user_address.find((address) => address._id === valueAddress) as UserAddress
-                  console.log({ addressSelector })
                   setAddressDefaultMutation.mutate({ _id: addressSelector._id })
                   return
                   // return
@@ -173,7 +172,6 @@ const BoxConfirmAddress = (props: TProps) => {
       }
 
       const handleChangeRadio = (e: RadioChangeEvent) => {
-            console.log({ radio: e.target.value })
             setValueAddress(e.target.value)
       }
 

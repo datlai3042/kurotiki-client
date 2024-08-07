@@ -34,7 +34,7 @@ const BoxAbsolute = (props: Props) => {
                   WrapperIconRef.current.style.zIndex = `${props.zIndex || 1}`
 
                   if (props.Mode.mode === 'CENTER') {
-                        // console.log(props.Mode.CornerRemaining?.left)
+                        //console.log(([^)]+))
                         switch (props.Mode.CornerCenter) {
                               case 'TOP':
                                     WrapperIconRef.current.style.top = `50%`

@@ -1,7 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import React, { SetStateAction, useState } from 'react'
 import { MAX_PRICE } from '../../../component/BoxUi/BoxFilterProduct'
-import { on } from 'events'
 
 type PriceFilter = 'MAX_40' | 'MAX_120' | 'MAX_180' | 'MIN_180'
 
@@ -18,7 +17,6 @@ const FilterProductPrice = (props: TProps) => {
       const onValueChange = (index: number, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             e.stopPropagation()
             e.preventDefault()
-            console.log(index)
             if (index === 1) {
                   setActive(1)
                   setPrice((prev) => ({ ...prev, minPrice: 1, maxPrice: 40000 }))
@@ -43,8 +41,6 @@ const FilterProductPrice = (props: TProps) => {
                   return
             }
       }
-
-      console.log({ active })
 
       const styleEffect = {
             onActive: (state: boolean) => {

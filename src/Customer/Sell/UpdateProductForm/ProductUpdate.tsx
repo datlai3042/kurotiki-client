@@ -4,26 +4,24 @@ import React, { useEffect, useState } from 'react'
 import { Check } from 'lucide-react'
 
 //@api
-import ProductApi, { ProductData } from '../../../apis/product.api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import ProductApi, { ProductData } from '../../../apis/product.api'
 
 //@form
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
-import * as z from 'zod'
 
 //@components
-import InputText from '../components/InputText'
-import InputNumber from '../components/InputNumber'
-import Timeline from '../components/Timeline'
 import { useDispatch } from 'react-redux'
-import { productBookSchema, productFoodSchema, productSchema } from '../types/product.schema'
-import Book from '../Category/Book/Book'
-import { ProductForm, TCheckDescriptionImage, TProductDetail, TProfileImage } from '../../../types/product/product.type'
-import { TCloudinaryImage } from '../types/cloudinary.typs'
-import ButtonUpload from '../RegisterProductForm/components/ButtonUpload'
-import UpdateMultipleImage from './components/UpdateMultipleImage'
 import { addOneToastError } from '../../../Redux/toast'
+import { ProductForm, TCheckDescriptionImage, TProductDetail, TProfileImage } from '../../../types/product/product.type'
+import InputNumber from '../components/InputNumber'
+import InputText from '../components/InputText'
+import Timeline from '../components/Timeline'
+import ButtonUpload from '../RegisterProductForm/components/ButtonUpload'
+import { TCloudinaryImage } from '../types/cloudinary.typs'
+import { productBookSchema, productFoodSchema, productSchema } from '../types/product.schema'
+import UpdateMultipleImage from './components/UpdateMultipleImage'
 
 //@Props - Product::Book
 
@@ -56,7 +54,6 @@ type TProps<T, K> = {
 //@Component
 const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
       const { product_id, ProductAttribute, TimelineProps, mode = 'UPDATE', product, defaultValues, ProductType, endPointUrl } = props
-      console.log({ product })
       //@trang thái submit
       const [, setFormStateSubmit] = useState(false)
       const dispatch = useDispatch()
@@ -83,13 +80,12 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
 
       //@lấy thông tin tên các hình
       const [getFileName, setGetFileName] = useState<string[]>([])
-      // console.log({ getFileName })
+      //console.log(([^)]+))
       //@useForm
       const methods = useForm<typeof defaultValues>({
             defaultValues: product as unknown as typeof defaultValues,
             resolver: zodResolver(schema),
       })
-      console.log({ formError: methods.formState.defaultValues })
 
       //@hàm upload sản phẩn
       const uploadProductFull = useMutation({
@@ -100,53 +96,41 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
       //@hàm submit sản phẩm
       const onSubmit = (data: typeof defaultValues) => {
             setFormStateSubmit(true)
-            console.log({ data: '123' })
-            console.log({ data })
 
             // return
             if (!urlProductMultipleImage.isUploadImage) {
-
                   dispatch(
                         addOneToastError({
                               toast_item: {
                                     type: 'ERROR',
                                     core: {
                                           message: `Upload thêm ${4 - urlProductMultipleImage.numberImage} để đủ 4 ảnh bạn nhé`,
-
-
-                                     },
+                                    },
                                     _id: Math.random().toString(),
                                     toast_title: 'Có lỗi xảy ra',
                               },
                         }),
                   )
-
-                
             }
 
             if (!urlProductThumb.isUploadImage) {
-
-
                   dispatch(
                         addOneToastError({
                               toast_item: {
                                     type: 'ERROR',
                                     core: {
-
                                           message: 'Hình đại diện sản phẩm là bắt buộc',
-
-                                     },
+                                    },
                                     _id: Math.random().toString(),
                                     toast_title: 'Có lỗi xảy ra',
                               },
                         }),
                   )
-                  
             }
 
             // chỉ submit khi có đủ image
             if (urlProductThumb.isUploadImage && urlProductMultipleImage.isUploadImage) {
-                  // console.log({ urlProductThumb })
+                  //console.log(([^)]+))
 
                   const uploadProduct = {
                         product_id,
@@ -158,8 +142,6 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
                   uploadProductFull.mutate({ product_id: product_id, uploadProduct, product_attribute: data.attribute, mode: 'UPDATE' })
             }
       }
-
-      console.log({ submit: methods.formState.isSubmitted, success: methods.formState.isSubmitSuccessful, erros: methods.formState.errors })
 
       useEffect(() => {
             const callAgain = async () => {
@@ -175,7 +157,7 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
             }
       }, [uploadProductFull.isSuccess, queryClient])
 
-      // console.log({ defaultValues: methods.formState.defaultValues })
+      //console.log(([^)]+))
 
       return (
             <React.Fragment>

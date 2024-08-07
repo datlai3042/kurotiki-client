@@ -146,7 +146,7 @@ const CartItemDetail = (props: TProps) => {
                               </div>
 
                               <button
-                                    className='absolute top-[-20px] right-[-10px] w-[50px] h-[50px] border-[1px] border-slate-900 bg-white hover:bg-slate-900 hover:text-white  rounded-full flex justify-center items-center'
+                                    className='absolute top-[-10px] right-[-5px] w-[36px] h-[36px] border-[1px] border-slate-900 bg-white hover:bg-slate-900 hover:text-white  rounded-full flex justify-center items-center'
                                     onClick={() => setOpenModel(false)}
                               >
                                     X

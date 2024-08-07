@@ -6,10 +6,10 @@ import React, { SetStateAction, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CommentService, { AddCommentParam } from '../../apis/comment.service'
 import { StateFile } from '../../apis/shop.api'
+import { addOneToastError, addOneToastWarning } from '../../Redux/toast'
 import { TProductDetail } from '../../types/product/product.type'
 import BoxLoading from './BoxLoading'
 import { ModeForm } from './BoxShopForm'
-import { addOneToastError, addOneToastWarning } from '../../Redux/toast'
 
 type TProps = {
       onClose: React.Dispatch<SetStateAction<boolean>>
@@ -76,7 +76,6 @@ const BoxCommentProduct = (props: TProps) => {
       })
 
       const onChangeStar = (value: number) => {
-            console.log({ star: value })
             setFormComment((prev) => ({ ...prev, vote: value }))
       }
 

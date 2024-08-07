@@ -1,5 +1,5 @@
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
-import React, { useEffect, useRef, useState } from 'react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { useRef, useState } from 'react'
 import { ProductType } from '../../../types/product/product.type'
 import FeaturedCategoryItem from './FeaturedCategoryItem'
 
@@ -41,7 +41,6 @@ const FeaturedCategory = (props: TProps) => {
                   setCountTranslate((prev) => prev - 1)
             }
       }
-      console.log({ countTranslate })
       const productsLength = 12 / 6
 
       return (

@@ -1,10 +1,9 @@
 import { Document, Font, PDFViewer, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
-import React from 'react'
 import { CartProduct } from '../../types/cart.type'
 import { convertDateToStringFull } from '../../utils/date.utils'
 
-import Roboto from './Fonts/Roboto-Medium.ttf'
 import { renderStringAddressDetailV2 } from '../../utils/address.util'
+import Roboto from './Fonts/Roboto-Medium.ttf'
 
 type TProps = {
       products: CartProduct[]
@@ -42,9 +41,6 @@ export const PDFInvoice = (props: TProps) => {
             },
             footer: { width: '100%', textAlign: 'right', fontSize: '24px' },
       })
-
-
-      console.log({products})
 
       return (
             <PDFViewer showToolbar={false} width={600} height={700}>

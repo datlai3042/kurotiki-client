@@ -54,7 +54,6 @@ const HeaderSeacrhInput = () => {
                   document.addEventListener('click', controllShowResultSearch)
             }
             return () => {
-                  console.log('remove')
                   document.removeEventListener('click', controllShowResultSearch)
             }
       }, [controllShowResultSearch, showSearch])

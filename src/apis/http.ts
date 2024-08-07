@@ -7,13 +7,12 @@ import { url } from 'inspector'
 let retry = false
 let i = 5
 const routerAuth = ['/v1/api/auth/login', '/v1/api/auth/register']
-export const REACT_BACK_END_URL = process.env.REACT_APP_MODE === 'DEV' ? 'http://localhost:4000' : 'https://backendtiki.onrender.com'
+export const REACT_BACK_END_URL = process.env.REACT_APP_MODE === 'DEV' ? process.env.REACT_APP_BASE_URL_LOCAL : 'https://backendtiki.onrender.com'
 let refreshTokenPromise: Promise<any> | null = null // this holds any in-progress token refresh requests
 class AxiosCustom {
       instance: AxiosInstance
 
       constructor() {
-            console.log({ REACT_BACK_END_URL })
             this.instance = axios.create({
                   baseURL: REACT_BACK_END_URL,
                   headers: {
@@ -52,7 +51,6 @@ class AxiosCustom {
                               !originalRequest.retry
                         ) {
                               originalRequest.retry = true
-                              console.log({ originalRequest })
                               store.dispatch(
                                     addOneToastError({
                                           toast_item: {
@@ -95,7 +93,6 @@ class AxiosCustom {
                                           error.response.config.url === 'v1/api/product/delete-product-description-image-one' ||
                                           error.response.config.url === 'v1/api/shop/register-shop'
                                     ) {
-                                          console.log('dung url ne')
                                           error.config.headers['Content-Type'] = 'multipart/form-data'
                                           error.config.timeout = 20000
                                     }

@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
-import React, { useEffect, useState } from 'react'
-import { GeolocationApi, WeatherData, convertUnixTimestampToString, getDataWeather, getGeoLocation } from '../../utils/weatherApi.util'
 import { CloudHail, Sunrise, Sunset } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { GeolocationApi, WeatherData, convertUnixTimestampToString, getDataWeather, getGeoLocation } from '../../utils/weatherApi.util'
 
 type TProps = {
       locationName: string
@@ -37,7 +37,7 @@ const BoxWeatherApi = (props: TProps) => {
             onSuccess: (axiosResponse) => {
                   // const data= axiosResponse.data[0].
                   weatherAPI.mutate({ data: axiosResponse.data as unknown as { lat: string; lon: string }[] })
-                  // console.log({ axiosResponse: axiosResponse.data[0] })
+                  //console.log(([^)]+))
             },
             onError: () => {
                   setNotData(true)
@@ -57,7 +57,6 @@ const BoxWeatherApi = (props: TProps) => {
                         weather,
                         name,
                   })
-                  console.log({ api: axiosResponse.data })
                   setHeight(1)
             },
             onError: () => {
@@ -66,9 +65,7 @@ const BoxWeatherApi = (props: TProps) => {
             },
       })
 
-      if (geolocationApi.isPending || weatherAPI.isPending) {
-            console.log({ ok: 123 })
-      }
+     
 
       useEffect(() => {
             geolocationApi.mutate(locationName)

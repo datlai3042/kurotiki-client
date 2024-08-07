@@ -28,7 +28,6 @@ const authSlice = createSlice({
             fetchUser: (state, payload: PayloadAction<{ user: UserResponse | undefined }>) => {
                   state.user = payload.payload.user
                   state.isLoading = false
-                  console.log('OK')
             },
 
             onLoading: (state) => {

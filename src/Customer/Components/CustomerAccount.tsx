@@ -27,11 +27,11 @@ import { sleep } from '../../utils/sleep'
 
 //@icon
 import AccountService from '../../apis/account.service'
+import { addOneToastSuccess } from '../../Redux/toast'
 import TErrorAxios from '../../types/axios.response.error'
 import { UserResponse } from '../../types/user.type'
 import BoxAvatarMode from '../Account/Box/BoxAvatarMode'
 import InputText from '../Sell/components/InputText'
-import { addOneToastSuccess } from '../../Redux/toast'
 
 //@type form
 type TFormCustomer = {
@@ -54,7 +54,7 @@ const CustomerAccount = () => {
       const dispatch = useDispatch()
 
       const dayTime = new Date()
-      // console.log({ id: Math.random() })
+      //console.log(([^)]+))
       const methods = useForm<TFormCustomer>({
             defaultValues: {
                   fullName: `${user.fullName || user?.email?.split('@')[0]}`,
@@ -68,8 +68,6 @@ const CustomerAccount = () => {
             },
             mode: 'onChange',
       })
-
-      console.log({ day: methods.watch('birth.day') })
 
       const getMe = useMutation({
             mutationKey: ['getMe'],
@@ -92,7 +90,7 @@ const CustomerAccount = () => {
             mutationKey: ['update-info'],
             mutationFn: (data: any) => Account.updateInfo(data),
             onSuccess: async (data: any) => {
-                  // console.log('dispatch', { data })
+                  //console.log(([^)]+))
                   dispatch(fetchUser({ user: data.data.metadata.user }))
                   // setShowToast((prev) => !prev)
 
@@ -100,7 +98,7 @@ const CustomerAccount = () => {
                         addOneToastSuccess({
                               toast_item: {
                                     type: 'SUCCESS',
-                                    core: {  message: 'Cập nhập thông tin thành công' },
+                                    core: { message: 'Cập nhập thông tin thành công' },
                                     _id: Math.random().toString(),
                                     toast_title: 'Thành công',
                               },
@@ -130,13 +128,10 @@ const CustomerAccount = () => {
 
       //@[shape] :: error.response.data.error
 
-      const submitfake = (data: TFormCustomer) => {
-            console.log('event', data)
-      }
+      const submitfake = (data: TFormCustomer) => {}
 
       //submid update info account
       const onSubmit = (form: TFormCustomer) => {
-            console.log({ submid: form })
             //Có 2 trường hợp sẽ xảy ra liên quan đến bob
             // thứ nhất theo mặc định sẽ là 'Ngày' 'Tháng' 'Năm' nếu người dùng không tương tác với field này thì ta sẽ gán cho nó = null
             // còn ngược lại thì ghép 3 chuỗi vừa nhận được từ hàm vaild kia để tạo ra 1 ngày hoàn chỉnh rồi gửi lên server
@@ -166,8 +161,6 @@ const CustomerAccount = () => {
                   )
             }
       }, [getMe.isSuccess, dispatch])
-
-      console.log({ watch: methods.watch('fullName') })
 
       return (
             <div className='bg-[#ffffff] p-[16px] shadow-xl flex flex-col xl:flex-row min-h-full xl:min-h-[650px] w-full h-max gap-[20px] xl:gap-[2%] ]'>

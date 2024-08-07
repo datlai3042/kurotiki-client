@@ -12,7 +12,7 @@ const useGetMe = () => {
       const getMe = useQuery({
             queryKey: ['getMeQuery'],
             queryFn: () => AccountService.getMeQuery(),
-            enabled: !!isLogin
+            enabled: !!isLogin,
       })
 
       useEffect(() => {
@@ -25,8 +25,6 @@ const useGetMe = () => {
             }
 
             if (getMe.isError) {
-                  console.log({ user: getMe.data?.data.metadata })
-
                   dispatch(fetchUser({ user: undefined }))
             }
       }, [getMe.isSuccess, getMe.isError, dispatch, getMe.data, getMe.isPending])

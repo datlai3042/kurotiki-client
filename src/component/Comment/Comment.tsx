@@ -1,12 +1,12 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import React, { useEffect, useState } from 'react'
-import CommentService from '../../apis/comment.service'
-import CommentItem from './CommentItem'
-import CommentSketeton from './CommentSketeton'
-import CommentFilter from './CommentFilter'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import CommentService from '../../apis/comment.service'
 import { fetchComment } from '../../Redux/comment.slice'
 import { RootState } from '../../store'
+import CommentFilter from './CommentFilter'
+import CommentItem from './CommentItem'
+import CommentSketeton from './CommentSketeton'
 
 type TProps = {
       product_id: string
@@ -78,7 +78,6 @@ const Comment = (props: TProps) => {
                                                       onModeFilter === false ? page === index + 1 : pageFilter === index + 1,
                                                 )} w-[20px] h-[20px] xl:w-[30px] xl:h-[30px] flex items-center justify-center transition-all `}
                                                 onClick={() => {
-                                                      console.log({ index })
                                                       onModeFilter === false ? setPage(index + 1) : setPageFilter(index + 1)
                                                 }}
                                           >

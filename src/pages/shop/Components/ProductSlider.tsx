@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { TProductDetail } from '../../../types/product/product.type'
+import { useEffect, useRef, useState } from 'react'
 import BoxButtonCircle from '../../../component/BoxUi/BoxButtonCircle'
+import { TProductDetail } from '../../../types/product/product.type'
 
 type TProps = {
       products: TProductDetail[]
@@ -83,7 +83,7 @@ const ProductSlider = (props: TProps) => {
                   clearInterval(timer.current as NodeJS.Timeout)
             }
       }, [newPosition, indexImage, LIMIT, TransitionTime, delay])
-      // console.log({ products: products.length, index: indexImage, LIMIT, TransitionTime, props: props })
+      //console.log(([^)]+))
 
       if (products.length === 0) {
             return <div className='animate-pulse bg-gray-200 w-full h-full'></div>

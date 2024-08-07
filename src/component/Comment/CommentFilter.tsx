@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query'
 import { Check } from 'lucide-react'
-import React, { SetStateAction, useCallback, useEffect, useState } from 'react'
-import CommentService, { GetAllCommentParam } from '../../apis/comment.service'
-import { fetchComment } from '../../Redux/comment.slice'
+import React, { SetStateAction, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import CommentService from '../../apis/comment.service'
+import { fetchComment } from '../../Redux/comment.slice'
 import { LIMIT } from './Comment'
 
 type FilterVote = {
@@ -98,7 +98,7 @@ const CommentFilter = (props: TProps) => {
       }
 
       // }, [page])
-      // console.log({ filterVote, storege })
+      //console.log(([^)]+))
 
       useEffect(() => {
             if (onModeFilter) {

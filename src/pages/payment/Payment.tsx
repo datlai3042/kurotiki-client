@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import LogoTiki from './assets/img/payment_logo_tiki.png'
-import { Phone } from 'lucide-react'
-import CartUserInfo from '../../component/Cart/CartUserInfo'
+import { PDFDownloadLink } from '@react-pdf/renderer'
 import { useQuery } from '@tanstack/react-query'
+import { Phone } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import CartService from '../../apis/cart.service'
+import CartUserInfo from '../../component/Cart/CartUserInfo'
+import { CartProduct, CartResponse } from '../../types/cart.type'
+import { OrderItem } from '../../types/order.type'
+import LogoTiki from './assets/img/payment_logo_tiki.png'
 import PaymentCart from './PaymentCart'
 import PaymentItem from './PaymentItem'
-import { Link } from 'react-router-dom'
-import { CartProduct, CartResponse } from '../../types/cart.type'
-import NotFound from '../../component/Errors/NotFound'
-import { OrderItem } from '../../types/order.type'
-import { PDFInvoice } from './PDFInvoice'
-import { PDFDownloadLink } from '@react-pdf/renderer'
 import { PDFInvoiceImage } from './PDFInvoiceImage'
 
 const Payment = () => {
@@ -41,7 +39,6 @@ const Payment = () => {
 
       useEffect(() => {
             if (payQuery.isSuccess && payQuery.data.data.metadata.carts) {
-                  console.log({ cart_id: payQuery.data.data.metadata.carts._id })
                   setPrice(() => {
                         let result: number = 0
                         payQuery.data.data.metadata.carts.cart_products.forEach((cartItem) => {
@@ -141,12 +138,11 @@ const Payment = () => {
 
                         {payQuery.isSuccess &&
                               payQuery.data.data.metadata.carts &&
-                              payQuery.data.data.metadata.carts.cart_products.length ===0 && (
+                              payQuery.data.data.metadata.carts.cart_products.length === 0 && (
                                     <div className='mt-[30px] w-full h-[600px] bg-[#fff] rounded-lg flex justify-center items-center'>
                                           Không có sản phẩm thanh toán
                                     </div>
                               )}
-                      
                   </div>
             </div>
       )

@@ -1,17 +1,17 @@
-import React, { useEffect, useReducer, useRef } from 'react'
-import { customerAccountReducer, initialValue } from '../../../reducer/customer.reducer'
-import { RootState } from '../../../store'
-import { useDispatch, useSelector } from 'react-redux'
+import { useMutation } from '@tanstack/react-query'
 import { Eye, Image, Pencil, Trash2 } from 'lucide-react'
+import React, { useEffect, useReducer, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import AccountService from '../../../apis/account.service'
 import Portal from '../../../component/Portal'
-import ModelAvatarSee from '../models/ModelAvatarSee'
-import ModelAvatarUpdate from '../models/ModelAvatarUpdate'
-import ModelAvatarDelete from '../models/ModelAvatarDelete'
+import { customerAccountReducer, initialValue } from '../../../reducer/customer.reducer'
+import { fetchUser } from '../../../Redux/authenticationSlice'
+import { RootState } from '../../../store'
 import { ShopResponse } from '../../../types/shop.type'
 import { UserResponse } from '../../../types/user.type'
-import { useMutation } from '@tanstack/react-query'
-import AccountService from '../../../apis/account.service'
-import { fetchUser } from '../../../Redux/authenticationSlice'
+import ModelAvatarDelete from '../models/ModelAvatarDelete'
+import ModelAvatarSee from '../models/ModelAvatarSee'
+import ModelAvatarUpdate from '../models/ModelAvatarUpdate'
 
 type TProps = {
       AvatartSource: {
@@ -42,9 +42,9 @@ const BoxAvatarMode = (props: TProps) => {
             const handleEvent = (e: MouseEvent) => {
                   // khong click vao thi chay dong script nay
                   if (!refModelAvatar.current?.contains(e.target as Node)) {
-                        // console.log('click point', e.target, modelAvatar)
+                        //console.log(([^)]+))
                         if (refModelAvatar.current) {
-                              // console.log(1)
+                              //console.log(([^)]+))
                               modeDispatch({ type: 'CLOSE_BOX_AVATAR', payload: { boxModeAvatar: false } })
 
                               // setModelAvatar((prev) => !prev)
@@ -81,8 +81,6 @@ const BoxAvatarMode = (props: TProps) => {
             widthImage,
             heightImage,
       }
-
-      console.log({ AvatartSource })
 
       return (
             <div

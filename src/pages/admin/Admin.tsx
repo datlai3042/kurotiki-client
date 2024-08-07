@@ -78,7 +78,6 @@ const Admin = () => {
                   ...file,
                   preview: URL.createObjectURL(file),
             }))
-            console.log('active', mappedFiles)
             setPreviewList(mappedFiles)
             // I've kept this example simple by using the first image instead of multiple
             setNameFile(e.target.value.split(/(\\|\/)/g).pop() as string)
@@ -131,10 +130,6 @@ const Admin = () => {
                                                 value={money}
                                                 onChange={(e) => {
                                                       setMoney(e.target.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'))
-                                                      console.log(
-                                                            'format money',
-                                                            e.target.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-                                                      )
                                                 }}
                                           />
                                           <div className='absolute top-[10%] px-[10px] py-[5px] right-[10px] bg-blue-700 text-white rounded-[4px]'>

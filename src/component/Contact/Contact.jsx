@@ -21,7 +21,7 @@
 
 //       const handleSubmit = (e) => {
 //             e.preventDefault()
-//             console.log(`message ${message.name}`)
+//            console.log(([^)]+))
 //       }
 
 //       const sendEmail = (e) => {
@@ -29,10 +29,10 @@
 
 //             emailjs.sendForm('service_n96z7bq', 'template_0iowuap', form.current, 'cp75Qf2YrnaH3g1Gn').then(
 //                   (result) => {
-//                         console.log(result.text)
+//                        console.log(([^)]+))
 //                   },
 //                   (error) => {
-//                         console.log(error.text)
+//                        console.log(([^)]+))
 //                   },
 //             )
 //             e.target.reset()

@@ -1,4 +1,4 @@
-import React, { memo, useId } from 'react'
+import React, { useId } from 'react'
 import { FieldValues, UseFormReturn, useFormContext } from 'react-hook-form'
 import { ui } from '../RegisterProductForm/ProductFormUpload'
 
@@ -24,7 +24,7 @@ const InputText = <T extends FieldValues>(props: TProps<T>) => {
             formState: { errors },
       } = formNested
 
-      // console.log({ zod: (errors!.attribute! as any)!['author']! })
+      //console.log(([^)]+))
       // methods?.watch(FieldName as unknown as Path<T>[])
 
       const styleEffect = {

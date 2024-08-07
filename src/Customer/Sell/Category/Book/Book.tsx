@@ -30,7 +30,7 @@ const Book = (props: TProps) => {
       const form = useFormContext()
       const errors = form.formState.errors
 
-      // console.log({ mode })
+      //console.log(([^)]+))
       return (
             <div className='flex flex-col gap-[16px]'>
                   <InputText FieldName={'attribute.publishing'} LabelMessage='Tên nhà sản xuất' placehorder='Nhập tên sản xuất' />

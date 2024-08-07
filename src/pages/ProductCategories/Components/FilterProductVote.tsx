@@ -50,8 +50,6 @@ const FilterProductVote = (props: TProps) => {
             }
       }
 
-      console.log({ onValue: state })
-
       const styleEffect = {
             onSelect: (state: boolean) => {
                   if (state) return 'bg-blue-600 border-blue-600 '

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { TProductDetail } from '../../types/product/product.type'
-import { TImage } from './Product'
 import BoxModalImage from './BoxModalImage'
+import { TImage } from './Product'
 
 type TProps = {
       product: TProductDetail
@@ -51,8 +51,6 @@ const ProductDetail = (props: TProps) => {
             }
             // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [isSuccess, product])
-
-      console.log({ imageArray })
 
       const styleEffect = {
             isActive: 'border-[2px] border-blue-600',

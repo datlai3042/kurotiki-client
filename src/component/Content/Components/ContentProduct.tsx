@@ -1,22 +1,22 @@
 import { useInViewport } from '@mantine/hooks'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { debounce } from 'lodash'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import ProductApi from '../../../apis/product.api'
-import ProductMedium from './ProductMedium'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import ProductShopInfo from '../../../pages/product/Components/ProductShopInfo'
+import ProductApi from '../../../apis/product.api'
 import ShopApi from '../../../apis/shop.api'
+import ProductShopInfo from '../../../pages/product/Components/ProductShopInfo'
 import { STALE_TIME } from '../../Comment/Comment'
+import ProductMedium from './ProductMedium'
 //relative brother conclict
 
-import NhaSachTikiLogo from '../../Sidebar/img/danhMuc/nhaSachTiki.jpg'
-import bachHoaOnline from '../../Sidebar/img/danhMuc/bachHoaOnline.jpg'
-import dongHoVaTrangSuc from '../../Sidebar/img/danhMuc/dongHoVaTrangSuc.jpg'
-import dienThoaiMayTinhBang from '../../Sidebar/img/danhMuc/dienThoaiMayTinhBang.jpg'
-import mayAnhCamera from '../../Sidebar/img/danhMuc/mayAnhMayQuayPhim.jpg'
-import oto from '../../Sidebar/img/danhMuc/otoXeMayVaXeDap.jpg'
 import { ShopResponse } from '../../../types/shop.type'
+import bachHoaOnline from '../../Sidebar/img/danhMuc/bachHoaOnline.jpg'
+import dienThoaiMayTinhBang from '../../Sidebar/img/danhMuc/dienThoaiMayTinhBang.jpg'
+import dongHoVaTrangSuc from '../../Sidebar/img/danhMuc/dongHoVaTrangSuc.jpg'
+import mayAnhCamera from '../../Sidebar/img/danhMuc/mayAnhMayQuayPhim.jpg'
+import NhaSachTikiLogo from '../../Sidebar/img/danhMuc/nhaSachTiki.jpg'
+import oto from '../../Sidebar/img/danhMuc/otoXeMayVaXeDap.jpg'
 
 type TagActiveArray = '/book' | '/food' | '/watch' | '/phone-laptop' | '/camera' | '/honda'
 
@@ -30,7 +30,7 @@ const arrayCategory: { image: string; label: string; href: TagActiveArray }[] = 
       { image: oto, label: 'Xe máy', href: '/honda' },
 ]
 
-const LIMIT = 8
+const LIMIT = 12
 const ContentProduct = () => {
       const refPos = useRef<HTMLDivElement | null>(null)
       const stickyRef = useRef<HTMLDivElement>(null)
@@ -110,7 +110,12 @@ const ContentProduct = () => {
                         return []
                   })
             }
-      }, [getAllProduct.data, getAllProduct.isSuccess])
+            if(getAllProduct.isSuccess) {
+
+            setPage(getAllProduct.data.pages.length)
+
+            }
+      }, [getAllProduct.data?.pages, getAllProduct.isSuccess, getAllProduct])
 
       const styleEffect = {
             onActive: (check: boolean) => {
@@ -118,6 +123,7 @@ const ContentProduct = () => {
                   return 'hover:bg-slate-200'
             },
       }
+
 
       return (
             <div className=' z-[5] w-full min-h-[370px] h-max  flex flex-col gap-[28px]  bg-[rgb(245_245_250)] pb-[50px] xl:p-0'>
@@ -180,7 +186,7 @@ const ContentProduct = () => {
                                     </>
                               )}
 
-                              {page > totalPage + 1 && getAllProduct.isPending && (
+                              {page === 1 && getAllProduct.isPending && (
                                     <>
                                           <div className='animate-pulse col-span-2 bg-slate-400'></div>
                                           {Array(10)
@@ -193,6 +199,7 @@ const ContentProduct = () => {
                                                 ))}
                                     </>
                               )}
+
                         </div>
                   </div>
                   <div className='w-full h-[65px] flex items-center justify-center' ref={refPos}>

@@ -25,7 +25,7 @@ const HeaderLogoToggle = (props: TProps) => {
                         <img src={logo} className='w-[40%] h-[36px] ' alt='' />
                         <p className='text-[14px] h-[40%] w-full text-blue-700 font-extrabold'>Bảo vệ khách hàng 111%</p>
                   </Link>
-                  <div className='block lg:hidden' onClick={onShowSideBarAction}>
+                  <button className='block lg:hidden' onClick={onShowSideBarAction}>
                         <svg
                               xmlns='http://www.w3.org/2000/svg'
                               fill='none'
@@ -36,7 +36,7 @@ const HeaderLogoToggle = (props: TProps) => {
                         >
                               <path strokeLinecap='round' strokeLinejoin='round' d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5' />
                         </svg>
-                  </div>
+                  </button>
             </div>
       )
 }

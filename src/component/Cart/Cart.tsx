@@ -1,19 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import React, { useEffect, useState } from 'react'
-import CartService from '../../apis/cart.service'
 import { Checkbox } from 'antd'
-import { Trash2 } from 'lucide-react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../store'
-import AuthPermission from '../Auth/AuthPermission'
 import { CheckboxChangeEvent } from 'antd/es/checkbox'
+import { Trash2 } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import CartService from '../../apis/cart.service'
+import { RootState } from '../../store'
+import { UserResponse } from '../../types/user.type'
+import AuthPermission from '../Auth/AuthPermission'
+import ContentProduct from '../Content/Components/ContentProduct'
+import CartEmpty from './CartEmpty'
 import CartItem from './CartItem'
 import CartPayMini from './CartPayMini'
 import CartUserInfo from './CartUserInfo'
-import CartEmpty from './CartEmpty'
-import { UserResponse } from '../../types/user.type'
-import ContentProduct from '../Content/Components/ContentProduct'
-import Loading from '../Common/Loading'
 
 const Cart = () => {
       const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
@@ -34,7 +33,6 @@ const Cart = () => {
             mutationFn: (value: boolean) => CartService.selectAllCart(value),
             onSuccess: (axiosResponse) => {
                   setSelectAll(axiosResponse.data.metadata.cart.cart_select_all)
-                  console.log({ state: axiosResponse.data.metadata.cart.cart_select_all })
                   queryClient.invalidateQueries({
                         queryKey: ['v1/api/cart/cart-get-my-cart'],
                   })
@@ -48,8 +46,6 @@ const Cart = () => {
       const onChangeSelectAll = (e: CheckboxChangeEvent) => {
             changeSelectAll.mutate(e.target.checked)
       }
-
-      console.log({ getMyCart: getMyCart.data?.data.metadata.cart })
 
       useEffect(() => {
             queryClient.invalidateQueries({
@@ -76,7 +72,7 @@ const Cart = () => {
 
       return (
             <React.Fragment>
-                  <div className='w-full max-w-full h-max  overflow-hidden xl:mt-0 flex gap-[12px] text-[13px]'>
+                  <div className='w-full max-w-full h-max  overflow-hidden xl:mt-0 flex gap-[12px] text-[13px] mb-[60px]'>
                         <div className='px-[8px] w-full pb-[10px]  h-max flex flex-col gap-x-[24px]'>
                               <h3 className='font-extrabold uppercase text-[20px] my-[12px]'>Giỏ hàng</h3>
                               {getMyCart.isSuccess &&
@@ -114,7 +110,7 @@ const Cart = () => {
                                                             </div>
                                                       </div>
                                                 </div>
-                                                <div className='w-full py-[16px] flex gap-[24px]'>
+                                                <div className='w-full pt-[16px] flex gap-[24px]'>
                                                       <div className='flex flex-col w-[55%] xl:w-[77%] gap-[24px]'>
                                                             {getMyCart.isSuccess &&
                                                                   getMyCart.data.data.metadata.cart.cart_products.length > 0 &&

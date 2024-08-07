@@ -24,8 +24,6 @@ const BoxCountProduct = (props: TProps) => {
       }
 
       const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-            console.log({ value: e.target.value, productQuantity })
-
             if (e.target.value === '') {
                   getValueChangeQuanity({ mode: 'INPUT', quantity: 0 })
 
@@ -59,7 +57,6 @@ const BoxCountProduct = (props: TProps) => {
       }
 
       const lengthCharQuantity = Number(productQuantity?.toLocaleString().length)
-      console.log({ disable })
       //min-w, w, rounded, gap, h
       return (
             <div className={`flex  max-w-max h-[28px]`}>

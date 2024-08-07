@@ -1,9 +1,8 @@
-import React from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
-import InputText from '../../components/InputText'
 import { Select } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
+import { Controller, useFormContext } from 'react-hook-form'
 import { ProductFoodType } from '../../../../types/product/product.food.type'
+import InputText from '../../components/InputText'
 
 const optionSelect: { label: string; value: ProductFoodType }[] = [
       {
@@ -34,7 +33,6 @@ const optionSelectUnit: { label: string; value: 'Kilogram' | 'Box' }[] = [
 const Food = () => {
       const form = useFormContext()
       const errors = form.formState.errors
-      console.log({ value: form.watch() })
       return (
             <div className='flex flex-col gap-[16px]'>
                   <InputText

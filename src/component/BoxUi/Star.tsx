@@ -1,5 +1,3 @@
-import React from 'react'
-
 type TProps = {
       opacity: number
 }
@@ -14,8 +12,6 @@ const Star = (props: TProps) => {
       if (opacity <= 0.5) {
             return <StarDescrease />
       }
-
-      console.log({ opacity })
 
       return <div className={`${styleEffect.opacity} clip-path-star w-[18px]  `}></div>
 }

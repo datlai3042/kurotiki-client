@@ -1,5 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit'
-import { store } from '../store'
+import { createSlice } from '@reduxjs/toolkit'
 
 const authSlice = createSlice({
       name: 'auth',
@@ -16,16 +15,11 @@ const authSlice = createSlice({
                   state.isOpenBoxLogin = false
             },
             userLogin: (state, action: any) => {
-                  console.log('dispatch')
-                  console.log('accout', action.payload)
-                  console.log('localStorage', localStorage.getItem('account'))
                   state.userCurrent = action.payload
-                  console.log('user', current(state))
                   state.isAuthencation = true
             },
 
             userLogout: (state) => {
-                  console.log('dang log out')
                   state.isAuthencation = false
                   state.userCurrent = null
             },

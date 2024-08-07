@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import BoxCenter from './BoxCenter'
 
 type Props = {
@@ -15,8 +15,8 @@ const BoxIsBought = (props: Props) => {
                   const width = containerBoughtRef.current.getBoundingClientRect().width - 5
                   const widthPercent = Math.ceil(width) / 10
 
-                  //     // console.log(boxBoughtRef.current.getBoundingClientRect().width)
-                  //   console.log(width)
+                  //     //console.log(([^)]+))
+                  //  console.log(([^)]+))
                   boxBoughtRef.current.style.width = `${
                         props.Quantity > 0 || props.Quantity !== 0 || props.Quantity <= 10
                               ? `${props.Quantity * (widthPercent && props.Quantity < 3 ? 30 : widthPercent)}`

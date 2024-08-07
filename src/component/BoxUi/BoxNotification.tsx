@@ -41,7 +41,7 @@
 //                         numberTranslate = 0
 //                   }
 //                   if (activeNotification.title === 'Thông báo cá nhân') {
-//                         console.log('OK')
+//                        console.log(([^)]+))
 //                         numberTranslate = 1
 //                   }
 

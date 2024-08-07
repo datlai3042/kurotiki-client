@@ -1,10 +1,9 @@
-import React, { ReactNode, useRef, useState } from 'react'
-import { ProductType, TProductDetail, TypeBook } from '../../../types/product/product.type'
 import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 import ProductApi from '../../../apis/product.api'
-import ProductSmall from './ProductSmall'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { TProductDetail, TypeBook } from '../../../types/product/product.type'
 import LayoutTranslate from './LayoutTranslate'
+import ProductLoading from './ProductLoading'
 
 export const CATEGORY_BOOK = [
       {
@@ -41,7 +40,6 @@ const ContentBook = () => {
       const productManga = getProductBookAllType.data?.data.metadata.manga
       const productNovel = getProductBookAllType.data?.data.metadata.novel
       const productDectective = getProductBookAllType.data?.data.metadata.detective
-      const COUNT_SKELETON = window.innerWidth >= 1024 ? 6 : 3
 
       const styleEffect = {
             onActive: (isActive: boolean) => {
@@ -51,20 +49,20 @@ const ContentBook = () => {
             },
       }
 
-      const calcLength = (type: TypeFilterBook) => {
-            switch (type) {
-                  case 'All':
-                        return Math.ceil((productAll?.length || 6) / 6)
-                  case 'Manga':
-                        return Math.ceil((productManga?.length || 6) / 6)
-                  case 'Novel':
-                        return Math.ceil((productNovel?.length || 6) / 6)
-                  case 'Detective':
-                        return Math.ceil((productDectective?.length || 6) / 6)
-                  default:
-                        return 1
-            }
-      }
+      // const calcLength = (type: TypeFilterBook) => {
+      //       switch (type) {
+      //             case 'All':
+      //                   return Math.ceil((productAll?.length || 6) / 6)
+      //             case 'Manga':
+      //                   return Math.ceil((productManga?.length || 6) / 6)
+      //             case 'Novel':
+      //                   return Math.ceil((productNovel?.length || 6) / 6)
+      //             case 'Detective':
+      //                   return Math.ceil((productDectective?.length || 6) / 6)
+      //             default:
+      //                   return 1
+      //       }
+      // }
 
       return (
             <div className='max-w-full w-full h-[485px] bg-[#ffffff] rounded-lg p-[20px] flex flex-col gap-[16px]'>
@@ -84,7 +82,7 @@ const ContentBook = () => {
                         </div>
                   </div>
 
-                  <div className='relative w-full h-[75%] overflow-hidden'>
+                  <div className='relative w-full h-[80%] overflow-hidden'>
                         {getProductBookAllType.isSuccess && type === 'All' && <LayoutTranslate products={productAll as TProductDetail[]} />}
                         {getProductBookAllType.isSuccess && type === 'Manga' && (
                               <LayoutTranslate products={productManga as TProductDetail[]} />
@@ -97,13 +95,12 @@ const ContentBook = () => {
                         )}
 
                         {getProductBookAllType.isPending && (
-                              <>
-                                    {Array(COUNT_SKELETON)
-                                          .fill(0)
-                                          ?.map((_, index) => (
-                                                <div className='animate-pulse w-full h-full rounded-lg bg-slate-400' key={index}></div>
-                                          ))}
-                              </>
+                              <div
+                                    className='gap-[20px] xl:gap-[16px] grid grid-rows-[300px]  grid-flow-col auto-cols-[calc((100%-40px)/2)] sm:auto-cols-[calc((100%-80px)/4)]   xl:auto-cols-[calc((100%-96px)/6)]  h-full overflow-x-scroll xl:overflow-visible 
+                   '
+                              >
+                                    <ProductLoading />
+                              </div>
                         )}
                   </div>
                   {getProductBookAllType.isSuccess && !getProductBookAllType.data?.data.metadata && (

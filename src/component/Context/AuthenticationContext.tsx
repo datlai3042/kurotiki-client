@@ -26,12 +26,10 @@ const AuthenticationContext = () => {
       useEffect(() => {
             if (getMe.isSuccess) {
                   const { user } = getMe.data.data.metadata
-                  console.log({ user })
                   dispatch(fetchUser({ user }))
             }
 
             if (getMe.isError) {
-                  console.log({ user: getMe.data?.data.metadata })
 
                   dispatch(fetchUser({ user: undefined }))
             }

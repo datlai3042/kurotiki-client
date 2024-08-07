@@ -1,13 +1,10 @@
-import { useEffect, useState, useRef } from 'react'
-import PositionIcon from '../../BoxUi/BoxAbsolute'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import BoxCenter from '../../BoxUi/BoxCenter'
-import BoxIsBought from '../../BoxUi/BoxIsBought'
-import BoxAbsolute from '../../BoxUi/BoxAbsolute'
 import { useQuery } from '@tanstack/react-query'
-import ProductApi, { TProduct, TProductReturn } from '../../../apis/product.api'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import ProductApi, { TProductReturn } from '../../../apis/product.api'
 import BoxMoneyV2 from '../../BoxUi/BoxMoneyV2'
+import ProductLoading from './ProductLoading'
 
 type Props = {}
 
@@ -40,7 +37,7 @@ const SectionProductItem = (props: Props) => {
                   const width = wrapperListProductsRef.current.getBoundingClientRect().width
                   PositionScrollCurrent.current = PositionScrollCurrent.current + width
 
-                  // console.log(Math.trunc(width))
+                  //console.log(([^)]+))
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
             }
@@ -91,22 +88,7 @@ const SectionProductItem = (props: Props) => {
                                     )
                               })}
 
-                        {allProduct.isPending &&
-                              Array(6)
-                                    .fill(0)
-                                    .map((_, index) => {
-                                          return (
-                                                <div
-                                                      className='animate-pulse bg-gray-100 flex flex-col min-w-[40%] md:min-w-[30%] lg:min-w-[15%] h-[160px] snap-always snap-start	 '
-                                                      key={index}
-                                                >
-                                                      <div className='bg-gray-200 w-full min-h-full flex rounded'>
-                                                            <div className='bg-slate-300 min-w-full min-h-[85%] max-h-[85%] rounded'></div>
-                                                            <p className='bg-slate-300 w-full text-center h-[20px] rounded'></p>
-                                                      </div>
-                                                </div>
-                                          )
-                                    })}
+                        {allProduct.isPending && <ProductLoading />}
                   </div>
                   <button
                         className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[-50%]  bg-[#ffffff]  rounded-full shadow-3xl`}

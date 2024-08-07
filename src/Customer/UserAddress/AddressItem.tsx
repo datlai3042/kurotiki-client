@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { UserAddress } from '../../types/user.type'
-import BoxButton from '../../component/BoxUi/BoxButton'
-import { Anchor, Building2, Home, TentTree, Trash2 } from 'lucide-react'
 import { useMutation } from '@tanstack/react-query'
-import AccountService from '../../apis/account.service'
+import { Anchor, Building2, Home, TentTree, Trash2 } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchUser } from '../../Redux/authenticationSlice'
+import AccountService from '../../apis/account.service'
+import BoxButton from '../../component/BoxUi/BoxButton'
 import BoxWeatherApi from '../../component/BoxUi/BoxWeatherApi'
+import { UserAddress } from '../../types/user.type'
 
 type TProps = {
       address: UserAddress
@@ -63,7 +63,7 @@ const AddressItem = (props: TProps) => {
                   const src = `https://maps.google.com/maps?&q="+${addressApi}"&output=embed`
 
                   iframeRef.current.src = src
-                  // console.log({state: iframeRef.current.})
+                  //console.log(([^)]+))
             }
       }, [detailAddress])
 

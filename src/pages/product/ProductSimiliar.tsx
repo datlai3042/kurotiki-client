@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useRef, useState } from 'react'
-import ProductApi from '../../apis/product.api'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import ProductItemMini from './Components/ProductItemMini'
+import { useRef, useState } from 'react'
+import ProductApi from '../../apis/product.api'
 import { TProductDetail } from '../../types/product/product.type'
+import ProductItemMini from './Components/ProductItemMini'
 
 type TProps = {
       product: TProductDetail
@@ -44,14 +44,13 @@ const ProductSimiliar = (props: TProps) => {
                   const width = wrapperListProductsRef.current.getBoundingClientRect().width
                   PositionScrollCurrent.current = PositionScrollCurrent.current + width
 
-                  // console.log(Math.trunc(width))
+                  //console.log(([^)]+))
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
             }
       }
       const productData = allProduct.data?.data.metadata.products
       const totalPage = Math.ceil(Number(productData?.length) / 8)
-      console.log({ totalPage })
       const styleEffect = {
             buttonPrev: count === 1 ? 'xl:hidden' : 'xl:flex',
             buttonNext: totalPage === count ? 'xl:hidden' : 'xl:flex',

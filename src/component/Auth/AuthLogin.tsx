@@ -59,7 +59,6 @@ const AuthLogin = (props: TProps) => {
       useEffect(() => {}, [])
       countRef.current += 1
 
-      console.log({ count: countRef.current })
       const dispatch = useDispatch()
 
       const authLogin = useMutation({

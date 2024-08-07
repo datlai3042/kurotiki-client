@@ -10,7 +10,7 @@ const FooterMobile = ({ ...props }: IProps) => {
       return (
             <div {...props}>
                   <div className='fixed bottom-0 left-0 right-0 w-full px-[12px] flex justify-between min-h-[45px] bg-white  items-center z-[800]'>
-                        <ArrowBigLeft onClick={() => navigate(-1)} />
+                        <ArrowBigLeft onClick={() => navigate(-1)} className='hover:cursor-pointer'/>
 
                         <Link to={'/'}>
                               <Home />

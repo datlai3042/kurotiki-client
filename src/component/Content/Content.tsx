@@ -53,7 +53,7 @@ const Content = () => {
 
                   <ContentProduct />
 
-                  {pathName === '/' && <Footer className='hidden xl:block bg-[#ffffff]' />}
+                  {/* {pathName === '/' && <Footer className='hidden xl:block bg-[#ffffff]' />} */}
             </div>
       )
 }

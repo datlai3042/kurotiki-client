@@ -10,9 +10,9 @@ import { useDispatch } from 'react-redux'
 //@api
 import { useMutation } from '@tanstack/react-query'
 import ProductApi, { IFormDataDeleteImage, IFormDataImage, IFormDataImages } from '../../../../apis/product.api'
-import { ui } from '../ProductFormUpload'
-import { TCheckDescriptionImage } from '../../../../types/product/product.type'
 import { addOneToastWarning } from '../../../../Redux/toast'
+import { TCheckDescriptionImage } from '../../../../types/product/product.type'
+import { ui } from '../ProductFormUpload'
 
 //@Props
 interface IProps {
@@ -109,7 +109,6 @@ const ButtonUploadMultiple = (props: IProps) => {
 
       //@kích hoạt onChange input
       const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            console.log({ target: e.target.files?.length })
             //@nếu file vượt quá 4 thì xét 3 state chính lại mặc định và mount toast
             if (filePreview.length > 4 || fileProduct.length > 4 || e.target.files!.length > 4) {
                   dispatch(
