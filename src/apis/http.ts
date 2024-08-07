@@ -7,7 +7,7 @@ import { url } from 'inspector'
 let retry = false
 let i = 5
 const routerAuth = ['/v1/api/auth/login', '/v1/api/auth/register']
-export const REACT_BACK_END_URL = process.env.REACT_APP_MODE === 'DEV' ? process.env.REACT_APP_BASE_URL_LOCAL : 'https://backendtiki.onrender.com'
+export const REACT_BACK_END_URL = process.env.REACT_APP_MODE === 'DEV' ? process.env.REACT_APP_BASE_URL_LOCAL : process.env.REACT_APP_BASE_URL_SERVER
 let refreshTokenPromise: Promise<any> | null = null // this holds any in-progress token refresh requests
 class AxiosCustom {
       instance: AxiosInstance
