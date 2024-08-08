@@ -161,7 +161,7 @@ const Product = () => {
                                           </div>
                                           <div className='animate-pulse bg-gray-400 comment w-full h-[100px] '></div>
                                     </div>
-                                    <div className='animate-pulse bg-gray-400 basis-[20%] sticky top-[16px] h-[300px]'></div>
+                                    <div className='hidden xl:block animate-pulse bg-gray-400 basis-[20%] sticky top-[16px] h-[300px]'></div>
                               </div>
                         )}
                   </div>

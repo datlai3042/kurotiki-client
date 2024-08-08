@@ -53,7 +53,7 @@ const BoxFilterProduct = (props: TProps) => {
 
       return (
             <div className='fixed inset-0 bg-[rgba(0,0,0,.4)] h-screen flex items-center justify-center z-[500]'>
-                  <form className='mx-[12px] xl:mx-0 w-[550px] h-[700px] px-[20px] bg-[#ffffff] rounded flex flex-col' onSubmit={onSubmit}>
+                  <form className='mx-[12px] xl:mx-0 w-[550px] h-[540px] xl:h-[700px] px-[20px] bg-[#ffffff] rounded flex flex-col' onSubmit={onSubmit}>
                         <header className='relative w-full h-[8%] flex items-center justify-center border-b-[1px] border-gray-200  '>
                               <h3 className='text-[18px] text-slate-800 font-extrabold'>Tất cả bộ lọc</h3>
                               <X
@@ -61,7 +61,7 @@ const BoxFilterProduct = (props: TProps) => {
                                     onClick={() => onClose(false)}
                               />
                         </header>
-                        <div className='flex-1 w-full   overflow-y-scroll'>
+                        <div className='flex-1 w-full scroll-common  overflow-y-scroll'>
                               <div className='w-full h-max flex '>
                                     <FilterProductVote setVote={setFilter} />
                               </div>

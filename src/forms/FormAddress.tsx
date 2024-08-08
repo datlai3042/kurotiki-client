@@ -233,7 +233,7 @@ const FormAddress = (props: TProps) => {
       return (
             <FormProvider {...addressForm}>
                   <form
-                        className='relative min-w-[575px] w-max  p-[16px_10px]  xl:px-[36px] xl:py-[30px] flex flex-col gap-[30px] bg-[#ffffff] rounded-md'
+                        className='relative min-w-[300px] xl:min-w-[575px] w-max  p-[16px_10px]  xl:px-[36px] xl:py-[30px] flex flex-col gap-[30px] bg-[#ffffff] rounded-md'
                         onSubmit={addressForm.handleSubmit(onSubmit)}
                         spellCheck={false}
                   >

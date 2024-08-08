@@ -172,7 +172,7 @@ const CommentMe = (props: TProps) => {
                   {!comment && (
                         <div>
                               <button
-                                    className=' mx-[20px]  w-[180px] my-[16px] h-[40px] border-[1px]  border-blue-400 text-blue-400 bg-[#ffffff] rounded'
+                                    className='   w-[180px] my-[16px] h-[40px] border-[1px]  border-blue-400 text-blue-400 bg-[#ffffff] rounded'
                                     onClick={() => onOpenModel(setOpenBoxUpload)}
                               >
                                     Viết đánh giá
