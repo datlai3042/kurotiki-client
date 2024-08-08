@@ -122,13 +122,13 @@ const BoxShopForm = (props: TProps) => {
                         <FormProvider {...form}>
                               <form
                                     spellCheck={false}
-                                    className='relative w-full h-[480px] xl:h-[480px] flex flex-col xl:flex-row  bg-[#ffffff] rounded-lg'
+                                    className='relative w-full h-[500px] xl:h-[480px] flex flex-col xl:flex-row  bg-[#ffffff] rounded-lg'
                                     onSubmit={form.handleSubmit(onSubmit)}
                               >
                                     <div className='w-full xl:w-[40%] h-full bg-[rgb(245_245_250)] pb-[16px] xl:pb-0'>
                                           <div className='flex flex-col items-center mt-[30px]'>
                                                 <div
-                                                      className='relative w-[180px] h-[180px] flex flex-col items-center justify-center bg-[#ffffff] rounded-full border-[6px] border-blue-300'
+                                                      className='relative w-[130px] xl:w-[180px] aspect-square flex flex-col items-center justify-center bg-[#ffffff] rounded-full border-[6px] border-blue-300'
                                                       onClick={onClickAvatar}
                                                 >
                                                       {preview && <img src={preview} className='w-full h-full rounded-full' alt='avatar' />}
@@ -157,7 +157,7 @@ const BoxShopForm = (props: TProps) => {
                                                 />
                                           </div>
                                     </div>
-                                    <div className='w-full xl:w-[60%] h-full pt-[16px]   flex flex-col items-center gap-[20px] bg-[#ffffff]'>
+                                    <div className='w-full xl:w-[60%] h-[67%] xl:h-full pt-[16px]   flex flex-col items-center gap-[20px] bg-[#ffffff]'>
                                           <header>Đăng kí thông tin về cửa hàng</header>
                                           <div className='flex flex-col gap-[8px] w-[80%]'>
                                                 <label htmlFor='shop_name'>Tên Shop</label>
@@ -180,7 +180,7 @@ const BoxShopForm = (props: TProps) => {
                                                       )}
                                                 />
                                           </div>
-                                          <button className='mt-[20px] w-max flex items-center gap-[16px] p-[12px_14px] border-[1px] border-blue-500 bg-[#ffffff] text-blue-500 rounded-md hover:bg-blue-500 hover:text-white hover:cursor-pointer transition-all duration-300'>
+                                          <button className='xl:mt-[20px] w-max flex items-center gap-[16px] p-[12px_14px] border-[1px] border-blue-500 bg-[#ffffff] text-blue-500 rounded-md hover:bg-blue-500 hover:text-white hover:cursor-pointer transition-all duration-300'>
                                                 {modeForm === 'UPDATE' ? 'Cập nhập' : 'Đăng kí'}
                                                 {registerShopMutation.isPending && <BoxLoading />}
                                           </button>
