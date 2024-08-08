@@ -118,11 +118,11 @@ const BoxShopForm = (props: TProps) => {
 
       return (
             <div className='fixed inset-0 bg-[rgba(0,0,0,.4)] h-screen flex items-center justify-center z-[500]'>
-                  <div className='animate-authBox w-[300px] xl:w-[700px] min-h-[480px] h-max  mx-[10px] xl:mx-0 bg-red-800 '>
+                  <div className='animate-authBox w-[435px] xl:w-[700px] min-h-[480px] h-max  mx-[10px] xl:mx-0  '>
                         <FormProvider {...form}>
                               <form
                                     spellCheck={false}
-                                    className='relative w-full h-[575px] xl:h-[480px] flex flex-col xl:flex-row  bg-[#ffffff] rounded-lg'
+                                    className='relative w-full h-[480px] xl:h-[480px] flex flex-col xl:flex-row  bg-[#ffffff] rounded-lg'
                                     onSubmit={form.handleSubmit(onSubmit)}
                               >
                                     <div className='w-full xl:w-[40%] h-full bg-[rgb(245_245_250)] pb-[16px] xl:pb-0'>

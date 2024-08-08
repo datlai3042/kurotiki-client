@@ -43,9 +43,6 @@
       .customer-item-isActive {
             @apply bg-slate-700 transition-all duration-500 ;
       }
-}
-
-@layer utilities {
 
       .scroll-common::-webkit-scrollbar {
             width: 0.6rem;
@@ -56,6 +53,11 @@
             border-radius: 0.2rem;
       }
 
+}
+
+@layer utilities {
+
+    
       .modelImage::-webkit-scrollbar {
             width: 10px;
             height: 200px;

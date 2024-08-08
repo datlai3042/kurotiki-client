@@ -38,6 +38,7 @@ function HeaderBoxHover() {
                   queryClient.removeQueries({
                         queryKey: ['cart-get-count-product'],
                   })
+                  window.location.reload()
             },
             onError: (error) => {
                   dispatch(
@@ -46,7 +47,7 @@ function HeaderBoxHover() {
                                     type: 'ERROR',
                                     _id: Math.random().toString(),
                                     core: {
-                                          message: 'Đăng xuất thành công'
+                                          message: 'Đăng xuất không thành công'
                                     },
                                     toast_title: 'Đã có lỗi xảy ra',
                               },
