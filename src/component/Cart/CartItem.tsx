@@ -105,7 +105,7 @@ const CartItem = (props: TProps) => {
                               className='h-[30px] w-[30px] xl:w-[40px] '
                               alt='shop_avatar'
                         />
-                        <Link to={`/shop/${shop._id}`} className='block xl:flex gap-[4px] w-full'>
+                        <Link to={`/shop/${shop._id}`} className='block xl:flex gap-[4px] max-w-[75%] truncate xl:w-full xl:max-w-full'>
                               <span>Cửa hàng:</span>
                               <span className='underline max-w-[70px] truncate'>{shop.shop_name}</span>
                         </Link>

@@ -63,7 +63,7 @@ const CommentImageAll = (props: TProps) => {
                                           </div>
                                           <div
                                                 // style={{ backgroundImage: `url(${comment_images && comment_images[0]?.image.secure_url})` }}
-                                                className='relative w-[80px] h-[80px] hover:cursor-pointer rounded overflow-hidden'
+                                                className='relative w-[60px] h-[60px] hover:cursor-pointer rounded overflow-hidden'
                                                 onClick={() => onClickOpenModel(imageUrl[0].secure_url)}
                                           >
                                                 <div

@@ -23,7 +23,7 @@ const CustomerUserAddress = () => {
                   </button>
                   {openFormAddress && (
                         <div className='fixed inset-0 bg-[rgba(0,0,0,.4)] h-screen flex items-center justify-center z-[500]'>
-                              <div className='animate-authBox xl:px-[60px] min-w-[575px]'>
+                              <div className='animate-authBox xl:px-[60px] '>
                                     <FormAddress iconClose={<X />} onClose={setOpenFormAddress} />
                               </div>
                         </div>
