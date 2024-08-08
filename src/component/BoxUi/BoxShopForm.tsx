@@ -157,9 +157,9 @@ const BoxShopForm = (props: TProps) => {
                                                 />
                                           </div>
                                     </div>
-                                    <div className='w-full xl:w-[60%] h-[67%] xl:h-full pt-[16px]   flex flex-col items-center gap-[20px] bg-[#ffffff]'>
+                                    <div className='w-full xl:w-[60%] h-[71%] xl:h-full pt-[16px]   flex flex-col items-center gap-[20px] bg-[#ffffff]'>
                                           <header>Đăng kí thông tin về cửa hàng</header>
-                                          <div className='flex flex-col gap-[8px] w-[80%]'>
+                                          <div className='flex flex-col gap-[8px] h-[66%] w-[80%]'>
                                                 <label htmlFor='shop_name'>Tên Shop</label>
                                                 <input
                                                       type='text'
