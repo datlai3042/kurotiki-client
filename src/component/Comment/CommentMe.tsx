@@ -27,10 +27,14 @@ const CommentMe = (props: TProps) => {
       const [openBoxUpdate, setopenBoxUpdate] = useState<boolean>(false)
       const [openBoxDelete, setOpenBoxDelete] = useState<boolean>(false)
 
+      const isLogin = JSON.parse(localStorage.getItem('isLogin') as string) || false
+
+
       const getMeCommentQuery = useQuery({
             queryKey: ['get-me-comment', product._id],
             queryFn: () => CommentService.getMeComment({ product_id: product._id }),
             staleTime: SLATE_TIME_COMMENT_ME_ALL,
+            enabled: !!isLogin
       })
 
       const deleteCommentMutation = useMutation({

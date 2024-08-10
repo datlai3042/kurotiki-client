@@ -117,6 +117,7 @@ const client = new QueryClient({
 
                               if (error.response.data?.detail === 'Token hết hạn' && error.response.config.url === 'v1/api/auth/logout') {
                                     store.dispatch(doLogout())
+                                    localStorage.removeItem('isLogin')
                                     store.dispatch(
                                           addOneToastError({
                                                 toast_item: {
