@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { TAvatarActions } from '../../../reducer/customer.reducer'
 import { fetchUser } from '../../../Redux/authenticationSlice'
-import { addOneToastSuccess } from '../../../Redux/toast'
+import { addOneToastError, addOneToastSuccess } from '../../../Redux/toast'
 import { RootState } from '../../../store'
 
 //@props
@@ -24,6 +24,8 @@ type TForm = {
 //@component::api
 const ModelAvatarUpdate = (props: TProps) => {
       const dispatch = useDispatch()
+
+
       //@props
       const { modeDispatch, onUpdate } = props
       const methods = useForm<TForm>({
@@ -101,10 +103,31 @@ const ModelAvatarUpdate = (props: TProps) => {
       const onSubmit: SubmitHandler<TForm> = (file) => {
             //console.log(([^)]+))
             const formData: any = new FormData()
-            formData.append('file', fileAvatar)
-            formData.append('user', user)
 
-            onUpdate.mutate(formData)
+            if (user) {
+                  const { roles } = user
+                  if (roles.includes('admin')) {
+                        dispatch(
+                              addOneToastError({
+                                    toast_item: {
+                                          type: 'ERROR',
+                                          core: { message: 'Quyền admin hiện không khả dụng' },
+                                          _id: Math.random().toString(),
+                                          toast_title: 'Có lỗi xảy ra',
+                                    },
+                              }),
+                        )
+                  } else {
+
+                        formData.append('file', fileAvatar)
+                        formData.append('user', user)
+            
+                        onUpdate.mutate(formData)
+                        
+                  }
+                  
+            }
+
       }
 
       //@element

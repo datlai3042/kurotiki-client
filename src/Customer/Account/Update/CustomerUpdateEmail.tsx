@@ -10,7 +10,7 @@ import { useMutation } from '@tanstack/react-query'
 import AccountService from '../../../apis/account.service'
 import { fetchUser } from '../../../Redux/authenticationSlice'
 import BoxLoading from '../../../component/BoxUi/BoxLoading'
-import { addOneToastSuccess, addOneToastWarning } from '../../../Redux/toast'
+import { addOneToastError, addOneToastSuccess, addOneToastWarning } from '../../../Redux/toast'
 
 // () => api
 const CustomerUpdateEmail = () => {
@@ -83,7 +83,25 @@ const CustomerUpdateEmail = () => {
                   setOpenSecurity(true)
                   return
             }
-            updateEmailMutation.mutate({ password, newEmail: email })
+
+            if (user) {
+                  const { roles } = user
+                  if (roles.includes('admin')) {
+                        dispatch(
+                              addOneToastError({
+                                    toast_item: {
+                                          type: 'ERROR',
+                                          core: { message: 'Quyền admin hiện không khả dụng' },
+                                          _id: Math.random().toString(),
+                                          toast_title: 'Có lỗi xảy ra',
+                                    },
+                              }),
+                        )
+                  } else {
+                        updateEmailMutation.mutate({ password, newEmail: email })
+                  }
+
+            }
             // const checkEmail = validateEmail(email)
             //console.log(([^)]+))
       }
