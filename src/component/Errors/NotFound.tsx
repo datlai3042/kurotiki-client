@@ -32,8 +32,17 @@ const NotFound = (props: TProps) => {
             }
             return () => {
                   clearInterval(xoaInter.current)
+            }
+      }, [])
+
+      useEffect(() => {
+            xoaTimout.current = setTimeout(() => {
+                  navigate(-1)
+            }, 5000)
+            return () => {
                   clearTimeout(xoaTimout.current)
             }
+
       }, [])
 
       return (
