@@ -4,13 +4,15 @@ import { SetStateAction, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import BoxLoading from '../../../component/BoxUi/BoxLoading'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useMutation } from '@tanstack/react-query'
 import AccountService from '../../../apis/account.service'
 import { fetchUser } from '../../../Redux/authenticationSlice'
 import { checkAxiosError } from '../../../utils/handleAxiosError'
 import TErrorAxios from '../../../types/axios.response.error'
-import { addOneToastSuccess, addOneToastWarning } from '../../../Redux/toast'
+import { addOneToastError, addOneToastSuccess, addOneToastWarning } from '../../../Redux/toast'
+import { RootState } from '@/src/store'
+import { UserResponse } from '@/src/types/user.type'
 
 // () => api
 
@@ -36,6 +38,9 @@ const CustomerUpdatePassword = () => {
       const [showPassword, setShowPassword] = useState<'text' | 'password'>('password')
       const [showNewPassword, setShowNewPassword] = useState<'text' | 'password'>('password')
       const [showNewConfirmPassword, setShowNewConfirmPassword] = useState<'text' | 'password'>('password')
+
+      const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
+
       const dispatch = useDispatch()
 
       const {
@@ -58,7 +63,27 @@ const CustomerUpdatePassword = () => {
 
       const onSubmit = (form: TRegisterZodSchema) => {
             const { password, new_password } = form
-            updatePasswordMutation.mutate({ password, newPassword: new_password })
+
+
+
+            if (user) {
+                  const { roles } = user
+                  if (roles.includes('admin')) {
+                        dispatch(
+                              addOneToastError({
+                                    toast_item: {
+                                          type: 'ERROR',
+                                          core: { message: 'Quyền admin hiện không khả dụng' },
+                                          _id: Math.random().toString(),
+                                          toast_title: 'Có lỗi xảy ra',
+                                    },
+                              }),
+                        )
+                  } else {
+                        updatePasswordMutation.mutate({ password, newPassword: new_password })
+                  }
+                  
+            }
       }
 
       const updatePasswordMutation = useMutation({

@@ -82,10 +82,10 @@ const BoxModalImage = (props: TProps) => {
 
       return (
             <Portal>
-                  <div className=' fixed inset-0 bg-[rgba(0,0,0,.93)] z-[6] flex flex-col content-between min-h-screen h-max px-[24px]'>
+                  <div className=' fixed inset-0 bg-[rgba(0,0,0,.93)] z-[999] flex flex-col content-between min-h-screen h-max px-[24px]'>
                         <div className='relative w-full h-[30%]  lg:h-[70%] mt-[100px] xl:mt-[24px]'>
                               <div className='w-full h-full flex justify-center items-center'>
-                                    <div className='w-[250px] h-[250px] xl:w-[540px] xl:h-[540px] overflow-x-hidden'>
+                                    <div className='w-[250px] h-[250px] xl:w-[430px] xl:h-[430px] overflow-x-hidden'>
                                           <div className='w-full h-full flex     ' ref={wrapperRef}>
                                                 {secure_url.map((image) => (
                                                       <img
