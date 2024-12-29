@@ -48,7 +48,7 @@ const FeaturedCategory = (props: TProps) => {
                   <h2 className='h-[18%] xl:h-[20%] px-[16px] text-[20px] text-slate-800'>Danh mục nổi bật</h2>
                   <div className=' flex-1 flex w-full overflow-x-hidden '>
                         <div
-                              className='w-[350px] xl:w-full flex gap-[28px] xl:gap-[8px] overflow-scroll xl:overflow-visible bg-[#ffffff]  snap-x snap-mandatory xl:snap-none'
+                              className='w-full flex gap-[28px] xl:gap-[8px] overflow-scroll xl:overflow-visible bg-[#ffffff]  snap-x snap-mandatory xl:snap-none'
                               ref={wrapperRef}
                         >
                               <FeaturedCategoryItem />
