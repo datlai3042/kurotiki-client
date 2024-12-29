@@ -6,7 +6,7 @@ import { addToast } from '../Redux/toast'
 
 let retry = false
 let i = 5
-export const REACT_BACK_END_URL = process.env.REACT_APP_MODE === 'DEV' ? 'http://localhost:4000' : 'https://backendtiki.onrender.com'
+export const REACT_BACK_END_URL = process.env.REACT_APP_MODE === 'DEV' ? 'http://localhost:4001' : 'https://api.kurotiki.io.vn'
 let refreshTokenPromise: Promise<any> | null = null // this holds any in-progress token refresh requests
 class AxiosCustom {
       instance: AxiosInstance
@@ -47,10 +47,10 @@ class AxiosCustom {
                                     refreshTokenPromise = refreshTokenPromise
                                           ? refreshTokenPromise
                                           : Auth.refresh_token()
-                                                  .catch((e) => {
-                                                        throw e
-                                                  })
-                                                  .finally(() => (refreshTokenPromise = null))
+                                                .catch((e) => {
+                                                      throw e
+                                                })
+                                                .finally(() => (refreshTokenPromise = null))
                               }
                               return refreshTokenPromise!.then((data: any) => {
                                     // store.dispatch(
