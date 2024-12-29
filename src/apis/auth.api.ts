@@ -15,7 +15,6 @@ class Auth {
       }
 
       static async register({ email, password }: TAuthParams) {
-            console.log(process.env.REACT_APP_BASE_URL)
 
             return axiosCustom.post<TResponseApi<{ user: UserResponse; access_token: string }>>('/v1/api/auth/register', {
                   email,
@@ -28,7 +27,7 @@ class Auth {
       }
 
       static async refresh_token() {
-            store.dispatch(addToast({ type: 'WARNNING', message: 'Đang gọi để lấy lại access_token', id: Math.random().toString() }))
+            // store.dispatch(addToast({ type: 'WARNNING', message: 'Đang gọi để lấy lại access_token', id: Math.random().toString() }))
             return axiosCustom.post<{ metadata: { token: string } }>('/v1/api/auth/rf', {})
       }
 }

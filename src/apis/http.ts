@@ -12,7 +12,6 @@ class AxiosCustom {
       instance: AxiosInstance
 
       constructor() {
-            console.log({ REACT_BACK_END_URL })
             this.instance = axios.create({
                   baseURL: REACT_BACK_END_URL,
                   headers: {
@@ -34,7 +33,6 @@ class AxiosCustom {
             this.instance.interceptors.response.use(
                   (res) => res,
                   async (error) => {
-                        console.log({ error })
                         const originalRequest = error.config
 
                         if (
@@ -44,8 +42,7 @@ class AxiosCustom {
                               !originalRequest.retry
                         ) {
                               originalRequest.retry = true
-                              console.log({ originalRequest })
-                              store.dispatch(addToast({ type: 'ERROR', message: 'Token hết hạn', id: Math.random().toString() }))
+                              // store.dispatch(addToast({ type: 'ERROR', message: 'Token hết hạn', id: Math.random().toString() }))
                               if (!refreshTokenPromise) {
                                     refreshTokenPromise = refreshTokenPromise
                                           ? refreshTokenPromise
@@ -56,13 +53,13 @@ class AxiosCustom {
                                                   .finally(() => (refreshTokenPromise = null))
                               }
                               return refreshTokenPromise!.then((data: any) => {
-                                    store.dispatch(
-                                          addToast({
-                                                type: 'SUCCESS',
-                                                message: 'Lấy thành công đang tiến hàng call lại api',
-                                                id: Math.random().toString(),
-                                          }),
-                                    )
+                                    // store.dispatch(
+                                    //       addToast({
+                                    //             type: 'SUCCESS',
+                                    //             message: 'Lấy thành công đang tiến hàng call lại api',
+                                    //             id: Math.random().toString(),
+                                    //       }),
+                                    // )
                                     if (
                                           error.response.config.url === 'v1/api/account/update-avatar' ||
                                           error.response.config.url === 'v1/api/product/upload-product-thumb' ||
@@ -74,7 +71,6 @@ class AxiosCustom {
                                           error.response.config.url === 'v1/api/product/delete-product-description-image-one' ||
                                           error.response.config.url === 'v1/api/shop/register-shop'
                                     ) {
-                                          console.log('dung url ne')
                                           error.config.headers['Content-Type'] = 'multipart/form-data'
                                           error.config.timeout = 20000
                                     }

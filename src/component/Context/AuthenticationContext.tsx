@@ -35,24 +35,21 @@ const AuthenticationContext = () => {
       const payment = router.pathname.startsWith('/payment')
 
       const routerAuthentication = cartRouter || customerRouter || updateProductRouter || payment
-      const enableAPI = !user && routerAuthentication
-      console.log({ enableAPI })
+      const enableAPI = routerAuthentication
 
       const getMe = useQuery({
             queryKey: ['getMeQuery'],
             queryFn: () => AccountService.getMeQuery(),
-            enabled: enableAPI,
+            enabled: enableAPI
       })
 
       useEffect(() => {
             if (getMe.isSuccess) {
                   const { user } = getMe.data.data.metadata
-                  console.log({ user })
                   dispatch(fetchUser({ user }))
             }
 
             if (getMe.isError) {
-                  console.log({ user: getMe.data?.data.metadata })
 
                   dispatch(fetchUser({ user: undefined }))
             }

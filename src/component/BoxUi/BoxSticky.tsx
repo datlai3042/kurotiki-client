@@ -6,7 +6,6 @@ type Props = {
 }
 
 const BoxSticky = (props: Props) => {
-      console.log('re-render')
       const wrapperBoxSticky = useRef<HTMLDivElement>(null)
 
       return (

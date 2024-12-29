@@ -69,7 +69,6 @@ const CustomerAccount = () => {
             mode: 'onChange',
       })
 
-      console.log({ day: methods.watch('birth.day') })
 
       const getMe = useMutation({
             mutationKey: ['getMe'],
@@ -121,12 +120,10 @@ const CustomerAccount = () => {
       //@[shape] :: error.response.data.error
 
       const submitfake = (data: TFormCustomer) => {
-            console.log('event', data)
       }
 
       //submid update info account
       const onSubmit = (form: TFormCustomer) => {
-            console.log({ submid: form })
             //Có 2 trường hợp sẽ xảy ra liên quan đến bob
             // thứ nhất theo mặc định sẽ là 'Ngày' 'Tháng' 'Năm' nếu người dùng không tương tác với field này thì ta sẽ gán cho nó = null
             // còn ngược lại thì ghép 3 chuỗi vừa nhận được từ hàm vaild kia để tạo ra 1 ngày hoàn chỉnh rồi gửi lên server
@@ -167,7 +164,7 @@ const CustomerAccount = () => {
                               spellCheck={false}
                         >
                               {/* @header */}
-                              <h3 className='h-[45px] font-openSans'>Thông tin cá nhân</h3>
+                              <h3 className='h-[45px] font-openSans text-[18px] font-semibold'>Thông tin cá nhân</h3>
 
                               {/* @change mode with avatar */}
                               <div className='h-[40%] xl:h-[24%]  data-user flex flex-col lg:flex-row gap-[20px] xl:gap-0 xl:items-center'>
@@ -182,9 +179,9 @@ const CustomerAccount = () => {
                                           />
                                           {/* @ form update infomation account */}
                                           {/* @ formLayout - 1 */}
-                                          <div className='min-h-[90px] flex flex-1  flex-col justify-between'>
+                                          <div className='min-h-[90px] flex flex-1 gap-[8px] flex-col justify-between'>
                                                 {/* @ field::name -> fullname */}
-                                                <div className='flex justify-between gap-[32px] w-full h-[35%] pl-[15px] items-center text-[14px]'>
+                                                <div className='flex justify-between gap-[32px] w-full h-[35%] items-center text-[14px]'>
                                                       <InputText
                                                             FieldName='fullName'
                                                             LabelMessage='Họ và tên'
@@ -196,7 +193,7 @@ const CustomerAccount = () => {
                                                       />
                                                 </div>
                                                 {/* @ field::name -> nickname */}
-                                                <div className='flex justify-between w-full gap-[32px] h-[35%] pl-[15px] items-center text-[14px]'>
+                                                <div className='flex justify-between w-full gap-[32px] h-[35%] items-center text-[14px]'>
                                                       <InputText
                                                             FieldName='nickName'
                                                             LabelMessage='NickName'
@@ -210,23 +207,23 @@ const CustomerAccount = () => {
                                     </div>
                               </div>
                               {/* @ formLayout - 2 */}
-                              <div className='form_user w-full min-h-[50%] sm:min-h-[40%] xl:h-[40%]  max-h-auto mt-[90px] flex xl:mt-[20px]'>
+                              <div className='form_user w-full min-h-[50%] sm:min-h-[40%] xl:h-[40%]  max-h-auto mt-[8px] flex xl:mt-[20px]'>
                                     <div className='flex flex-col w-full gap-[16px] justify-between xl:gap-[32px] lg:pt-[15px] 2xl:pt-[10px]'>
                                           {/* @ field::bob */}
-                                          <div className='mb-[30px] flex flex-col md:flex-row justify-between w-full h-[30%] sm:h-[20%] pl-[15px] sm:items-center text-[14px] gap-[20px]'>
-                                                <p className='w-full text-left lg:w-[100px]'>Ngày sinh</p>
+                                          <div className=' flex flex-col md:flex-row justify-between w-full  sm:items-center text-[14px] gap-[20px]'>
+                                                <p className='w-max text-left lg:w-[100px]'>Ngày sinh</p>
                                                 <CustomerAccountBirth />
                                           </div>
                                           {/* @ field::gender */}
-                                          <div className='flex flex-col md:flex-row justify-between w-full h-[20%] pl-[15px] sm:items-center text-[14px] gap-[12px] mt-[50px] lg:mt-0'>
-                                                <p className='w-full text-left lg:w-[100px]'>Giới tính</p>
+                                          <div className='flex flex-col md:flex-row justify-between w-full sm:items-center text-[14px] gap-[12px] mt-[8px] lg:mt-0'>
+                                                <p className='w-max text-left lg:w-[100px]'>Giới tính</p>
                                                 <CustomerAccountGender />
                                           </div>
                                           {/* @ form::action -> submit */}
                                           <div className='w-full mt-0 mb-[24px] xl:mb-0 xl:mt-[50px] flex justify-center xl:block sm:mt-0 pl:[35px] sm:pl-[130px]'>
                                                 <button
                                                       disabled={updateInfo.isPending}
-                                                      className='flex items-center justify-center gap-[6px] ml-0  w-[180px] h-[20px] p-[20px] bg-blue-700 text-white rounded-md'
+                                                      className='flex items-center justify-center gap-[6px] ml-0 w-full xl:w-[180px] h-[20px] p-[20px] bg-blue-700 text-white rounded-md'
                                                       type='submit'
                                                 >
                                                       <span>Lưu thay đổi</span>
@@ -253,13 +250,13 @@ const CustomerAccount = () => {
                               <span className='text-[16px] text-black font-semibold'>Email & liên hệ</span>
 
                               <div className='flex flex-col 2xl:flex-row  2xl:items-center min-h-[20px] pb-[15px] gap-[15px] 2xl:gap-0 '>
-                                    <div className='w-full flex items-center  gap-[16px]'>
-                                          <div className='min-w-[100px]'>Địa chỉ email</div>
-                                          <span className='flex-grow truncate max-w-[180px] underline  font-semibold'>{user.email}</span>
+                                    <div className='w-full flex items-center  gap-[8px]'>
+                                          <div className='min-w-[50px]'>Địa chỉ email:</div>
+                                          <span className='flex-grow truncate max-w-[180px]   font-semibold'>{user.email}</span>
                                     </div>
                                     <Link
                                           to={'/customer/account/update/email'}
-                                          className='w-[100px]  flex items-center justify-center rounded-md bg-white border-[1px] border-blue-700 text-blue-700 h-[15%] p-[6px] '
+                                          className='w-full xl:w-[100px]  flex items-center justify-center rounded-md bg-white border-[1px] border-blue-700 text-blue-700 h-[15%] p-[6px] '
                                     >
                                           Cập nhập
                                     </Link>
@@ -275,7 +272,7 @@ const CustomerAccount = () => {
                                     </div>
                                     <Link
                                           to={'/customer/account/update/password'}
-                                          className='w-[100px]  flex items-center justify-center rounded-md bg-white border-[1px] border-blue-700 text-blue-700 h-[15%] p-[6px] '
+                                          className='w-full xl:w-[100px]  flex items-center justify-center rounded-md bg-white border-[1px] border-blue-700 text-blue-700 h-[15%] p-[6px] '
                                     >
                                           Cập nhập
                                     </Link>

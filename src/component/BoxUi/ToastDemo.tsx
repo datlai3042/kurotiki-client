@@ -18,7 +18,6 @@ const ToastDemo = (props: TProps) => {
       const timeInterval = useRef<NodeJS.Timeout>()
       const now = new Date()
       // const token = JSON.parse(localStorage.getItem('token') as string)
-      // console.log(jwtDecode(token))
       const [show, setShow] = useState(true)
       const [time, setTime] = useState(timerToast)
       const [showDetail, setShowDetail] = useState(false)
@@ -30,13 +29,11 @@ const ToastDemo = (props: TProps) => {
 
       useEffect(() => {
             timeOut.current = setTimeout(() => {
-                  // console.log({ id: toast.id })
                   dispatch(removeToast({ id: toast.id }))
             }, timerToast * 1000)
 
             timeInterval.current = setInterval(() => {
                   setTime((prev) => (prev -= 1))
-                  // console.log('time interval')
             }, 1000)
 
             return () => {
@@ -53,14 +50,12 @@ const ToastDemo = (props: TProps) => {
 
       const handleOnMouseLeave = () => {
             timeOut.current = setTimeout(() => {
-                  // console.log({ id: toast.id })
                   dispatch(removeToast({ id: toast.id }))
                   setShow(false)
             }, time * 1000)
 
             timeInterval.current = setInterval(() => {
                   setTime((prev) => (prev -= 1))
-                  // console.log('time interval')
             }, 1000)
             setShowDetail(false)
       }

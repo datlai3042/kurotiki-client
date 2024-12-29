@@ -157,7 +157,7 @@ const ContentProduct = () => {
                                                       <Link to={`/shop/${shopAdmin?._id}`} className='h-[55%] flex justify-center'>
                                                             <img
                                                                   src={shopAdmin?.shop_avatar.secure_url || shopAdmin?.shop_avatar_default}
-                                                                  className='w-[75%] h-full'
+                                                                  className='object-contain w-[75%] h-full'
                                                                   alt='shop admin'
                                                             />
                                                       </Link>
@@ -180,7 +180,7 @@ const ContentProduct = () => {
                                     </>
                               )}
 
-                              {page > totalPage + 1 && getAllProduct.isPending && (
+                              {page + 1 <= totalPage && getAllProduct.isPending && (
                                     <>
                                           <div className='animate-pulse col-span-2 bg-slate-400'></div>
                                           {Array(10)

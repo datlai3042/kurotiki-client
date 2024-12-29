@@ -26,7 +26,6 @@ const BoxModalImage = (props: TProps) => {
                   const width = wrapperRef.current.getBoundingClientRect().width
                   wrapperRef.current.style.transform = `translate3d(${-width + widthAfter.current}px,0px,0px)`
                   widthAfter.current = -width + widthAfter.current
-                  console.log({ width: widthAfter.current })
                   wrapperRef.current.style.transition = 'all .5s'
                   setPosImage((prev) => (prev += 1))
             }
@@ -48,7 +47,6 @@ const BoxModalImage = (props: TProps) => {
                   const width = wrapperRef.current.getBoundingClientRect().width
                   wrapperRef.current.style.transform = `translate3d(${-width * index}px, 0px,0px)`
                   widthAfter.current = -width * index
-                  console.log({ width: widthAfter.current })
                   wrapperRef.current.style.transition = 'all .5s'
                   setPosImage(index + 1)
             }
@@ -59,7 +57,6 @@ const BoxModalImage = (props: TProps) => {
       useEffect(() => {
             const foundElementActive = secure_url.map((img) => img.secure_url).indexOf(imageActive)
             if (foundElementActive === 0 || foundElementActive === -1) return
-            console.log({ foundElementActive })
             indexActive.current = foundElementActive
             if (wrapperRef.current) {
                   const width = wrapperRef.current.getBoundingClientRect().width
@@ -68,8 +65,6 @@ const BoxModalImage = (props: TProps) => {
                   wrapperRef.current.style.transition = `all ${transitionDuration}s`
                   setPosImage(indexActive.current + 1)
             }
-            console.log({ width: widthAfter.current })
-            console.log({ foundElementActive, secure_url, imageActive })
       }, [imageActive, secure_url, transitionDuration])
 
       const styleEffect = {
@@ -77,11 +72,10 @@ const BoxModalImage = (props: TProps) => {
             buttonNext: posImage === secure_url.length ? 'text-gray-500 border-gray-500' : 'text-white border-white-400',
             isActiveImage: 'border-[4px] border-blue-800',
       }
-      console.log({})
 
       return (
             <Portal>
-                  <div className=' fixed inset-0 bg-[rgba(0,0,0,.93)] flex flex-col content-between min-h-screen h-max px-[24px]'>
+                  <div className=' fixed z-[200] inset-0 bg-[rgba(0,0,0,.93)] flex flex-col content-between min-h-screen h-max px-[24px]'>
                         <div className='relative w-full h-[30%]  lg:h-[70%] mt-[100px] xl:mt-[24px]'>
                               <div className='w-full h-full flex justify-center items-center'>
                                     <div className='w-[250px] h-[250px] xl:w-[540px] xl:h-[540px] overflow-x-hidden'>

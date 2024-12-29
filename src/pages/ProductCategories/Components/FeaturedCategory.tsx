@@ -41,7 +41,6 @@ const FeaturedCategory = (props: TProps) => {
                   setCountTranslate((prev) => prev - 1)
             }
       }
-      console.log({ countTranslate })
       const productsLength = 12 / 6
 
       return (

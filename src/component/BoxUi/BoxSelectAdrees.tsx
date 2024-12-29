@@ -90,7 +90,6 @@ const BoxSelectAdrees = (props: TProps) => {
             setWard(code)
       }
 
-      console.log({ province })
 
       useEffect(() => {
             if (province) {
@@ -107,12 +106,10 @@ const BoxSelectAdrees = (props: TProps) => {
       }, [district])
 
       useEffect(() => {
-            console.log({ data: provinceApi.data?.data })
       }, [provinceApi.isSuccess, provinceApi.data?.data])
 
       useEffect(() => {
             if (districtApi.isSuccess) {
-                  console.log({ district: districtApi.data.data.metadata })
             }
       }, [districtApi.isSuccess, districtApi.data?.data.metadata])
 

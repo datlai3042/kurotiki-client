@@ -90,7 +90,7 @@ const Product = () => {
             <div className='flex flex-col w-full text-[12px]'>
                   <div className=' w-full flex flex-col gap-[4px] '>
                         {getProductWithId.data?.data && (
-                              <div className='flex items-center gap-[4px] px-[10px] xl:px-0 text-[16px] pb-[4px]'>
+                              <div className='flex items-center gap-[4px] p-[20px] xl:px-0 text-[20px] font-extrabold '>
                                     <Link to='/'>Trang chủ</Link>
 
                                     <ChevronRight size={16} color='black' />
@@ -166,7 +166,6 @@ const Product = () => {
                   </div>
                   <ContentProduct />
 
-                  <div className=' bg-black h-[4000px] w-full'></div>
             </div>
       )
 }

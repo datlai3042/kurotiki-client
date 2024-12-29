@@ -2,7 +2,7 @@ import React, { SetStateAction, useState } from 'react'
 import AuthLogin from './AuthLogin'
 import AuthRegister from './AuthRegister'
 import { useDispatch } from 'react-redux'
-import { doCloseBoxLogin } from '../../Redux/authenticationSlice'
+import { doCloseBoxLogin } from '../../Redux/authSlice'
 
 export type TModeAuth = 'Login' | 'Register'
 

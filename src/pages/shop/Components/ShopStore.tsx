@@ -38,8 +38,6 @@ const ShopStore = (props: TProps) => {
             )
       }
 
-      console.log('re-render')
-
       return (
             <div className='flex flex-col gap-[16px]'>
                   <div className='mx-[10px] xl:mx-0 h-[300px] xl:h-[500px] flex items-center justify-center xl:block'>

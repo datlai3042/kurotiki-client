@@ -46,7 +46,6 @@ const BoxShopForm = (props: TProps) => {
             }
       }
 
-      console.log({ errors: form.formState.errors })
 
       const onChangeAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
             // if(!)

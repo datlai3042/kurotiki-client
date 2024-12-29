@@ -15,8 +15,6 @@ const BoxIsBought = (props: Props) => {
                   const width = containerBoughtRef.current.getBoundingClientRect().width - 5
                   const widthPercent = Math.ceil(width) / 10
 
-                  //     // console.log(boxBoughtRef.current.getBoundingClientRect().width)
-                  //   console.log(width)
                   boxBoughtRef.current.style.width = `${
                         props.Quantity > 0 || props.Quantity !== 0 || props.Quantity <= 10
                               ? `${props.Quantity * (widthPercent && props.Quantity < 3 ? 30 : widthPercent)}`

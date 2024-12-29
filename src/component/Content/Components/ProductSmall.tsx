@@ -19,7 +19,7 @@ const ProductSmall = (props: TProps) => {
                   className='w-full h-full  flex flex-col  gap-[10px] border-[1px] border-slate-200  rounded-lg bg-[#ffffff] p-1'
             >
                   <div className='relative w-full h-[60%]'>
-                        <img src={product.product_thumb_image?.secure_url} className='w-full h-[85%] rounded-t-lg' alt='' />
+                        <img src={product.product_thumb_image?.secure_url} className='object-contain w-full h-[85%] rounded-t-lg' alt='' />
                   </div>
                   <div className='px-[10px] gap-[7px] flex-1 flex flex-col '>
                         <span className='w-[80%] break-words  line-clamp-2 text-[12px] font-normal'>{product.product_name}</span>

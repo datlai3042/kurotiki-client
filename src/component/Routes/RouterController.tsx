@@ -44,8 +44,9 @@ const RouterController = () => {
       const showOverload = useSelector((state: RootState) => state.uiSlice.showOverload)
 
       const styleEffect = {
-            matchPathName: window.location.pathname !== '/payment' ? '  pt-[80px] xl:pt-[20px]' : '',
+            matchPathName: window.location.pathname !== '/payment' ? '  pt-[80px] xl:pt-[20px] pb-[45px] xl:pb-0' : '',
             matchPathNameCustomer: pathName.startsWith('/customer') ? 'top-[0px] ' : 'top-[60px] lg:h-[calc(100vh-100px)]',
+            layoutFull: pathName?.startsWith('/customer') ? '' : 'mx-auto max-w-full md:max-w-[1023px] xl:max-w-[1400px]',
       }
 
       return (
@@ -53,8 +54,8 @@ const RouterController = () => {
                   {!hiddenHeader && <Header />}
 
                   <div
-                        className={`${styleEffect.matchPathName}  flex-1 w-full  items-stretch h-max  flex flex-col xl:flex-row gap-[28px]    bg-[rgb(245_245_250)] 
-mx-auto max-w-full md:max-w-[1023px] xl:max-w-[1400px]`}
+                        className={`${styleEffect.matchPathName} ${styleEffect.layoutFull} z-[1]  flex-1 w-full  items-stretch h-max  flex flex-col xl:flex-row gap-[28px]    bg-[rgb(245_245_250)] 
+`}
                   >
                         <Sidebar />
                         <Routes>

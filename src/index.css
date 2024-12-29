@@ -5,8 +5,9 @@
 
 @layer components {
       .isActive {
-            background-color: #ceced1;
+            background-color: #1d4ed8;
             color: white !important;
+            border-radius: 8px;
       }
 
       .custom-product-item {
@@ -128,33 +129,34 @@ code {
 
 /* width */
 
-:not(body)::-webkit-scrollbar {
+/* :not(body)::-webkit-scrollbar {
       display: none;
-}
+} */
 
 .scrollCustome::-webkit-scrollbar,
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
       width: 8px;
+      height: 10px;
       scroll-behavior: smooth;
 }
 
 /* Track */
 .scrollCustome::-webkit-scrollbar,
-body::-webkit-scrollbar-track {
-      background: transparent;
+*::-webkit-scrollbar-track {
+      background: #f2f2f2;
       border-radius: 5px;
 }
 
 /* Handle */
 .scrollCustome::-webkit-scrollbar,
-body::-webkit-scrollbar-thumb {
-      background: rgb(15 23 42);
-      /* border-radius: 5px; */
+*::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 5px;
 }
 
 /* Handle on hover */
 .scrollCustome::-webkit-scrollbar,
-body::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
       background: #555;
 }
 

@@ -30,8 +30,7 @@ const CartItem = (props: TProps) => {
 
       const queryClient = useQueryClient()
 
-      console.log({ time: convertDateToString(product.cart_date) })
-      console.log({ quantity: product.quantity })
+   
 
       useEffect(() => {
             // if (select !== product.product_is_select) {
@@ -45,7 +44,6 @@ const CartItem = (props: TProps) => {
             mutationKey: ['/v1/api/cart/cart-change-select-one'],
             mutationFn: ({ value, product_id }: { value: boolean; product_id: string }) => CartService.selectCartOne({ value, product_id }),
             onSuccess: (axiosResponse) => {
-                  console.log({ axiosResponse })
                   queryClient.invalidateQueries({
                         queryKey: ['v1/api/cart/cart-pay'],
                   })
@@ -93,7 +91,7 @@ const CartItem = (props: TProps) => {
             product.cart_address.type === 'Home' ? 'Nhà' : product.cart_address.type === 'Company' ? 'Công ty / cơ quan' : 'Nơi ở riêng tư'
       // if (!product.product_id.s) return null
       return (
-            <div className='h-[600px] xl:h-[450px] flex flex-col gap-[16px] bg-[#ffffff] px-[12px]' key={product._id}>
+            <div className='min-h-[450px]  flex flex-col gap-[16px] bg-[#ffffff] p-[12px]' key={product._id}>
                   <div className='flex gap-[12px] h-[14%] xl:h-[30%] items-center'>
                         {/* <Checkbox disabled={styleEffect.readOnly} /> */}
                         <Home />
@@ -108,7 +106,7 @@ const CartItem = (props: TProps) => {
                               <span className='underline'>{shop.shop_name}</span>
                         </p>
                   </div>
-                  <div className='max-h-[70%] h-[60%] xl:max-h-[50%] xl:h-[40%] w-full flex flex-col  gap-[40px]'>
+                  <div className='w-full flex flex-col  gap-[40px]'>
                         <div className='w-full flex  flex-col xl:flex-row gap-[30px] min-h-[230px] h-max xl:min-h-[80px]'>
                               <Checkbox
                                     disabled={styleEffect.readOnly}
@@ -116,10 +114,7 @@ const CartItem = (props: TProps) => {
                                     checked={select}
                                     onChange={changeSelect}
                               />
-                              <Link
-                                    className='inline-block w-[200px] xl:w-[90px] h-[250px] xl:h-[80px]'
-                                    to={`/product/${product.product_id._id}`}
-                              >
+                              <Link className='inline-block h-[250px] xl:h-[80px]' to={`/product/${product.product_id._id}`}>
                                     <img
                                           src={product.product_id.product_thumb_image.secure_url}
                                           className='max-w-full max-h-full h-full'
@@ -127,7 +122,7 @@ const CartItem = (props: TProps) => {
                                     />{' '}
                               </Link>
                               <div
-                                    className={`${styleEffect.product_not_avaiable} flex-1 flex flex-wrap flex-col   gap-[4px] xl:gap-0 content-between justify-between font-semibold text-slate-700`}
+                                    className={`${styleEffect.product_not_avaiable} flex-1 flex  flex-col   gap-[12px]  content-between justify-between font-semibold text-slate-700`}
                               >
                                     <span>Tên sản phẩm:{product.product_id.product_name}</span>
 
@@ -195,13 +190,15 @@ const CartItem = (props: TProps) => {
                                           <span>Đặt hàng vào lúc:</span>
                                           <span>{DateTimeFromString(product.cart_date)}</span>
                                     </div>
-                                    <div className='flex flex-col xl:flex-row xl:items-center gap-[8px] xl:w-[80%]'>
-                                          <p className='flex gap-[16px] xl:gap-[8px] items-center'>
-                                                <span className='mt-[-4px]'>{AddressTypeIcon}</span>
-                                                <span>Giao tại nhà: {AddressTypeText}</span>
-                                          </p>
-                                          <span className='hidden xl:inline'>-</span>
-                                          <span>Địa chỉ {product.cart_address.address_text}</span>
+                                    <div className='w-full flex flex-col xl:flex-row xl:items-center justify-between gap-[8px] '>
+                                          <div className='flex flex-col xl:flex-row xl:items-center gap-[8px] xl:w-[80%]'>
+                                                <p className='flex gap-[16px] xl:gap-[8px] items-center'>
+                                                      <span className='mt-[-4px]'>{AddressTypeIcon}</span>
+                                                      <span>Giao tại nhà: {AddressTypeText}</span>
+                                                </p>
+                                                <span className='hidden xl:inline'>-</span>
+                                                <span>Địa chỉ {product.cart_address.address_text}</span>
+                                          </div>
                                           <div className='w-max'>
                                                 <BoxButton
                                                       content='Cập nhập địa chỉ khác'
@@ -227,8 +224,6 @@ const CartItem = (props: TProps) => {
                   {openModelDetail && <CartItemDetail product={product} setOpenModel={setOpenModelDetail} />}
 
                   <div className='w-[calc(100%+24px)] ml-[-12px] bg-slate-100 h-[2px] my-[8px]'></div>
-
-                  <div className='max-h-[20%] flex ml-[16px] items-center gap-[8px]'></div>
             </div>
       )
 }

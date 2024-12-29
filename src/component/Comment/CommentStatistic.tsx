@@ -19,7 +19,6 @@ const CommentStatistic = (props: TProps) => {
                   setWidth(width)
             }
       }, [avg, totalComment, detailComment])
-      // console.log({ width:  })
 
       return (
             <div className='w-[300px] h-max flex items-center py-[16px] px-[20px]'>

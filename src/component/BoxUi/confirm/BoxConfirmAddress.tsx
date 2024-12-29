@@ -84,7 +84,9 @@ const BoxConfirmAddress = (props: TProps) => {
                   dispatch(
                         addToast({
                               type: 'WARNNING',
-                              message: `Vui lòng chọn 1 trong ${user?.user_address.length} địa chỉ`,
+                              message: `Vui lòng  ${
+                                    user?.user_address.length ? `chọn 1 trong ${user?.user_address.length}` : 'chọn '
+                              } địa chỉ`,
                               id: Math.random().toString(),
                         }),
                   )
@@ -93,7 +95,6 @@ const BoxConfirmAddress = (props: TProps) => {
 
             if (mode === 'User') {
                   const addressSelector = user?.user_address.find((address) => address._id === valueAddress) as UserAddress
-                  console.log({ addressSelector })
                   setAddressDefaultMutation.mutate({ _id: addressSelector._id })
                   return
                   // return
@@ -158,15 +159,14 @@ const BoxConfirmAddress = (props: TProps) => {
       }
 
       const handleChangeRadio = (e: RadioChangeEvent) => {
-            console.log({ radio: e.target.value })
             setValueAddress(e.target.value)
       }
 
       return (
             <Portal>
-                  <div className='fixed inset-0 bg-[rgba(0,0,0,.45)] flex justify-center items-center z-[503]'>
+                  <div className='fixed inset-0 bg-[rgba(0,0,0,.45)] flex justify-center items-center z-[200]'>
                         <div
-                              className='relative w-full xl:w-[600px] min-h-[370px] h-max bg-[#ffffff] p-[12px_8px]  xl:p-[18px_12px] mx-[16px] xl:mx-0 
+                              className='relative w-[450px] min-h-[370px] h-max bg-[#ffffff] p-[12px_8px]  xl:p-[18px_12px] mx-[16px] xl:mx-0 
  rounded'
                         >
                               <div className='flex flex-col gap-[10px] h-full'>
@@ -179,12 +179,8 @@ const BoxConfirmAddress = (props: TProps) => {
                                                       chuyển một cách chính xác nhất.
                                                 </span>
                                           </div>
-                                          {user && user?.user_address && (
-                                                <div
-                                                      className={`${
-                                                            valueAddress === 'Other' ? 'h-[100px]' : 'h-max'
-                                                      } scrollCustome px-[36px] mt-[24px]  overflow-y-auto `}
-                                                >
+                                          <div className='max-h-[450px] overflow-y-auto scrollCustome'>
+                                                <div className={`${valueAddress === 'Other' ? 'min-h-[30px]' : ''}  px-[36px]   `}>
                                                       <Radio.Group
                                                             className='flex flex-col gap-[8px]'
                                                             onChange={handleChangeRadio}
@@ -217,14 +213,14 @@ const BoxConfirmAddress = (props: TProps) => {
                                                             <Radio value={'Other'}>Chọn địa chỉ khác</Radio>
                                                       </Radio.Group>
                                                 </div>
-                                          )}
-                                          {valueAddress !== 'Other' && (
-                                                <div className='mt-[20px]' onClick={onVerifyAddress}>
-                                                      <BoxButton content='Xác nhận' />
-                                                </div>
-                                          )}
+                                                {valueAddress !== 'Other' && (
+                                                      <div className='mt-[20px]' onClick={onVerifyAddress}>
+                                                            <BoxButton content='Xác nhận' />
+                                                      </div>
+                                                )}
 
-                                          {valueAddress === 'Other' && <FormAddress onSuccessAddAddress={onSuccessAddAddress} />}
+                                                {valueAddress === 'Other' && <FormAddress onSuccessAddAddress={onSuccessAddAddress} />}
+                                          </div>
                                     </div>
                               </div>
                               <button

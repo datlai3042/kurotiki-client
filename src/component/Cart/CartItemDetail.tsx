@@ -55,7 +55,7 @@ const CartItemDetail = (props: TProps) => {
       return (
             <>
                   <div
-                        className='fixed w-full min-h-screen top-0 left-0 flex justify-center items-center bg-[rgba(0,0,0,.7)] z-[999] px-[15px]'
+                        className='fixed w-full min-h-screen top-0 left-0 flex justify-center items-center bg-[rgba(0,0,0,.7)] z-[110] px-[15px]'
                         onClick={() => {
                               // setShowBoxAuth(false)
                         }}
@@ -66,7 +66,7 @@ const CartItemDetail = (props: TProps) => {
                         >
                               <span>Tên sản phẩm: {product.product_id.product_name}</span>
                               <Link
-                                    className='inline-block w-[100px] xl:w-[90px] h-[100px] xl:h-[80px]'
+                                    className='inline-block w-[100px] xl:w-[180px] h-[100px]  xl:h-[180px]'
                                     to={`/product/${product.product_id._id}`}
                               >
                                     <img
@@ -95,7 +95,7 @@ const CartItemDetail = (props: TProps) => {
                               <div className='max-h-[36%] flex flex-wrap flex-col xl:flex-row justify-between ml-0 xl:ml-[16px]  gap-[24px] xl:gap-[16px]'>
                                     <div className='flex xl:flex-col  gap-[8px] text-slate-800 text-[12px] xl:text-[16px] font-extrabold'>
                                           {/* <TimerIcon className='hidden xl:block' /> */}
-                                          <span>Đặt hàng vào lúc:</span>
+                                          <span className='min-w-[100px]'>Đặt hàng vào lúc:</span>
                                           <span>{DateTimeFromString(product.cart_date)}</span>
                                     </div>
                                     <div className='flex flex-col   gap-[20px] xl:gap-[10px] xl:w-[80%]'>
@@ -104,7 +104,7 @@ const CartItemDetail = (props: TProps) => {
                                                 <span>Giao tại nhà: {AddressTypeText}</span>
                                           </p>
                                           <span className='hidden xl:inline'>-</span>
-                                          <span>Địa chỉ {product.cart_address.address_text}</span>
+                                          <span>Địa chỉ: {product.cart_address.address_text}</span>
                                           <div className='w-max'>
                                                 <BoxButton
                                                       content='Cập nhập địa chỉ khác'
@@ -122,8 +122,9 @@ const CartItemDetail = (props: TProps) => {
                                     </div>
                               </div>
 
-                              <div className='w-[20px] flex items-center  xl:my-0'>
+                              <div className='min-w-[20px] gap-[6px] flex items-center  xl:my-0'>
                                     <Trash2 onClick={() => setOpenBoxConfirmDelete(true)} />
+                                    <span>Xóa</span>
                                     {openBoxConfirmDelete && (
                                           <BoxConfirmDelete
                                                 content='Bạn sẽ xóa sản phẩm này chứ'

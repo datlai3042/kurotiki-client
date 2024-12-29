@@ -82,7 +82,6 @@ const BoxAvatarMode = (props: TProps) => {
             heightImage,
       }
 
-      console.log({ AvatartSource })
 
       return (
             <div

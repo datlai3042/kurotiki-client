@@ -103,7 +103,7 @@ const Shop = () => {
                                                             </div>
                                                       </div>
                                                 </div>
-                                                <div className='ml-[-40px] xl:ml-0   h-max min-h-[100px] xl:min-h-[40px] flex flex-col xl:flex-row  items-center w-full mt-[-30px] xl:mt-[16px] overflow-hidden'>
+                                                <div className='pl-[34px] gap-[12px] ml-[-40px] xl:ml-0   h-max min-h-[100px] xl:min-h-[40px] flex flex-col xl:flex-row  items-center w-full mt-[-30px] xl:mt-[16px] overflow-hidden'>
                                                       <div className='w-full h-max min-h-[100px] xl:min-h-[40px] xl:w-[70%] flex items-center justify-between overflow-x-scroll xl:overflow-visible '>
                                                             {TagTransition.map((btn) => (
                                                                   <button

@@ -37,23 +37,25 @@ const AvatarUsed = (props: TProps) => {
             }
       }, [deleteAvatarUsed.isSuccess, dispatch, deleteAvatarUsed.data?.data.metadata.user])
       return (
-            <div className='w-full relative'>
-                  <img src={avatar?.secure_url} loading='lazy' className='w-full min-h-full rounded-tr-md' alt='avatar_used[]' />
-                  <p className='absolute top-0 right-0 bg-slate-700 text-white min-w-[60px] px-[6px] py-[2px]'>
-                        {avatar.date_update ? convertDateToString(avatar.date_update) : 'none'}
-                  </p>
-                  <div
-                        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => handleDeleteAvatarUsed(avatar.public_id, e)}
-                        className=' gap-[8px] absolute bg-white rounded-md bottom-0 right-0 w-[70px] h-[30px] p-[4px] border-[1px] border-slate-700 text-slate-700 hover:bg-red-700 hover:border-red-700 hover:text-white flex justify-center items-center z-[2]'
-                  >
-                        <Trash2 className='' />
-                        {showLoading && (
-                              <span
-                                    className='inline-block  h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'
-                                    role='status'
-                              ></span>
-                        )}
+            <div className='w-full flex flex-col gap-[8px]'>
+                  <div className='flex justify-between '>
+                        <p className=' bg-slate-700 text-white min-w-[60px] px-[6px] py-[2px]'>
+                              {avatar.date_update ? convertDateToString(avatar.date_update) : 'none'}
+                        </p>
+                        <div
+                              onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => handleDeleteAvatarUsed(avatar.public_id, e)}
+                              className=' gap-[8px]  text-[#fff] rounded-md  min-w-[70px] h-[30px] p-[4px] border-[1px]  bg-red-700 hover:border-red-700  flex justify-center items-center z-[2]'
+                        >
+                              <span className=''>Xóa ảnh</span>
+                              {showLoading && (
+                                    <span
+                                          className='inline-block  h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'
+                                          role='status'
+                                    ></span>
+                              )}
+                        </div>
                   </div>
+                  <img src={avatar?.secure_url} loading='lazy' className='w-full min-h-full rounded-tr-md' alt='avatar_used[]' />
             </div>
       )
 }

@@ -25,7 +25,7 @@ const ProductMedium = (props: TProps) => {
                   className='w-full h-full  flex flex-col  gap-[10px] border-[1px] border-slate-200  rounded-lg bg-[#ffffff] hover:shadow-xl p-1'
             >
                   <div className='relative w-full h-[60%]'>
-                        <img src={product.product_thumb_image?.secure_url} className='w-full h-[77%] rounded-t-lg' alt='' />
+                        <img src={product.product_thumb_image?.secure_url} className='object-contain w-full h-[77%] rounded-t-lg' alt='' />
                         <div className=' absolute bottom-0 left-0 px-[10px] flex flex-col gap-[5px]'>
                               {TikiBest && <img src={TikiBestLogo} className='w-[80px]' alt='logo-tiki-best' />}
                               <ProductLabel content='Chính hãng' />

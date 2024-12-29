@@ -14,11 +14,9 @@ const WrapperCountProduct = (props: TProps) => {
       const [productQuantity, setProductQuantity] = useState<number | undefined>(cart_quantity)
       const queryClient = useQueryClient()
 
-      console.log({ product_id })
-      console.log({ quantity: productQuantity })
+    
 
       useEffect(() => {
-            console.log('api')
             setProductQuantity(cart_quantity)
       }, [cart_quantity, productQuantity])
 

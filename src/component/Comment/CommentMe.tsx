@@ -31,6 +31,7 @@ const CommentMe = (props: TProps) => {
             queryKey: ['get-me-comment', product._id],
             queryFn: () => CommentService.getMeComment({ product_id: product._id }),
             staleTime: SLATE_TIME_COMMENT_ME_ALL,
+            enabled: !!user 
       })
 
       const deleteCommentMutation = useMutation({
@@ -61,7 +62,6 @@ const CommentMe = (props: TProps) => {
       }
 
       const onOpenModel = (cb: React.Dispatch<SetStateAction<boolean>>) => {
-            console.log({ User: user?._id, owner: ownerProduct })
 
             if (ownerProduct === user._id) {
                   dispatch(

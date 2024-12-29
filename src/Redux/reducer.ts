@@ -24,24 +24,18 @@ export const cartSlice = createSlice({
                   if (state.cartList.length !== 0) {
                         let find = state.cartList.findIndex((product: any) => {
                               if (product.id === action.payload.id) {
-                                    console.log('đã tồn tại')
-                                    console.log(action.payload)
                                     // const cartSetLocalStorage = JSON.stringify(state)
                                     // localStorage.setItem('cart', cartSetLocalStorage)
                                     return (product.quantity += action.payload.quantity)
                               }
                         })
-                        console.log(find)
                         if (find === -1) {
-                              console.log('chưa có')
                               state.cartList.push(action.payload)
                               state.soLuong += 1
                         }
                   }
-                  console.log(current(state))
             },
             deleteProduct: (state, action) => {
-                  console.log('x')
                   let idSanPhamBiXoa = action.payload
                   let indexSanPhamTrongCartList = state.cartList.findIndex((product: any) => product.id === idSanPhamBiXoa)
                   if (indexSanPhamTrongCartList !== -1) {
@@ -57,8 +51,6 @@ export const cartSlice = createSlice({
             },
 
             increaseProduct: (state, action) => {
-                  console.log('tăng')
-                  console.log('>>>checkId', action.payload)
                   let idSanPham = state.cartList.findIndex((product: any) => product.id === action.payload)
                   if (idSanPham !== -1) {
                         state.cartList[idSanPham].quantity += 1
@@ -67,14 +59,10 @@ export const cartSlice = createSlice({
                   // localStorage.setItem('cart', cartSetLocalStorage)
             },
             decreaseProduct: (state, action) => {
-                  console.log('giảm')
-                  console.log('>>>checkId', action.payload)
                   let idSanPham = state.cartList.findIndex((product: any) => product.id === action.payload)
-                  console.log(idSanPham)
                   if (idSanPham !== -1) {
                         if (state.cartList[idSanPham].quantity > 1) {
                               state.cartList[idSanPham].quantity -= 1
-                              console.log('a', state.cartList[idSanPham].quantity)
                         }
                   }
                   // const cartSetLocalStorage = JSON.stringify(state)
@@ -82,14 +70,12 @@ export const cartSlice = createSlice({
             },
 
             addProductPair: (state, action) => {
-                  console.log(action.payload)
                   // tìm id thay đổi checkbox
 
                   //Trời ơi Đạt tui mất gần 1 tiếng cho cái công thức này
                   // đầu tiên là lấy lọc lấy index phần tử trong mảng cartList[] nhá
                   // làm vậy để checkbox thay đổi true, false còn cập nhập theo được kkk
                   let indexCart = state.cartList.findIndex((product: any) => product.id === action.payload.productObj.id)
-                  console.log(indexCart)
                   // sửa lại phần tử index có giá trị check mới tinh mà action.payload truyền vào nè
                   state.cartList[indexCart].check = action.payload.productObj.check
 
@@ -116,7 +102,6 @@ export const cartSlice = createSlice({
                   // localStorage.setItem('cart', cartSetLocalStorage)
             },
             actionPaid: (state, action) => {
-                  console.log(action.payload)
                   state.cartList = state.cartList.filter((product: any) => {
                         if (!product.check) {
                               return true
@@ -129,10 +114,8 @@ export const cartSlice = createSlice({
                   // localStorage.setItem('cart', cartSetLocalStorage)
             },
             doIsSelectAll: (state, action) => {
-                  console.log('alo', action.payload)
                   if (action.payload) {
                         state.cartList.forEach((product: any) => {
-                              console.log(current(product))
                               product.check = true
                         })
                   }

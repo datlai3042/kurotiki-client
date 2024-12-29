@@ -40,7 +40,6 @@ const BoxFilterProduct = (props: TProps) => {
 
       const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault()
-            console.log({ filter })
             const payload: ProductFilter = {
                   product_vote: filter.onVote || 1,
                   minPrice: filter.minPrice || 1,

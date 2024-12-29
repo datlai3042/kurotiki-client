@@ -38,7 +38,6 @@ const ProductIntro = (props: TProps) => {
       const dispatch = useDispatch()
 
       const [openModal, setOpenModal] = useState<boolean>(false)
-
       const handleOpenModal = () => {
             if (!user) {
                   dispatch(doOpenBoxLogin())
@@ -53,8 +52,7 @@ const ProductIntro = (props: TProps) => {
             staleTime: STALE_TIME,
       })
 
-      // console.log({ cartCurrent: renderStringAddressDetailV2(address_default[0]) })
-
+      console.log({ result: getAddressDefault(user?.user_address) })
       return (
             <div className='flex flex-col min-h-full h-max gap-[16px] text-[13px]'>
                   <section className='bg-white w-full min-h-[160px] h-auto p-[18px]  rounded-lg'>
@@ -97,7 +95,7 @@ const ProductIntro = (props: TProps) => {
                         <div className='flex flex-col gap-[12px]'>
                               <p className='[word-spacing:1px] text-[16px] text-black font-semibold word'>Thông tin vận chuyển</p>
                               <div className=' min-h-[26px] h-max w-full flex flex-wrap flex-row justify-between'>
-                                    <span className='text-[14px]'>
+                                    <div className='text-[14px]'>
                                           {cartCurrent.cart_current_address ? (
                                                 <p className='flex gap-[8px]'>
                                                       <span>Giao đến</span>
@@ -105,22 +103,10 @@ const ProductIntro = (props: TProps) => {
                                                             {cartCurrent.cart_current_address}
                                                       </span>
                                                 </p>
-                                          ) : <p className='flex gap-[8px]'>
-                                                  <span>Giao đến</span>
-                                                  <span className='underline text-slate-800 font-bold'>
-                                                        {getAddressDefault(user?.user_address) as React.ReactNode}
-                                                  </span>
-                                            </p> ? (
-                                                <p className='flex gap-[8px]'>
-                                                      <span>Giao đến</span>
-                                                      <span className='underline text-slate-800 font-bold'>
-                                                            {address_default ? renderStringAddressDetailV2(address_default[0]) : ''}
-                                                      </span>
-                                                </p>
                                           ) : (
                                                 <span>Bạn chưa chọn ví trí giao hàng</span>
                                           )}
-                                    </span>
+                                    </div>
                                     <button className='text-left text-blue-600' onClick={handleOpenModal}>
                                           {getAddressDefault(user?.user_address) ? 'Đổi' : 'Chọn vị trí'}
                                     </button>

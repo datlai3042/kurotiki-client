@@ -12,7 +12,6 @@ export const getNewPosition = (
 
       let newPosition = position + -posCurrent.current
       let newPositionPostive = -newPosition
-      console.log('time', time)
 
       if (sliderWrapper.current) {
             sliderWrapper.current.style.transform = `translate3d(${newPosition}px, 0,0)`

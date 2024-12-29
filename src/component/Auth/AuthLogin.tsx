@@ -9,9 +9,10 @@ import Auth from '../../apis/auth.api'
 import { useDispatch } from 'react-redux'
 import { checkAxiosError } from '../../utils/handleAxiosError'
 import TErrorAxios from '../../types/axios.response.error'
-import { doCloseBoxLogin, fetchUser } from '../../Redux/authenticationSlice'
+import {  fetchUser } from '../../Redux/authenticationSlice'
 import { addToast } from '../../Redux/toast'
 import BoxLoading from '../BoxUi/BoxLoading'
+import { doCloseBoxLogin } from '../../Redux/authSlice'
 
 type TProps = {
       setModeAuth: React.Dispatch<SetStateAction<TModeAuth>>
@@ -59,7 +60,6 @@ const AuthLogin = (props: TProps) => {
       useEffect(() => {}, [])
       countRef.current += 1
 
-      console.log({ count: countRef.current })
       const dispatch = useDispatch()
 
       const authLogin = useMutation({

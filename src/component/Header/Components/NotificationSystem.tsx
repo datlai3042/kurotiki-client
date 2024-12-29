@@ -10,7 +10,6 @@ type TProps = {
 
 const NotificationSystem = (props: TProps) => {
       const { notification } = props
-      console.log({ notification })
       return (
             <Link to={`/customer/notification#${notification._id}`} className='w-full h-full flex flex-col gap-[8px]'>
                   <p className='w-full flex justify-between'>

@@ -106,7 +106,6 @@ class ShopApi {
             limit: number
             inc: number
       }) {
-            console.log({ index: page })
             return axiosCustom.get<TResponseApi<{ shop: ShopResponse }>>('/v1/api/shop/get-product-best-seller', {
                   params: { shop_id, sort, page, limit, inc },
             })

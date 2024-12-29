@@ -40,7 +40,6 @@ const SectionProductItem = (props: Props) => {
                   const width = wrapperListProductsRef.current.getBoundingClientRect().width
                   PositionScrollCurrent.current = PositionScrollCurrent.current + width
 
-                  // console.log(Math.trunc(width))
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
             }

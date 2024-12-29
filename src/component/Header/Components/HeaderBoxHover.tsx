@@ -25,7 +25,6 @@ function HeaderBoxHover() {
                   })
             },
             onError: (error) => {
-                  console.log({ error })
                   dispatch(addToast({ type: 'ERROR', message: 'Đăng xuất không thành công', id: Math.random().toString() }))
             },
       })

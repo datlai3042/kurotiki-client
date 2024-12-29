@@ -18,14 +18,12 @@ const NotificationProduct = (props: TProps) => {
       const limit = 10
       const [page, setPage] = useState<number>(1)
       const [heightNotification, setHeightNotification] = useState<number>(180)
-      console.log({ id: notificationProduct.product_id })
       const getOrderInfo = useQuery({
             queryKey: ['/v1/api/order/get-order-info', notificationProduct.product_id],
             queryFn: () => OrderService.getOrderInfo({ order_id: notificationProduct.product_id }),
             staleTime: 1000 * 60 * 5,
       })
 
-      console.log({ order_id: notificationProduct.product_id })
 
       useEffect(() => {
             if (getOrderInfo.isSuccess) {

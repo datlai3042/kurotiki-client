@@ -111,8 +111,6 @@ const SliderProducts = (props: Props) => {
                         newPosition = position + -posCurrent.current
                   }
 
-                  console.log('time', time)
-
                   sliderWrapper.current.style.transform = `translate3d(${newPosition}px, 0,0)`
                   sliderWrapper.current.style.transition = `all ${time}s linner`
 
@@ -122,7 +120,6 @@ const SliderProducts = (props: Props) => {
 
                   await sleep(1000)
                   run.current = true
-                  console.log('onClick', posCurrent.current)
             }
       }
 
@@ -176,7 +173,6 @@ const SliderProducts = (props: Props) => {
       useEffect(() => {
             if (window.innerWidth > 1024) {
                   timerId.current = setInterval(() => {
-                        // console.log({ scope: scope.current })
                         if (run.current) {
                               if (sliderWrapper.current) {
                                     if (scope.current === hinhAnhSlider.length || scope.current + 2 > hinhAnhSlider.length - 1) {
@@ -214,7 +210,6 @@ const SliderProducts = (props: Props) => {
             }
       }, [])
 
-      console.log()
 
       return (
             <div

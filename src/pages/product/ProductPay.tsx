@@ -64,7 +64,6 @@ const ProductPay = (props: TProps) => {
       }
 
       const handleClickBuy = () => {
-            console.log('OK')
             if (!user) {
                   dispatch(doOpenBoxLogin())
                   return
@@ -86,7 +85,6 @@ const ProductPay = (props: TProps) => {
             //       return
             // }
 
-            console.log({ product: { ...product, productQuantity, price: product.product_price * (productQuantity || 1) } })
             const formData = new FormData()
             formData.append('product_id', product._id)
             const payload: ProductCart = {
@@ -117,11 +115,9 @@ const ProductPay = (props: TProps) => {
       }
 
       useEffect(() => {
-            console.log('ol')
             setDisableBtn(false)
       }, [cartCurrent.cart_current_address])
 
-      console.log({ productQuantity })
 
       useEffect(() => {
             if (cartMutation.isSuccess) {

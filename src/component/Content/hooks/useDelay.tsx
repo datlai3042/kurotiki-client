@@ -6,7 +6,6 @@ type Props = {
 }
 
 const useDelay = (props: Props) => {
-      console.log('hooks')
       const { func, delay } = props
 
       const callbackRef = useRef<(() => Promise<void>) | null>(null)

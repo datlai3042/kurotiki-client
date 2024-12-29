@@ -18,7 +18,6 @@ const CommentItem = (props: TProps) => {
       const [openModal, setOpenModal] = useState<boolean>(false)
 
       const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
-      console.log({ comment })
       return (
             <div className='relative flex flex-col xl:flex-row min-h-[250px] h-max py-[32px] xl:py-[16px] border-t-[2px] border-[rgb(245_245_250)] gap-[16px] xl:gap-0'>
                   <div className='w-full  min-h-[50px] flex flex-row  gap-[10px]'>

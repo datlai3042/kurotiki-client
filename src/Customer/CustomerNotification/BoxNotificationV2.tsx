@@ -41,7 +41,6 @@ const BoxNotification = () => {
                         numberTranslate = 0
                   }
                   if (activeNotification.title === 'Thông báo cá nhân') {
-                        console.log('OK')
                         numberTranslate = 1
                   }
 

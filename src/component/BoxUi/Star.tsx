@@ -15,7 +15,6 @@ const Star = (props: TProps) => {
             return <StarDescrease />
       }
 
-      console.log({ opacity })
 
       return <div className={`${styleEffect.opacity} clip-path-star w-[18px]  `}></div>
 }

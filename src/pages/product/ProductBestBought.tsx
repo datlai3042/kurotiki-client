@@ -68,12 +68,12 @@ const ProductBestBought = () => {
                         )}
 
                         {_page2 && (
-                              <div className='   xl:w-full w-max  ml-[100%]  grid grid-flow-col auto-cols-[130px] auto-rows-[225px] grid-cols-[130px] xl:grid-cols-[130px] grid-rows-[225px] gap-[18px] '>
+                              <div className='   xl:w-full w-max   grid grid-flow-col auto-cols-[130px] auto-rows-[225px] grid-cols-[130px] xl:grid-cols-[130px] grid-rows-[225px] gap-[18px] '>
                                     {_page2?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                               </div>
                         )}
                         {_page3 && (
-                              <div className='   xl:w-full ml-[100%]   grid grid-flow-col auto-cols-[130px] auto-rows-[225px] grid-cols-[130px] xl:grid-cols-[130px] grid-rows-[225px] gap-[18px] '>
+                              <div className='   xl:w-full   grid grid-flow-col auto-cols-[130px] auto-rows-[225px] grid-cols-[130px] xl:grid-cols-[130px] grid-rows-[225px] gap-[18px] '>
                                     {_page3?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                               </div>
                         )}

@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { TProductDetail } from '../../types/product/product.type'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import CartService from '../../apis/cart.service'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import CartService from '../../apis/cart.service'
+import { CartCurrent } from '../../Redux/cartSlice'
 import { addToast } from '../../Redux/toast'
 import { RootState } from '../../store'
-import { UserResponse } from '../../types/user.type'
-import { CartCurrent } from '../../Redux/cartSlice'
-import { doOpenBoxLogin } from '../../Redux/authenticationSlice'
 import { Address } from '../../types/address.type'
-import { d } from '@tanstack/react-query-devtools/build/legacy/devtools-dKCOqp9Q'
+import { TProductDetail } from '../../types/product/product.type'
+import { UserResponse } from '../../types/user.type'
 import { checkAxiosError } from '../../utils/handleAxiosError'
+import { doOpenBoxLogin } from '../../Redux/authSlice'
 
 type TProps = {
       product: TProductDetail
@@ -84,7 +83,6 @@ const ProductPayMoblie = (props: TProps) => {
             //       return
             // }
 
-            console.log({ product: { ...product, productQuantity, price: product.product_price * (productQuantity || 1) } })
             const formData = new FormData()
             formData.append('product_id', product._id)
             const payload: ProductCart = {
@@ -118,11 +116,10 @@ const ProductPayMoblie = (props: TProps) => {
             setDisableBtn(false)
       }, [cartCurrent.cart_current_address])
 
-      console.log({ productQuantity })
 
       useEffect(() => {
             if (cartMutation.isSuccess) {
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Cart', id: Math.random().toString() }))
+                  dispatch(addToast({ type: 'SUCCESS', message: 'Thêm thành công', id: Math.random().toString() }))
                   queryClient.invalidateQueries({
                         queryKey: ['v1/api/cart/cart-get-my-cart'],
                   })
@@ -184,7 +181,10 @@ const ProductPayMoblie = (props: TProps) => {
                   </div>
 
                   <div className='w-full h-max flex flex-col gap-[8px]'>
-                        <button className='w-full h-[45px] flex items-center justify-center bg-red-600 text-white rounded-md'>
+                        <button
+                              onClick={handleClickBuy}
+                              className='w-full h-[45px] flex items-center justify-center bg-red-600 text-white rounded-md'
+                        >
                               Mua ngay
                         </button>
                         <button

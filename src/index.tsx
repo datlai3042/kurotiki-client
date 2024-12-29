@@ -38,21 +38,19 @@ const client = new QueryClient({
                                     error?.response.data?.detail === 'Không tìm thấy tài khoản' ||
                                     error?.response.data?.detail === 'Token đã được sử dụng')
                         ) {
-                              store.dispatch(
-                                    addToast({ type: 'ERROR', message: 'Refresh Token không hợp lệ', id: Math.random().toString() }),
-                              )
-                              store.dispatch(doOpenBoxLogin())
+                             
+                              // store.dispatch(doOpenBoxLogin())
                               throw error
                         }
                         if (error.response?.status === 401) {
                               if (error.response.data?.detail === 'Đăng nhập thất bại, vui lòng nhập thông tin hợp lệ') {
-                                    store.dispatch(
-                                          addToast({ type: 'ERROR', message: error.response.data.detail, id: Math.random().toString() }),
-                                    )
+                                    // store.dispatch(
+                                    //       addToast({ type: 'ERROR', message: error.response.data.detail, id: Math.random().toString() }),
+                                    // )
                               }
 
                               if (error.response.data?.detail === 'Token hết hạn') {
-                                    store.dispatch(addToast({ type: 'ERROR', message: 'Token hết hạn', id: Math.random().toString() }))
+                                    // store.dispatch(addToast({ type: 'ERROR', message: 'Token hết hạn', id: Math.random().toString() }))
                               }
                         }
                   }
@@ -60,9 +58,7 @@ const client = new QueryClient({
       }),
       mutationCache: new MutationCache({
             onError: async (error, varibale, context, mutation) => {
-                  console.log({ error, mutation, varibale, context })
                   if (checkAxiosError<TErrorAxios>(error)) {
-                        console.log({ mute: error })
                         if (
                               error?.response?.status === 403 &&
                               error?.response.data?.message === 'Forbidden' &&
@@ -71,22 +67,22 @@ const client = new QueryClient({
                                     error?.response.data?.detail === 'Không tìm thấy tài khoản' ||
                                     error?.response.data?.detail === 'Token đã được sử dụng')
                         ) {
-                              store.dispatch(
-                                    addToast({ type: 'ERROR', message: 'Refresh Token không hợp lệ', id: Math.random().toString() }),
-                              )
-                              store.dispatch(doOpenBoxLogin())
+                              // store.dispatch(
+                              //       addToast({ type: 'ERROR', message: 'Refresh Token không hợp lệ', id: Math.random().toString() }),
+                              // )
+                              // store.dispatch(doOpenBoxLogin())
                         }
                         if (error.response?.status === 401) {
                               if (error.response.data?.detail === 'Đăng nhập thất bại, vui lòng nhập thông tin hợp lệ') {
-                                    store.dispatch(
-                                          addToast({ type: 'ERROR', message: error.response.data.detail, id: Math.random().toString() }),
-                                    )
+                                    // store.dispatch(
+                                    //       addToast({ type: 'ERROR', message: error.response.data.detail, id: Math.random().toString() }),
+                                    // )
                                     return
                               }
 
                               if (error.response.data?.detail === 'Token hết hạn' && error.response.config.url === 'v1/api/auth/logout') {
-                                    store.dispatch(doLogout())
-                                    store.dispatch(addToast({ type: 'ERROR', message: 'Token hết hạn', id: Math.random().toString() }))
+                                    // store.dispatch(doLogout())
+                                    // store.dispatch(addToast({ type: 'ERROR', message: 'Token hết hạn', id: Math.random().toString() }))
                               }
                         }
                   }

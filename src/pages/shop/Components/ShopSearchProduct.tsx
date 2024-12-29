@@ -23,7 +23,7 @@ const ShopSearchProduct = (props: TProps) => {
       }, [search])
 
       return (
-            <form className='w-[320px] h-[40px] flex items-center p-[8px] bg-[#ffffff]  rounded-lg gap-[8px]' onSubmit={onSubmit}>
+            <form className='w-full min-w-[320px] h-[40px] flex items-center p-[8px] bg-[#ffffff]  rounded-lg gap-[8px]' onSubmit={onSubmit}>
                   <Search />
                   <input
                         type='text'

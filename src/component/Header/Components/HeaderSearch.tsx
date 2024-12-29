@@ -54,7 +54,6 @@ const HeaderSeacrhInput = () => {
                   document.addEventListener('click', controllShowResultSearch)
             }
             return () => {
-                  console.log('remove')
                   document.removeEventListener('click', controllShowResultSearch)
             }
       }, [controllShowResultSearch, showSearch])
@@ -76,7 +75,7 @@ const HeaderSeacrhInput = () => {
       }, [showOverload])
 
       return (
-            <div className='flex h-full border border-gray-300 rounded-lg' ref={divRef}>
+            <div className='flex h-[80%] border border-gray-300 rounded-lg' ref={divRef}>
                   <div className='relative grow  h-full pl-4'>
                         <form className='h-full  flex gap-4' spellCheck={false}>
                               <div className='basis-[3%]   flex items-center'>

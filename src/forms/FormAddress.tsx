@@ -78,7 +78,6 @@ const FormAddress = (props: TProps) => {
       })
 
       const onSubmit: SubmitHandler<AddressForm> = (form) => {
-            console.log({ form })
             if (!user) {
                   dispatch(doOpenBoxLogin())
                   return
@@ -216,15 +215,14 @@ const FormAddress = (props: TProps) => {
             }
       }, [addressForm.formState.errors])
 
-      console.log({ watch: addressForm.watch(), errors: addressForm.formState.errors })
       return (
             <FormProvider {...addressForm}>
                   <form
-                        className='relative min-w-[575px] w-max  p-[16px_10px]  xl:px-[36px] xl:py-[50px] flex flex-col gap-[30px] bg-[#ffffff] rounded-md'
+                        className='relative  w-full  p-[16px_10px]  xl:px-[36px] xl:py-[50px] flex flex-col gap-[30px] bg-[#ffffff] rounded-md'
                         onSubmit={addressForm.handleSubmit(onSubmit)}
                         spellCheck={false}
                   >
-                        <div className='] flex flex-col  xl:flex-row gap-[16px]'>
+                        <div className='] flex flex-col   gap-[16px]'>
                               <Controller
                                     control={addressForm.control}
                                     name='address_province'
@@ -303,7 +301,7 @@ const FormAddress = (props: TProps) => {
                                     FieldName='address_street'
                                     LabelMessage='Địa chỉ cụ thể'
                                     placehorder='Thêm thông tin về địa chỉ'
-                                    autofocus={true}
+                                    autofocus={false}
                                     // onChange={(e) => field.onChange(e.target.value)}
                               />
                               {/* ) */}

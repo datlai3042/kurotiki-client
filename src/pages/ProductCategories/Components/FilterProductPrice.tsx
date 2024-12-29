@@ -18,7 +18,6 @@ const FilterProductPrice = (props: TProps) => {
       const onValueChange = (index: number, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             e.stopPropagation()
             e.preventDefault()
-            console.log(index)
             if (index === 1) {
                   setActive(1)
                   setPrice((prev) => ({ ...prev, minPrice: 1, maxPrice: 40000 }))
@@ -44,7 +43,6 @@ const FilterProductPrice = (props: TProps) => {
             }
       }
 
-      console.log({ active })
 
       const styleEffect = {
             onActive: (state: boolean) => {

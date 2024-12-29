@@ -59,7 +59,6 @@ const ButtonUpload = (props: IProps) => {
                         return newObject
                   })
                   setUrlProductThumb(() => {
-                        console.log({ secure_url })
                         const newObject = {} as TProfileImage
                         newObject.isUploadImage = true
                         newObject.FileLength = secure_url ? 1 : 0

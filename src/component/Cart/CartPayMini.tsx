@@ -31,10 +31,8 @@ const CartPayMini = () => {
       }
 
       useEffect(() => {
-            // console.log({ data: payQuery.data?.data.metadata.carts.cart_products })
 
             if (payQuery.isSuccess) {
-                  console.log('Ok')
                   if (payQuery?.data.data.metadata.carts) {
                         setPrice(() => {
                               let result: number = 0

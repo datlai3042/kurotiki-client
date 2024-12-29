@@ -51,7 +51,6 @@ const ProductSimiliar = (props: TProps) => {
       }
       const productData = allProduct.data?.data.metadata.products
       const totalPage = Math.ceil(Number(productData?.length) / 8)
-      console.log({ totalPage })
       const styleEffect = {
             buttonPrev: count === 1 ? 'xl:hidden' : 'xl:flex',
             buttonNext: totalPage === count ? 'xl:hidden' : 'xl:flex',

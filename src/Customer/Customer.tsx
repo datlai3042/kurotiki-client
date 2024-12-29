@@ -64,9 +64,9 @@ const Customer = () => {
       //@element
       return (
             <>
-                  <div className='px-[14px] text-[14px] w-full min-h-full flex flex-col gap-[20px]  pt-[15px] xl:pt-[0px] mt-0 xl:mt-[10px]'>
+                  <div className='px-[14px] text-[14px] w-full min-h-full flex flex-col gap-[10px]  pt-[15px] xl:pt-[0px] mt-0 xl:mt-[10px]'>
                         {/* @header */}
-                        <div className='hidden lg:block mb-[1px]'>
+                        <div className='hidden lg:block mb-[1px] text-[20px]'>
                               <Link to={'/'}>Trang chủ</Link>
                               <span> {' > '}</span>
                               <Link className='' to={textLink?.path as string}>
@@ -75,9 +75,9 @@ const Customer = () => {
                         </div>
 
                         {user ? (
-                              <div className=' w-full flex gap-[1%] min-h-[450px]  h-[auto] '>
+                              <div className=' w-full flex gap-[1%] min-h-[575px]  '>
                                     {/* @navigate pathname */}
-                                    <div className='sticky top-0 hidden xl:block h-screen  xl:w-[24%]'>
+                                    <div className='sticky top-0 hidden xl:block h-screen  xl:w-[20%]'>
                                           <div
                                                 className='h-[75px] flex items-center gap-[8px] overflow-x-hidden'
                                                 title={`Account ${user?.email}` || ''}
@@ -233,12 +233,16 @@ const Customer = () => {
                                                       <Outlet />
                                                 </CustomerWrapperItem>
                                           ) : (
-                                                <AuthPermission />
+                                                <div className='h-[575px]'>
+                                                      <AuthPermission />
+                                                </div>
                                           )}
                                     </div>
                               </div>
                         ) : (
-                              <AuthPermission />
+                              <div className='h-[575px]'>
+                                    <AuthPermission />
+                              </div>
                         )}
                   </div>
             </>

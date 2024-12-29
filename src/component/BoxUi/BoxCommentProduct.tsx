@@ -72,7 +72,6 @@ const BoxCommentProduct = (props: TProps) => {
       })
 
       const onChangeStar = (value: number) => {
-            console.log({ star: value })
             setFormComment((prev) => ({ ...prev, vote: value }))
       }
 

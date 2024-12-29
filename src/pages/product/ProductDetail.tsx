@@ -52,7 +52,6 @@ const ProductDetail = (props: TProps) => {
             // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [isSuccess, product])
 
-      console.log({ imageArray })
 
       const styleEffect = {
             isActive: 'border-[2px] border-blue-600',
@@ -63,7 +62,7 @@ const ProductDetail = (props: TProps) => {
                   <div className='basis-[20%] md:basis-[35%] h-max flex justify-center rounded-xl p-[12px]  '>
                         <img
                               src={product!.product_thumb_image.secure_url}
-                              className='cursor-pointer w-[90%] h-[360px] min-h-[240px] xl:min-h-[360px] xl:max-h-[360px]  transition-all duration-700 rounded-lg'
+                              className='cursor-pointer object-contain w-[90%] h-[360px] min-h-[240px] xl:min-h-[360px] xl:max-h-[360px]  transition-all duration-700 rounded-lg'
                               alt='product'
                               ref={image}
                               onClick={handleOpenModal}

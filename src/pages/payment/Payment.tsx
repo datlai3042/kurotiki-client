@@ -41,7 +41,6 @@ const Payment = () => {
 
       useEffect(() => {
             if (payQuery.isSuccess && payQuery.data.data.metadata.carts) {
-                  console.log({ cart_id: payQuery.data.data.metadata.carts._id })
                   setPrice(() => {
                         let result: number = 0
                         payQuery.data.data.metadata.carts.cart_products.forEach((cartItem) => {

@@ -29,10 +29,8 @@ const BoxConfirmDelete = <T,>(props: BoxConfirmDeleteProps<T>) => {
                   let wrapperRefPx = Number(
                         window.getComputedStyle(wrapperRef.current, null).getPropertyValue('padding-left').replace('px', ''),
                   )
-                  console.log({ wrapperRefPx })
                   let width = Number(wrapperRef.current.getBoundingClientRect().width)
                   setWidthBreakLine({ width, marginLeft: wrapperRefPx })
-                  console.log({ widthBreakLine })
             }
       }, [widthBreakLine.width, widthBreakLine.marginLeft])
 

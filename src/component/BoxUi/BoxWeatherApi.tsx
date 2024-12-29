@@ -37,7 +37,6 @@ const BoxWeatherApi = (props: TProps) => {
             onSuccess: (axiosResponse) => {
                   // const data= axiosResponse.data[0].
                   weatherAPI.mutate({ data: axiosResponse.data as unknown as { lat: string; lon: string }[] })
-                  // console.log({ axiosResponse: axiosResponse.data[0] })
             },
             onError: () => {
                   setNotData(true)
@@ -57,7 +56,6 @@ const BoxWeatherApi = (props: TProps) => {
                         weather,
                         name,
                   })
-                  console.log({ api: axiosResponse.data })
                   setHeight(1)
             },
             onError: () => {
@@ -67,7 +65,6 @@ const BoxWeatherApi = (props: TProps) => {
       })
 
       if (geolocationApi.isPending || weatherAPI.isPending) {
-            console.log({ ok: 123 })
       }
 
       useEffect(() => {

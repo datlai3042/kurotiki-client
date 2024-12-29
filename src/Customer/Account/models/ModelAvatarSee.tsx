@@ -39,45 +39,47 @@ const ModelAvatarSee = <T extends ParamAvatarQuery>(props: TProps<T>) => {
             >
                   <div
                         onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
-                        className='scroll-pt-[50px] w-[650px] min-h-[200px] h-[auto] max-h-[600px] bg-white  p-[40px] relative shadow-2xl overflow-y-scroll'
+                        className='scroll-pt-[50px] max-w-[85vw] w-[650px]  min-h-[200px] h-[auto] max-h-[600px] bg-white  p-[28px] relative shadow-2xl overflow-y-scroll rounded-md'
                   >
                         <div className='absolute text-[25px] max-w-max top-[25px] right-[25px]' onClick={modelControllClose}>
                               <X />
                         </div>
-                        <div className='h-[10%] flex items-center mb-[15px]'>Xem ảnh đại diện</div>
+                        <div className='h-[10%] flex items-center mb-[15px] font-openSans text-[20px] font-medium'>Xem ảnh đại diện</div>
                         <div className='h-[1px] bg-stone-100'></div>
-                        <div className='w-full h-[250px] rounded-full mt-[30px] flex justify-center'>
-                              <img
-                                    src={AvatarSource.avatar || AvatarSource.avatar_default || ''}
-                                    alt='user_avatar'
-                                    className='w-[250px] h-full '
-                              />
-                        </div>
-                        {AvatarImageUsed && AvatarImageUsed.length > 0 && (
-                              <div className='mt-[70px] w-full min-h-[360px] h-auto flex flex-col gap-[20px] '>
-                                    <span>Các hình đại diện trước đó</span>
-                                    {userAvatarUsed.isSuccess && (
-                                          <div className='flex gap-[45px] mb-[70px] min-h-[360px] h-auto flex-wrap '>
-                                                {userAvatarUsed?.data?.data.metadata?.avatar_used
-                                                      ?.reverse()
-                                                      .map((avatar: UserAvatarUsed) => (
-                                                            <AvatarUsed avatar={avatar} key={avatar.date_update.toString()} />
-                                                      ))}
-                                          </div>
-                                    )}
-
-                                    {userAvatarUsed.isPending && (
-                                          <div className='w-full h-full flex gap-[15px]'>
-                                                <div className='animate-pulse bg-gray-200 rounded-lg basis-[50%] h-[360px] flex justify-center items-center '>
-                                                      <Image size={40} />
-                                                </div>
-                                                <div className='animate-pulse bg-gray-200 rounded-lg basis-[50%] h-[360px] flex justify-center items-center '>
-                                                      <Image size={40} />
-                                                </div>
-                                          </div>
-                                    )}
+                        <div className='flex flex-col h-[500px] overflow-y-auto'>
+                              <div className='w-full h-[250px] rounded-full mt-[30px] flex justify-center'>
+                                    <img
+                                          src={AvatarSource.avatar || AvatarSource.avatar_default || ''}
+                                          alt='user_avatar'
+                                          className='object-contain w-[250px] h-full '
+                                    />
                               </div>
-                        )}
+                              {AvatarImageUsed && AvatarImageUsed.length > 0 && (
+                                    <div className='mt-[70px] w-full min-h-[360px] h-auto flex flex-col gap-[20px] '>
+                                          <span>Các hình đại diện trước đó</span>
+                                          {userAvatarUsed.isSuccess && (
+                                                <div className='flex gap-[45px] mb-[70px] min-h-[360px] h-auto flex-wrap '>
+                                                      {userAvatarUsed?.data?.data.metadata?.avatar_used
+                                                            ?.reverse()
+                                                            .map((avatar: UserAvatarUsed) => (
+                                                                  <AvatarUsed avatar={avatar} key={avatar.date_update.toString()} />
+                                                            ))}
+                                                </div>
+                                          )}
+
+                                          {userAvatarUsed.isPending && (
+                                                <div className='w-full h-full flex gap-[15px]'>
+                                                      <div className='animate-pulse bg-gray-200 rounded-lg basis-[50%] h-[360px] flex justify-center items-center '>
+                                                            <Image size={40} />
+                                                      </div>
+                                                      <div className='animate-pulse bg-gray-200 rounded-lg basis-[50%] h-[360px] flex justify-center items-center '>
+                                                            <Image size={40} />
+                                                      </div>
+                                                </div>
+                                          )}
+                                    </div>
+                              )}
+                        </div>
                   </div>
             </div>
       )

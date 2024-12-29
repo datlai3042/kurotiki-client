@@ -34,7 +34,6 @@ const Cart = () => {
             mutationFn: (value: boolean) => CartService.selectAllCart(value),
             onSuccess: (axiosResponse) => {
                   setSelectAll(axiosResponse.data.metadata.cart.cart_select_all)
-                  console.log({ state: axiosResponse.data.metadata.cart.cart_select_all })
                   queryClient.invalidateQueries({
                         queryKey: ['v1/api/cart/cart-get-my-cart'],
                   })
@@ -49,7 +48,6 @@ const Cart = () => {
             changeSelectAll.mutate(e.target.checked)
       }
 
-      console.log({ getMyCart: getMyCart.data?.data.metadata.cart })
 
       useEffect(() => {
             queryClient.invalidateQueries({
@@ -66,8 +64,9 @@ const Cart = () => {
 
       useEffect(() => {}, [getMyCart.isPending])
 
+
       if (!user) {
-            if (isLoading) {
+            if (getMyCart?.isLoading) {
                   return (
                         <div className='w-full h-[500px]'>
                               <Loading />
@@ -82,7 +81,6 @@ const Cart = () => {
             }
       }
 
-      console.log({ selectAll })
 
       return (
             <React.Fragment>

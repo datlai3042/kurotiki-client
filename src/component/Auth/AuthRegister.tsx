@@ -97,7 +97,6 @@ const AuthRegister = (props: TProps) => {
       }
 
       const onSubmit = (data: TRegisterZodSchema) => {
-            console.log('data', data)
             authRegister.mutate(data)
       }
 
@@ -112,7 +111,6 @@ const AuthRegister = (props: TProps) => {
             }
       }, [errors, dispatch])
 
-      console.log({ errors })
 
       return (
             <div className='flex flex-col items-center gap-[15px] py-[35px]'>
@@ -170,7 +168,6 @@ const AuthRegister = (props: TProps) => {
                         </div>
                         <div className='w-full'>
                               <button
-                                    onClick={() => console.log('click')}
                                     type='submit'
                                     className='flex justify-center items-center gap-[8px] w-full h-[60px] rounded-lg bg-slate-900 text-white disabled:opacity-50 disabled:cursor-not-allowed'
                                     disabled={!authRegister.isPending && Object.keys(errors).length > 0}

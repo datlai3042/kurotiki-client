@@ -45,7 +45,6 @@ export const initialValue: IState = {
 
 export const customerAccountReducer = (state: IState = initialValue, action: TAvatarActions) => {
       const { type, payload } = action
-      console.log({ action })
       switch (type as TypeActions) {
             case 'OPEN_BOX_AVATAR': {
                   return {

@@ -37,7 +37,6 @@ const PaymentCart = (props: TProps) => {
             mutationKey: ['/v1/api/order/order-payment-product'],
             mutationFn: (orders: ParamOrderAdd) => OrderService.orderAddProduct(orders),
             onSuccess: (axiosResponse) => {
-                  console.log({ order: axiosResponse.data.metadata.order_success })
                   const { message, order_success } = axiosResponse.data.metadata
                   onOrderSuccess({ message, order_success })
             },
@@ -58,7 +57,6 @@ const PaymentCart = (props: TProps) => {
             setOpenSeeProduct((prev) => !prev)
       }
 
-      console.log({ product_payment })
       const handleVerifyBuy = () => {
             orderPaymentMutation.mutate({ products: product_payment, order_total: price })
             setDisable(true)

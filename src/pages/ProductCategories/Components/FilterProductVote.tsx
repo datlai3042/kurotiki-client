@@ -50,7 +50,6 @@ const FilterProductVote = (props: TProps) => {
             }
       }
 
-      console.log({ onValue: state })
 
       const styleEffect = {
             onSelect: (state: boolean) => {

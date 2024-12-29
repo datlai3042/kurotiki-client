@@ -13,7 +13,7 @@ import ProductMedium from '../../../component/Content/Components/ProductMedium'
 import ProductApi from '../../../apis/product.api'
 import { ShopResponse } from '../../../types/shop.type'
 
-const LIMIT = 2
+const LIMIT = 12
 
 type TProps = {
       shop_id: string
@@ -55,7 +55,7 @@ const ShopProductAll = (props: TProps) => {
                   ShopApi.getProductFilter({
                         shop_id: shop_id as string,
                         page: pageParam,
-                        limit: 1,
+                        limit: LIMIT,
                         sort: filterProduct.value,
                         inc: filterProduct.inc,
                   }),
@@ -73,7 +73,7 @@ const ShopProductAll = (props: TProps) => {
                         text: searchName,
                         shop_id: shop_id as string,
                         page: pageParam,
-                        limit: 1,
+                        limit: LIMIT,
                   }),
             initialPageParam: 1,
             getNextPageParam: (lastPage, allPages) =>
@@ -93,7 +93,6 @@ const ShopProductAll = (props: TProps) => {
       useEffect(() => {
             if (getProductAll.isSuccess) {
                   const shop_products = getProductAll.data.pages.flatMap((p) => p.data.metadata.shop.shop_products)
-                  console.log({ shop_products })
                   dispatch(fetchShopProduct({ shop_products: shop_products }))
             }
       }, [getProductAll.isSuccess, dispatch, getProductAll.data?.pages])

@@ -56,7 +56,6 @@ type TProps<T, K> = {
 //@Component
 const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
       const { product_id, ProductAttribute, TimelineProps, mode = 'UPDATE', product, defaultValues, ProductType, endPointUrl } = props
-      console.log({ product })
       //@trang thái submit
       const [, setFormStateSubmit] = useState(false)
       const dispatch = useDispatch()
@@ -89,7 +88,6 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
             defaultValues: product as unknown as typeof defaultValues,
             resolver: zodResolver(schema),
       })
-      console.log({ formError: methods.formState.defaultValues })
 
       //@hàm upload sản phẩn
       const uploadProductFull = useMutation({
@@ -100,8 +98,7 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
       //@hàm submit sản phẩm
       const onSubmit = (data: typeof defaultValues) => {
             setFormStateSubmit(true)
-            console.log({ data: '123' })
-            console.log({ data })
+          
 
             // return
             if (!urlProductMultipleImage.isUploadImage) {
@@ -139,7 +136,6 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
             }
       }
 
-      console.log({ submit: methods.formState.isSubmitted, success: methods.formState.isSubmitSuccessful, erros: methods.formState.errors })
 
       useEffect(() => {
             const callAgain = async () => {

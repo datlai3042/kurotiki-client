@@ -46,7 +46,6 @@ const ModelAvatarUpdate = (props: TProps) => {
 
             const objectUrl = URL.createObjectURL(fileAvatar)
             setFilePreview(objectUrl)
-            console.log(objectUrl)
             // free memory when ever this component is unmounted
             return () => URL.revokeObjectURL(objectUrl)
       }, [fileAvatar])
@@ -58,7 +57,6 @@ const ModelAvatarUpdate = (props: TProps) => {
                   dispatch(addToast({ type: 'SUCCESS', message: 'Cập nhập avtar thành công', id: Math.random().toString() }))
             }
             if (onUpdate.isSuccess && onUpdate.data) {
-                  console.log({ onUpdate: onUpdate.data.data.metadata.user })
             }
       }, [onUpdate.isSuccess, modeDispatch, onUpdate.data, dispatch])
 
@@ -85,20 +83,17 @@ const ModelAvatarUpdate = (props: TProps) => {
                   setFileAvatar(undefined)
             }
 
-            console.log(e.target.files)
             if (e.target.files) {
                   setFileAvatar(e.target.files[0])
             }
       }
 
       const onSubmit: SubmitHandler<TForm> = (file) => {
-            console.log(file, fileAvatar)
             // console.log('link', URL.createObjectURL(file.file[0].name))
             const formData: any = new FormData()
             formData.append('file', fileAvatar)
             formData.append('user', user)
 
-            console.log('dirty', methods)
             onUpdate.mutate(formData)
       }
 
@@ -111,14 +106,14 @@ const ModelAvatarUpdate = (props: TProps) => {
                   }}
             >
                   <div
-                        className={`w-[650px] h-max bg-white rounded-2xl p-[40px] relative`}
+                        className={`w-[650px] h-max bg-white rounded-2xl p-[28px] relative`}
                         onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
                   >
                         <div className='text-[25px] absolute top-[25px] right-[25px]' onClick={modelControllClose}>
                               <X />
                         </div>
                         <div className='h-[10%] flex items-center mb-[15px]'>Cập nhập ảnh đại diện</div>
-                        <div className='h-[1px] bg-stone-100'></div>
+                        <div className='h-[1px] '></div>
                         <form
                               className='h-[85%]'
                               onSubmit={(e) => {
@@ -128,7 +123,7 @@ const ModelAvatarUpdate = (props: TProps) => {
                               }}
                         >
                               <div
-                                    className={`flex flex-col gap-[16px] mt-[25px] bg-stone-100 mb-[25px] p-[20px] items-center justify-center`}
+                                    className={`flex flex-col gap-[16px]  p-[8px] items-center justify-center`}
                               >
                                     {filePreview && (
                                           <img
@@ -136,7 +131,7 @@ const ModelAvatarUpdate = (props: TProps) => {
                                                 width={200}
                                                 height={300}
                                                 alt='avatar_update'
-                                                className='w-[300px] h-[300px]'
+                                                className='object-contain w-[300px] h-[300px]'
                                           />
                                     )}
                                     <button
@@ -163,14 +158,14 @@ const ModelAvatarUpdate = (props: TProps) => {
                               {filePreview && (
                                     <div className='w-full min-w-[100px] flex gap-[2%]'>
                                           <button
-                                                className='w-[49%] px-[12px] py-[6px] bg-stone-200 text-blue-500'
+                                                className='w-[49%] px-[12px] py-[6px] bg-red-500 text-[#fff] rounded-md'
                                                 onClick={modelControllClose}
                                           >
                                                 Hủy bỏ
                                           </button>
                                           <button
                                                 type='submit'
-                                                className='w-[49%] px-[12px] py-[6px] bg-blue-500 text-white flex justify-center gap-[8px] items-center'
+                                                className='w-[49%] px-[12px] py-[6px] rounded-md bg-blue-500 text-white flex justify-center gap-[8px] items-center'
                                           >
                                                 <span>Lưu thay đổi</span>
                                                 {onUpdate.isPending && (

@@ -20,7 +20,6 @@ const CustomerRouter = () => {
                   dispatch(addToast({ type: 'SUCCESS', message: 'Đăng xuất thành công', id: Math.random().toString() }))
             },
             onError: (error) => {
-                  console.log({ error })
                   dispatch(addToast({ type: 'ERROR', message: 'Đăng xuất không thành công', id: Math.random().toString() }))
             },
       })
@@ -31,6 +30,7 @@ const CustomerRouter = () => {
       if (window.innerWidth > 1024) {
             return <p>Trang này chỉ hiển thị cho mobile</p>
       }
+
 
       return (
             <div className='block w-full py-[20px] bg-[#ffffff]'>
@@ -55,60 +55,58 @@ const CustomerRouter = () => {
                               </div>
                         )}
                   </div>
-                  <Link to={'/customer/account'} className='customer-item-bg px-[15px] py-[8px] w-full'>
-                        <UserRound />
-                        Account
+                  <Link to={'/customer/account'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
+                        <UserRound style={{ minWidth: 32 }}/>
+                        <span>Tài khoản</span>
                   </Link>
 
-                  <Link to={'/customer/notification'} className='customer-item-bg px-[15px] py-[8px] w-full'>
-                        <BellDot />
-                        Thông báo của tôi
+                  <Link to={'/customer/notification'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
+                        <BellDot style={{ minWidth: 32 }}/>
+                        <span>Thông báo của tôi</span>
                   </Link>
 
-                  <Link to={'/customer/order_history'} className='customer-item-bg px-[15px] py-[8px] w-full'>
-                        <NotebookPen />
-                        Quản lí đơn hàng
+                  <Link to={'/customer/order_history'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
+                        <NotebookPen style={{ minWidth: 32 }}/>
+                        <span>Quản lí đơn hàng</span>
                   </Link>
-                  <Link to={'/customer/shop'} className='customer-item-bg px-[15px] py-[8px] w-full'>
-                        <ShoppingCart />
-                        Shop
+                  <Link to={'/customer/shop'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
+                        <ShoppingCart style={{ minWidth: 32 }}/>
+                        <span>Cửa hàng</span>
                   </Link>
-                  <Link to={'/customer/register-sell'} className=' customer-item-bg px-[15px] py-[8px] w-full'>
-                        <ShoppingBag />
-                        Đăng kí bán
+                  <Link to={'/customer/register-sell'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
+                        <ShoppingBag style={{ minWidth: 32 }}/>
+                        <span>Đăng kí bán sản phẩm</span>
                   </Link>
 
                   {user?.verify_email && (
-                        <Link to={'/customer/shop/product-list'} className='customer-item-bg px-[15px] py-[8px] w-full'>
-                              <Store />
-                              Sản phẩm của Shop
+                        <Link to={'/customer/shop/product-list'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
+                              <Store style={{ minWidth: 32 }} />
+                              <span>Sản phẩm của Shop</span>
                         </Link>
                   )}
                   <Link to={'/customer/shop/product-list'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
-                        <Store />
-
+                        <Store style={{ minWidth: 32 }}/>
                         <span>Sản phẩm của Shop</span>
                   </Link>
 
                   <Link to={'/customer/account/address'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
-                        <MapPinned />
-
+                        <MapPinned style={{ minWidth: 32 }}/>
                         <span>Số địa chỉ</span>
                   </Link>
 
                   <Link to={'/customer/account/update/email'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
-                        <Mail />
+                        <Mail style={{ minWidth: 32 }}/>
                         <span>Cập nhập Email</span>
                   </Link>
 
                   <Link to={'/customer/account/update/password'} className={`customer-item-bg flex items-center p-[8px] gap-[24px] `}>
-                        <Key />
+                        <Key style={{ minWidth: 32 }}/>
                         <span>Cập nhập mật khẩu</span>
                   </Link>
 
-                  <div className={`customer-item-bg p-[8px]`} onClick={handleLogOut}>
-                        <LogIn />
-                        <span className=' py-[8px] w-full'>Đăng xuất</span>
+                  <div className={`customer-item-bg flex items-center p-[8px] gap-[24px] `} onClick={handleLogOut}>
+                        <LogIn style={{ minWidth: 32 }}/>
+                        <span>Đăng xuất</span>
                   </div>
             </div>
       )

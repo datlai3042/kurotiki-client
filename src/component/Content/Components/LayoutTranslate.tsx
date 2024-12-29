@@ -14,7 +14,6 @@ const LayoutTranslate = (props: TProps) => {
       const PositionScrollCurrent = useRef<number>(0)
       const [count, setCount] = useState(1)
 
-      // console.log({ productManga })
       const handleClickNext = () => {
             if (wrapperListProductsRef.current) {
                   setCount((prev) => prev + 1)
@@ -32,7 +31,6 @@ const LayoutTranslate = (props: TProps) => {
                   const width = wrapperListProductsRef.current.getBoundingClientRect().width
                   PositionScrollCurrent.current = PositionScrollCurrent.current + width
 
-                  // console.log(Math.trunc(width))
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
             }

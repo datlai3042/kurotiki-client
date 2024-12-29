@@ -1,22 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import RouterController from './component/Routes/RouterController'
-import { RootState } from './store'
+import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import AuthWrapper from './component/Auth/AuthWrapper'
+import AuthenticationContext from './component/Context/AuthenticationContext'
 import FooterMobile from './component/Footer/FooterMobile'
 import ScrollToAnchor from './component/Header/Components/ScrollArchor'
-import { useLocation } from 'react-router-dom'
+import RouterController from './component/Routes/RouterController'
 import './index.css'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import AccountService from './apis/account.service'
-import { checkAxiosError } from './utils/handleAxiosError'
-import { fetchUser } from './Redux/authenticationSlice'
-import AuthenticationContext from './component/Context/AuthenticationContext'
+import { RootState } from './store'
 function App() {
-      const boxLogin = useSelector((state: RootState) => state.authentication.isOpenBoxLogin)
+      const boxLogin = useSelector((state: RootState) => state.auth.isOpenBoxLogin)
       const [, setShowBoxAuth] = useState(true)
       const location = useLocation().pathname
-      const dispatch = useDispatch()
+
 
       useEffect(() => {
             window.scrollTo({

@@ -78,7 +78,6 @@ const Comment = (props: TProps) => {
                                                       onModeFilter === false ? page === index + 1 : pageFilter === index + 1,
                                                 )} w-[20px] h-[20px] xl:w-[30px] xl:h-[30px] flex items-center justify-center transition-all `}
                                                 onClick={() => {
-                                                      console.log({ index })
                                                       onModeFilter === false ? setPage(index + 1) : setPageFilter(index + 1)
                                                 }}
                                           >

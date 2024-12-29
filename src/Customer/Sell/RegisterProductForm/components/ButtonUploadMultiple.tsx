@@ -109,7 +109,6 @@ const ButtonUploadMultiple = (props: IProps) => {
 
       //@kích hoạt onChange input
       const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            console.log({ target: e.target.files?.length })
             //@nếu file vượt quá 4 thì xét 3 state chính lại mặc định và mount toast
             if (filePreview.length > 4 || fileProduct.length > 4 || e.target.files!.length > 4) {
                   dispatch(addToast({ type: 'WARNNING', message: 'Chỉ upload tối đa 4 files', id: Math.random().toString() }))
