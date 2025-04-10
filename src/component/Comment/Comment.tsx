@@ -42,13 +42,13 @@ const Comment = (props: TProps) => {
 
       const styleEffect = {
             onActive: (check: boolean) => {
-                  if (check) return ' bg-blue-500 text-white border-[1px]  rounded-full'
-                  return ' bg-transparent text-slate-500 border-[1px] border-transparent  rounded-full hover:bg-blue-200 hover:text-white'
+                  if (check) return ' bg-color-main text-white   rounded-full'
+                  return ' bg-transparent text-slate-500   rounded-full hover:bg-blue-200 hover:text-white'
             },
       }
 
       return (
-            <div className='relative h-full bg-[rgb(255, 255, 255)] flex flex-col gap-[20px] px-[20px]'>
+            <div className='relative h-full bg-color-section-theme flex flex-col gap-[20px] px-[20px]'>
                   <CommentFilter
                         product_id={product_id}
                         page={pageFilter}

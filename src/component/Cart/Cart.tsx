@@ -48,7 +48,6 @@ const Cart = () => {
             changeSelectAll.mutate(e.target.checked)
       }
 
-
       useEffect(() => {
             queryClient.invalidateQueries({
                   queryKey: ['cart-get-count-product'],
@@ -63,7 +62,6 @@ const Cart = () => {
       }, [])
 
       useEffect(() => {}, [getMyCart.isPending])
-
 
       if (!user) {
             if (getMyCart?.isLoading) {
@@ -81,61 +79,66 @@ const Cart = () => {
             }
       }
 
-
       return (
             <React.Fragment>
                   <div className='w-full max-w-full h-max  overflow-hidden xl:mt-0 flex gap-[12px] text-[13px]'>
                         <div className='px-[8px] w-full pb-[10px]  h-max flex flex-col gap-x-[24px]'>
-                              <h3 className='font-extrabold uppercase text-[20px] my-[12px]'>Giỏ hàng</h3>
+                              <h3 className='font-extrabold uppercase text-[20px] my-[10px]'>Giỏ hàng</h3>
                               {getMyCart.isSuccess &&
                                     getMyCart.data.data.metadata.cart &&
                                     getMyCart.data.data.metadata.cart.cart_products &&
                                     getMyCart.data.data.metadata.cart.cart_products.length > 0 && (
                                           <React.Fragment>
-                                                <div className='sticky top-[70px] xl:top-[-2px] bg-[#f5f4f6]  w-full  xl:w-[75.75%] py-[16px] h-[70px] items-center z-[10]'>
-                                                      <div className='bg-[#ffffff] rounded h-[36px] px-[12px] flex items-center'>
-                                                            <div className='flex gap-[8px] w-[50%] items-center'>
-                                                                  <Checkbox
-                                                                        disabled={changeSelectAll.isPending}
-                                                                        onChange={onChangeSelectAll}
-                                                                        defaultChecked={selectAll}
-                                                                        checked={selectAll}
-                                                                  ></Checkbox>
-                                                                  <span>
-                                                                        Tất cả {'('}{' '}
-                                                                        {getMyCart.isSuccess &&
-                                                                              getMyCart.data.data.metadata.cart.cart_products.length}{' '}
-                                                                        sản phẩm {')'}
-                                                                  </span>
+                                                <div className='w-full  flex gap-[8px]'>
+                                                      <div className='flex-1 flex flex-col'>
+                                                            <div className='sticky w-full py-[6px] items-center z-[10]'>
+                                                                  <div className='bg-[#ffffff] rounded h-[36px] px-[12px] flex items-center'>
+                                                                        <div className='flex gap-[8px] w-[50%] items-center'>
+                                                                              <Checkbox
+                                                                                    disabled={changeSelectAll.isPending}
+                                                                                    onChange={onChangeSelectAll}
+                                                                                    defaultChecked={selectAll}
+                                                                                    checked={selectAll}
+                                                                              ></Checkbox>
+                                                                              <span>
+                                                                                    Tất cả {'('}{' '}
+                                                                                    {getMyCart.isSuccess &&
+                                                                                          getMyCart.data.data.metadata.cart.cart_products
+                                                                                                .length}{' '}
+                                                                                    sản phẩm {')'}
+                                                                              </span>
+                                                                        </div>
+                                                                        <div className='hidden xl:block xl:basis-[180px]'>
+                                                                              <span>Đơn giá</span>
+                                                                        </div>
+                                                                        <div className='hidden xl:block xl:basis-[120px]'>
+                                                                              <span>Số lượng</span>
+                                                                        </div>
+                                                                        <div className='hidden xl:block xl:basis-[180px]'>
+                                                                              <span>Thành tiền</span>
+                                                                        </div>
+                                                                        <div className='hidden xl:block xl:basis-[20px]'>
+                                                                              <Trash2 />
+                                                                        </div>
+                                                                  </div>
                                                             </div>
-                                                            <div className='hidden xl:block xl:basis-[180px]'>
-                                                                  <span>Đơn giá</span>
-                                                            </div>
-                                                            <div className='hidden xl:block xl:basis-[120px]'>
-                                                                  <span>Số lượng</span>
-                                                            </div>
-                                                            <div className='hidden xl:block xl:basis-[180px]'>
-                                                                  <span>Thành tiền</span>
-                                                            </div>
-                                                            <div className='hidden xl:block xl:basis-[20px]'>
-                                                                  <Trash2 />
+                                                            <div className='flex flex-1 flex-col gap-[24px]'>
+                                                                  {getMyCart.isSuccess &&
+                                                                        getMyCart.data.data.metadata.cart.cart_products.length > 0 &&
+                                                                        getMyCart.data.data.metadata.cart.cart_products.map(
+                                                                              (cartItem, index) => {
+                                                                                    return (
+                                                                                          <CartItem
+                                                                                                key={cartItem._id}
+                                                                                                product={cartItem}
+                                                                                                shop={cartItem.shop_id}
+                                                                                          />
+                                                                                    )
+                                                                              },
+                                                                        )}
                                                             </div>
                                                       </div>
-                                                </div>
-                                                <div className='w-full py-[16px] flex gap-[24px]'>
-                                                      <div className='flex flex-col w-[55%] xl:w-[77%] gap-[24px]'>
-                                                            {getMyCart.isSuccess &&
-                                                                  getMyCart.data.data.metadata.cart.cart_products.length > 0 &&
-                                                                  getMyCart.data.data.metadata.cart.cart_products.map((cartItem, index) => {
-                                                                        return (
-                                                                              <CartItem
-                                                                                    key={cartItem._id}
-                                                                                    product={cartItem}
-                                                                                    shop={cartItem.shop_id}
-                                                                              />
-                                                                        )
-                                                                  })}
-                                                      </div>
+
                                                       <div className='w-[40%] xl:w-[23%] min-h-screen flex flex-col gap-[16px] '>
                                                             <CartUserInfo />
 

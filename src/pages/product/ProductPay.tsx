@@ -182,7 +182,7 @@ const ProductPay = (props: TProps) => {
                                     }}
                                     value={productQuantity || 0}
                                     type='number'
-                                    className='flex items-center justify-center border-[1px] border-slate-400 w-[40px]  h-full text-[16px] text-center rounded-md'
+                                    className='flex items-center justify-center border-[1px] border-slate-400 w-[40px]  h-full text-[16px] text-center text-black rounded-md'
                               />
                               <button
                                     className='flex items-center justify-center p-[6px] border-[1px] border-slate-400 min-w-[36px] h-full text-[20px] rounded-md'

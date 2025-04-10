@@ -28,7 +28,7 @@ const ProductFood = (props: TProps) => {
                         }
                         return (
                               <div
-                                    className=' w-full flex flex-wrap items-center  gap-[8px] pb-[6px] border-b-[1px] border-gray-200 last:border-transparent'
+                                    className=' w-full flex flex-wrap items-center  gap-[8px] pb-[6px] border-b-[1px] border-[var(--border-color-input)] last:border-transparent'
                                     key={attri + index}
                               >
                                     <span className='min-w-[50%]'>{food_label[index]}</span>

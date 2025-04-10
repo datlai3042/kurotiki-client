@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom'
-import { RootState, store } from '../../../store'
-import { onShowSideBar, toDoHideSideBar, toDoShowSideBar } from '../../../Redux/uiSlice'
-import { connect, useDispatch, useSelector } from 'react-redux'
-import logo from './logo.png'
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { onShowSideBar } from '../../../Redux/uiSlice'
+import { RootState } from '../../../store'
+import logo from './logo.png'
 
 type TProps = {}
 
@@ -21,11 +21,10 @@ const HeaderLogoToggle = (props: TProps) => {
 
       return (
             <div className='w-full h-full'>
-                  <Link className='hidden lg:flex flex-col w-full gap-[6px] h-full content-between ' to='/'>
-                        <img src={logo} className='w-[40%] h-[36px] ' alt='' />
-                        <p className='text-[14px] h-[40%] w-full text-blue-700 font-extrabold'>Bảo vệ khách hàng 111%</p>
+                  <Link className='hidden md:flex flex-col w-full gap-[6px] h-full content-between ' to='/'>
+                        <img src={logo} className='min-w-[80px] h-[36px] ' alt='' />
                   </Link>
-                  <div className='block lg:hidden' onClick={onShowSideBarAction}>
+                  <div className='block md:hidden' onClick={onShowSideBarAction}>
                         <svg
                               xmlns='http://www.w3.org/2000/svg'
                               fill='none'

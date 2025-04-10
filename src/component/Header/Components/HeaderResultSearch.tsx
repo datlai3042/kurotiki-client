@@ -60,7 +60,7 @@ const HeaderResultSearch = (props: Props) => {
 
       return (
             <>
-                  <div className=' absolute left-0 top-full right-0  m-h-25 overflow-hidden   bg-white border-[1px] border-solid border-[#ccc] min-h-55 z-[9999] min-h-[400px] rounded-lg'>
+                  <div className=' absolute left-0 top-full right-0  m-h-25 overflow-hidden   bg-color-section-theme border-[1px] border-solid border-[var(--border-color-input)] min-h-55 z-[9999] min-h-[400px] rounded-lg'>
                         <div className='sanPhamTheoTen dienThoai:my-2 flex flex-col gap-y-2 overflow-hidden min-h-[150px] '>
                               {!text && getProductTopSearch.isSuccess && getProductTopSearch.data.data.metadata.products.length === 0 && (
                                     <span className='p-2 opacity-50'>Hãy nhập tìm kiếm</span>
@@ -69,32 +69,32 @@ const HeaderResultSearch = (props: Props) => {
                                     getProductTopSearch.isSuccess &&
                                     getProductTopSearch.data.data.metadata.products.map((product) => (
                                           <div
-                                                className=' min-h-[40px] h-max bg-[#ffffff] flex flex-col gap-[8px] justify-center '
+                                                className=' min-h-[40px] h-max bg-color-section-theme flex flex-col gap-[8px] justify-center '
                                                 key={product._id}
                                           >
                                                 <Link
                                                       to={`/product/${product._id}`}
-                                                      className='flex items-center gap-[8px] min-h-[40px] hover:bg-slate-200 px-[20px] py-[8px]'
+                                                      className='flex items-center gap-[8px] min-h-[40px] hover:bg-color-main hover:text-[#fff] px-[20px] py-[8px] rounded-[4px]'
                                                       onClick={onNavigate}
                                                 >
-                                                      <Search className='text-slate-400' />
+                                                      <Search className='' />
                                                       <span>{product.product_name}</span>
                                                 </Link>
                                           </div>
                                     ))}
 
                               {searchQuery.isSuccess && (
-                                    <div className=' min-h-[40px] h-max bg-[#ffffff]   flex flex-col gap-[20px] justify-center'>
+                                    <div className=' min-h-[40px] h-max bg-color-section-theme   flex flex-col gap-[20px] justify-center'>
                                           {products &&
                                                 products.length > 0 &&
                                                 products.map((product) => (
                                                       <Link
                                                             key={product._id}
                                                             to={`/product/${product._id}`}
-                                                            className='flex gap-[8px] hover:bg-slate-200 px-[20px] py-[8px]'
+                                                            className='flex gap-[8px] hover:bg-color-main hover:text-[#fff] px-[20px] py-[8px]  rounded-[4px]'
                                                             onClick={onNavigate}
                                                       >
-                                                            <Search className='text-slate-400' />
+                                                            <Search className='' />
                                                             <span>{product.product_name}</span>
                                                       </Link>
                                                 ))}
@@ -105,7 +105,7 @@ const HeaderResultSearch = (props: Props) => {
                                                       <Link
                                                             key={shop._id}
                                                             to={`/shop/${shop._id}`}
-                                                            className='px-[20px] py-[8px] flex gap-[20px] hover:bg-slate-200'
+                                                            className='px-[20px] py-[8px] flex gap-[20px] hover:bg-color-main hover:text-[#fff]  rounded-[4px]'
                                                       >
                                                             <img
                                                                   src={shop.shop_avatar?.secure_url || shop.shop_avatar_default}
@@ -113,7 +113,7 @@ const HeaderResultSearch = (props: Props) => {
                                                                   alt=''
                                                             />
                                                             <div className='flex flex-col gap-[2px]'>
-                                                                  <span className='text-slate-900 font-bold'>{shop.shop_name}</span>
+                                                                  <span className='text-text-theme font-bold'>{shop.shop_name}</span>
                                                                   <p>
                                                                         <span>{shop.shop_vote.toString()}</span>
                                                                         <Rate
@@ -140,7 +140,7 @@ const HeaderResultSearch = (props: Props) => {
                                           <Link
                                                 to={category.href}
                                                 key={category.href + category.label}
-                                                className='w-full h-full hover:bg-[#ffffff] hover:shadow-2xl flex flex-col items-center gap-[6px] p-[8px]'
+                                                className='w-full h-full hover:bg-color-main hover:text-[#fff] hover:shadow-2xl  rounded-[4px] flex flex-col items-center gap-[6px] p-[8px]'
                                           >
                                                 <img src={category.image} className='w-[110px] h-[110px] rounded-full' alt='category' />
                                                 <span className=' text-[13px]'>{category.label}</span>

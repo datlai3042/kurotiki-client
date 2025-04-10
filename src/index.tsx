@@ -11,6 +11,7 @@ import TErrorAxios from './types/axios.response.error'
 import { addToast } from './Redux/toast'
 import BoxContainerToast from './component/BoxUi/BoxContainerToast'
 import { doLogout, doOpenBoxLogin } from './Redux/authenticationSlice'
+import ThemeProvider, { ThemeContext } from './component/Context/ThemeContext'
 
 // store.dispatch(addToast({ type: 'ERROR', message: '123', id: '1' }))
 // setTimeout(() => {}, 5000)
@@ -38,7 +39,6 @@ const client = new QueryClient({
                                     error?.response.data?.detail === 'Không tìm thấy tài khoản' ||
                                     error?.response.data?.detail === 'Token đã được sử dụng')
                         ) {
-                             
                               // store.dispatch(doOpenBoxLogin())
                               throw error
                         }
@@ -94,7 +94,9 @@ root.render(
       <Provider store={store}>
             <BrowserRouter>
                   <QueryClientProvider client={client}>
-                        <App />
+                        <ThemeProvider>
+                              <App />
+                        </ThemeProvider>
                         <BoxContainerToast />
                         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
                   </QueryClientProvider>

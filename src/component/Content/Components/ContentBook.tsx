@@ -67,11 +67,11 @@ const ContentBook = () => {
       }
 
       return (
-            <div className='max-w-full w-full h-[485px] bg-[#ffffff] rounded-lg p-[20px] flex flex-col gap-[16px]'>
-                  <h3>Các sãn phẩm về sách</h3>
+            <div className='max-w-full w-full h-[485px] bg-color-section-theme text-text-theme rounded-lg p-[20px] flex flex-col gap-[16px]'>
+                  <h3>Các sản phẩm về sách</h3>
 
                   <div className='overflow-hidden'>
-                        <div className='h-[40px] max-w-full flex gap-[20px] overflow-scroll'>
+                        <div className='h-[40px] max-w-full flex gap-[20px]  overflow-auto md:overflow-hidden'>
                               {CATEGORY_BOOK.map((btn) => (
                                     <button
                                           key={btn.label}
@@ -84,7 +84,7 @@ const ContentBook = () => {
                         </div>
                   </div>
 
-                  <div className='relative w-full h-[75%] overflow-hidden'>
+                  <div className='relative w-full h-[85%] overflow-hidden'>
                         {getProductBookAllType.isSuccess && type === 'All' && <LayoutTranslate products={productAll as TProductDetail[]} />}
                         {getProductBookAllType.isSuccess && type === 'Manga' && (
                               <LayoutTranslate products={productManga as TProductDetail[]} />

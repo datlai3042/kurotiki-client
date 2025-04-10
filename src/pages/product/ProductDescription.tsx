@@ -30,28 +30,25 @@ const ProductDescription = (props: TProps) => {
             <>
                   <div
                         style={{ height: openMore ? 'max-content' : 300 }}
-                        className='relative bg-white w-full  px-[18px] pt-[18px] pb-[70px] overflow-y-hidden'
+                        className='relative bg-color-section-theme w-full  px-[18px] pt-[18px] pb-[70px] overflow-y-hidden'
                   >
                         <header>
-                              <p id='description' className='text-[18px] text-black font-semibold my-[20px]'>
+                              <p id='description' className='text-[18px] text-text-theme font-semibold my-[20px]'>
                                     Mô tả sản phẩm
                               </p>
                         </header>
 
                         <div
-                              className='min-h-[70px]  h-max w-full  bg-[#ffffff] grid grid-cols-2 md:grid-cols-3 xl:grid-cols-1 mb-[40px] '
+                              className='min-h-[70px]  h-max w-full  bg-color-section-theme grid grid-cols-2 md:grid-cols-3 xl:grid-cols-1 mb-[40px] gap-[16px] '
                               ref={wrapperConent}
                         >
-                              <img src={product.product_thumb_image.secure_url} className='w-[100%] h-[200px] xl:h-[555px]' alt='' />
+                              <img src={product.product_thumb_image.secure_url} className='w-[100%] ' alt='' />
                               {product.product_desc_image.map((image) => (
-                                    <img key={image.public_id} src={image.secure_url} className='w-[100%] h-[200px] xl:h-[555px]' alt='' />
+                                    <img key={image.public_id} src={image.secure_url} className='w-[100%] ]' alt='' />
                               ))}
                         </div>
 
-                        <pre className='whitespace-pre-wrap break-words '>
-                              {product.attribute.description}
-                              lorem*asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-                        </pre>
+                        <pre className='whitespace-pre-wrap break-words '>{product.attribute.description}</pre>
 
                         {!openMore && (
                               <div

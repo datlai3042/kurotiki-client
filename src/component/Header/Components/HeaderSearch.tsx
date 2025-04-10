@@ -75,7 +75,7 @@ const HeaderSeacrhInput = () => {
       }, [showOverload])
 
       return (
-            <div className='flex h-[80%] border border-gray-300 rounded-lg' ref={divRef}>
+            <div className='flex min-h-[80%]  border border-[var(--border-color-input)] text-text-theme rounded-lg' ref={divRef}>
                   <div className='relative grow  h-full pl-4'>
                         <form className='h-full  flex gap-4' spellCheck={false}>
                               <div className='basis-[3%]   flex items-center'>
@@ -86,7 +86,7 @@ const HeaderSeacrhInput = () => {
                                           ref={inputRef}
                                           type='text'
                                           value={text}
-                                          className='w-full h-full outline-none border-none'
+                                          className='w-full h-full outline-none border-none rounded-lg bg-color-section-theme border-[.1rem] border-[var(--border-color-input)]'
                                           placeholder='Bạn tìm gì hôm nay'
                                           onChange={onChangeSearch}
                                           onClick={() => {

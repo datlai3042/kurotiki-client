@@ -3,6 +3,119 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+      :root {
+            --borderInputAnswerFocus: '#ccc', --background: 0 0% 100%;
+            --bg-input-core: #ffffff;
+            --bg-input-core-2: #000000;
+            --bg-dark-readOnly: #08112b;
+            --foreground: 222.2 84% 4.9%;
+            --color-main-profile: #2662d9;
+            --card: 0 0% 100%;
+            --card-foreground: 222.2 84% 4.9%;
+
+            --popover: 0 0% 100%;
+            --popover-foreground: 222.2 84% 4.9%;
+
+            --primary: 222.2 47.4% 11.2%;
+            --primary-foreground: 210 40% 98%;
+
+            --secondary: 210 40% 96.1%;
+            --secondary-foreground: 222.2 47.4% 11.2%;
+
+            --muted: 210 40% 96.1%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+
+            --accent: 210 40% 96.1%;
+            --accent-foreground: 222.2 47.4% 11.2%;
+
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 210 40% 98%;
+
+            --border: 214.3 31.8% 91.4%;
+            --input: 214.3 31.8% 91.4%;
+            --ring: 222.2 84% 4.9%;
+            --radius: 0.5rem;
+            --bg-client-loading: #3d52a2;
+            --color-gap-empty: #f1f4fb;
+            /* --color-main: #6262e5; */
+            --color-main: #3d52a2;
+            --color-section-theme: #08112b;
+            --text-theme: #000;
+            --color-main-hover: rgb(229 231 235);
+            --border-color: hwb(0 10% 88% / 0.189);
+            --bg-form-nav: #fff;
+            --bg-input-theme: #fff;
+            --btn-design: #2d68ff;
+            --bg-model: #eef1f9;
+            --color-btn-primarily: rgb(37, 104, 170);
+            --toast-success: #4299de;
+            --toast-error: #f4454c;
+            --toast-warning: #ea580c;
+            --border-color-input: rgb(209 213 219 / 27%);
+            --background: 0 0% 100%;
+            /* --chart-1: 12 76% 61%; */
+            --chart-1: 227.52deg 45.29% 43.73%;
+            --chart-2: 173 58% 39%;
+            --chart-3: 197 37% 24%;
+            --chart-4: 43 74% 66%;
+            --chart-5: 27 87% 67%;
+            --chart-primary: 241.82deg 69.62% 53.53%;
+            --chart-danger: 343.94deg 68.97% 49.95%;
+            --chart-normal: 242.18deg 35.03% 30.78%;
+            --chart-custom-v1: 160, 60%, 45%;
+      }
+
+      html {
+            scroll-behavior: smooth;
+      }
+
+      body.light {
+            --bg-form-nav: #fff;
+            --color-gap-empty: #eef1f9;
+            --color-main: #3d52a2;
+            --bg-scrollbar-thumb-normal: #636363;
+            --bg-scrollbar-track-normal: #e9e2e2;
+            --bg-answer-option: rgb(180 183 189 / 42%);
+
+            --color-section-theme: #fefefe;
+            --text-theme: #000;
+            --border-color: hwb(0 10% 88% / 0.189);
+            --bg-model: #eef1f9;
+            --color-main-hover: rgb(229 231 235);
+            --border-form-item: #e8e8e8;
+            --bg-space: #f4f6ff;
+            /* --bg-module-other: #17174b; */
+
+            --bg-module-other: #e1e1e1ca;
+            --border-color-input: rgb(200 205 214 / 42%);
+            --border-color-side: rgb(200 205 214 / 42%);
+            /* --color-btn-primarily: #2d68ff;ư */
+      }
+
+      body.dark {
+            --bg-form-nav: #393c73;
+            --color-gap-empty: #020a1e;
+            /* --color-main: #3b36db; */
+            --bg-answer-option: rgb(222 224 228);
+
+            --color-main: #35336a;
+            --color-section-theme: #08112b;
+            --text-theme: #ccc;
+            --color-main-hover: rgb(229 231 235);
+            --border-color: #14113c;
+            --bg-model: #0f1623;
+            --color-btn-primarily: rgb(37, 104, 170);
+            --border-form-item: transparent;
+            --bg-space: #252525;
+            --bg-module-other: #17174bb0;
+            --border-color-input: rgb(209 213 219 / 27%);
+            --border-color-side: rgb(200 205 214 / 18%);
+            --bg-scrollbar-thumb-normal: rgba(203, 191, 191, 0.758);
+            --bg-scrollbar-track-normal: #2c2c2c;
+      }
+}
+
 @layer components {
       .isActive {
             background-color: #1d4ed8;
@@ -158,6 +271,10 @@ code {
 .scrollCustome::-webkit-scrollbar,
 *::-webkit-scrollbar-thumb:hover {
       background: #555;
+}
+
+.hide-scroll::-webkit-scrollbar {
+      display: none;
 }
 
 body {

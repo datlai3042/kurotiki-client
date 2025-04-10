@@ -87,24 +87,24 @@ const Product = () => {
       }
 
       return (
-            <div className='flex flex-col w-full text-[12px]'>
+            <div className='flex flex-col w-full text-[12px] text-text-theme gap-[20px]'>
                   <div className=' w-full flex flex-col gap-[4px] '>
                         {getProductWithId.data?.data && (
-                              <div className='flex items-center gap-[4px] p-[20px] xl:px-0 text-[20px] font-extrabold '>
+                              <div className='flex items-center gap-[4px] p-[12px_20px] xl:px-0 text-[20px] font-extrabold '>
                                     <Link to='/'>Trang chủ</Link>
 
-                                    <ChevronRight size={16} color='black' />
+                                    <ChevronRight size={16}  />
                                     <Link to={`/${product?.product_type}`}>{product?.product_type}</Link>
-                                    <ChevronRight size={16} color='black' />
+                                    <ChevronRight size={16}  />
                                     <Link to={`/${product?.product_type}`}>{product?.attribute.type}</Link>
                               </div>
                         )}
 
                         {getProductWithId.isSuccess && product && (
-                              <div className='  flex gap-[16px] xl:gap-[24px] xl:mt-0'>
+                              <div className='  flex gap-[16px] xl:gap-[16px] xl:mt-0'>
                                     <div className='w-full xl:w-[74%] flex flex-col gap-[24px]'>
                                           <div className='top w-full min-h-[1000px] h-max flex flex-col xl:flex-row gap-[24px]'>
-                                                <div className='xl:w-[40%] static xl:sticky top-[32px] xl:top-[16px] bg-white px-[3px] py-[6px] rounded-lg  h-max flex flex-col gap-[16px] '>
+                                                <div className='xl:w-[40%] static xl:sticky top-[32px] xl:top-[16px] bg-color-section-theme px-[3px] py-[6px] rounded-lg  h-max flex flex-col gap-[16px] '>
                                                       <ProductDetail product={product} isSuccess={getProductWithId.isSuccess} />
                                                 </div>
                                                 <div className='xl:w-[60%]  min-h-[500px] h-max mt-[20px] xl:mt-0 rounded-lg '>
@@ -115,7 +115,7 @@ const Product = () => {
                                                       />
                                                 </div>
                                           </div>
-                                          <div className='flex flex-col gap-[10px] comment w-full min-h-[1000px] h-max  bg-[#ffffff] rounded-lg  pb-[50px]'>
+                                          <div className='flex flex-col gap-[10px] comment w-full min-h-[1000px] h-max  bg-color-section-theme rounded-lg  pb-[50px]'>
                                                 <CommentStatistic
                                                       avg={avg || vote || product.product_votes}
                                                       totalComment={totalComment || 0}
@@ -128,14 +128,14 @@ const Product = () => {
                                                 <Comment product_id={product?._id} />
                                           </div>
                                     </div>
-                                    <div className='hidden xl:flex w-[40%] xl:w-[26%] sticky top-[100px] xl:top-[16px] h-max pb-[15px] bg-white  rounded-md'>
+                                    <div className='hidden xl:flex w-[40%] xl:w-[26%] sticky top-[100px] xl:top-[16px] h-max pb-[15px] bg-color-section-theme  rounded-md'>
                                           <ProductPay product={product} />
                                     </div>
                               </div>
                         )}
 
                         {getProductWithId.isPending && (
-                              <div className='animate-pulse bg-gray-100 flex gap-[24px]'>
+                              <div className='animate-pulse bg-gray-100 flex gap-[16px]'>
                                     <div className=' w-full flex flex-col gap-[24px]'>
                                           <div className='top w-full min-h-[1000px] h-max flex flex-col xl:flex-row gap-[24px]'>
                                                 <div className='basis-[40%] bg-gray-100 static min-h-[800px] h-[900px] xl:sticky top-[16px]  p-[8px] rounded-sm   flex flex-col gap-[16px]'>

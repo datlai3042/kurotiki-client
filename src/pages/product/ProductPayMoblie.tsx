@@ -129,7 +129,7 @@ const ProductPayMoblie = (props: TProps) => {
       }, [cartMutation.isSuccess, cartMutation.data?.data, dispatch, queryClient])
 
       return (
-            <section className='w-full h-full  flex xl:hidden flex-col gap-[16px] p-[12px] text-[12px] xl:text-[14px] bg-[#ffffff] rounded-lg'>
+            <section className='w-full h-full  flex xl:hidden flex-col gap-[16px] p-[12px] text-[12px] xl:text-[14px] bg-color-section-theme rounded-lg'>
                   <div className='flex flex-col gap-[12px]'>
                         <div className='font-bold flex flex-col gap-[8px] text-[14px] xl:text-[18px]'>
                               <span className=''>Tạm tính</span>
@@ -144,7 +144,7 @@ const ProductPayMoblie = (props: TProps) => {
                         </div>
                         <div className='flex gap-[8px] max-w-max h-[30px]'>
                               <button
-                                    className='flex items-center justify-center p-[6px] border-[1px] border-slate-400 min-w-[36px] h-full text-[20px] rounded-md'
+                                    className='flex items-center justify-center p-[6px] border-[1px] border-[var(--border-color-input)] min-w-[36px] h-full text-[20px] rounded-md'
                                     onClick={handleDecreaseProductQuantity}
                                     disabled={productQuantity === 1 ? true : false}
                               >
@@ -169,10 +169,10 @@ const ProductPayMoblie = (props: TProps) => {
                                     }}
                                     value={productQuantity || 0}
                                     type='number'
-                                    className='flex items-center justify-center border-[1px] border-slate-400 w-[40px]  h-full text-[16px] text-center rounded-md'
+                                    className='flex items-center justify-center border-[1px] border-[var(--border-color-input)] w-[40px]  h-full text-[16px] text-center rounded-md'
                               />
                               <button
-                                    className='flex items-center justify-center p-[6px] border-[1px] border-slate-400 min-w-[36px] h-full text-[20px] rounded-md'
+                                    className='flex items-center justify-center p-[6px] border-[1px] border-[var(--border-color-input)] min-w-[36px] h-full text-[20px] rounded-md'
                                     onClick={handleIncreaseProductQuantity}
                               >
                                     +

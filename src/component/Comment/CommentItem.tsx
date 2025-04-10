@@ -19,7 +19,7 @@ const CommentItem = (props: TProps) => {
 
       const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
       return (
-            <div className='relative flex flex-col xl:flex-row min-h-[250px] h-max py-[32px] xl:py-[16px] border-t-[2px] border-[rgb(245_245_250)] gap-[16px] xl:gap-0'>
+            <div className='relative flex flex-col xl:flex-row min-h-[250px] h-max py-[32px] xl:py-[16px] border-t-[1px] border-[var(--border-color-input)] gap-[16px] xl:gap-0'>
                   <div className='w-full  min-h-[50px] flex flex-row  gap-[10px]'>
                         <img
                               src={comment.comment_user_id?.avatar?.secure_url || comment.comment_user_id?.avatar_url_default}

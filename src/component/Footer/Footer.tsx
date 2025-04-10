@@ -81,11 +81,15 @@ const Footer = ({ ...props }: IProps) => {
       // const { ...props } = props
 
       return (
-            <div className=' h-auto bg-white border-1 border-white rounded-lg' {...props}>
+            <div
+            style={{lineHeight: 1.6}}
+                  className=' h-auto  border-1 border-[var(--border-color-input)] bg-color-section-theme text-text-theme rounded-lg'
+                  {...props}
+            >
                   <div className='w-full '>
                         <div className=' flex  justify-between gap-10   p-[25px]'>
                               <div className='basis-1/5 flex flex-col pb-[25px] min-h-[150px] h-auto'>
-                                    <h3 className='footer-title'>{mock[0].title}</h3>
+                                    <h3 className='footer-title !text-text-theme'>{mock[0].title}</h3>
                                     <div className='basis-4/5 flex flex-col gap-2 relative'>
                                           {mock[0].data.map((item) => (
                                                 <div className='flex flex-col relative ' key={item}>
@@ -95,7 +99,7 @@ const Footer = ({ ...props }: IProps) => {
                                     </div>
                               </div>
                               <div className='basis-1/5 flex flex-col pb-[25px] min-h-[150px] h-auto'>
-                                    <h3 className='footer-title'>{mock[1].title}</h3>
+                                    <h3 className='footer-title !text-text-theme'>{mock[1].title}</h3>
                                     <div className='basis-4/5 flex flex-col gap-2 relative'>
                                           {mock[1].data.map((item) => (
                                                 <span className='footer-span' key={item}>
@@ -105,7 +109,7 @@ const Footer = ({ ...props }: IProps) => {
                                     </div>
                               </div>
                               <div className='basis-1/5 flex flex-col pb-[25px] min-h-[150px] h-[200px]'>
-                                    <h3 className='footer-title'>{mock[2].title}</h3>
+                                    <h3 className='footer-title !text-text-theme'>{mock[2].title}</h3>
                                     <div className='basis-4/5 flex flex-col gap-2 relative'>
                                           {mock[2].data.map((item) => (
                                                 <span className='footer-span' key={item}>
@@ -113,7 +117,7 @@ const Footer = ({ ...props }: IProps) => {
                                                 </span>
                                           ))}
                                     </div>
-                                    <h3 className='footer-title'>{mock[2].subTitle}</h3>
+                                    <h3 className='footer-title  !text-text-theme'>{mock[2].subTitle}</h3>
                                     <div className='flex gap-1 items-center'>
                                           <img src={boCT_1} alt='Bộ công thương' className='w-[20%] h-[45px]' />
                                           <img src={boCT_2} alt='Bộ công thương' className='w-[50%] h-[55px]' />
@@ -121,31 +125,31 @@ const Footer = ({ ...props }: IProps) => {
                                     </div>
                               </div>
                               <div className='basis-1/5 flex flex-col gap-y-2'>
-                                    <h3 className='footer-title'>{mock[3].title}</h3>
-                                    <div className='basis-2/6 grid grid-cols-4 grid-row-[30px_30px_30px] gap-y-[1px] relative'>
+                                    <h3 className='footer-title  !text-text-theme'>{mock[3].title}</h3>
+                                    <div className='basis-2/6 grid grid-cols-4 grid-row-[30px_30px_30px] gap-[16px] relative'>
                                           {mock[3].data.map((item) => (
                                                 <div className='flex items-center justify-center' key={item}>
-                                                      <img src={item} alt='' />
+                                                      <img src={item} alt='' className='rounded-[4px]'/>
                                                 </div>
                                           ))}
                                     </div>
                                     <div className='h-[45px]'>
-                                          <h3 className='footer-title'>{mock[3].subTitle}</h3>
+                                          <h3 className='footer-title  !text-text-theme'>{mock[3].subTitle}</h3>
                                     </div>
                                     <div className='w-[85px]'>
-                                          <img src={tikiNow} className='w-full rounded-[999px]' alt='' />
+                                          <img src={tikiNow} className='w-full rounded-[4px]' alt='' />
                                     </div>
                               </div>
                               <div className='basis-1/5  flex flex-col gap-y-5'>
-                                    <h3 className='footer-title'>{mock[4].title}</h3>
+                                    <h3 className='footer-title !text-text-theme'>{mock[4].title}</h3>
                                     <div className='basis-1/6 flex  gap-y-[15px] justify-between'>
                                           {mock[4].data.map((item) => (
                                                 <div className='basis-1/4 flex items-center justify-center rounded-[999px]' key={item}>
-                                                      <img src={item} alt='' />
+                                                      <img src={item} alt='' className='rounded-[4px]'/>
                                                 </div>
                                           ))}
                                     </div>
-                                    <h3 className='footer-title'>{mock[4].subTitle}</h3>
+                                    <h3 className='footer-title !text-text-theme'>{mock[4].subTitle}</h3>
                                     <div className='basis-4 /6 flex gap-x-2'>
                                           <div className='basis-1/2 h-full'>
                                                 <img src={Qr} className='w-full h-full' alt='' />
@@ -158,8 +162,8 @@ const Footer = ({ ...props }: IProps) => {
                               </div>
                         </div>
                         <hr />
-                        <div className='p-[25px] flex flex-col gap-[24px] text-[12px]'>
-                              <h3 className='text-slate-900 font-semibold text-[16px]'>Công ty TNHH TIKI</h3>
+                        <div className='p-[25px] flex flex-col gap-[24px] text-[12px] !text-text-theme'>
+                              <h3 className=' font-semibold text-[16px] !text-text-theme'>Công ty TNHH TIKI</h3>
                               <p>Tòa nhà số 52 đường Út Tịch, Phường 4, Quận Tân Bình, Thành phố Hồ Chí Minh</p>
                               <p>
                                     Giấy chứng nhận đăng ký doanh nghiệp số 0309532909 do Sở Kế Hoạch và Đầu Tư Thành phố Hồ Chí Minh cấp
@@ -172,11 +176,11 @@ const Footer = ({ ...props }: IProps) => {
                         </div>
 
                         <hr />
-                        <div className='p-[25px] flex flex-col gap-[24px] text-[12px]'>
-                              <h3 className='text-slate-900 font-semibold text-[16px]'>Tiki - Thật nhanh, thật chất lượng, thật rẻ</h3>
+                        <div className='p-[25px] flex flex-col gap-[24px] text-[12px] !text-text-theme'>
+                              <h3 className=' font-semibold text-[16px] !text-text-theme'>Tiki - Thật nhanh, thật chất lượng, thật rẻ</h3>
 
                               <div className='flex flex-col gap-[8px]'>
-                                    <h4 className='text-slate-700 font-semibold '>Tiki có tất cả</h4>
+                                    <h4 className=' font-semibold !text-text-theme'>Tiki có tất cả</h4>
                                     <p>
                                           Với hàng triệu sản phẩm từ các thương hiệu, cửa hàng uy tín, hàng nghìn loại mặt hàng từ{' '}
                                           <span className='mx-[4px] text-blue-400 hover:underline hover:cursor-pointer'>
@@ -195,8 +199,8 @@ const Footer = ({ ...props }: IProps) => {
                                     </p>
                               </div>
 
-                              <div className='flex flex-col gap-[8px] text-[12px]'>
-                                    <h4 className='text-slate-700  font-semibold'>Khuyến mãi, ưu đãi tràn ngập</h4>
+                              <div className='flex flex-col gap-[8px] text-[12px] !text-text-theme'>
+                                    <h4 className='  font-semibold !text-text-theme'>Khuyến mãi, ưu đãi tràn ngập</h4>
                                     <p>
                                           Bạn muốn săn giá sốc, Tiki có
                                           <span className='mx-[4px] text-blue-400 hover:underline hover:cursor-pointer'>

@@ -10,10 +10,10 @@ const AuthPermission = () => {
       }
 
       return (
-            <div className='bg-white w-full h-full min-h-[80%] flex flex-col justify-center items-center text-[42px] font-bold gap-[20px]'>
+            <div className='bg-color-section-theme text-text-theme w-full h-full min-h-[80%] flex flex-col justify-center items-center text-[42px] font-bold gap-[20px]'>
                   <span className=' text-center'>Chức năng cần đăng nhập</span>
                   <button
-                        className='text-[14px] font-normal w-[150px] h-[45px] hover:bg-slate-900 hover:text-white border-[1px] bg-white border-slate-900 text-slate-900 rounded-md'
+                        className='text-[14px] font-normal w-[150px] h-[45px] hover:bg-color-main hover:text-white border-[1px] bg-white border-slate-900 text-slate-900 rounded-md'
                         onClick={handleAuth}
                   >
                         Đăng nhập

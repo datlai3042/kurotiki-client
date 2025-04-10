@@ -81,11 +81,11 @@ function Sidebar(props: TProps) {
 
       return (
             <div
-                  className={`${styleEffect.showSideBar}  fixed xl:sticky  w-[180px] xl:w-[230px] min-w-[230px]  top-[75px] xl:top-[20px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
+                  className={`${styleEffect.showSideBar} hide-scroll  fixed xl:sticky  w-[180px] xl:w-[230px] min-w-[230px]  top-[83px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
             >
-                  <div className='flex flex-col gap-[20px] bg-transparent h-max mb-[50px]'>
-                        <div className='flex flex-col gap-[10px] h-max p-[16px] bg-[#ffffff] rounded-xl'>
-                              <h3 className='text-[14px] font-semibold text-slate-800'>Danh mục</h3>
+                  <div className='flex flex-col gap-[20px] bg-transparent h-max mb-[50px] text-text-theme'>
+                        <div className='flex flex-col gap-[10px] h-max p-[16px] bg-color-section-theme rounded-[4px] '>
+                              <h3 className='text-[14px] font-semibold '>Danh mục</h3>
                               <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
                                     {arrayCategory.map((category) => (
                                           <li key={category.href}>
@@ -98,8 +98,8 @@ function Sidebar(props: TProps) {
                               </ul>
                         </div>
 
-                        <div className='flex flex-col gap-[10px] h-max p-[16px] bg-[#ffffff]  rounded-xl'>
-                              <h3 className='text-[14px] font-semibold text-slate-800'>Nổi bật</h3>
+                        <div className='flex flex-col gap-[10px] h-max p-[16px]  bg-color-section-theme   rounded-xl'>
+                              <h3 className='text-[14px] font-semibold '>Nổi bật</h3>
                               <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
                                     {arrayPopular.map((category) => (
                                           <li key={category.href}>
@@ -114,7 +114,7 @@ function Sidebar(props: TProps) {
 
                         <Link
                               to={'/customer/register-sell'}
-                              className='w-full h-[70px] flex items-center p-[16px_24px] rounded-lg bg-[#ffffff] gap-[8px] text-slate-500 '
+                              className='w-full h-[70px] flex items-center p-[16px_24px] rounded-lg  gap-[8px] text-slate-500 '
                         >
                               <Store />
                               <span>Bán hàng cùng Tiki</span>

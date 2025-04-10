@@ -21,43 +21,46 @@ function Header() {
 
       return (
             <>
-                  <div className={`fixed lg:static top-0 left-0 w-full z-[100] bg-white border-[1px] border-solid border-[#e8e8e8]`}>
-                        <div className='h-[75px] lg:h-[90px] py-2 px-[10px]  bg-white flex items-center gap-3 lg:gap-0 mx-auto  xl:max-w-[1400px]'>
-                              <div className='basis-[14%] flex items-center'>
+                  <div className={`fixed text-text-theme  top-0 left-0 w-full z-[100] bg-color-section-theme border-b-[1px] border-solid border-[var(--border-color-input)]`}>
+                        <div className='h-[65px] md:h-[75px] py-2 px-[10px] gap-[24px]  flex items-center  mx-auto  xl:max-w-[1400px]'>
+                              <div className='max-w-[200px] flex items-center'>
                                     <HeaderLogoToggle />
                               </div>
-                              <div className=' grow flex-1 xl:flex-auto flex h-full gap-[24px]'>
-                                    <div className='grow flex flex-col justify-center basis-[70%]'>
+                              <div className=' grow flex-1 xl:flex-auto flex justify-center h-full gap-[24px]'>
+                                    <div className='flex flex-grow-1 flex-1 flex-col justify-center '>
                                           <HeaderSeacrhInput />
-                                          <HeaderTagsLocation />
+                                          {/* <HeaderTagsLocation /> */}
                                     </div>
-                                    <div className='basis-[10%] xl:basis-[25%] flex lg:flex-col lg:justify-between  ml-0 xl:ml-[20px] h-full'>
+                                    <div className='whitespace-pre flex lg:flex-col justify-center  ml-auto h-full'>
                                           <HeaderActions />
                                           <div
                                                 id=''
-                                                className='hidden xl:flex items-center  text-[14px] text-[#000] max-w-[500px] w-max truncate  '
+                                                className='text-[11px] hidden xl:flex items-center   flex-grow-1  justify-space  '
                                                 title={`${address_default ? renderStringAddressDetailV2(address_default[0]) : ' ...'}`}
                                           >
-                                                <img
-                                                      src='https://salt.tikicdn.com/ts/upload/88/5c/9d/f5ee506836792eb7775e527ef8350a44.png'
-                                                      alt='Location'
-                                                      width={20}
-                                                      height={2}
-                                                      className='mr-[4px]'
-                                                />
-                                                <div className='text-[11px] text-slate-500'>
+                                                <div className=' flex items-center gap-[.2rem]'>
+                                                      <img
+                                                            src='https://salt.tikicdn.com/ts/upload/88/5c/9d/f5ee506836792eb7775e527ef8350a44.png'
+                                                            alt='Location'
+                                                            width={20}
+                                                            height={2}
+                                                            className='mr-[4px]'
+                                                      />
+                                                      <span>[THIẾT LẬP ĐỊA CHỈ GIAO HÀNG]</span>
+                                                </div>
+
+                                                <div className='mx-[6px] text-[11px] '>
                                                       {getAddressDefault(user?.user_address) ? (
                                                             <p className='flex gap-[8px]'>
                                                                   <span>Giao đến</span>
-                                                                  <span className='underline text-slate-800 font-bold'>
+                                                                  <span className='underline  font-bold'>
                                                                         {address_default
                                                                               ? renderStringAddressDetailV2(address_default[0])
                                                                               : ''}
                                                                   </span>
                                                             </p>
                                                       ) : (
-                                                            <p className='flex gap-[4px] text-[11px]'>
-                                                                  <span>[BẠN CHƯA THIẾT LẬP ĐỊA CHỈ GIAO HÀNG MẶC ĐỊNH]</span>
+                                                            <p className='flex gap-[4px] '>
                                                                   <Link className='underline' to={'/customer/account/address'}>
                                                                         Thiết lập
                                                                   </Link>

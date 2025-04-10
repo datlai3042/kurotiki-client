@@ -53,7 +53,7 @@ const LayoutTranslate = (props: TProps) => {
       }
 
       return (
-            <div className='h-full max-w-full flex gap-[20px] overflow-scroll xl:overflow-visible ' ref={wrapperListProductsRef}>
+            <div className='h-full max-w-full flex gap-[20px] overflow-auto pb-[8px] ' ref={wrapperListProductsRef}>
                   {products?.map((product) => (
                         <div
                               key={product._id}

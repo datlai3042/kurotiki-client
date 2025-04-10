@@ -114,32 +114,32 @@ const ContentProduct = () => {
 
       const styleEffect = {
             onActive: (check: boolean) => {
-                  if (check) return 'bg-blue-50 border-b-[3px] border-blue-500'
-                  return 'hover:bg-slate-200'
+                  if (check) return 'bg-color-main border-b-[3px] border-blue-500 !text-[#fff]'
+                  return 'hover:bg-color-main'
             },
       }
 
       return (
-            <div className=' z-[5] w-full min-h-[370px] h-max  flex flex-col gap-[28px]  bg-[rgb(245_245_250)] pb-[50px] xl:p-0'>
+            <div className=' z-[5] w-full min-h-[370px] h-max  flex flex-col gap-[8px]  bg-color-section-theme text-text-theme  xl:p-0'>
                   <div
-                        className='animate-mountComponent h-[155px] w-full sticky top-[70px] xl:top-[0px] bg-[rgb(245_245_250)] pt-[16px] z-[2] '
+                        className='animate-mountComponent  w-full sticky top-[60px]  pt-[16px] z-[2] '
                         ref={stickyRef}
                   >
-                        <div className=' w-full h-[145px] bg-[#ffffff]  rounded  border[1px] border-b-[1px] border-gray-200  flex flex-col gap-[10px] pt-[10px]'>
-                              <h3 className='w-full pl-[20px] text-slate-900 font-bold'>Gợi ý hôm nay</h3>
-                              <div className='grow grid  grid-cols-[repeat(3,150px)] auto-cols-[150px] grid-flow-col  xl:grid-flow-row  xl:grid-cols-6  justify-items-center overflow-x-scroll xl:overflow-x-visible'>
+                        <div className=' w-full  bg-color-section-theme  rounded  border[1px] border-b-[1px] border-[var(--border-color-input)]  flex flex-col gap-[10px] pt-[10px]'>
+                              <h3 className='w-full pl-[20px] font-bold'>Gợi ý hôm nay</h3>
+                              <div className='grow grid  grid-cols-[repeat(3,170px)] auto-cols-[170px] grid-flow-col  xl:grid-flow-row  xl:grid-cols-6  justify-items-center overflow-auto pb-[8px]'>
                                     {arrayCategory.map((category) => (
                                           <Link
                                                 to={category.href}
                                                 key={category.href + category.label}
                                                 className={`${styleEffect.onActive(
                                                       tagActive === category.href,
-                                                )} flex w-full h-full items-center flex-col gap-[8px] `}
+                                                )} flex w-full h-full items-center flex-col gap-[8px] py-[6px]`}
                                                 onClick={() => setTagActive(category.href)}
                                           >
                                                 <img
                                                       src={category.image}
-                                                      className='w-[65px] h-[65px] rounded-full border-[1px] border-gray-300 p-[8px]'
+                                                      className='w-[65px] h-[65px] rounded-full border-[1px] border-[var(--border-color-input)] p-[8px]'
                                                       alt='category'
                                                 />
                                                 <span className='text-[13px]'>{category.label}</span>
@@ -153,7 +153,7 @@ const ContentProduct = () => {
                               {getAllProduct.isSuccess && (
                                     <>
                                           {shopAdmin && (
-                                                <div className='col-span-2 flex flex-col p-[16px] h-full bg-[#ffffff] rounded-lg'>
+                                                <div className='col-span-2 flex flex-col p-[16px] h-full bg-color-section-theme rounded-lg border-[1px] border-[var(--border-color-input)]'>
                                                       <Link to={`/shop/${shopAdmin?._id}`} className='h-[55%] flex justify-center'>
                                                             <img
                                                                   src={shopAdmin?.shop_avatar.secure_url || shopAdmin?.shop_avatar_default}
@@ -161,7 +161,7 @@ const ContentProduct = () => {
                                                                   alt='shop admin'
                                                             />
                                                       </Link>
-                                                      <div className='w-full h-[35%] flex justify-center'>
+                                                      <div className='w-full h-[35%] flex-1 py-[6px] flex justify-center'>
                                                             <ProductShopInfo
                                                                   shop={shopAdminQuery.data?.data.metadata.shopAdmin as ShopResponse}
                                                             />
@@ -197,7 +197,7 @@ const ContentProduct = () => {
                   </div>
                   <div className='w-full h-[65px] flex items-center justify-center' ref={refPos}>
                         <button
-                              className='  min-w-[180px] px-[16px] w-max h-[40px] bg-[#ffffff] border-[1px] border-blue-500 text-blue-500 flex items-center justify-center rounded-lg hover:bg-blue-50 hover:text-blue-500'
+                              className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-section-theme border-[1px] border-blue-500 text-blue-500 flex items-center justify-center rounded-lg hover:bg-blue-50 hover:text-blue-500'
                               ref={ref}
                               onClick={() => getAllProduct.fetchNextPage()}
                               disabled={!getAllProduct.hasNextPage}

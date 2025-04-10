@@ -13,7 +13,7 @@ const ProductItemMini = (props: TProps) => {
       return (
             <Link
                   to={`/product/${product._id}`}
-                  className=' w-full max-h-full  flex flex-col gap-[20px] border-[1px] border-gray-100  rounded-lg pb-[5px] hover:shadow-lg'
+                  className=' w-full max-h-full  flex flex-col gap-[20px] border-[1px] border-[var(--border-color-input)]  rounded-lg pb-[5px] hover:shadow-lg'
             >
                   <img src={product.product_thumb_image?.secure_url} className='w-full h-[55%]  rounded-t-lg' alt='' />
                   <div className='px-[6px]  flex-1 flex flex-col gap-[10px]  justify-between text-[8px]'>

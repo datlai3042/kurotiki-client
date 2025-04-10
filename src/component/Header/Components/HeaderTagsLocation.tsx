@@ -1,7 +1,7 @@
 // import './header_list_down.css'
 function HeaderTagsLocation() {
       return (
-            <div className='h-full hidden lg:flex lg:items-center '>
+            <div className='h-full hidden md:flex lg:items-center flex-1'>
                   <ul className='flex text-[12px] text-[#000] gap-1 lg:opacity-70'>
                         <li className='list_item'>trái cây,</li>
                         <li className='list_item'>thịt,trứng,</li>

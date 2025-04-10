@@ -20,13 +20,13 @@ const Content = () => {
       const pathName = useLocation().pathname
 
       return (
-            <div className='   w-full xl:w-[calc(100%-250px)]  h-max flex flex-col gap-[20px] '>
+            <div className='   w-full xl:w-[calc(100%-250px)]  h-max flex flex-col gap-[6px] '>
                   {/* <div className=' hidden 2xl:gap-6 2xl:flex'>
                         <SliderProducts hinhAnhSlider={hinhAnhSlider} height={300} delay={1} />
                         <Banner />
                   </div> */}
 
-                  <div className='w-full p-[20px_16px_32px]  min-h-[250px] xl:min-h-[400px] h-max bg-[#ffffff] rounded-lg'>
+                  <div className='w-full p-[20px_16px_32px] h-[400px]   bg-color-section-theme rounded-[4px]'>
                         <SliderProductV2 />
                   </div>
 
@@ -47,17 +47,17 @@ const Content = () => {
                   <SectionProduct
                         title={<TitleProductSection content='Hàng chính hãng' />}
                         // other={<CountDown />}
-                        background={`linear-gradient(rgba(255, 255, 255, 0) 22.49%, rgb(255, 255, 255) 73.49%), linear-gradient(264.03deg, rgb(220, 229, 251)
-                  -10.27%, rgb(234, 236, 255) 35.65%, rgb(213, 236, 253) 110.66%)`}
+                        //       background={`linear-gradient(rgba(255, 255, 255, 0) 22.49%, rgb(255, 255, 255) 73.49%), linear-gradient(264.03deg, rgb(220, 229, 251)
+                        // -10.27%, rgb(234, 236, 255) 35.65%, rgb(213, 236, 253) 110.66%)`}
                         ListProducts={<ProductGenuineBrand />}
                   />
 
                   <ContentBook />
-{/*                   <ContentFood /> */}
+                  {/*                   <ContentFood /> */}
 
                   <ContentProduct />
 
-                  {pathName === '/' && <Footer className='hidden xl:block bg-[#ffffff]' />}
+                  {pathName === '/' && <Footer className='hidden xl:block bg-color-section-theme' />}
             </div>
       )
 }

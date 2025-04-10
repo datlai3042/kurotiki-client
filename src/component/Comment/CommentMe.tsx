@@ -31,7 +31,7 @@ const CommentMe = (props: TProps) => {
             queryKey: ['get-me-comment', product._id],
             queryFn: () => CommentService.getMeComment({ product_id: product._id }),
             staleTime: SLATE_TIME_COMMENT_ME_ALL,
-            enabled: !!user 
+            enabled: !!user,
       })
 
       const deleteCommentMutation = useMutation({
@@ -62,16 +62,14 @@ const CommentMe = (props: TProps) => {
       }
 
       const onOpenModel = (cb: React.Dispatch<SetStateAction<boolean>>) => {
-
+            if (!user) {
+                  dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: 'Vui lòng đăng nhập để đánh giá sản phẩm' }))
+                  return
+            }
             if (ownerProduct === user._id) {
                   dispatch(
                         addToast({ id: Math.random().toString(), message: 'Bạn không đánh giá sản phẩm của chính mình', type: 'WARNNING' }),
                   )
-                  return
-            }
-
-            if (!user) {
-                  dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: 'Vui lòng đăng nhập để đánh giá sản phẩm' }))
                   return
             }
 

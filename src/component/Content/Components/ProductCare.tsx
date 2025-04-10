@@ -59,7 +59,7 @@ const ProductCare = () => {
                   <div className='max-w-full min-h-[298px] overflow-hidden'>
                         {products && products?.length > 0 && (
                               <div
-                                    className='gap-[20px] xl:gap-[16px] grid grid-rows-[300px]  grid-flow-col auto-cols-[calc((100%-40px)/2)] sm:auto-cols-[calc((100%-80px)/4)]   xl:auto-cols-[calc((100%-96px)/6)]  h-full overflow-x-scroll xl:overflow-visible '
+                                    className='gap-[20px] xl:gap-[16px] grid grid-rows-[300px]  grid-flow-col auto-cols-[calc((100%-40px)/2)] sm:auto-cols-[calc((100%-80px)/4)]   xl:auto-cols-[calc((100%-96px)/6)]  h-full overflow-auto   md:overflow-hidden pb-[8px] '
                                     ref={wrapperListProductsRef}
                               >
                                     {products &&
@@ -84,14 +84,14 @@ const ProductCare = () => {
                               </div>
                         )}
                         {products && products.length === 0 && (
-                              <div className=' w-full min-h-[298px] flex items-center justify-center text-[20px] font-semibold text-slate-700 bg-[#ffffff] rounded-lg'>
+                              <div className=' w-full min-h-[298px] flex items-center justify-center text-[20px] font-semibold text-text-theme bg-color-section-theme rounded-lg'>
                                     Không có thông tin các sản phẩm khác
                               </div>
                         )}
                   </div>
 
                   <button
-                        className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[-50%]  bg-[#ffffff]  rounded-full shadow-3xl`}
+                        className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[-50%]   bg-color-section-theme  rounded-full shadow-3xl`}
                         onClick={handleClickPrev}
                         disabled={styleEffect.disButtonPrev}
                   >

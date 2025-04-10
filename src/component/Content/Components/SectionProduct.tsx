@@ -14,7 +14,7 @@ const SectionProduct = (props: Props) => {
       return (
             <div
                   style={{ background: props.background ? props.background : '' }}
-                  className='bg-[#ffffff] rounded-lg flex-col  min-h-[295px]  p-[12px]'
+                  className='bg-color-section-theme text-text-theme rounded-lg flex-col  min-h-[295px]  p-[12px]'
             >
                   <div className='2xl:h[20%] 2xl:h-[8%] flex justify-between my-[16px]'>
                         <div className=' flex items-center gap-[8px] 2xl:w-full'>

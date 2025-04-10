@@ -123,9 +123,9 @@ const CommentFilter = (props: TProps) => {
       }
 
       return (
-            <div className='w-full min-h-[90px] h-max  flex flex-col gap-[20px] bg-[#ffffff] border-t-[2px] border-[rgb(245_245_250)] py-[16px]'>
-                  <p className='ml-[2px] text-[15px] text-slate-700 font-medium'>Lọc theo</p>
-                  <div className='w-full flex overflow-x-scroll items-center justify-between gap-[14px] xl:gap-0 py-[20px]'>
+            <div className='w-full min-h-[90px] h-max  flex flex-col gap-[20px] bg-color-section-theme text-text-theme border-t-[2px] border-[var(--border-color-input)] py-[16px]'>
+                  <p className='ml-[2px] text-[15px] font-medium'>Lọc theo</p>
+                  <div className='w-full flex overflow-auto items-center justify-between gap-[14px] xl:gap-0 py-[20px]'>
                         <button
                               className={`${styleEffect.onActive(
                                     filterVote.isSelectTime,

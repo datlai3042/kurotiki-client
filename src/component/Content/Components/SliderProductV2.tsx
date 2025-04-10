@@ -84,7 +84,7 @@ const SliderProductV2 = () => {
                                     <img
                                           src={img}
                                           key={img}
-                                          className='min-w-[calc(100%-16px)] xl:min-w-[calc((100%-40px)/2)] h-full rounded-xl'
+                                          className='min-w-[calc(100%-16px)] xl:min-w-[calc((100%-40px)/2)] h-full rounded-xl object-contain'
                                           alt=''
                                     />
                               ))}

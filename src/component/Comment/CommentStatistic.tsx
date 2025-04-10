@@ -24,17 +24,17 @@ const CommentStatistic = (props: TProps) => {
             <div className='w-[300px] h-max flex items-center py-[16px] px-[20px]'>
                   <div className='w-full min-h-[100px] h-max flex flex-col gap-[20px]'>
                         <div className=''>
-                              <span className='text-[15px] text-slate-800 font-extrabold'>Khách hàng đánh giá</span>
+                              <span className='text-[15px]  font-extrabold'>Khách hàng đánh giá</span>
                         </div>
                         <div className=''>
-                              <span className='text-[14px] text-slate-700 font-semibold'>Tổng quan</span>
+                              <span className='text-[14px]  font-semibold'>Tổng quan</span>
                         </div>
                         <div className='w-full min-h-[70px] h-max flex flex-col gap-[2px] '>
                               <div className='flex items-center gap-[8px] flex-1'>
-                                    <span className='text-[28px] text-slate-900 font-semibold'>{avg.toFixed(1)}</span>
+                                    <span className='text-[28px]  font-semibold'>{avg.toFixed(1)}</span>
                                     <Rate disabled allowHalf value={avg} className='' />
                               </div>
-                              <div className='h-max text-[16px] text-slate-500'>({totalComment} đánh giá)</div>
+                              <div className='h-max text-[16px] t'>({totalComment} đánh giá)</div>
                         </div>
                         <div className='w-full min-h-[60px] h-max flex flex-col gap-[6px]'>
                               {detailComment.map((comment) => (

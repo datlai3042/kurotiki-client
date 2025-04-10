@@ -19,7 +19,7 @@ const ProductShopInfo = (props: TProps) => {
                   {shop && (
                         <Link
                               to={`/shop/${shop?._id}`}
-                              className='w-full min-h-[130px] h-full bg-[#ffffff] rounded-lg flex flex-col gap-[16px] p-[16px]'
+                              className='w-full min-h-[130px] h-full bg-color-section-theme text-text-theme rounded-lg flex flex-col gap-[16px] p-[16px]'
                         >
                               <h4 className='text-[16px] font-semibold'>Thông tin nhà bán</h4>
                               <div className='flex flex-row xl:flex-col gap-[12px]'>
@@ -44,7 +44,7 @@ const ProductShopInfo = (props: TProps) => {
                                     </div>
 
                                     <div className='ml-[30px] self-start justify-self-start flex flex-col gap-[12px]'>
-                                          <button className='min-w-[60px] w-max h-[30px] p-[8px] border-[1px] border-slate-400 flex items-center justify-center rounded-md'>
+                                          <button className='min-w-[60px] w-max h-[30px] p-[8px] border-[1px] border-[var(--border-color-input)] flex items-center justify-center rounded-md'>
                                                 Xem shop
                                           </button>
                                     </div>

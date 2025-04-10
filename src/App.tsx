@@ -24,7 +24,7 @@ function App() {
       useEffect(() => {}, [boxLogin])
 
       return (
-            <div className=' min-h-screen  w-full min-w-full bg-[rgb(245_245_250)] '>
+            <div className=' min-h-screen  w-full min-w-full bg-color-gap-empty '>
                   <div id='main w-full ' className='min-h-screen flex flex-col'>
                         <AuthenticationContext />
                         <RouterController />

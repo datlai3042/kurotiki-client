@@ -49,9 +49,9 @@ const ProductGenuineBrand = () => {
       }
 
       return (
-            <div className='relative flex-1 h-[80%]  px-[18px]'>
+            <div className='relative flex-1 h-[80%]  px-[18px] bg-color-section-theme text-text-theme'>
                   <div className='w-full h-full overflow-hidden'>
-                        <div className='flex  gap-[20px] h-full overflow-x-scroll xl:overflow-visible' ref={wrapperListProductsRef}>
+                        <div className='flex  gap-[20px] h-full  overflow-auto md:overflow-hidden pb-[8px]' ref={wrapperListProductsRef}>
                               <img
                                     src={img1}
                                     className='h-full min-w-[calc((100%-120px)/2)] sm:min-w-[calc((100%-120px)/4)] xl:min-w-[calc((100%-120px)/6)]'

@@ -70,12 +70,15 @@ const ProductSimiliar = (props: TProps) => {
             <div className='relative h-full overflow-hidden flex flex-col gap-[16px] mx-[16px] py-[24px]'>
                   <p className='text-[16px] font-semibold'>Sản phẩm tương tự</p>
                   {productData && productData.length === 0 && (
-                        <div className='w-full min-h-full h-full flex items-center justify-center text-[20px] font-semibold text-slate-700 bg-[#ffffff] rounded-lg'>
+                        <div className='w-full min-h-full h-full flex items-center justify-center text-[20px] font-semibold text-text-theme bg-color-section-theme rounded-lg'>
                               Không có thông tin các sản phẩm khác
                         </div>
                   )}
                   {productData && (
-                        <div className='flex xl:w-full  xl:gap-0    overflow-scroll xl:overflow-visible ' ref={wrapperListProductsRef}>
+                        <div
+                              className='flex xl:w-full  xl:gap-0    overflow-auto md:overflow-visible pb-[8px]'
+                              ref={wrapperListProductsRef}
+                        >
                               <div className=' w-max xl:min-w-full    grid grid-flow-col auto-cols-[130px] auto-rows-[220px] grid-cols-[130px] xl:grid-cols-4 grid-rows-[220px_220px] gap-[18px] '>
                                     {page1 && page1?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                               </div>

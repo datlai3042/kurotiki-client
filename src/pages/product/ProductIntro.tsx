@@ -55,7 +55,7 @@ const ProductIntro = (props: TProps) => {
       console.log({ result: getAddressDefault(user?.user_address) })
       return (
             <div className='flex flex-col min-h-full h-max gap-[16px] text-[13px]'>
-                  <section className='bg-white w-full min-h-[160px] h-auto p-[18px]  rounded-lg'>
+                  <section className='bg-color-section-theme w-full min-h-[160px] h-auto p-[18px]  rounded-lg'>
                         <div className='flex flex-col gap-[4px]'>
                               <header>
                                     <div className='flex gap-[12px] flex-col xl:flex-row'>
@@ -68,32 +68,32 @@ const ProductIntro = (props: TProps) => {
                                           )}
                                     </div>
                               </header>
-                              <p className='text-[24px] text-black font-medium'>{product?.product_name}</p>
+                              <p className='text-[24px] font-medium'>{product?.product_name}</p>
                               <div className=' min-h-[16px] h-max  flex flex-row    items-center gap-[8px] text-[16px] my-[6px]'>
                                     {avg > 0 && <span className='font-semibold'>{avg.toFixed(1)}</span>}
                                     {/* {diffrenceBetweenStar(votes)?.map((opacity) => <Star opacity={opacity} />)} */}
                                     <Rate disabled allowHalf value={avg || product.product_votes} className='text-[14px]' />
-                                    <p className='text-gray-400'>({totalComment})</p>
+                                    <p className='opacity-80'>({totalComment})</p>
                                     {product.product_is_bought > 0 && <p className='w-[1px] h-[12px] mt-[5px] bg-gray-400'></p>}
-                                    <p className='text-[14px] text-gray-500 leading-3 mt-[2px]'>
+                                    <p className='text-[14px] opacity-80 leading-3 mt-[2px]'>
                                           {product.product_is_bought > 1000 ? 'Đã bán 1000+' : `Đã bán ${product.product_is_bought}` || ''}
                                     </p>
                               </div>
 
-                              <p className='text-[24px] text-black font-semibold'>
+                              <p className='text-[24px]  font-semibold'>
                                     {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
                                           product?.product_price as number,
                                     )}
                               </p>
-                              <p className=' text-[14px] text-gray-500'>Sản phẩm trong kho: {product.product_available || 0}</p>
+                              <p className=' text-[14px] opacity-80'>Sản phẩm trong kho: {product.product_available || 0}</p>
                         </div>
                   </section>
 
                   <ProductPayMoblie product={product} />
 
-                  <section className='bg-white w-full min-h-[160px] h-auto p-[18px] rounded-lg'>
+                  <section className='bg-color-section-theme w-full min-h-[160px] h-auto p-[18px] rounded-lg'>
                         <div className='flex flex-col gap-[12px]'>
-                              <p className='[word-spacing:1px] text-[16px] text-black font-semibold word'>Thông tin vận chuyển</p>
+                              <p className='[word-spacing:1px] text-[16px]  font-semibold word'>Thông tin vận chuyển</p>
                               <div className=' min-h-[26px] h-max w-full flex flex-wrap flex-row justify-between'>
                                     <div className='text-[14px]'>
                                           {cartCurrent.cart_current_address ? (
@@ -132,7 +132,7 @@ const ProductIntro = (props: TProps) => {
                         </div>
                   </section>
 
-                  <section className='max-w-full h-[550px] bg-[#ffffff] rounded-lg'>
+                  <section className='max-w-full  bg-color-section-theme rounded-lg'>
                         <ProductSimiliar product={product} />
                   </section>
                   <section className='w-full min-h-[300px] h-max  rounded-lg'>
@@ -142,7 +142,7 @@ const ProductIntro = (props: TProps) => {
                         <ProductShopInfo shop={shopQuery.data?.data.metadata.shop as ShopResponse} />
                   </section>
 
-                  <section className='min-h-[70px] h-max w-full  p-[18px]  bg-[#ffffff] flex flex-col gap-[6px] rounded-lg '>
+                  <section className='min-h-[70px] h-max w-full  p-[18px]  bg-color-section-theme flex flex-col gap-[6px] rounded-lg '>
                         <p className='text-[16px] font-semibold'>Thông tin chi tiết</p>
                         <div className='flex flex-wrap'>
                               {product.product_type === 'Food' && <ProductFood product_attribute={product.attribute as IProductFood} />}

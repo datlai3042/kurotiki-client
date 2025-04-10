@@ -59,7 +59,7 @@ const SectionProductItem = (props: Props) => {
       }
 
       return (
-            <div className='h-[85%] mx-[4px] relative  overflow-x-scroll lg:overflow-x-hidden  '>
+            <div className='h-[85%] mx-[4px] relative overflow-auto md:overflow-hidden pb-[8px] bg-color-section-theme text-text-theme '>
                   <div
                         ref={wrapperListProductsRef}
                         className=' h-full  flex  gap-[12px] xl:gap-[34px] px-[18px] w-[370px]  xl:w-full snap-mandatory	'
