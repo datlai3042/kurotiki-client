@@ -53,6 +53,7 @@ const HeaderResultSearch = (props: Props) => {
       const products = searchQuery.data?.data.metadata.products
       const shops = searchQuery.data?.data.metadata.shops
 
+
       const onNavigate = () => {
             // setText('')
             onReset()
@@ -113,18 +114,22 @@ const HeaderResultSearch = (props: Props) => {
                                                                   alt=''
                                                             />
                                                             <div className='flex flex-col gap-[2px]'>
-                                                                  <span className='text-text-theme font-bold'>{shop.shop_name}</span>
-                                                                  <p>
-                                                                        <span>{shop.shop_vote.toString()}</span>
-                                                                        <Rate
-                                                                              defaultValue={1}
-                                                                              count={1}
-                                                                              allowHalf
-                                                                              disabled
-                                                                              className='text-[10px]'
-                                                                        />
+                                                                  <span className=' font-bold'>{shop.shop_name}</span>
+                                                                  <div className='flex gap-[8px] items-center'>
+                                                                        <div className='flex items-center gap-[6px]'>
+                                                                              <span>
+                                                                                    {shop.shop_vote ? shop.shop_vote.toString() : 4.5}
+                                                                              </span>
+                                                                              <Rate
+                                                                                    defaultValue={1}
+                                                                                    count={1}
+                                                                                    allowHalf
+                                                                                    disabled
+                                                                                    className='text-[10px]'
+                                                                              />
+                                                                        </div>
                                                                         <p>{shop.shop_count_total_vote.toString()} đánh giá</p>
-                                                                  </p>
+                                                                  </div>
                                                             </div>
                                                       </Link>
                                                 ))}

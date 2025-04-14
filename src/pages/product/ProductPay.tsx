@@ -9,9 +9,9 @@ import { addToast } from '../../Redux/toast'
 import { RootState } from '../../store'
 import { UserResponse } from '../../types/user.type'
 import { CartCurrent } from '../../Redux/cartSlice'
-import { doOpenBoxLogin } from '../../Redux/authenticationSlice'
 import { Address } from '../../types/address.type'
 import { checkAxiosError } from '../../utils/handleAxiosError'
+import { doOpenBoxLogin } from '../../Redux/authSlice'
 
 type TProps = {
       product: TProductDetail
@@ -118,7 +118,6 @@ const ProductPay = (props: TProps) => {
             setDisableBtn(false)
       }, [cartCurrent.cart_current_address])
 
-
       useEffect(() => {
             if (cartMutation.isSuccess) {
                   dispatch(addToast({ type: 'SUCCESS', message: 'Cart', id: Math.random().toString() }))
@@ -204,7 +203,10 @@ const ProductPay = (props: TProps) => {
                         </p>
                   </div>
                   <div className='w-full h-max flex flex-col gap-[8px]'>
-                        <button className='w-full h-[45px] flex items-center justify-center bg-red-600 text-white rounded-md'>
+                        <button
+                              onClick={handleClickBuy}
+                              className='w-full h-[45px] flex items-center justify-center bg-red-600 text-white rounded-md'
+                        >
                               Mua ngay
                         </button>
                         <button

@@ -1,4 +1,4 @@
-import { Document, Font, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
+import { Document, Font, Image, Page, StyleSheet, Text, View } from '@react-pdf/renderer'
 import React from 'react'
 import { CartProduct } from '../../types/cart.type'
 import { convertDateToStringFull } from '../../utils/date.utils'
@@ -53,65 +53,127 @@ export const PDFInvoiceImage = (props: TProps) => {
                         </View>
 
                         <View style={styles.body}>
-                              {products.map((product, index) => (
-                                    <View key={product.product_id._id} style={styles.bodyItem}>
-                                          <Text>Tên cửa hàng: {product.shop_id.shop_name}</Text>
-                                          <View
-                                                style={{
-                                                      display: 'flex',
-                                                      flexDirection: 'row',
-                                                      gap: 8,
-                                                      justifyContent: 'space-between',
-                                                }}
-                                          >
-                                                <Text>Tên sản phẩm: {product.product_id.product_name}</Text>
+                              {products.map((product) => {
+                                    return (
+                                          <View key={product.product_id._id} style={styles.bodyItem}>
+                                                <View>
+                                                      <Text
+                                                            style={{
+                                                                  display: 'flex',
+                                                                  flexDirection: 'row',
+                                                                  gap: 8,
+                                                                  justifyContent: 'space-between',
+                                                                  lineHeight: 1.6,
+                                                            }}
+                                                      >
+                                                            <Text
+                                                                  style={{
+                                                                        fontWeight: 700,
+                                                                        width: 160,
+                                                                        marginRight: 8,
+                                                                        color: '#35336a',
+                                                                  }}
+                                                            >
+                                                                  Cửa hàng:
+                                                            </Text>
+
+                                                            <Text>{product.shop_id.shop_name}</Text>
+                                                      </Text>
+                                                      <Image
+                                                            src={
+                                                                  product.shop_id?.shop_avatar.secure_url ||
+                                                                  product.shop_id?.shop_avatar_default
+                                                            }
+                                                            style={{ width: 70, height: 70, marginRight: 8, borderRadius: 4 }}
+                                                      />
+                                                </View>
+
                                                 <View
                                                       style={{
-                                                            width: 15,
-                                                            height: 15,
-                                                            borderRadius: '50%',
                                                             display: 'flex',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-                                                            backgroundColor: '#000000',
-                                                            color: '#ffffff',
+                                                            flexDirection: 'row',
+                                                            gap: 8,
+                                                            justifyContent: 'space-between',
+                                                            lineHeight: 1.6,
                                                       }}
                                                 >
-                                                      <Text>{index + 1}</Text>
+                                                      <Text
+                                                            style={{
+                                                                  display: 'flex',
+                                                                  flexDirection: 'row',
+                                                                  gap: 8,
+                                                                  justifyContent: 'space-between',
+                                                                  lineHeight: 1.6,
+                                                            }}
+                                                      >
+                                                            <Text
+                                                                  style={{
+                                                                        fontWeight: 700,
+                                                                        width: 160,
+                                                                        marginRight: 8,
+                                                                        color: '#35336a',
+                                                                  }}
+                                                            >
+                                                                  Sản phẩm:
+                                                            </Text>
+                                                            <Text>{product.product_id.product_name}</Text>
+                                                      </Text>
                                                 </View>
-                                          </View>
 
-                                          <View
-                                                style={{
-                                                      display: 'flex',
-                                                      flexDirection: 'row',
-                                                      gap: 8,
-                                                      justifyContent: 'space-between',
-                                                }}
-                                          >
-                                                <Text>Giá: {product.quantity}</Text>
-                                                <Text>Số lượng: {product.quantity}</Text>
-                                                <Text style={{ textAlign: 'right' }}>
-                                                      Thành tiền: {product.product_id.product_price * product.quantity}
+                                                <Text
+                                                      style={{
+                                                            display: 'flex',
+                                                            flexDirection: 'row',
+                                                            gap: 8,
+                                                            justifyContent: 'space-between',
+                                                            lineHeight: 1.6,
+                                                      }}
+                                                >
+                                                      <Text style={{ fontWeight: 700, width: 160, marginRight: 8, color: '#35336a' }}>
+                                                            Giá:
+                                                      </Text>
+
+                                                      <Text>{product.product_id.product_price} VNĐ</Text>
                                                 </Text>
-                                          </View>
+                                                <Text
+                                                      style={{
+                                                            display: 'flex',
+                                                            flexDirection: 'row',
+                                                            gap: 8,
+                                                            justifyContent: 'space-between',
+                                                            lineHeight: 1.6,
+                                                      }}
+                                                >
+                                                      <Text style={{ fontWeight: 700, width: 160, marginRight: 8, color: '#35336a' }}>
+                                                            Số lượng:
+                                                      </Text>
 
-                                          <View
-                                                style={{
-                                                      display: 'flex',
-                                                      flexDirection: 'row',
-                                                      gap: 8,
-                                                      justifyContent: 'space-between',
-                                                }}
-                                          >
-                                                <Text>Địa chỉ nhận hàng: {renderStringAddressDetailV2(product.cart_address)}</Text>
-                                          </View>
+                                                      <Text>{product.quantity}</Text>
+                                                </Text>
 
-                                          <Text style={{ width: '100%', height: 1, backgroundColor: 'gray', opacity: 0.5 }}></Text>
-                                    </View>
-                              ))}
+                                                <Text
+                                                      style={{
+                                                            display: 'flex',
+                                                            flexDirection: 'row',
+                                                            gap: 8,
+                                                            justifyContent: 'space-between',
+                                                            lineHeight: 1.6,
+                                                      }}
+                                                >
+                                                      <Text style={{ fontWeight: 700, width: 160, marginRight: 8, color: '#35336a' }}>
+                                                            Địa chỉ nhận hàng:
+                                                      </Text>
+                                                      <Text>{renderStringAddressDetailV2(product.cart_address)}</Text>
+                                                </Text>
+                                                <Text style={{ textAlign: 'right' }}>
+                                                      Thành tiền: {product.product_id.product_price * product.quantity} VNĐ
+                                                </Text>
+                                                <Text style={{ width: '100%', height: 1, backgroundColor: 'gray', opacity: 0.5 }}></Text>
+                                          </View>
+                                    )
+                              })}
                         </View>
-                        <Text style={styles.footer}>Tổng tiền của hóa đơn: {orderTotal}</Text>
+                        <Text style={styles.footer}>Tổng tiền: {orderTotal} VNĐ</Text>
                   </Page>
             </Document>
       )

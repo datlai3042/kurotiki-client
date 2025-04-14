@@ -115,18 +115,15 @@ const ContentProduct = () => {
       const styleEffect = {
             onActive: (check: boolean) => {
                   if (check) return 'bg-color-main border-b-[3px] border-blue-500 !text-[#fff]'
-                  return 'hover:bg-color-main'
+                  return 'hover:bg-color-main hover:text-[#fff]'
             },
       }
 
       return (
             <div className=' z-[5] w-full min-h-[370px] h-max  flex flex-col gap-[8px]  bg-color-section-theme text-text-theme  xl:p-0'>
-                  <div
-                        className='animate-mountComponent  w-full sticky top-[60px]  pt-[16px] z-[2] '
-                        ref={stickyRef}
-                  >
+                  <div className='animate-mountComponent  w-full sticky top-[65px] md:top-[75px]   z-[2] ' ref={stickyRef}>
                         <div className=' w-full  bg-color-section-theme  rounded  border[1px] border-b-[1px] border-[var(--border-color-input)]  flex flex-col gap-[10px] pt-[10px]'>
-                              <h3 className='w-full pl-[20px] font-bold'>Gợi ý hôm nay</h3>
+                              <h3 className='w-full pl-[20px] font-bold text-[16px]'>Gợi ý hôm nay</h3>
                               <div className='grow grid  grid-cols-[repeat(3,170px)] auto-cols-[170px] grid-flow-col  xl:grid-flow-row  xl:grid-cols-6  justify-items-center overflow-auto pb-[8px]'>
                                     {arrayCategory.map((category) => (
                                           <Link
@@ -182,14 +179,11 @@ const ContentProduct = () => {
 
                               {page + 1 <= totalPage && getAllProduct.isPending && (
                                     <>
-                                          <div className='animate-pulse col-span-2 bg-slate-400'></div>
+                                          <div className=' col-span-2 skeleton__container'></div>
                                           {Array(10)
                                                 .fill(0)
                                                 ?.map((_, index) => (
-                                                      <div
-                                                            className='animate-pulse w-full h-full rounded-lg bg-slate-400'
-                                                            key={index}
-                                                      ></div>
+                                                      <div className=' w-full h-full rounded-lg skeleton__container' key={index}></div>
                                                 ))}
                                     </>
                               )}

@@ -79,7 +79,7 @@ const ToastDemo = (props: TProps) => {
                         <div
                               onMouseEnter={handleOnMouseEnter}
                               onMouseLeave={handleOnMouseLeave}
-                              className={`${styleEffect.type_toast} animate-toastAnimation bg-[#ffffff] pt-[8px] px-[6px] xl:pt-[16px] pb-[30px] xl:px-[12px] w-[220px] xl:w-[300px]  relative min-w-[140px] xl:min-w-[150px]   min-h-[100px]  xl:min-h-[114px] h-max   rounded-lg transition-all duration-1000  flex items-center justify-center`}
+                              className={`${styleEffect.type_toast} animate-toastAnimation min-w-[250px] bg-[#ffffff] pt-[8px] px-[6px] xl:pt-[16px] py-[20px] pb-[30px] xl:px-[12px]   relative    h-max   rounded-lg transition-all duration-1000  flex items-center justify-center`}
                         >
                               <div
                                     className={`${styleEffect.bgBoxTime} absolute top-[15px] right-[35px] w-[50px] h-[20
@@ -132,7 +132,7 @@ px] xl:w-[60px] xl:h-[30px] flex items-center justify-center rounded-md  text-wh
                               </span>
                               <span
                                     onClick={(e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => handleControllCloseToast(e, toast.id)}
-                                    className={`absolute flex justify-center items-center top-[5px] animate-pulse right-[5px] w-[30px] h-[30px] p-[4px] text-[12px]  `}
+                                    className={`absolute flex justify-center items-center top-[5px] animate-pulse right-[5px] w-[30px] h-[30px] p-[4px] text-[12px]  cursor-pointer`}
                               >
                                     <X color={`${styleEffect.type_toast_icon}`} />
                               </span>

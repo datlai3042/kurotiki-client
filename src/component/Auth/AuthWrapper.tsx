@@ -30,7 +30,7 @@ const AuthWrapper = (props: TProps) => {
                   }}
             >
                   <div
-                        className='animate-authBox relative w-[420px] max-w-[420px] bg-white min-h-[400px] h-auto shadow-lg rounded-lg p-[8px]'
+                        className='animate-authBox relative  bg-color-section-theme text-text-theme  h-auto shadow-lg rounded-lg p-[8px]'
                         onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
                   >
                         {modeAuth === ('Login' as const) ? (
@@ -40,10 +40,10 @@ const AuthWrapper = (props: TProps) => {
                         )}
 
                         <button
-                              className='absolute top-[-20px] right-[-10px] w-[50px] h-[50px] border-[1px] border-slate-900 bg-white hover:bg-slate-900 hover:text-white  rounded-full flex justify-center items-center'
+                              className='absolute bottom-[102%] right-[0px] w-[50px] py-[5px] rounded-[4px]  bg-color-main hover:border-transparent text-white min-w-[100px] flex justify-center items-center'
                               onClick={handleHideBoxAuth}
                         >
-                              X
+                              Đóng
                         </button>
                   </div>
             </div>

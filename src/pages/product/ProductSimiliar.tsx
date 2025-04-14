@@ -74,7 +74,7 @@ const ProductSimiliar = (props: TProps) => {
                               Không có thông tin các sản phẩm khác
                         </div>
                   )}
-                  {productData && (
+                  {productData && productData.length > 0 &&(
                         <div
                               className='flex xl:w-full  xl:gap-0    overflow-auto md:overflow-visible pb-[8px]'
                               ref={wrapperListProductsRef}
@@ -105,7 +105,7 @@ const ProductSimiliar = (props: TProps) => {
                               ))}
                   </div>
 
-                  {allProduct.isPending && (
+                  {/* {allProduct.isPending && (
                         <div className='flex xl:w-full  xl:gap-0    overflow-scroll xl:overflow-visible ' ref={wrapperListProductsRef}>
                               <div className=' w-max xl:min-w-full mx-[50px] xl:mx-0 grid grid-flow-col auto-cols-[130px] auto-rows-[230px] grid-cols-[130px] xl:grid-cols-4 grid-rows-[230px_230px] gap-[18px] '>
                                     {Array(8)
@@ -113,23 +113,27 @@ const ProductSimiliar = (props: TProps) => {
                                           ?.map((_, index) => <div className='animate-pulse bg-slate-400' key={index}></div>)}
                               </div>
                         </div>
+                  )} */}
+
+                  {productData &&  productData.length > 0 && (
+                        <>
+                              <button
+                                    className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[30%]  bg-[#ffffff]  rounded-full shadow-3xl`}
+                                    onClick={handleClickPrev}
+                                    disabled={styleEffect.disButtonPrev || allProduct.isPending}
+                              >
+                                    <ChevronLeft size={28} color='blue' />
+                              </button>
+
+                              <button
+                                    className={`${styleEffect.buttonNext} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[30%] bg-[#ffffff]  rounded-full shadow-3xl `}
+                                    onClick={handleClickNext}
+                                    disabled={styleEffect.disButtonNext || allProduct.isPending}
+                              >
+                                    <ChevronRight size={26} color='blue' />
+                              </button>
+                        </>
                   )}
-
-                  <button
-                        className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[30%]  bg-[#ffffff]  rounded-full shadow-3xl`}
-                        onClick={handleClickPrev}
-                        disabled={styleEffect.disButtonPrev || allProduct.isPending}
-                  >
-                        <ChevronLeft size={28} color='blue' />
-                  </button>
-
-                  <button
-                        className={`${styleEffect.buttonNext} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[30%] bg-[#ffffff]  rounded-full shadow-3xl `}
-                        onClick={handleClickNext}
-                        disabled={styleEffect.disButtonNext || allProduct.isPending}
-                  >
-                        <ChevronRight size={26} color='blue' />
-                  </button>
             </div>
       )
 }

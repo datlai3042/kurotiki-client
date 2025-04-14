@@ -74,10 +74,10 @@ const PaymentCart = (props: TProps) => {
 
       return (
             <React.Fragment>
-                  <div className='min-h-[230px] xl:min-h-[180px] h-max  transition-all duration-1000 bg-[#ffffff] rounded p-[16px] text-[12px]'>
+                  <div className='min-h-[230px] xl:min-h-[180px] h-max  transition-all duration-1000 bg-color-section-theme text-text-theme rounded p-[16px] text-[12px]'>
                         <div className='w-full min-h-[50px]  flex flex-col gap-[6px]'>
                               <h4>Đơn hàng</h4>
-                              <div className='flex gap-[6px] items-center'>
+                              <div className='flex gap-[6px] items-center cursor-pointer'>
                                     <span>{carts?.cart_products.length} sản phẩm</span>
                                     <p className='flex gap-[3px] items-center' onClick={controllOpenSeeProduct}>
                                           <span>Xem thông tin</span>
@@ -86,7 +86,7 @@ const PaymentCart = (props: TProps) => {
                               </div>
                         </div>
 
-                        <div className='w-[calc(100%+32px)] ml-[-16px] bg-slate-200 h-[1px] my-[8px] '></div>
+                        <div className='w-[calc(100%+32px)] ml-[-16px] bg-[var(--border-color-input)] h-[1px] my-[8px] '></div>
                         <div
                               style={{ height, paddingTop: height > 0 ? 10 : 0, paddingBottom: height > 0 ? 10 : 0 }}
                               className={` flex flex-col gap-[8px] transition-all duration-100`}
@@ -102,17 +102,20 @@ const PaymentCart = (props: TProps) => {
                                                 className=' justify-between  items-center'
                                                 key={product._id}
                                           >
-                                                <div className='flex gap-[2px] h-full items-center justify-between'>
-                                                      <span className='self-end text-[12px]'>x</span>
-                                                      <p className='self-end min-w-[50px] text-[20px] leading-none'>{product.quantity}</p>
+                                                <div className='flex gap-[12px] h-full items-center justify-between'>
                                                       <img
                                                             style={{
                                                                   width: (height / carts?.cart_products.length / 100) * 70,
                                                             }}
                                                             src={product.product_id.product_thumb_image.secure_url}
-                                                            className=' h-[100%]'
+                                                            className=' h-[100%] object-contain'
                                                             alt='product'
                                                       />
+                                                      <p className='self-end min-w-[50px] text-[20px] leading-none text-color-main font-semibold'>
+                                                      <span className='self-end text-[12px]'>x</span>
+                                                          
+                                                            {product.quantity}
+                                                      </p>
                                                 </div>
                                                 <p className=' min-w-[50px] w-max text-left text-slate-900 font-bold text-[16px]'>
                                                       {product.quantity * product.product_id.product_price}
@@ -120,11 +123,11 @@ const PaymentCart = (props: TProps) => {
                                           </div>
                                     )
                               })}
-                              <div className='w-[calc(100%+32px)] ml-[-16px] bg-slate-200 h-[1px] '></div>
+                              <div className='w-[calc(100%+32px)] ml-[-16px] bg-[var(--border-color-input)] h-[1px] '></div>
                         </div>
-                        <div className=' bg-[#ffffff]  min-h-[150px]  flex-1 w-[calc(100%+32px)] ml-[-16px] px-[16px]'>
+                        <div className=' bg-color-section-theme  min-h-[150px]  flex-1 w-[calc(100%+32px)] ml-[-16px] px-[16px]'>
                               <div className='h-[49%]  flex flex-col gap-[8px] xl:gap-[16px] justify-center'>
-                                    <div className='w-full flex  flex-col xl:flex-row justify-between'>
+                                    <div className='w-full flex  flex-row flex-wrap justify-between'>
                                           <span>Tạm tính</span>
                                           <p className='w-max flex gap-[4px] items-center '>
                                                 <span className='w-[130px] xl:w-max  max-w-[180px] truncate'>
@@ -137,11 +140,11 @@ const PaymentCart = (props: TProps) => {
                                     </div>
                                     <p className='w-full flex justify-between gap-[16px]'>
                                           <span>Giảm giá </span>
-                                          <span>-15000</span>
+                                          <span>-0đ</span>
                                     </p>
                               </div>
-                              <div className='mt-0 transition-all duration-700 h-[49%] flex flex-col gap-[8px] xl:gap-0 justify-center bg-[#ffffff] '>
-                                    <div className='flex   flex-col xl:flex-row justify-between '>
+                              <div className='mt-0 transition-all duration-700 h-[49%] flex flex-col gap-[8px] xl:gap-0 justify-center bg-color-section-theme '>
+                                    <div className='flex   flex-row flex-wrap justify-between gap-[16px]'>
                                           <span>Tổng tiền</span>
                                           <BoxMoney name='VNĐ' money={price} />
                                     </div>
@@ -163,7 +166,7 @@ const PaymentCart = (props: TProps) => {
                               {orderPaymentMutation.isSuccess && (
                                     <Link
                                           to={'/'}
-                                          className='w-full h-[45px] flex items-center justify-center bg-blue-600 text-white rounded-md text-[16px] mt-[16px]'
+                                          className='w-full h-[45px] flex items-center justify-center bg-color-main text-white rounded-[4px] text-[16px] mt-[16px]'
                                     >
                                           Thanh toán thành công, nhấn để quay về
                                     </Link>

@@ -39,7 +39,7 @@ const InputNumber = <T extends FieldValues>(props: TProps<T>) => {
                         placeholder={placehorder}
                         id={id}
                         autoFocus={autofocus}
-                        className='border-[1px] border-slate-400 outline-none px-[16px] py-[10px] rounded-[6px]'
+                        className='border-[1px] border-[var(--border-color-input)] bg-color-section-theme text-text-theme outline-none px-[16px] py-[10px] rounded-[6px]'
                   />
 
                   {errors[FieldName as string] && (

@@ -1,4 +1,4 @@
-import { Plus, X } from 'lucide-react'
+import { Camera, Plus, X } from 'lucide-react'
 import React, { SetStateAction, useEffect, useRef, useState } from 'react'
 import { Controller, FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -8,6 +8,7 @@ import { addToast } from '../../Redux/toast'
 import BoxLoading from './BoxLoading'
 import { fetchUser } from '../../Redux/authenticationSlice'
 import TextArea from 'antd/es/input/TextArea'
+import Portal from '../Portal'
 
 type TForm = {
       shop_name: string
@@ -45,7 +46,6 @@ const BoxShopForm = (props: TProps) => {
                   inputAvatar.current?.click()
             }
       }
-
 
       const onChangeAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
             // if(!)
@@ -98,85 +98,104 @@ const BoxShopForm = (props: TProps) => {
       }, [preview])
 
       return (
-            <div className='fixed inset-0 bg-[rgba(0,0,0,.4)] h-screen flex items-center justify-center z-[500]'>
-                  <div className='animate-authBox w-[300px] xl:w-[700px] min-h-[480px] h-max  mx-[10px] xl:mx-0 bg-red-800 '>
-                        <FormProvider {...form}>
-                              <form
-                                    spellCheck={false}
-                                    className='relative w-full h-[575px] xl:h-[480px] flex flex-col xl:flex-row  bg-[#ffffff] rounded-lg'
-                                    onSubmit={form.handleSubmit(onSubmit)}
-                              >
-                                    <div className='w-full xl:w-[40%] h-full bg-[rgb(245_245_250)] pb-[16px] xl:pb-0'>
-                                          <div className='flex flex-col items-center mt-[30px]'>
-                                                <div
-                                                      className='relative w-[180px] h-[180px] flex flex-col items-center justify-center bg-[#ffffff] rounded-full border-[6px] border-blue-300'
-                                                      onClick={onClickAvatar}
-                                                >
-                                                      {preview && <img src={preview} className='w-full h-full rounded-full' alt='avatar' />}
+            <Portal>
+                  <div className='fixed inset-0 bg-[rgba(0,0,0,.4)] h-screen flex items-center justify-center z-[998]'>
+                        <div className='animate-authBox  h-max  mx-[10px] xl:mx-0   '>
+                              <FormProvider {...form}>
+                                    <div className='relative   pr-[10px'>
+                                          <form
+                                                spellCheck={false}
+                                                className='px-[20px] flex flex-row flex-wrap w-[600px] overflow-y-auto  max-w-[90vw] max-h-[80vh]  bg-color-section-theme rounded-lg text-text-theme gap-[20px]'
+                                                onSubmit={form.handleSubmit(onSubmit)}
+                                          >
+                                                <div className='w-full xl:w-[40%] h-full bg-color-section-theme pb-[16px] xl:pb-0 cursor-pointer'>
+                                                      <div className='flex flex-col items-center mt-[30px]'>
+                                                            <div
+                                                                  className='relative w-[150px] h-[150px] flex flex-col items-center justify-center bg-color-section-theme rounded-full border-[6px] border-color-main'
+                                                                  onClick={onClickAvatar}
+                                                            >
+                                                                  {preview && (
+                                                                        <img
+                                                                              src={preview}
+                                                                              className='w-full h-full rounded-full'
+                                                                              alt='avatar'
+                                                                        />
+                                                                  )}
 
-                                                      {!preview && <Plus size={30} color='blue' />}
+                                                                  {!preview && <Camera size={30} className='text-color-main' />}
+                                                            </div>
+
+                                                            {preview && (
+                                                                  <button
+                                                                        className='mt-[20px] p-[12px_14px] rounded-[4px]  bg-color-main opacity-80 hover:opacity-100 text-[#fff] hover:cursor-pointer transition-all duration-300'
+                                                                        onClick={onResetAvatar}
+                                                                  >
+                                                                        Chọn lại
+                                                                  </button>
+                                                            )}
+                                                            <input
+                                                                  type='file'
+                                                                  className='hidden'
+                                                                  id='avatar_shop'
+                                                                  onChange={(e) => {
+                                                                        onChangeAvatar(e)
+                                                                  }}
+                                                                  ref={(e) => {
+                                                                        inputAvatar.current = e
+                                                                  }}
+                                                            />
+                                                      </div>
                                                 </div>
-
-                                                {preview && (
-                                                      <button
-                                                            className='mt-[20px] p-[12px_14px] border-[1px] border-blue-500 bg-[#ffffff] text-blue-500 rounded-md hover:bg-blue-500 hover:text-white hover:cursor-pointer transition-all duration-300'
-                                                            onClick={onResetAvatar}
-                                                      >
-                                                            Chọn lại
+                                                <div className='w-full xl:w-[60%] flex-1 h-full py-[16px]   flex flex-col items-center gap-[20px] bg-color-section-theme'>
+                                                      <header>Đăng kí thông tin về cửa hàng</header>
+                                                      <div className='flex flex-col gap-[8px] w-[100%]'>
+                                                            <label htmlFor='shop_name'>Tên Shop</label>
+                                                            <input
+                                                                  type='text'
+                                                                  placeholder='Nhập tên shop'
+                                                                  id='shop_name'
+                                                                  className='w-full h-[40px] p-[12px_24px] bg-color-section-theme rounded outline-none border-[1px] border-[var(--border-color-input)]'
+                                                                  {...form.register('shop_name', {
+                                                                        required: { value: true, message: 'Tên shop là bắt buộc' },
+                                                                        minLength: { value: 3, message: 'Tối thiểu 3 kí tự' },
+                                                                        maxLength: { value: 150, message: 'Tối thiểu 150 kí tự' },
+                                                                  })}
+                                                            />
+                                                            <Controller
+                                                                  control={form.control}
+                                                                  name='shop_description'
+                                                                  render={({ field }) => (
+                                                                        <TextArea
+                                                                              rows={10}
+                                                                              {...field}
+                                                                              placeholder='Nhập mô tả của shop'
+                                                                              style={{
+                                                                                    backgroundColor: 'var(--color-section-theme)',
+                                                                                    border: '1px solid var(--border-color-input)',
+                                                                                    color: 'var(--text-theme)',
+                                                                              }}
+                                                                        ></TextArea>
+                                                                  )}
+                                                            />
+                                                      </div>
+                                                      <button className='ml-auto w-max flex items-center gap-[16px] p-[12px_14px]  bg-color-main opacity-80 hover:opacity-100 text-[#fff] rounded-md  hover:cursor-pointer transition-all duration-300'>
+                                                            {modeForm === 'UPDATE' ? 'Cập nhập' : 'Đăng kí'}
+                                                            {registerShopMutation.isPending && <BoxLoading />}
                                                       </button>
-                                                )}
-                                                <input
-                                                      type='file'
-                                                      className='hidden'
-                                                      id='avatar_shop'
-                                                      onChange={(e) => {
-                                                            onChangeAvatar(e)
-                                                      }}
-                                                      ref={(e) => {
-                                                            inputAvatar.current = e
-                                                      }}
-                                                />
-                                          </div>
-                                    </div>
-                                    <div className='w-full xl:w-[60%] h-full pt-[16px]   flex flex-col items-center gap-[20px] bg-[#ffffff]'>
-                                          <header>Đăng kí thông tin về cửa hàng</header>
-                                          <div className='flex flex-col gap-[8px] w-[80%]'>
-                                                <label htmlFor='shop_name'>Tên Shop</label>
-                                                <input
-                                                      type='text'
-                                                      placeholder='Nhập tên shop'
-                                                      id='shop_name'
-                                                      className='w-full h-[40px] p-[12px_24px] bg-[#ffffff] rounded outline-none border-[1px] border-gray-300'
-                                                      {...form.register('shop_name', {
-                                                            required: { value: true, message: 'Tên shop là bắt buộc' },
-                                                            minLength: { value: 3, message: 'Tối thiểu 3 kí tự' },
-                                                            maxLength: { value: 150, message: 'Tối thiểu 150 kí tự' },
-                                                      })}
-                                                />
-                                                <Controller
-                                                      control={form.control}
-                                                      name='shop_description'
-                                                      render={({ field }) => (
-                                                            <TextArea rows={10} {...field} placeholder='Nhập mô tả của shop'></TextArea>
-                                                      )}
-                                                />
-                                          </div>
-                                          <button className='mt-[20px] w-max flex items-center gap-[16px] p-[12px_14px] border-[1px] border-blue-500 bg-[#ffffff] text-blue-500 rounded-md hover:bg-blue-500 hover:text-white hover:cursor-pointer transition-all duration-300'>
-                                                {modeForm === 'UPDATE' ? 'Cập nhập' : 'Đăng kí'}
-                                                {registerShopMutation.isPending && <BoxLoading />}
+                                                </div>
+                                          </form>
+
+                                          <button
+                                                className='absolute top-[-10%] text-[#fff] right-[0px] w-[50px] py-[5px] rounded-[4px]  bg-color-main hover:border-transparent hover:text-white min-w-[100px] flex justify-center items-center'
+                                                onClick={() => onClose(false)}
+                                          >
+                                                Đóng
                                           </button>
                                     </div>
-
-                                    <button
-                                          className='absolute top-[-20px] right-[-20px] w-[40px] h-[40px] flex items-center justify-center rounded-full bg-slate-800'
-                                          onClick={() => onClose(false)}
-                                    >
-                                          <X color='white' />
-                                    </button>
-                              </form>
-                        </FormProvider>
+                              </FormProvider>
+                        </div>
                   </div>
-            </div>
+            </Portal>
       )
 }
 

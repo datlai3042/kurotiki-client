@@ -1,5 +1,6 @@
-import React, { SetStateAction } from 'react'
-import { TModeChangeQuantityProductCart } from '../../apis/cart.service'
+import React, { SetStateAction, useState } from 'react'
+import CartService, { TModeChangeQuantityProductCart } from '../../apis/cart.service'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 type TProps = {
       productQuantity: number | undefined
@@ -11,12 +12,13 @@ type TProps = {
 
 const BoxCountProduct = (props: TProps) => {
       const { productQuantity, getValueChangeQuanity, disable, readOnly } = props
+      const queryClient = useQueryClient()
 
       const handleIncreaseProductQuantity = () => {
             // setProductQuantity((prev) => ((prev as number) += 1))
             getValueChangeQuanity({ mode: 'INCREASE', quantity: 1 })
       }
-
+    
       const handleDecreaseProductQuantity = () => {
             // setProductQuantity((prev) => ((prev as number) -= 1))
 
@@ -52,19 +54,20 @@ const BoxCountProduct = (props: TProps) => {
                   getValueChangeQuanity({ mode: 'INPUT', quantity: 1 })
             }
       }
+  
 
       const styleEffect = {
-            readOnly: readOnly || disable ? 'bg-slate-100' : '',
+            readOnly: readOnly || disable ? 'opacity-70' : '',
       }
 
       const lengthCharQuantity = Number(productQuantity?.toLocaleString().length)
       //min-w, w, rounded, gap, h
       return (
-            <div className={`flex  max-w-max h-[28px]`}>
+            <div className={`flex  max-w-max h-[22px]`}>
                   <button
-                        className={` ${styleEffect.readOnly}  flex items-center justify-center p-[6px] border-[1px] border-slate-400 min-w-[28px] h-full text-[20px] `}
+                        className={` ${styleEffect.readOnly}  flex items-center justify-center p-[6px] min-w-[28px] h-full text-[20px] bg-color-section-theme text-text-theme border-[1px] border-[var(--border-color-input)] `}
                         onClick={handleDecreaseProductQuantity}
-                        disabled={productQuantity === 1 || disable ? true : false}
+                        disabled={productQuantity! < 0 || disable ? true : false}
                   >
                         -
                   </button>
@@ -75,11 +78,11 @@ const BoxCountProduct = (props: TProps) => {
                         onBlur={handleBlurInput}
                         value={productQuantity}
                         type='number'
-                        className={`${styleEffect.readOnly} flex items-center justify-center border-[1px] border-slate-400 min-w-[32px] max-w-max    h-full text-[16px] text-center `}
+                        className={`${styleEffect.readOnly} bg-color-section-theme text-text-theme flex items-center justify-center border-[1px] border-[var(--border-color-input)] min-w-[32px] max-w-max focus:outline-none   h-full text-[16px] text-center `}
                   />
                   <button
                         disabled={disable}
-                        className={`${styleEffect.readOnly} flex items-center justify-center p-[6px] border-[1px] border-slate-400 min-w-[28px] h-full text-[20px] `}
+                        className={`${styleEffect.readOnly} flex items-center justify-center p-[6px]  min-w-[28px] h-full text-[20px] bg-color-section-theme text-text-theme border-[1px] border-[var(--border-color-input)] `}
                         onClick={handleIncreaseProductQuantity}
                   >
                         +

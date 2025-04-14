@@ -209,8 +209,8 @@ const UpdateMultipleImage = (props: IProps) => {
             // heightWrapperFilePreview: filePreview.length > 0 ? 'w-[350px] ' : 'w-[80px] min-h-[60px]',
             stateButton:
                   isSubmit && cloudinaryImage.length === 0
-                        ? 'border-[2px] border-red-700 text-red-700 bg-white'
-                        : 'text-white bg-slate-900 border-[2px] border-slate-900',
+                        ? 'border-[2px] border-red-700 text-red-700 bg-color-section-theme '
+                        : 'text-white bg-color-main border-[2px] border-[var(--border-color-input)]',
 
             flexContainerModal: cloudinaryImage.length === 1 ? 'flex-row' : cloudinaryImage.length > 2 ? 'flex-row' : `flex-col`,
             widthImageModal:
@@ -262,7 +262,7 @@ const UpdateMultipleImage = (props: IProps) => {
                                                                   <img src={preview.secure_url} alt='preview' className='w-full h-full' />
 
                                                                   <div
-                                                                        className='absolute top-[-15px] right-[-15px] bg-red-700 h-[24px] w-[24px] p-[2px] flex items-center justify-center'
+                                                                        className='cursor-pointer absolute top-[-15px] right-[-15px] bg-red-700 h-[24px] w-[24px] p-[2px] flex items-center justify-center'
                                                                         onClick={(e) => {
                                                                               e.stopPropagation()
                                                                               e.preventDefault()
@@ -282,8 +282,8 @@ const UpdateMultipleImage = (props: IProps) => {
                               </React.Fragment>
                         )}
                         {uploadProductDescriptionImageOne.isPending && (
-                              <div className='animate-pulse  bg-gray-200 w-full h-[80px] '>
-                                    <Image color='#666666' size={50} />
+                              <div className='skeleton__container w-full h-[80px] '>
+                                 
                               </div>
                         )}{' '}
                   </div>
@@ -300,22 +300,21 @@ const UpdateMultipleImage = (props: IProps) => {
 
                   {/* {@Nút button reset, chỉ có khi khi upload ít nhất 1 file hình} */}
                   {cloudinaryImage.length > 0 && (
-                        <div className='mt-[25px] h-[35px] w-[95px] flex gap-[16px] '>
+                        <div className='mt-[25px]  w-[95px] flex flex-col  gap-[16px] '>
                               <button
                                     disabled={cloudinaryImage.length < 0}
                                     onClick={(e) => {
                                           e.preventDefault()
                                           handleDeleteProductImages()
                                     }}
-                                    className='min-w-[150px] px-[12px] py-[6px] bg-slate-700 text-white rounded-md '
+                                    className='min-w-[150px] px-[12px] py-[6px]  bg-color-main opacity-80 hover:opacity-100 text-[#fff] rounded-md '
                               >
                                     Chọn lại từ đầu
                               </button>
                               <div
-                                    className=' bg-white h-[35px] min-w-[180px] flex items-center  gap-[8px] rounded-full'
+                                    className='cursor-pointer bg-color-main text-text-theme h-[35px] flex justify-center items-center  gap-[8px] rounded-md '
                                     onClick={() => setModalFilePreview(true)}
                               >
-                                    <View size={28} className=' ' />
                                     <p>Xem trước</p>
                               </div>
                         </div>
@@ -338,16 +337,16 @@ const UpdateMultipleImage = (props: IProps) => {
                                                 key={selectImageModal}
                                                 src={selectImageModal}
                                                 alt='preview'
-                                                className='w-[600px] h-[600px] bg-yellow-700'
+                                                className='w-[600px] h-[600px] bg-yellow-700 object-cover'
                                           />
                                           <div
-                                                className='absolute top-[-10px] right-[-16px] bg-slate-900 flex items-center justify-center rounded-md'
+                                                className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] border-[1px] text-text-theme border-[var(--border-color-input)] bg-white hover:bg-color-main hover:text-[#fff] hover:border-transparent rounded-full flex items-center justify-center'
                                                 onClick={() => {
                                                       setModalFilePreview(false)
                                                       setSelectImageModal('')
                                                 }}
                                           >
-                                                <X color='white' size={40} />
+                                                <X  size={40} />
                                           </div>
                                     </div>
                               )}
@@ -367,13 +366,13 @@ const UpdateMultipleImage = (props: IProps) => {
                                           ))}
 
                                           <div
-                                                className='absolute top-[-10px] right-[-16px] bg-slate-900 flex items-center justify-center rounded-md'
+                                                className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] border-[1px] border-[var(--border-color-input)] bg-white hover:bg-color-main hover:text-[#fff] hover:border-transparent rounded-full flex items-center justify-center'
                                                 onClick={() => {
                                                       setModalFilePreview(false)
                                                       setSelectImageModal('')
                                                 }}
                                           >
-                                                <X color='white' size={40} />
+                                                <X  size={40} />
                                           </div>
                                     </div>
                               )}

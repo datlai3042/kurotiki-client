@@ -32,7 +32,7 @@ const ShopStore = (props: TProps) => {
 
       if (shop && shop?.shop_products.length === 0) {
             return (
-                  <div className='w-full h-[500px] bg-[#ffffff] flex items-center justify-center text-[18px] font-semibold'>
+                  <div className='w-full h-[500px] bg-color-section-theme text-text-theme flex items-center justify-center text-[18px] font-semibold'>
                         Shop này chưa đăng sản phẩm
                   </div>
             )

@@ -164,28 +164,32 @@ const BoxConfirmAddress = (props: TProps) => {
 
       return (
             <Portal>
-                  <div className='fixed inset-0 bg-[rgba(0,0,0,.45)] flex justify-center items-center z-[200]'>
+                  <div className='fixed inset-0 bg-[rgba(0,0,0,.45)] flex justify-center items-center z-[999]'>
                         <div
-                              className='relative w-[450px] min-h-[370px] h-max bg-[#ffffff] p-[12px_8px]  xl:p-[18px_12px] mx-[16px] xl:mx-0 
+                              className='relative w-[450px] max-h-[96vh] bg-color-section-theme p-[12px_8px]  xl:p-[18px_12px] mx-[16px] xl:mx-0 
  rounded'
                         >
                               <div className='flex flex-col gap-[10px] h-full'>
-                                    <div className='basis-[80%] bg-white rounded-lg  py-[12px] flex flex-col gap-[12px]'>
+                                    <div className='bg-color-section-theme text-text-theme rounded-lg  py-[12px] flex flex-col gap-[12px]'>
                                           <header className='text-[20px] font-medium text-center'>Địa chỉ giao hàng</header>
-                                          <div className='w-full h-[1px] bg-gray-100'></div>
-                                          <div className='px-[36px] mt-[24px] text-[14px]'>
+                                          <div className='w-full h-[1px] bg-[var(--border-color-input)]'></div>
+                                          <div className='px-[14px] mt-[24px] text-[14px]'>
                                                 <span>
                                                       Hãy chọn địa chỉ nhận hàng để được dự báo thời gian giao hàng cùng phí đóng gói, vận
                                                       chuyển một cách chính xác nhất.
                                                 </span>
                                           </div>
                                           <div className='max-h-[450px] overflow-y-auto scrollCustome'>
-                                                <div className={`${valueAddress === 'Other' ? 'min-h-[30px]' : ''}  px-[36px]   `}>
-                                                      <Radio.Group
-                                                            className='flex flex-col gap-[8px]'
-                                                            onChange={handleChangeRadio}
-                                                            value={valueAddress}
-                                                            defaultValue={valueAddress}
+                                                <Radio.Group
+                                                      className='flex flex-col gap-[12px]'
+                                                      onChange={handleChangeRadio}
+                                                      value={valueAddress}
+                                                      defaultValue={valueAddress}
+                                                >
+                                                      <div
+                                                            className={`${
+                                                                  valueAddress === 'Other' ? 'min-h-[30px]' : ''
+                                                            }  mx-[8px]  max-h-[65px] overflow-auto flex flex-col gap-[5px] text-text-theme`}
                                                       >
                                                             {user?.user_address.map((address, index) => {
                                                                   return (
@@ -193,6 +197,7 @@ const BoxConfirmAddress = (props: TProps) => {
                                                                               <Radio
                                                                                     value={address._id}
                                                                                     defaultChecked={address.address_default}
+                                                                                    className='flex flex-wrap'
                                                                               >
                                                                                     <span>
                                                                                           {renderStringAddressDetailV2(address)!.replace(
@@ -201,18 +206,20 @@ const BoxConfirmAddress = (props: TProps) => {
                                                                                           ) || ''}
                                                                                     </span>
                                                                                     {addNew && user?.user_address.length === index + 1 && (
-                                                                                          <span className='ml-[6px] inline-block bg-blue-400 rounded-md p-[2px] text-white'>
-                                                                                                new
+                                                                                          <span className='ml-[6px] flex justify-center items-center w-[44px] bg-color-main rounded-[4px] p-[1px] text-white'>
+                                                                                                Mới
                                                                                           </span>
                                                                                     )}
                                                                               </Radio>
                                                                         </div>
                                                                   )
                                                             })}
+                                                      </div>
+                                                      <Radio value={'Other'} className='text-text-theme  mx-[8px]'>
+                                                            Chọn địa chỉ khác
+                                                      </Radio>
+                                                </Radio.Group>
 
-                                                            <Radio value={'Other'}>Chọn địa chỉ khác</Radio>
-                                                      </Radio.Group>
-                                                </div>
                                                 {valueAddress !== 'Other' && (
                                                       <div className='mt-[20px]' onClick={onVerifyAddress}>
                                                             <BoxButton content='Xác nhận' />
@@ -224,10 +231,10 @@ const BoxConfirmAddress = (props: TProps) => {
                                     </div>
                               </div>
                               <button
-                                    className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] border-[1px] border-gray-300 bg-white rounded-full flex items-center justify-center'
+                                    className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] border-[1px] border-[var(--border-color-input)] bg-white hover:bg-color-main hover:text-[#fff] hover:border-transparent rounded-full flex items-center justify-center'
                                     onClick={handleCloseModal}
                               >
-                                    <X color='gray' />
+                                    <X size={18} />
                               </button>
                         </div>
                   </div>

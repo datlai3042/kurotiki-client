@@ -116,9 +116,9 @@ const BoxSelectAdrees = (props: TProps) => {
       return (
             <Portal>
                   <div className='fixed inset-0 bg-[rgba(0,0,0,.45)] flex justify-center'>
-                        <div className='relative w-[300px] xl:w-[600px] min-h-[370px] h-max bg-[#efefef] mt-[100px] xl:mt-[80px] p-[12px] rounded-md'>
+                        <div className='relative w-[300px] xl:w-[600px] max-h-[80vh] bg-[#efefef] mt-[100px] xl:mt-[80px] p-[12px] rounded-md'>
                               <div className='flex flex-col gap-[10px] h-full'>
-                                    <div className='basis-[80%] bg-white rounded-lg  py-[12px] flex flex-col gap-[12px]'>
+                                    <div className=' bg-color-section-theme text-text-theme rounded-lg  py-[12px] flex flex-col gap-[12px]'>
                                           <header className='text-[20px] font-medium text-center'>Địa chỉ giao hàng</header>
                                           <div className='w-full h-[1px] bg-gray-100'></div>
                                           <div className='px-[36px] mt-[24px] text-[14px]'>

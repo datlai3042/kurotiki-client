@@ -1,5 +1,5 @@
 import { Link, useMatch } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 
 import nhaSachLogo from './img/danhMuc/nhaSachTiki.jpg'
@@ -33,6 +33,9 @@ import muaTruocTraSau from './img/noiBat/muaTruocTraSau.jpg'
 import baoHiem from './img/noiBat/baoHiemTiki360.jpg'
 import { Store } from 'lucide-react'
 import { UserResponse } from '../../types/user.type'
+import { useMediaQuery } from '@mantine/hooks'
+import { useEffect } from 'react'
+import { toDoHideSideBar } from '../../Redux/uiSlice'
 
 const arrayCategory = [
       { image: nhaSachLogo, label: 'Nhà sách Tiki', href: '/book' },
@@ -73,15 +76,31 @@ type TProps = {}
 
 function Sidebar(props: TProps) {
       const showSideBar = useSelector((state: RootState) => state.uiSlice.showSideBar)
+      const dispatch = useDispatch()
       const match = useMatch('/')
+      const queryMedia = useMediaQuery(
+            '(max-width: 767px)',
+            false,
 
-      const styleEffect = {
-            showSideBar: showSideBar ? 'flex animate-showSideBarAni' : `hidden ${match ? 'xl:flex' : 'xl:hidden'}`,
+            {
+                  getInitialValueInEffect: false,
+            },
+      )
+      const show = queryMedia ? (showSideBar ? true : false) : match ? true : false
+
+      let styleEffect = {
+            showSideBar: ` ${show ? `flex ${queryMedia  ? 'animate-showSideBarAni' : ''}` : 'hidden'}`,
       }
+
+      useEffect(() => {
+            if (queryMedia) {
+                  dispatch(toDoHideSideBar())
+            }
+      }, [queryMedia, dispatch])
 
       return (
             <div
-                  className={`${styleEffect.showSideBar} hide-scroll  fixed xl:sticky  w-[180px] xl:w-[230px] min-w-[230px]  top-[83px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
+                  className={`${styleEffect.showSideBar} bg-color-section-theme hide-scroll border-r-[1px] border-[var(--border-color-input)] md:border-none  fixed md:sticky  w-[180px] xl:w-[230px] min-w-[230px] top-[65px] md:top-[75px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
             >
                   <div className='flex flex-col gap-[20px] bg-transparent h-max mb-[50px] text-text-theme'>
                         <div className='flex flex-col gap-[10px] h-max p-[16px] bg-color-section-theme rounded-[4px] '>

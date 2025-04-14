@@ -13,6 +13,7 @@ import { TProfileImage } from '../../../../types/product/product.type'
 import { TCloudinaryImage } from '../../types/cloudinary.typs'
 import { useDispatch } from 'react-redux'
 import { addToast } from '../../../../Redux/toast'
+import Portal from '../../../../component/Portal'
 
 //@Props
 interface IProps {
@@ -123,8 +124,8 @@ const ButtonUpload = (props: IProps) => {
             widthButtonUpload: width ? 'w-full xl:w-[25%]' : 'w-full',
             stateButton:
                   isSubmit && !cloudinaryImage?.secure_url
-                        ? 'border-[2px] border-red-700 text-red-700 bg-white'
-                        : 'text-white bg-slate-900 border-[2px] border-slate-900',
+                        ? 'border-[2px] border-red-700 text-red-700 bg-color-section-theme '
+                        : 'text-white bg-color-main border-[2px] border-[var(--border-color-input)]',
 
             gap: ui.gapElementChildButton || 'gap-[8px]',
             fontSizeError: ui.fontSizeError || 'text-[12px]',
@@ -141,9 +142,9 @@ const ButtonUpload = (props: IProps) => {
                   <input type='file' id={id} hidden ref={inputRef} onChange={(e) => handleInputChange(e)} />
 
                   {cloudinaryImage?.secure_url && (
-                        <div className='animate-pulseCustome bg-gray-300 w-[150px] h-[150px] relative flex justify-center items-center'>
+                        <div className='animate-pulseCustome  w-[150px]  relative  flex flex-col gap-[8px] justify-center '>
                               <img src={cloudinaryImage.secure_url} width={150} height={150} alt='preview' className={`w-full h-full`} />
-                              <div className='absolute top-0 right-[-100px] h-[35px] w-[95px] '>
+                              <div className='w-[100px]  h-[35px]  '>
                                     <button
                                           disabled={uploadProductThumb.isPending}
                                           onClick={(e) => {
@@ -155,13 +156,15 @@ const ButtonUpload = (props: IProps) => {
                                                 )
                                                 inputRef.current?.click()
                                           }}
-                                          className='min-w-[150px] px-[12px] py-[6px] bg-slate-700 text-white rounded-md '
+                                          className=' py-[6px] px-[6px] bg-color-main opacity-80 hover:opacity-100 text-[#fff] rounded-md '
                                     >
                                           Chọn lại
                                     </button>
                               </div>
-                              <div className='absolute bottom-[0px] right-[-140px] bg-white h-[35px] min-w-[150px] flex items-center justify-center rounded-full gap-[16px]'>
-                                    <View onClick={() => setModalFilePreview(true)} size={28} className=' ' />
+                              <div
+                                    onClick={() => setModalFilePreview(true)}
+                                    className='cursor-pointer w-[100px] ] bg-color-main text-text-theme  h-[35px] flex items-center justify-center rounded-[4px] gap-[16px]'
+                              >
                                     <span>Xem trước</span>
                               </div>
 
@@ -171,13 +174,13 @@ const ButtonUpload = (props: IProps) => {
                                                 <img
                                                       src={cloudinaryImage.secure_url}
                                                       alt='preview'
-                                                      className='w-full h-full bg-yellow-700'
+                                                      className='w-full h-full bg-yellow-700 object-contain'
                                                 />
                                                 <div
-                                                      className='absolute top-[-10px] right-[-10px] bg-slate-900 flex items-center justify-center rounded-md'
+                                                      className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] border-[1px] border-[var(--border-color-input)] text-text-theme bg-white hover:bg-color-main hover:text-[#fff] hover:border-transparent rounded-full flex items-center justify-center'
                                                       onClick={() => setModalFilePreview(false)}
                                                 >
-                                                      <X color='white' size={40} />
+                                                      <X  size={40} />
                                                 </div>
                                           </div>
                                     </BoxModal>
@@ -192,7 +195,7 @@ const ButtonUpload = (props: IProps) => {
                   <button
                         hidden={cloudinaryImage?.secure_url ? true : false}
                         disabled={uploadProductThumb.isPending}
-                        className={`${styleEffect.widthButtonUpload} ${styleEffect.widthButtonUpload} ${styleEffect.stateButton}  xl:w-[32%] min-h-[40px] flex-1  rounded-md`}
+                        className={`${styleEffect.widthButtonUpload} ${styleEffect.widthButtonUpload} ${styleEffect.stateButton}  xl:w-[32%] min-h-[40px] flex-1 bg-color-main opacity-80 hover:opacity-100 text-[#fff]  rounded-md`}
                         onClick={(e) => handleButtonClick(e)}
                   >
                         Tải ảnh lên

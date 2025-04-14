@@ -35,27 +35,30 @@ function HeaderBoxHover() {
 
       return (
             <>
-                  <ul className='flex flex-col min-w-[250px] bg-color-section-theme shadow-xl py-2 gap-2 border border-[var(--border-color-input)] rounded z-20'>
-                        <li className='flex items-center h-[35px] hover:bg-color-main px-2'>
+                  <ul className='flex flex-col min-w-[250px] bg-color-section-theme shadow-xl py-2 gap-2 border border-[var(--border-color-input)] text-text-theme rounded z-20'>
+                        <li className='flex items-center h-[35px] hover:bg-color-main hover:text-[#fff] px-2'>
                               <Link to={'/customer/account'} className='w-full h-full flex items-center'>
                                     {user ? `Tài khoản: ${user?.fullName || user?.nickName || user.email}` : 'Thông tin tài khoản'}
                               </Link>
                         </li>
 
-                        <li className='flex items-center h-[35px] hover:bg-color-main px-2'>
+                        <li className='flex items-center h-[35px] hover:bg-color-main hover:text-[#fff] px-2'>
                               <Link to={'/customer/notification'} className='w-full h-full flex items-center'>
                                     Thông báo của tôi
                               </Link>
                         </li>
 
-                        <li className='flex items-center h-[35px] hover:bg-color-main px-2'>
+                        <li className='flex items-center h-[35px] hover:bg-color-main hover:text-[#fff] px-2'>
                               <Link to={'/customer/order_history'} className='w-full h-full flex items-center'>
                                     Đơn hàng của tôi
                               </Link>
                         </li>
 
                         {user && (
-                              <li className='flex items-center h-[35px] px-2 hover:bg-[#ccc] hover:cursor-pointer' onClick={handleLogOut}>
+                              <li
+                                    className='flex items-center h-[35px] px-2  hover:bg-color-main hover:text-[#fff] hover:cursor-pointer'
+                                    onClick={handleLogOut}
+                              >
                                     Đăng xuất
                               </li>
                         )}

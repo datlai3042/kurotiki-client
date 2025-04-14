@@ -29,7 +29,7 @@ const CommentItem = (props: TProps) => {
 
                         <div className='flex flex-col gap-[6px] text-[14px]'>
                               <p className='flex flex-row gap-[10px]  font-semibold'>
-                                    <span className='text-slate-900'>
+                                    <span className=''>
                                           {comment.comment_user_id.fullName ||
                                                 comment.comment_user_id.nickName ||
                                                 comment.comment_user_id.email}
@@ -55,7 +55,7 @@ const CommentItem = (props: TProps) => {
                               <div className='w-full min-h-[80px] h-max flex flex-col gap-[12px]'>
                                     <img
                                           src={comment.comment_image[0].secure_url}
-                                          className='w-[80px] h-[80px] rounded-md hover:cursor-pointer'
+                                          className='w-[80px] h-[80px] rounded-md hover:cursor-pointer object-contain'
                                           alt='comment'
                                           onClick={() => setOpenModal(true)}
                                     />

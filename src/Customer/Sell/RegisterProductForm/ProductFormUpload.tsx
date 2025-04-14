@@ -99,7 +99,6 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
             mutationKey: ['upload-product-full'],
             mutationFn: (data: ProductData) => ProductApi.uploadProductFull(data, endpointUrl),
       })
-      console.log({ erros: methods.formState.errors })
       //@hàm submit sản phẩm
       const onSubmit = (data: typeof defaultValues) => {
             setFormStateSubmit(true)
@@ -171,7 +170,7 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
                                           onSubmit={methods.handleSubmit(onSubmit)}
                                           spellCheck={false}
                                     >
-                                          <div className=''>Thông tin cơ bản về sản phẩm</div>
+                                          <div className='text-[20px] font-semibold text-color-main'>Thông tin cơ bản về sản phẩm</div>
                                           <InputText
                                                 methods={methods}
                                                 FieldName='product_name'
@@ -218,7 +217,7 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
                                           <button
                                                 disabled={uploadProductFull.isSuccess}
                                                 type='submit'
-                                                className='min-w-[150px] px-[12px] py-[6px] bg-slate-700 text-white flex justify-center items-center gap-[8px] disabled:cursor-not-allowed'
+                                                className='min-w-[150px] px-[12px] py-[6px] bg-color-main opacity-80 hover:opacity-100 text-white flex justify-center items-center gap-[8px] disabled:cursor-not-allowed'
                                           >
                                                 <span>{!uploadProductFull.isSuccess ? 'Đăng bán' : 'Đăng sản phẩm thành công'}</span>
 

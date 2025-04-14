@@ -24,13 +24,10 @@ const CartItem = (props: TProps) => {
       const { product, shop } = props
 
       const [select, setSelect] = useState<boolean>(product.isSelect)
-      const [openBoxConfirmDelete, setOpenBoxConfirmDelete] = useState<boolean>(false)
       const [openBoxCofirmUpdateAddress, setOpenBoxConfirmUpdateAddress] = useState<boolean>(false)
       const [openModelDetail, setOpenModelDetail] = useState<boolean>(false)
 
       const queryClient = useQueryClient()
-
-   
 
       useEffect(() => {
             // if (select !== product.product_is_select) {
@@ -51,27 +48,7 @@ const CartItem = (props: TProps) => {
             },
       })
 
-      const deleteCartWithProductId = useMutation({
-            mutationKey: ['/v1/api/cart/cart-delete/:product_id'],
-            mutationFn: ({ product_id }: { product_id: string }) => CartService.deleteCart({ product_id }),
-            onSuccess: () => {
-                  queryClient.invalidateQueries({
-                        queryKey: ['v1/api/cart/cart-get-my-cart'],
-                  })
-
-                  queryClient.invalidateQueries({
-                        queryKey: ['v1/api/cart/cart-pay'],
-                  })
-
-                  queryClient.invalidateQueries({
-                        queryKey: ['cart-get-count-product'],
-                  })
-            },
-      })
-
-      const onDeleteCart = ({ product_id }: { product_id: string }) => {
-            deleteCartWithProductId.mutate({ product_id })
-      }
+  
 
       const changeSelect = (e: CheckboxChangeEvent) => {
             updateSelectOneMutation.mutate({ value: e.target.checked, product_id: product.product_id._id })
@@ -91,20 +68,24 @@ const CartItem = (props: TProps) => {
             product.cart_address.type === 'Home' ? 'Nhà' : product.cart_address.type === 'Company' ? 'Công ty / cơ quan' : 'Nơi ở riêng tư'
       // if (!product.product_id.s) return null
       return (
-            <div className='min-h-[450px]  flex flex-col gap-[16px] bg-[#ffffff] p-[12px]' key={product._id}>
-                  <div className='flex gap-[12px] h-[14%] xl:h-[30%] items-center'>
-                        {/* <Checkbox disabled={styleEffect.readOnly} /> */}
-                        <Home />
-                        <ChevronRight className='hidden xl:block' />
-                        <img
-                              src={shop.shop_avatar?.secure_url || product.shop_id.shop_avatar_default || ''}
-                              className='h-[30px] w-[30px] xl:w-[40px] '
-                              alt='shop_avatar'
-                        />
-                        <p className='block xl:flex gap-[4px] w-full'>
-                              <span>Cửa hàng:</span>
-                              <span className='underline'>{shop.shop_name}</span>
-                        </p>
+            <div className=' flex flex-col gap-[24px] bg-color-section-theme text-text-theme p-[0px_12px_16px]' key={product._id}>
+                  <div className='w-full flex  py-[24px] flex-wrap gap-[10px]  items-center justify-between'>
+                        <div className='flex gap-[12px]  items-center'>
+                              {/* <Checkbox disabled={styleEffect.readOnly} /> */}
+                              {/* <Home />
+                        <ChevronRight className='hidden xl:block' /> */}
+                              <img
+                                    src={shop.shop_avatar?.secure_url || product.shop_id.shop_avatar_default || ''}
+                                    className='h-[30px] w-[30px] xl:w-[40px] '
+                                    alt='shop_avatar'
+                              />
+                              <Link to={`/shop/${product.shop_id._id}`} className='block xl:flex gap-[4px] w-full group'>
+                                    <span>Cửa hàng:</span>
+                                    <span className='text-color-main font-semibold group-hover:underline'>{shop.shop_name}</span>
+                              </Link>
+                        </div>
+
+                        <span className='ml-[43px]'>{DateTimeFromString(product.cart_date)}</span>
                   </div>
                   <div className='w-full flex flex-col  gap-[40px]'>
                         <div className='w-full flex  flex-col xl:flex-row gap-[30px] min-h-[230px] h-max xl:min-h-[80px]'>
@@ -122,61 +103,44 @@ const CartItem = (props: TProps) => {
                                     />{' '}
                               </Link>
                               <div
-                                    className={`${styleEffect.product_not_avaiable} flex-1 flex  flex-col   gap-[12px]  content-between justify-between font-semibold text-slate-700`}
+                                    className={`${styleEffect.product_not_avaiable} flex-1 flex  flex-col   gap-[12px]  content-between justify-between font-semibold text-text-theme`}
                               >
-                                    <span>Tên sản phẩm:{product.product_id.product_name}</span>
+                                    <div className='w-full flex justify-between'>
+                                          <span>{product.product_id.product_name}</span>
 
-                                    <span>Thể loại: Sách</span>
-                                    <span>Giao vào ngày mai</span>
-                                    <div className='w-[180px] flex xl:hidden items-center  xl:my-[4px] mt-[20px] xl:mt-0 '>
-                                          Giá tiền:
-                                          <BoxMoney name='VND' money={product.product_id.product_price} colorBackground='bg-blue-600' />
-                                    </div>
-
-                                    <div className='hidden xl:flex '>
-                                          <div className='w-[180px] flex items-center  xl:my-[4px] mt-[20px] xl:mt-0 '>
-                                                <BoxMoney
-                                                      name='VND'
-                                                      money={product.product_id.product_price}
-                                                      colorBackground='bg-blue-600'
-                                                />
-                                          </div>
                                           <div className='w-[120px] flex items-center h-max xl:h-full  xl:my-0'>
                                                 <WrapperCountProduct
                                                       readOnly={!product.product_id.product_state}
                                                       product_id={product.product_id._id}
                                                       cart_quantity={product.quantity}
+                                                      product={product}
+                                                      modeAction='EDIT'
+
                                                 />
                                           </div>
-                                          <div className='w-[180px]  xl:my-0 flex items-center text-[14px] gap-[2px]'>
+                                    </div>
+                                    <div className='w-full flex justify-between'>
+                                          <div className='flex gap-[8px] items-center'>
+                                                <span>Giá gốc: </span>
+                                                <BoxMoney name='VND' money={product.product_id.product_price} />
+                                          </div>
+
+                                          <div className=' flex items-center gap-[8px] h-max xl:h-full  xl:my-0 text-color-main text-[20px]'>
+                                                <span>
+                                                      x{product.quantity}: {'=>'}{' '}
+                                                </span>
                                                 <BoxMoney name='VNĐ' money={product.quantity * product.product_id.product_price} />
                                           </div>
-                                          <div className='w-[20px] flex items-center  xl:my-0'>
-                                                <Trash2 onClick={() => setOpenBoxConfirmDelete(true)} />
-                                                {openBoxConfirmDelete && (
-                                                      <BoxConfirmDelete
-                                                            content='Bạn sẽ xóa sản phẩm này chứ'
-                                                            subContent={
-                                                                  product.product_id.product_name +
-                                                                  ' ' +
-                                                                  `SL:${product.quantity}` +
-                                                                  ' ' +
-                                                                  `Giá: ${formatMoneyVND(
-                                                                        product.quantity * product.product_id.product_price,
-                                                                  )}` +
-                                                                  ' ' +
-                                                                  'VNĐ'
-                                                            }
-                                                            ButtonCancellContent='Hủy'
-                                                            ButtonConfrimContent='Xác nhận xóa'
-                                                            onClose={setOpenBoxConfirmDelete}
-                                                            onActive={onDeleteCart}
-                                                            paramsActive={{ product_id: product._id }}
-                                                      />
-                                                )}
-                                          </div>
                                     </div>
-
+                                    <span>Thể loại: Sách</span>
+                                    <span>Giao vào ngày mai</span>
+                                    <div className='flex flex-col xl:flex-row xl:items-center gap-[8px] xl:w-[80%]'>
+                                          <p className='flex gap-[16px] xl:gap-[8px] items-center'>
+                                                <span>Giao tại nhà: {AddressTypeText}</span>
+                                          </p>
+                                          <span className='hidden xl:inline'>-</span>
+                                          <span>Địa chỉ {product.cart_address.address_text}</span>
+                                    </div>
                                     {!product.product_id.product_state && (
                                           <span className='text-red-700 font-semibold text-[16px]'>Sản phẩm ngừng kinh doanh</span>
                                     )}
@@ -184,21 +148,8 @@ const CartItem = (props: TProps) => {
                         </div>
 
                         <div className='hidden xl:block'>
-                              <div className='max-h-[32%] flex flex-wrap flex-col xl:flex-row justify-between ml-0 xl:ml-[16px]  gap-[24px] xl:gap-[16px]'>
-                                    <div className='flex flex-col xl:flex-row  gap-[8px] text-slate-800 text-[12px] xl:text-[16px] font-extrabold'>
-                                          {/* <TimerIcon className='hidden xl:block' /> */}
-                                          <span>Đặt hàng vào lúc:</span>
-                                          <span>{DateTimeFromString(product.cart_date)}</span>
-                                    </div>
-                                    <div className='w-full flex flex-col xl:flex-row xl:items-center justify-between gap-[8px] '>
-                                          <div className='flex flex-col xl:flex-row xl:items-center gap-[8px] xl:w-[80%]'>
-                                                <p className='flex gap-[16px] xl:gap-[8px] items-center'>
-                                                      <span className='mt-[-4px]'>{AddressTypeIcon}</span>
-                                                      <span>Giao tại nhà: {AddressTypeText}</span>
-                                                </p>
-                                                <span className='hidden xl:inline'>-</span>
-                                                <span>Địa chỉ {product.cart_address.address_text}</span>
-                                          </div>
+                              <div className=' flex flex-wrap flex-col xl:flex-row justify-between ml-0 xl:ml-[16px]  gap-[24px] xl:gap-[16px]'>
+                                    <div className='w-full flex flex-col xl:flex-row xl:items-center justify-end gap-[8px] '>
                                           <div className='w-max'>
                                                 <BoxButton
                                                       content='Cập nhập địa chỉ khác'
@@ -218,12 +169,14 @@ const CartItem = (props: TProps) => {
                         </div>
                   </div>
 
-                  <button onClick={() => setOpenModelDetail(true)} className='block xl:hidden w-[8rem] h-[3rem] bg-blue-300 rounded-lg'>
+                  <button
+                        onClick={() => setOpenModelDetail(true)}
+                        className='block xl:hidden p-[6px] bg-color-main text-[#fff] opacity-80 hover:opacity-100'
+                  >
                         Xem chi tiết
                   </button>
                   {openModelDetail && <CartItemDetail product={product} setOpenModel={setOpenModelDetail} />}
-
-                  <div className='w-[calc(100%+24px)] ml-[-12px] bg-slate-100 h-[2px] my-[8px]'></div>
+                  
             </div>
       )
 }

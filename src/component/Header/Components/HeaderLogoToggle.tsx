@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { onShowSideBar } from '../../../Redux/uiSlice'
+import { onShowSideBar, toDoHideSideBar, toDoShowSideBar } from '../../../Redux/uiSlice'
 import { RootState } from '../../../store'
 import logo from './logo.png'
 
@@ -9,22 +9,19 @@ type TProps = {}
 
 const HeaderLogoToggle = (props: TProps) => {
       const uiSlice = useSelector((state: RootState) => state.uiSlice.showSideBar)
-      const [showSideBar, setShowSideBar] = useState<boolean>(false)
       const dispatch = useDispatch()
       const onShowSideBarAction = () => {
-            setShowSideBar((prev) => !prev)
-      }
+            // dispatch(onShowSideBar({ showSideBar: showSideBar }))
 
-      useEffect(() => {
-            dispatch(onShowSideBar({ showSideBar: showSideBar }))
-      }, [showSideBar])
+            return uiSlice ? dispatch(toDoHideSideBar()) : dispatch(toDoShowSideBar())
+      }
 
       return (
             <div className='w-full h-full'>
                   <Link className='hidden md:flex flex-col w-full gap-[6px] h-full content-between ' to='/'>
                         <img src={logo} className='min-w-[80px] h-[36px] ' alt='' />
                   </Link>
-                  <div className='block md:hidden' onClick={onShowSideBarAction}>
+                  <div className='block md:hidden cursor-pointer' onClick={onShowSideBarAction}>
                         <svg
                               xmlns='http://www.w3.org/2000/svg'
                               fill='none'

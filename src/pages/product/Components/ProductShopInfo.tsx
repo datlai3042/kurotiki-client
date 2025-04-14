@@ -35,7 +35,7 @@ const ProductShopInfo = (props: TProps) => {
                                                       <img src={ShopLogo} className='object-contain w-[80px]' alt='label logo' />
                                                 </div>
                                                 <div className='flex items-center gap-[6px] w-max'>
-                                                      <Rate disabled allowHalf value={shop.shop_vote} className='text-[12px]' />
+                                                      <Rate disabled allowHalf value={shop.shop_vote || 4.5} className='text-[12px]' />
                                                       <span className='text-[13px] xl:text-[14px]'>
                                                             ({shop.shop_count_total_vote} đánh giá)
                                                       </span>
@@ -44,7 +44,7 @@ const ProductShopInfo = (props: TProps) => {
                                     </div>
 
                                     <div className='ml-[30px] self-start justify-self-start flex flex-col gap-[12px]'>
-                                          <button className='min-w-[60px] w-max h-[30px] p-[8px] border-[1px] border-[var(--border-color-input)] flex items-center justify-center rounded-md'>
+                                          <button className='min-w-[60px] w-max h-[30px] p-[8px] border-[1px] border-[var(--border-color-input)] hover:border-transparent hover:bg-color-main flex items-center justify-center rounded-md'>
                                                 Xem shop
                                           </button>
                                     </div>

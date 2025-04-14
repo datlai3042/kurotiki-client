@@ -57,117 +57,121 @@ const NotificationSection = (props: TProps) => {
       }
 
       return (
-            <div className='w-full min-h-[50px] h-max bg-[#ffffff] relative pb-[20px] mb-[80px] xl:mb-0'>
-                  <div className='mb-[80px] xl:mb-[40px] flex flex-col gap-[16px] xl:gap-0'>
+            <div className='w-full min-h-[50px] h-max bg-color-section-theme text-text-theme relative py-[20px] mb-[80px] xl:mb-0'>
+                  <div className=' flex flex-col gap-[16px] xl:gap-0'>
                         {getMyNotification.data?.pages.map((page) =>
-                              page.data.metadata.notifications.notification.notifications_message.map((notification) => (
-                                    <div
-                                          className={`${styleEffect.isRead(
-                                                notification.notification_isRead,
-                                          )} bg-[#ffffff] w-full h-[180px] xl:h-[100px] flex flex-col xl:flex-row items-center  p-[14px] xl:px-[32px] gap-[4px] xl:gap-[16px]`}
-                                          key={notification._id}
-                                    >
-                                          <div className='flex w-full xl:w-[24%] h-max xl:h-[70%] items-center  justify-between'>
-                                                <p>{convertDateToStringFull(notification.notification_creation_time)}</p>
-                                                <div className='w-[40px] h-[40px] bg-blue-200 flex items-center justify-center rounded-full'>
-                                                      {notification.notification_attribute.notification_type === 'PRODUCT' && (
-                                                            <Inbox size={24} color='white' />
-                                                      )}
+                              page.data.metadata.notifications.notification.notifications_message.map((notification) => {
+
+                                    return (
+                                          <div
+                                                className={`${styleEffect.isRead(
+                                                      notification.notification_isRead,
+                                                )} bg-color-section-theme text-text-theme w-full min-h-[180px]  flex flex-col xl:flex-row items-center  p-[14px] xl:px-[32px] gap-[4px] xl:gap-[16px]`}
+                                                key={notification._id}
+                                          >
+                                                <div className='flex w-full xl:w-[24%] h-max xl:h-[70%] items-center  justify-between'>
+                                                      <p>{convertDateToStringFull(notification.notification_creation_time)}</p>
+                                                      <div className='w-[40px] h-[40px] bg-color-main flex items-center justify-center rounded-full'>
+                                                            {notification.notification_attribute.notification_type === 'PRODUCT' && (
+                                                                  <Inbox size={24} className='text-[#fff]' />
+                                                            )}
+                                                            {notification.notification_attribute.notification_type === 'SYSTEM' && (
+                                                                  <Clock8 size={24} className='text-[#fff]' />
+                                                            )}
+
+                                                            {notification.notification_attribute.notification_type === 'USER' && (
+                                                                  <Clock8 size={24} className='text-[#fff]' />
+                                                            )}
+
+                                                            {notification.notification_attribute.notification_type === 'SHOP' && (
+                                                                  // <Clock8 size={24} color='white' />
+                                                                  <img
+                                                                        className='w-full h-full rounded'
+                                                                        src={notification.notification_attribute.product_image}
+                                                                        alt='product'
+                                                                  />
+                                                            )}
+                                                      </div>
+                                                </div>
+                                                <div className='flex flex-1 w-full  items-center  h-full '>
                                                       {notification.notification_attribute.notification_type === 'SYSTEM' && (
-                                                            <Clock8 size={24} color='white' />
+                                                            <span>{notification.notification_attribute.notification_content}</span>
                                                       )}
 
                                                       {notification.notification_attribute.notification_type === 'USER' && (
-                                                            <Clock8 size={24} color='white' />
+                                                            <span>{notification.notification_attribute.notification_content}</span>
                                                       )}
-
                                                       {notification.notification_attribute.notification_type === 'SHOP' && (
-                                                            // <Clock8 size={24} color='white' />
-                                                            <img
-                                                                  className='w-full h-full rounded'
-                                                                  src={notification.notification_attribute.product_image}
-                                                                  alt='product'
-                                                            />
-                                                      )}
-                                                </div>
-                                          </div>
-                                          <div className='flex flex-1 w-full  items-center  h-full '>
-                                                {notification.notification_attribute.notification_type === 'SYSTEM' && (
-                                                      <span>{notification.notification_attribute.notification_content}</span>
-                                                )}
-
-                                                {notification.notification_attribute.notification_type === 'USER' && (
-                                                      <span>{notification.notification_attribute.notification_content}</span>
-                                                )}
-                                                {notification.notification_attribute.notification_type === 'SHOP' && (
-                                                      <p>
-                                                            {notification.notification_attribute.notification_content}
-                                                            <span className='mx-[2px]  text-black underlinex inline-block px-[2px] py-1'>
-                                                                  {notification.notification_attribute.product_name}
-                                                            </span>
-                                                            <span className='mx-[2px] text-blue-400 underline  inline-block px-[2px] py-1'>
-                                                                  số lượng: {notification.notification_attribute.product_quantity}
-                                                            </span>
-                                                      </p>
-                                                )}
-
-                                                {notification.notification_attribute.notification_type === 'PRODUCT' && (
-                                                      <div className='flex flex-col gap-[4px]'>
                                                             <p>
                                                                   {notification.notification_attribute.notification_content}
-                                                                  <span className='mx-[2px]  text-blue-600 inline-block px-[2px] py-1'>
+                                                                  <span className='mx-[2px]  text-text-theme underlinex inline-block px-[2px] py-1'>
                                                                         {notification.notification_attribute.product_name}
                                                                   </span>
-                                                                  <span className='mx-[2px] text-blue-400  inline-block px-[2px] py-1'>
+                                                                  <span className='mx-[2px] text-blue-400 underline  inline-block px-[2px] py-1'>
                                                                         số lượng: {notification.notification_attribute.product_quantity}
                                                                   </span>
                                                             </p>
-                                                            <Link
-                                                                  to={`/order-check/${notification.notification_attribute.order_id}`}
-                                                                  className='text-left'
-                                                            >
-                                                                  Xem chi tiết
-                                                            </Link>
-                                                      </div>
-                                                )}
-                                          </div>
-                                          <div className='w-full xl:w-[20%] flex items-center justify-between '>
-                                                {!notification.notification_isRead && (
-                                                      <button
-                                                            className='xl:min-w-[50%] w-max h-[30px]  text-blue-400'
-                                                            onClick={() =>
-                                                                  onReadNotification({
-                                                                        notification_id: notification._id,
-                                                                        read: notification.notification_isRead,
-                                                                  })
-                                                            }
-                                                      >
-                                                            Đánh dấu là đã đọc
-                                                      </button>
-                                                )}
-                                                <button className='w-max h-[30px] text-red-400' onClick={() => setShowConfirm(true)}>
-                                                      Xóa
-                                                      {showConfirm && (
-                                                            <BoxConfirmDelete
-                                                                  content='Bạn có chắc có thông báo này không'
-                                                                  ButtonCancellContent='Hủy'
-                                                                  ButtonConfrimContent='Xóa'
-                                                                  onClose={setShowConfirm}
-                                                                  paramsActive={{ notification_id: notification._id }}
-                                                                  onActive={deleteNotificationMutation.mutate}
-                                                            />
                                                       )}
-                                                </button>
+
+                                                      {notification.notification_attribute.notification_type === 'PRODUCT' && (
+                                                            <div className='flex flex-col gap-[4px]'>
+                                                                  <p>
+                                                                        {notification.notification_attribute.notification_content}
+                                                                        <span className='mx-[2px]  text-blue-600 inline-block px-[2px] py-1'>
+                                                                              {notification.notification_attribute.product_name}
+                                                                        </span>
+                                                                        <span className='mx-[2px] text-blue-400  inline-block px-[2px] py-1'>
+                                                                              số lượng:{' '}
+                                                                              {notification.notification_attribute.product_quantity}
+                                                                        </span>
+                                                                  </p>
+                                                                  <Link
+                                                                        to={`/order-check/${notification.notification_attribute.order_id}`}
+                                                                        className='text-left'
+                                                                  >
+                                                                        Xem chi tiết
+                                                                  </Link>
+                                                            </div>
+                                                      )}
+                                                </div>
+                                                <div className='w-full xl:w-[20%] flex items-center justify-between '>
+                                                      {!notification.notification_isRead && (
+                                                            <button
+                                                                  className='xl:min-w-[50%] w-max h-[30px]  text-blue-400'
+                                                                  onClick={() =>
+                                                                        onReadNotification({
+                                                                              notification_id: notification._id,
+                                                                              read: notification.notification_isRead,
+                                                                        })
+                                                                  }
+                                                            >
+                                                                  Đánh dấu là đã đọc
+                                                            </button>
+                                                      )}
+                                                      <button className='w-max h-[30px] text-red-400' onClick={() => setShowConfirm(true)}>
+                                                            Xóa
+                                                            {showConfirm && (
+                                                                  <BoxConfirmDelete
+                                                                        content='Bạn có chắc có thông báo này không'
+                                                                        ButtonCancellContent='Hủy'
+                                                                        ButtonConfrimContent='Xóa'
+                                                                        onClose={setShowConfirm}
+                                                                        paramsActive={{ notification_id: notification._id }}
+                                                                        onActive={deleteNotificationMutation.mutate}
+                                                                  />
+                                                            )}
+                                                      </button>
+                                                </div>
+                                                {/* {notification.notification_attribute.notification_type === 'SHOP' && (
+                                          <span>{notification.notification_attribute.order_id}</span>
+                                    )} */}
                                           </div>
-                                          {/* {notification.notification_attribute.notification_type === 'SHOP' && (
-                                                <span>{notification.notification_attribute.order_id}</span>
-                                          )} */}
-                                    </div>
-                              )),
+                                    )
+                              }),
                         )}
                   </div>
                   <button
-                        className='mx-[32px] px-[16px] min-w-[150px] w-max h-[40px] flex items-center gap-[16px] bg-[#ffffff] border-[1px] border-blue-400 text-blue-400 rounded'
+                        className='mx-[32px] px-[16px] min-w-[150px] w-max h-[40px] flex items-center gap-[16px]  text-[#fff] opacity-80 hover:opacity-100 bg-color-main  rounded'
                         onClick={() => getMyNotification.fetchNextPage()}
                         disabled={!getMyNotification.hasNextPage || getMyNotification.isFetchingNextPage}
                   >

@@ -50,22 +50,22 @@ const CartPayMini = () => {
 
       return (
             <React.Fragment>
-                  <div className='min-h-[240px] h-max xl:h-[180px] bg-[#ffffff] rounded p-[12px]'>
-                        <div className='h-[49%]  flex flex-col gap-[8px] xl:gap-0 justify-center'>
+                  <div className='flex flex-col gap-[20px] bg-color-section-theme text-text-theme rounded p-[12px]'>
+                        <div className='h-[49%]  flex flex-col gap-[8px]  justify-center  bg-color-section-theme'>
                               <div className='w-full flex flex-wrap xl:flex-none flex-row justify-between'>
                                     <span>Tạm tính</span>
                                     <BoxMoney money={price} name='VNĐ' />
                               </div>
                               <p className='w-full flex justify-between'>
                                     <span>Giảm giá </span>
-                                    <span>-15000</span>
+                                    <span>-0%</span>
                               </p>
                         </div>
 
                         <div className='w-[calc(100%+32px)] my-[10px] xl:my-0 ml-[-16px] '>
-                              <div className='w-full h-[1px] bg-slate-100'></div>
+                              <div className='w-full h-[1px] bg-[var(--border-color-input)]'></div>
                         </div>
-                        <div className='h-[49%] flex flex-col gap-[8px] xl:gap-0 justify-center '>
+                        <div className='h-[49%] flex flex-col gap-[8px]  justify-center  bg-color-section-theme'>
                               <div className='flex flex-row flex-wrap xl:flex-none justify-between '>
                                     <span>Tổng tiền</span>
                                     <p className='w-max flex gap-[4px] items-center '>

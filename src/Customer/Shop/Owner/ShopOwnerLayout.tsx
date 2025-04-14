@@ -26,17 +26,17 @@ const ShopOwnerLayout = (props: TProps) => {
 
       const styleEffect = {
             onActive: (check: boolean) => {
-                  if (check) return 'bg-slate-900 text-white rounded'
-                  return 'bg-white text-slate-900 rounded'
+                  if (check) return 'bg-color-main text-[#fff] rounded'
+                  return 'bg-white text-slate-900 rounded hover:bg-color-main hover:text-[#fff]'
             },
       }
 
       return (
             <div className='relative w-full min-h-[200px] h-max flex flex-col'>
-                  <div className='relative w-full h-[160px] xl:h-[100px] bg-white flex items-center justify-center'>
-                        <p className='tracking-[4px] text-[18px] mt-[-60px] xl:mt-0'>{shop.shop_name}</p>
+                  <div className='relative w-full h-[160px] xl:h-[100px] bg-color-section-theme flex items-center justify-center'>
+                        <p className='tracking-[2px] text-[18px] mt-[-60px] xl:mt-0'>{shop.shop_name}</p>
                         <button
-                              className='absolute bottom-[10px] right-[20px] min-w-[150px] w-max h-[40px] p-[8px_14px] bg-slate-800 text-white'
+                              className='absolute bottom-[10px] right-[20px] min-w-[150px] w-max h-[40px] p-[8px_14px] bg-color-main opacity-80 hover:opacity-100 text-[#fff]'
                               onClick={() => setOpenForm(true)}
                         >
                               Chỉnh sửa thông tin

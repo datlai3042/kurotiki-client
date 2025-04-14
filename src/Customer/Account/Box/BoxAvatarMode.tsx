@@ -85,7 +85,7 @@ const BoxAvatarMode = (props: TProps) => {
 
       return (
             <div
-                  className={`${styleEffect.widthImage}  ${styleEffect.heightImage} flex  items-center justify-center  rounded-full mb-[15px]`}
+                  className={`${styleEffect.widthImage}  ${styleEffect.heightImage} flex-shrink flex  items-center justify-center  rounded-full mb-[15px]`}
                   onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
                         e.stopPropagation()
                         modeDispatch({ type: 'OPEN_BOX_AVATAR', payload: { boxModeAvatar: true } })

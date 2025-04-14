@@ -21,7 +21,7 @@ const CommentStatistic = (props: TProps) => {
       }, [avg, totalComment, detailComment])
 
       return (
-            <div className='w-[300px] h-max flex items-center py-[16px] px-[20px]'>
+            <div className='w-[330px] h-max flex items-center py-[16px] px-[20px]'>
                   <div className='w-full min-h-[100px] h-max flex flex-col gap-[20px]'>
                         <div className=''>
                               <span className='text-[15px]  font-extrabold'>Khách hàng đánh giá</span>

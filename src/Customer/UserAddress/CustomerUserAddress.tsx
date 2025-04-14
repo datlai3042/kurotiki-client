@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { UserResponse } from '../../types/user.type'
 import AddressItem from './AddressItem'
+import Portal from '../../component/Portal'
 
 const CustomerUserAddress = () => {
       const [openFormAddress, setOpenFormAddress] = useState<boolean>(false)
@@ -13,24 +14,26 @@ const CustomerUserAddress = () => {
       const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
 
       return (
-            <div className='w-full  py-[8px] flex flex-col gap-[20px] bg-[#f5f4f6]'>
+            <div className='w-full  py-[8px] flex flex-col gap-[20px] bg-color-section-theme'>
                   <button
-                        className='w-full h-[60px] flex items-center justify-center gap-[8px] bg-[#ffffff] border-[1px] border-dotted border-stone-400'
+                        className=' h-[60px] mx-[10px] flex items-center justify-center gap-[8px] bg-color-section-theme border-[1px] border-dotted border-[var(--border-color-input)]'
                         onClick={() => setOpenFormAddress((prev) => !prev)}
                   >
                         <Plus />
                         <span>{`${openFormAddress ? 'Ẩn Form' : 'Thêm địa chỉ'}`}</span>
                   </button>
                   {openFormAddress && (
-                        <div className='fixed inset-0 bg-[rgba(0,0,0,.4)] h-screen flex items-center justify-center z-[500]'>
-                              <div className='animate-authBox px-[60px] min-w-[575px]'>
-                                    <FormAddress iconClose={<X />} onClose={setOpenFormAddress} />
+                        <Portal>
+                              <div className='fixed inset-0 bg-[rgba(0,0,0,.4)] h-screen flex items-center justify-center z-[998]'>
+                                    <div className='animate-authBox  min-w-[575px]'>
+                                          <FormAddress iconClose={<X />} onClose={setOpenFormAddress} />
+                                    </div>
                               </div>
-                        </div>
+                        </Portal>
                   )}
 
                   {user.user_address.length === 0 && (
-                        <div className='w-full flex flex-col gap-[24px] justify-center items-center py-[50px] bg-[#ffffff]'>
+                        <div className='w-full flex flex-col gap-[24px] justify-center items-center py-[50px] bg-color-section-theme'>
                               <header className='w-full h-max flex justify-center gap-[16px] '>
                                     <MapPinOff />
                                     <span>Bạn chưa thêm bất kì địa chỉ nào, nhấn vào "Thêm địa chỉ" để cập nhập nhé</span>

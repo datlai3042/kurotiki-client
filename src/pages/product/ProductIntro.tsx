@@ -52,7 +52,6 @@ const ProductIntro = (props: TProps) => {
             staleTime: STALE_TIME,
       })
 
-      console.log({ result: getAddressDefault(user?.user_address) })
       return (
             <div className='flex flex-col min-h-full h-max gap-[16px] text-[13px]'>
                   <section className='bg-color-section-theme w-full min-h-[160px] h-auto p-[18px]  rounded-lg'>
@@ -99,7 +98,7 @@ const ProductIntro = (props: TProps) => {
                                           {cartCurrent.cart_current_address ? (
                                                 <p className='flex gap-[8px]'>
                                                       <span>Giao đến</span>
-                                                      <span className='underline text-slate-800 font-bold'>
+                                                      <span className='underline text-color-main font-bold'>
                                                             {cartCurrent.cart_current_address}
                                                       </span>
                                                 </p>

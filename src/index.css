@@ -72,7 +72,7 @@
 
       body.light {
             --bg-form-nav: #fff;
-            --color-gap-empty: #eef1f9;
+            --color-gap-empty: #f5f5fa;
             --color-main: #3d52a2;
             --bg-scrollbar-thumb-normal: #636363;
             --bg-scrollbar-track-normal: #e9e2e2;
@@ -86,7 +86,8 @@
             --border-form-item: #e8e8e8;
             --bg-space: #f4f6ff;
             /* --bg-module-other: #17174b; */
-
+            --sketeton-theme-to: hsl(200, 20%, 80%);
+            --sketeton-theme-from: hsl(200, 20%, 95%);
             --bg-module-other: #e1e1e1ca;
             --border-color-input: rgb(200 205 214 / 42%);
             --border-color-side: rgb(200 205 214 / 42%);
@@ -98,9 +99,10 @@
             --color-gap-empty: #020a1e;
             /* --color-main: #3b36db; */
             --bg-answer-option: rgb(222 224 228);
-
+            --sketeton-theme-to: #2a3342;
+            --sketeton-theme-from: #343e4e;
             --color-main: #35336a;
-            --color-section-theme: #08112b;
+            --color-section-theme: #081026;
             --text-theme: #ccc;
             --color-main-hover: rgb(229 231 235);
             --border-color: #14113c;
@@ -109,7 +111,7 @@
             --border-form-item: transparent;
             --bg-space: #252525;
             --bg-module-other: #17174bb0;
-            --border-color-input: rgb(209 213 219 / 27%);
+            --border-color-input: rgb(209 213 219 / 10%);
             --border-color-side: rgb(200 205 214 / 18%);
             --bg-scrollbar-thumb-normal: rgba(203, 191, 191, 0.758);
             --bg-scrollbar-track-normal: #2c2c2c;
@@ -144,11 +146,15 @@
     } */
 
       .customer-item-bg {
-            @apply flex gap-[12px] items-center pl-[20px];
+            @apply flex gap-[12px] items-center pl-[20px] hover:bg-color-main hover:text-[#fff] hover:rounded-md;
       }
 
       .customer-item-isActive {
             @apply bg-slate-700 transition-all duration-500;
+      }
+
+      .inputCommon {
+            @apply border-[1px] border-[var(--border-color-input)] bg-color-section-theme text-text-theme;
       }
 }
 
@@ -240,6 +246,37 @@ code {
       font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New';
 }
 
+.skeleton__container {
+      animation: skeleton-loading .6s linear infinite alternate;
+}
+
+.skeleton--line {
+      width: 24rem;
+      height: 2.6rem;
+      border-radius: 0.5rem;
+}
+
+.skeleton--avatar {
+      width: 8rem;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+}
+
+.skeleton--box {
+      width: 8rem;
+      aspect-ratio: 4/1;
+      border-radius: 0.5rem;
+}
+
+@keyframes skeleton-loading {
+      0% {
+            background-color: var(--sketeton-theme-to);
+      }
+      100% {
+            background-color: var(--sketeton-theme-from);
+      }
+}
+
 /* width */
 
 /* :not(body)::-webkit-scrollbar {
@@ -280,4 +317,18 @@ code {
 body {
       max-width: 100vw;
       /* overflow-x: hidden; */
+}
+
+/*border-select*/
+.ant-select-focused:where(.css-dev-only-do-not-override-dkbvqv).ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(
+            .ant-pagination-size-changer
+      )
+      .ant-select-selector {
+      border: 1px solid var(--border-color-input) !important;
+}
+
+/*Bg-select*/
+
+:where(.css-dev-only-do-not-override-dkbvqv).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+      background-color: var(--color-section-theme) !important;
 }

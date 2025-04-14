@@ -26,13 +26,17 @@ const CommentMe = (props: TProps) => {
       const [openBoxUpload, setOpenBoxUpload] = useState<boolean>(false)
       const [openBoxUpdate, setopenBoxUpdate] = useState<boolean>(false)
       const [openBoxDelete, setOpenBoxDelete] = useState<boolean>(false)
-
       const getMeCommentQuery = useQuery({
             queryKey: ['get-me-comment', product._id],
             queryFn: () => CommentService.getMeComment({ product_id: product._id }),
             staleTime: SLATE_TIME_COMMENT_ME_ALL,
             enabled: !!user,
       })
+
+
+      useEffect(() => {
+            getMeCommentQuery.refetch()
+      }, [user])
 
       const deleteCommentMutation = useMutation({
             mutationKey: ['/v1/api/comment/delete-comment'],
@@ -41,7 +45,7 @@ const CommentMe = (props: TProps) => {
                   setOpenBoxDelete(false)
                   dispatch(addToast({ id: Math.random().toString(), message: 'Đã xóa comment thành công', type: 'SUCCESS' }))
                   queryClient.invalidateQueries({
-                        queryKey: ['get-all-comment-image'],
+                        queryKey: ['get-all-comment-image', product._id],
                   })
 
                   queryClient.invalidateQueries({
@@ -88,7 +92,7 @@ const CommentMe = (props: TProps) => {
       return (
             <div>
                   {getMeCommentQuery.data?.data.metadata.comment && comment && (
-                        <div className='relative ' id={'comment_me'}>
+                        <div className='relative px-[20px]' id={'comment_me'}>
                               <CommentItem comment={comment} />
                               {user?._id === comment?.comment_user_id?._id && (
                                     <>
@@ -139,7 +143,7 @@ const CommentMe = (props: TProps) => {
                   {!comment && (
                         <div>
                               <button
-                                    className=' mx-[20px]  w-[180px] my-[16px] h-[40px] border-[1px]  border-blue-400 text-blue-400 bg-[#ffffff] rounded'
+                                    className=' mx-[20px]  w-[180px] my-[16px] h-[40px] bg-color-main opacity-80 hover:opacity-100 text-[#fff] rounded'
                                     onClick={() => onOpenModel(setOpenBoxUpload)}
                               >
                                     Viết đánh giá

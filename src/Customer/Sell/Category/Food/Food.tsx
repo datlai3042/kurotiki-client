@@ -35,7 +35,7 @@ const Food = () => {
       const form = useFormContext()
       const errors = form.formState.errors
       return (
-            <div className='flex flex-col gap-[16px]'>
+            <div className='flex flex-col gap-[20px]'>
                   <InputText
                         FieldName={'attribute.product_food_Manufacturers_Name'}
                         LabelMessage='Tên xưởng sản xuất'
@@ -64,7 +64,14 @@ const Food = () => {
                   <Controller
                         name={'attribute.description'}
                         control={form.control}
-                        render={({ field }) => <TextArea {...field} maxLength={10000} rows={80} />}
+                        render={({ field }) => (
+                              <TextArea
+                                    {...field}
+                                    maxLength={10000}
+                                    rows={16}
+                                    className='bg-color-section-theme text-text-theme border-[1px] border-[var(--border-color-input)]'
+                              />
+                        )}
                   />
 
                   {errors?.attribute && (

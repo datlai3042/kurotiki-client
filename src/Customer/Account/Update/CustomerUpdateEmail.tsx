@@ -81,23 +81,23 @@ const CustomerUpdateEmail = () => {
       })
 
       return (
-            <div className='flex items-center justify-center w-full min-h-[200px] h-max  bg-[#ffffff] py-[60px] rounded'>
+            <div className='flex items-center justify-center w-full min-h-[200px] h-max  bg-color-section-theme text-text-theme py-[60px] rounded'>
                   <form
-                        className='flex flex-col gap-[16px]  min-w-[150px] xl:min-w-[400px] xl:min-h-[150px] h-max max-w-auto  p-[24px] rounded-sm  shadow-2xl border-[1px] border-slate-100 bg-[#ffffff]'
+                        className='flex flex-col gap-[16px]  min-w-[150px] xl:min-w-[400px] xl:min-h-[150px] h-max max-w-auto  p-[24px] rounded-sm  shadow-2xl border-[1px] border-[var(--border-color-input)] '
                         style={{ width: Number(user.email.length) * 10 }}
                         onSubmit={onSubmit}
                   >
-                        <label htmlFor='account_email_update' className='[word-spacing:1px] text-[16px] text-black font-medium '>
+                        <label htmlFor='account_email_update' className='[word-spacing:1px] text-[16px]  font-medium '>
                               Địa chỉ Email
                         </label>
 
                         <div
-                              className='w-full h-[50px] max-w-auto group flex gap-[10px] px-[8px] py-[2px] items-center border-[1px] border-blue-700 rounded'
+                              className='w-full h-[50px] max-w-auto group flex gap-[10px] px-[8px] py-[2px] items-center border-[1px] border-[var(--border-color-input)] rounded'
                               tabIndex={0}
                         >
                               <Mail />
                               <input
-                                    className='w-full max-w-auto border-none h-full outline-none py-[8px]'
+                                    className='w-full max-w-auto border-none h-full outline-none py-[8px] bg-color-section-theme'
                                     type='text'
                                     id='account_email_update'
                                     value={email}
@@ -106,7 +106,7 @@ const CustomerUpdateEmail = () => {
                         </div>
                         <button
                               type='submit'
-                              className='w-full h-[45px] flex items-center justify-center gap-[14px] bg-blue-700 text-white rounded-md'
+                              className='w-full h-[45px] flex items-center justify-center gap-[14px]  rounded-[4px] bg-color-main opacity-100 hover:opacity-100 text-[#fff]'
                         >
                               <span>Lưu thay đổi</span>
 

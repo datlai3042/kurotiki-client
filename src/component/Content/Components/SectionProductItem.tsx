@@ -62,7 +62,7 @@ const SectionProductItem = (props: Props) => {
             <div className='h-[85%] mx-[4px] relative overflow-auto md:overflow-hidden pb-[8px] bg-color-section-theme text-text-theme '>
                   <div
                         ref={wrapperListProductsRef}
-                        className=' h-full  flex  gap-[12px] xl:gap-[34px] px-[18px] w-[370px]  xl:w-full snap-mandatory	'
+                        className=' h-full  flex  gap-[12px] xl:gap-[34px] px-[18px] min-w-[370px] w-[370px]  xl:w-full snap-mandatory	'
                   >
                         {allProduct.isSuccess &&
                               allProduct?.data?.data?.metadata.products.map((product: TProductReturn) => {
@@ -96,7 +96,7 @@ const SectionProductItem = (props: Props) => {
                                     .map((_, index) => {
                                           return (
                                                 <div
-                                                      className='animate-pulse bg-gray-100 flex flex-col min-w-[40%] md:min-w-[30%] lg:min-w-[15%] h-[160px] snap-always snap-start	 '
+                                                      className='animate-pulse bg-gray-100 flex flex-col min-w-[40%] xl:min-w-[15%] h-[160px] snap-always snap-start	 '
                                                       key={index}
                                                 >
                                                       <div className='bg-gray-200 w-full min-h-full flex rounded'>
@@ -107,21 +107,26 @@ const SectionProductItem = (props: Props) => {
                                           )
                                     })}
                   </div>
-                  <button
-                        className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[-50%]  bg-[#ffffff]  rounded-full shadow-3xl`}
-                        onClick={handleClickPrev}
-                        disabled={styleEffect.disButtonPrev}
-                  >
-                        <ChevronLeft size={24} color='blue' />
-                  </button>
 
-                  <button
-                        className={`${styleEffect.buttonNext} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[-50%] bg-[#ffffff]  rounded-full shadow-3xl `}
-                        onClick={handleClickNext}
-                        disabled={styleEffect.disButtonNext}
-                  >
-                        <ChevronRight size={26} color='blue' />
-                  </button>
+                  {allProduct.isSuccess && allProduct?.data?.data?.metadata.products.length > 0 && (
+                        <>
+                              <button
+                                    className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[-50%]  bg-[#ffffff]  rounded-full shadow-3xl`}
+                                    onClick={handleClickPrev}
+                                    disabled={styleEffect.disButtonPrev}
+                              >
+                                    <ChevronLeft size={24} color='blue' />
+                              </button>
+
+                              <button
+                                    className={`${styleEffect.buttonNext} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[-50%] bg-[#ffffff]  rounded-full shadow-3xl `}
+                                    onClick={handleClickNext}
+                                    disabled={styleEffect.disButtonNext}
+                              >
+                                    <ChevronRight size={26} color='blue' />
+                              </button>
+                        </>
+                  )}
             </div>
       )
 }

@@ -77,24 +77,22 @@ const AddressItem = (props: TProps) => {
       return (
             <div
                   style={{ height: detailAddress ? 'max-content !important' : 200 }}
-                  className={`${
-                        detailAddress ? 'h-max' : 'h-[375px] xl:h-[240px]'
-                  } relative transition-all  duration-300 flex flex-col gap-[20px] bg-[#ffffff] p-[16px]`}
+                  className={` relative border-b-[1px] border-[var(--border-color-input)] transition-all  duration-300 flex flex-col gap-[20px] bg-color-section-theme text-text-theme p-[16px]`}
                   key={address._id}
             >
-                  <div className='flex flex-col xl:flex-row xl:gap-[20px]'>
-                        <div className='w-full xl:w-[60%]'>
-                              <div className='h-[55px] w-full flex items-center gap-[8px]'>
+                  <div className='flex flex-col xl:flex-row flex-wrap xl:gap-[20px]'>
+                        <div className='w-full pt-[60px]'>
+                              {/* <div className='h-[55px] flex items-center gap-[8px]'>
                                     <span>Số địa chỉ: </span>
                                     <span className='  bg-slate-900 text-white  w-[20px] h-[20px] rounded-full flex items-center justify-center'>
                                           {index + 1}
                                     </span>
-                              </div>
+                              </div> */}
                               <div className='flex flex-col gap-[24px] w-full '>
-                                    <div className='w-max flex flex-col xl:flex-row gap-[20px] xl:gap-[4px]'>
+                                    <div className='flex flex-wrap gap-[6px]'>
                                           <span>Địa chỉ:</span>
                                           <div
-                                                className='hover:cursor-pointer  bg-blue-300 text-white p-[12px_6px] min-w-[50px] w-[auto] max-w-[400px] h-[20px] rounded flex items-center justify-center gap-[8px]'
+                                                className='hover:cursor-pointer  bg-color-main text-white p-[12px_6px] min-w-[50px] w-[auto] max-w-[400px] h-[20px] rounded flex items-center justify-center gap-[8px]'
                                                 onClick={() =>
                                                       openSearchGoogle(
                                                             address.address_street +
@@ -108,17 +106,17 @@ const AddressItem = (props: TProps) => {
                                                 }
                                           >
                                                 <span>{address.address_street}</span>
-                                                <p className='w-max flex gap-[2px] items-center'>
+                                                <p className='flex gap-[2px] items-center'>
                                                       <span>Phường/Xã:</span>
                                                       <button
-                                                            className='  bg-blue-300 text-white p-[12px_6px] min-w-[20px] w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
+                                                            className='  bg-color-main text-white p-[12px_6px] min-w-[20px] w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
                                                             onClick={() => openSearchGoogle(address.address_ward.text)}
                                                       >
                                                             {address.address_ward.text}
                                                       </button>
                                                 </p>
                                           </div>
-                                          <div className='ml-[6px] flex gap-[6px] items-center'>
+                                          <div className='ml-auto flex gap-[6px] items-center'>
                                                 {AddressType}
                                                 <span>
                                                       (
@@ -133,20 +131,20 @@ const AddressItem = (props: TProps) => {
                                     </div>
 
                                     <div className='flex flex-col xl:flex-row gap-[16px]  xl:gap-[4px]'>
-                                          <p className='w-max flex gap-[4px]'>
+                                          <p className='flex gap-[4px]'>
                                                 <span>Quận/Huyện:</span>
                                                 <button
-                                                      className='  bg-blue-300 text-white p-[12px_6px] min-w-[50px] w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
+                                                      className='  bg-color-main text-white p-[12px_6px] min-w-[50px] w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
                                                       onClick={() => openSearchGoogle(address.address_district.text)}
                                                 >
                                                       {address.address_district.text}
                                                 </button>
                                           </p>
 
-                                          <p className='w-max flex gap-[4px]'>
+                                          <p className='flex gap-[4px]'>
                                                 <span>Tỉnh/Thành phố:</span>
                                                 <button
-                                                      className='  bg-blue-300 text-white p-[12px_6px] min-w-[50px] w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
+                                                      className='  bg-color-main text-white p-[12px_6px] min-w-[50px] w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
                                                       onClick={() => openSearchGoogle(address.address_province.text)}
                                                 >
                                                       {address.address_province.text}
@@ -154,7 +152,7 @@ const AddressItem = (props: TProps) => {
                                           </p>
                                     </div>
                                     {/* <p>{renderStringAddressDetail(address)}</p> */}
-                                    <div className='w-[120px] h-[36px]'>
+                                    {/* <div className='w-[110px] h-[24px]'>
                                           <BoxButton
                                                 content={`${detailAddress ? 'Đóng bản đồ' : 'Xem bản đồ'}`}
                                                 onClick={() => {
@@ -162,38 +160,42 @@ const AddressItem = (props: TProps) => {
                                                       setLoadingIframe(true)
                                                 }}
                                           />
+                                    </div> */}
+                              </div>
+                              <div className='flex flex-col md:flex-row flex-wrap'>
+                                    {detailAddress && (
+                                          <div className='mt-[20px] h-[250px] xl:h-[300px]'>
+                                                <BoxWeatherApi locationName={address.address_district.text} />
+                                          </div>
+                                    )}
+                                    <div className=' flex-1'>
+                                          {detailAddress && (
+                                                <div className='h-full'>
+                                                      {loadingIframe && (
+                                                            <div className='animate-pulse w-full xl:w-[100%] h-full bg-slate-300'></div>
+                                                      )}
+                                                      <iframe
+                                                            ref={iframeRef}
+                                                            onLoad={() => {
+                                                                  setLoadingIframe(false)
+                                                                  if (iframeRef.current) {
+                                                                        iframeRef.current.style.height = '92%'
+                                                                  }
+                                                            }}
+                                                            style={{ height: 0 }}
+                                                            title='address'
+                                                            className='mt-[30px] w-full xl:w-[100%]  animate-mountComponent'
+                                                            loading='lazy'
+                                                            referrerPolicy='no-referrer-when-downgrade'
+                                                      ></iframe>
+                                                </div>
+                                          )}
                                     </div>
                               </div>
-                              {detailAddress && (
-                                    <div className='mt-[20px] w-full h-[250px] xl:h-[300px]'>
-                                          <BoxWeatherApi locationName={address.address_district.text} />
-                                    </div>
-                              )}
-                        </div>
-                        <div className=' flex-1'>
-                              {detailAddress && (
-                                    <div className='pt-[20px] xl:pt-[80px] h-full'>
-                                          {loadingIframe && <div className='animate-pulse w-full xl:w-[100%] h-full bg-slate-300'></div>}
-                                          <iframe
-                                                ref={iframeRef}
-                                                onLoad={() => {
-                                                      setLoadingIframe(false)
-                                                      if (iframeRef.current) {
-                                                            iframeRef.current.style.height = '92%'
-                                                      }
-                                                }}
-                                                style={{ height: 0 }}
-                                                title='address'
-                                                className='mt-[30px] w-full xl:w-[100%]  animate-mountComponent'
-                                                loading='lazy'
-                                                referrerPolicy='no-referrer-when-downgrade'
-                                          ></iframe>
-                                    </div>
-                              )}
                         </div>
                   </div>
 
-                  <div className='absolute top-0 xl:top-[20px] right-0 xl:right-[20px] flex items-center gap-[12px]'>
+                  <div className='absolute top-[8px] xl:top-[20px] right-[4px] xl:right-[20px] flex items-center gap-[12px]'>
                         <button
                               className={`${styleEffect.btnAddressDefault} w-[145px] xl:w-[180px] h-[32px] xl:px-[12px] xl:py-[6px]  flex items-center justify-center gap-[6px]`}
                               onClick={() => handleSetDefaultAddress(address._id)}

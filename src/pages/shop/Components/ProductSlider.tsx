@@ -86,7 +86,7 @@ const ProductSlider = (props: TProps) => {
       // console.log({ products: products.length, index: indexImage, LIMIT, TransitionTime, props: props })
 
       if (products.length === 0) {
-            return <div className='animate-pulse bg-gray-200 w-full h-full'></div>
+            return <div className='skeleton__container w-full h-full'></div>
       }
 
       return (
@@ -106,7 +106,7 @@ const ProductSlider = (props: TProps) => {
                                                             className='w-full h-full rounded  shadow-3xl'
                                                             alt=''
                                                       />
-                                                      <div className='absolute min-w-[420px] w-max h-[90px] left-[50%] translate-x-[-50%] bottom-[20px] hidden xl:flex gap-[20px] p-[10px] bg-[#ffffff] rounded-lg shadow-2xl'>
+                                                      <div className='absolute min-w-[420px] w-max h-[90px] left-[50%] translate-x-[-50%] bottom-[20px] hidden xl:flex gap-[20px] p-[10px] bg-color-section-theme text-text-theme rounded-lg shadow-2xl'>
                                                             {[products[index].product_thumb_image]
                                                                   .concat(products[index].product_desc_image)
                                                                   .map((img) => (

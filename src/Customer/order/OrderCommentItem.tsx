@@ -14,13 +14,13 @@ const OrderCommentItem = (props: TProps) => {
             <Link to={`/product/${comment.comment_product_id._id}#comment_me`} className=' w-full h-[600px] xl:min-h-[200px] xl:h-max  '>
                   <div className='w-[calc(100%+60px)] h-[1px] ml-[-30px] my-[16px] bg-slate-100 '></div>
                   <div className=' w-full h-[40%] xl:h-full flex flex-col xl:flex-row items-center gap-[20px] xl:gap-[30px]'>
-                        <div className='w-full xl:w-[40%] h-full p-[10px] xl:p-[20px] flex flex-col gap-[20px] xl:gap-[40px]   '>
+                        <div className='w-full xl:w-[40%] h-full p-[10px] xl:p-[20px] flex flex-col gap-[20px]    '>
                               <img
                                     src={comment.comment_product_id.product_thumb_image.secure_url}
                                     alt='comment'
-                                    className='h-[80px] xl:h-[160px] w-[200px]  bg-slate-300 rounded p-[8px] border-[1px] border-slate-700'
+                                    className=' w-[200px] border-[1px] object-contain  border-[var(--border-color-input)] rounded p-[8px] border-[1px] border-slate-700'
                               />
-                              <div className='min-w-[150px] w-[200px] xl:w-[300px] h-[30px] break-words truncate '>
+                              <div style={{lineHeight: 1.6}} className='min-w-[150px] w-[200px] xl:w-[300px] h-[30px] break-words '>
                                     Sản phẩm: {comment.comment_product_id.product_name}
                               </div>
                         </div>

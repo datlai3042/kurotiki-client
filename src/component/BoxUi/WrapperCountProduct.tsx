@@ -2,19 +2,44 @@ import React, { memo, useEffect, useState } from 'react'
 import BoxCountProduct from './BoxCountProduct'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import CartService, { TModeChangeQuantityProductCart } from '../../apis/cart.service'
+import BoxConfirmDelete from './confirm/BoxConfirmDelete'
+import { CartProduct, CartProductRef } from '../../types/cart.type'
+import { formatMoneyVND } from '../../utils'
 
 type TProps = {
       product_id: string
       cart_quantity: number
       readOnly: boolean
+      product: CartProduct | null
+      modeAction?: 'ADD' | 'EDIT'
 }
 
 const WrapperCountProduct = (props: TProps) => {
-      const { product_id, cart_quantity, readOnly } = props
+      const { product_id, cart_quantity, readOnly, product, modeAction = 'ADD' } = props
       const [productQuantity, setProductQuantity] = useState<number | undefined>(cart_quantity)
       const queryClient = useQueryClient()
+      const [openBoxConfirmDelete, setOpenBoxConfirmDelete] = useState<boolean>(false)
+      const deleteCartWithProductId = useMutation({
+            mutationKey: ['/v1/api/cart/cart-delete/:product_id'],
+            mutationFn: ({ product_id }: { product_id: string }) => CartService.deleteCart({ product_id }),
+            onSuccess: () => {
+                  queryClient.invalidateQueries({
+                        queryKey: ['v1/api/cart/cart-get-my-cart'],
+                  })
 
-    
+                  queryClient.invalidateQueries({
+                        queryKey: ['v1/api/cart/cart-pay'],
+                  })
+
+                  queryClient.invalidateQueries({
+                        queryKey: ['cart-get-count-product'],
+                  })
+            },
+      })
+
+      const onDeleteCart = ({ product_id }: { product_id: string }) => {
+            deleteCartWithProductId.mutate({ product_id })
+      }
 
       useEffect(() => {
             setProductQuantity(cart_quantity)
@@ -36,8 +61,23 @@ const WrapperCountProduct = (props: TProps) => {
       })
 
       const getValueChangeQuanity = (mode: TModeChangeQuantityProductCart) => {
+            if (mode.mode === 'DECREASE') {
+                  if (modeAction === 'EDIT') {
+                        if (mode.quantity === 0 || mode.quantity < 0) {
+                              setOpenBoxConfirmDelete(true)
+                              setProductQuantity(0)
+                              return
+                        }
+                  } else {
+                        if (mode.quantity === 0 || mode.quantity < 0) {
+                              setProductQuantity(0)
+                              return
+                        }
+                  }
+            }
             if (mode.mode === 'INPUT') {
-                  if (mode.quantity === 0) {
+                  if (mode.quantity === 0 || mode.quantity < 0) {
+                        setOpenBoxConfirmDelete(true)
                         setProductQuantity(0)
                         return
                   } else {
@@ -60,13 +100,42 @@ const WrapperCountProduct = (props: TProps) => {
       }, [updateCartQuantityBtn.isSuccess, updateCartQuantityBtn?.data?.data.metadata.quantity])
 
       return (
-            <BoxCountProduct
-                  readOnly={readOnly}
-                  getValueChangeQuanity={getValueChangeQuanity}
-                  productQuantity={productQuantity}
-                  setProductQuantity={setProductQuantity}
-                  disable={updateCartQuantityBtn.isPending || readOnly}
-            />
+            <>
+                  <BoxCountProduct
+                        readOnly={readOnly}
+                        getValueChangeQuanity={getValueChangeQuanity}
+                        productQuantity={productQuantity}
+                        setProductQuantity={setProductQuantity}
+                        disable={updateCartQuantityBtn.isPending || readOnly}
+                  />
+
+                  {openBoxConfirmDelete && (
+                        <BoxConfirmDelete
+                              content='Bạn sẽ xóa sản phẩm này chứ'
+                              subContent={
+                                    <div className='flex flex-col gap-[8px]'>
+                                          <span>{product!.product_id.product_name}</span>
+                                          <div className='w-full justify-end gap-[8px]'>
+                                                <div className='flex gap-[8px]'>
+                                                      <span>Số lượng:</span>
+                                                      <span>{cart_quantity}</span>
+                                                </div>
+
+                                                <div className='flex gap-[8px]'>
+                                                      <span>Giá:</span>
+                                                      <span>{formatMoneyVND(cart_quantity * product!.product_id.product_price)}</span>
+                                                </div>
+                                          </div>
+                                    </div>
+                              }
+                              ButtonCancellContent='Hủy'
+                              ButtonConfrimContent='Xác nhận xóa'
+                              onClose={setOpenBoxConfirmDelete}
+                              onActive={onDeleteCart}
+                              paramsActive={{ product_id: product!._id }}
+                        />
+                  )}
+            </>
       )
 }
 

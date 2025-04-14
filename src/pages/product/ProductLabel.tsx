@@ -13,7 +13,7 @@ const ProductLabel = (props: TProps) => {
                   <span className='bg-blue-800 font-extrabold w-[12px] h-[12px] rounded-full flex items-center justify-center'>
                         <Check color='white' size={10} />
                   </span>
-                  <span className='uppercase text-blue-700 font-semibold mt-[1px] text-[10px]'>{content}</span>
+                  <span className='uppercase text-blue-700 font-semibold mt-[1px] text-[9px]'>{content}</span>
             </p>
       )
 }

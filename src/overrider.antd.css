@@ -1,0 +1,53 @@
+.ant-select-selector {
+      border: 1px solid var(--border-color-input) !important;
+      background-color: var(--color-section-theme) !important;
+}
+
+:where(.css-dev-only-do-not-override-1tvv740).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+      background-color: var(--color-section-theme) !important;
+      border: 1px solid var(--border-color-input) !important;
+}
+
+/**placehoder*/
+:where(.css-dev-only-do-not-override-1tvv740).ant-select .ant-select-selection-placeholder,
+:where(.css-dev-only-do-not-override-1tvv740).ant-select .ant-select-arrow,
+:where(.css-dev-only-do-not-override-1tvv740).ant-select-single .ant-select-selector {
+      color: var(--text-theme) !important;
+}
+
+/*Dropdown*/
+:where(.css-dev-only-do-not-override-1tvv740).ant-select-dropdown {
+      background-color: var(--color-section-theme) !important;
+      color: var(--text-theme) !important;
+      border: 1px solid var(--border-color-input) !important;
+}
+
+/*Dropdown Item*/
+.ant-select-item-option-content {
+      color: var(--text-theme);
+}
+
+.ant-select-item.ant-select-item-option:hover,
+.ant-select-item.ant-select-item-option.ant-select-item-option-active.ant-select-item-option-selected,
+:where(.css-dev-only-do-not-override-1tvv740).ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+      background-color: var(--color-main) !important;
+      color: #fff !important;
+}
+
+/*Title khi active dropdown**/
+:where(.css-dev-only-do-not-override-1tvv740).ant-select-single.ant-select-open .ant-select-selection-item {
+      color: var(--color-main) !important;
+      font-weight: 700;
+}
+
+/*Radio*/
+:where(.css-dev-only-do-not-override-1tvv740).ant-radio-wrapper {
+      color: var(--text-theme) !important;
+
+}
+
+
+/*Fix checkbox*/
+:where(.css-dev-only-do-not-override-1tvv740).ant-checkbox-wrapper:after {
+      content: unset;
+}

@@ -21,7 +21,9 @@ function Header() {
 
       return (
             <>
-                  <div className={`fixed text-text-theme  top-0 left-0 w-full z-[100] bg-color-section-theme border-b-[1px] border-solid border-[var(--border-color-input)]`}>
+                  <div
+                        className={`fixed text-text-theme  top-0 left-0 w-full z-[100] bg-color-section-theme border-b-[1px] border-solid border-[var(--border-color-input)]`}
+                  >
                         <div className='h-[65px] md:h-[75px] py-2 px-[10px] gap-[24px]  flex items-center  mx-auto  xl:max-w-[1400px]'>
                               <div className='max-w-[200px] flex items-center'>
                                     <HeaderLogoToggle />
@@ -33,7 +35,8 @@ function Header() {
                                     </div>
                                     <div className='whitespace-pre flex lg:flex-col justify-center  ml-auto h-full'>
                                           <HeaderActions />
-                                          <div
+                                          {/**
+                                       *     <div
                                                 id=''
                                                 className='text-[11px] hidden xl:flex items-center   flex-grow-1  justify-space  '
                                                 title={`${address_default ? renderStringAddressDetailV2(address_default[0]) : ' ...'}`}
@@ -68,6 +71,8 @@ function Header() {
                                                       )}
                                                 </div>
                                           </div>
+                                       * 
+                                       */}
                                     </div>
                               </div>
                         </div>

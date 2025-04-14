@@ -72,10 +72,10 @@ const RegisterSell = () => {
 
       if (!user.isOpenShop) {
             return (
-                  <div className='w-full h-[500px] bg-[#ffffff] rounded-lg flex flex-col gap-[30px] items-center justify-center text-[20px] font-semibold'>
+                  <div className='w-full h-[500px] bg-color-section-theme text-text-theme rounded-lg flex flex-col gap-[12px] items-center justify-center text-[20px] font-semibold'>
                         <span>Chức năng chỉ dành cho các tài khoản đã đăng kí shop</span>
                         <Link
-                              className='w-[150px] h-[40px] flex items-center justify-center bg-[#ffffff] border-[1px] border-blue-400 text-blue-400 rounded'
+                              className='w-[150px] h-[40px] flex items-center justify-center  border-[1px] border-[var(--border-color-input)] rounded bg-color-main opacity-80 hover:opacity-100 text-[#fff] hover:border-transparent transition-none duration-300 text-[15px]'
                               to={'/customer/shop'}
                         >
                               Đăng kí shop
@@ -84,10 +84,10 @@ const RegisterSell = () => {
             )
       }
       return (
-            <div className='min-w-full min-h-[100px] h-auto flex items-center justify-center bg-[#ffffff] p-[20px] '>
+            <div className='min-w-full  h-auto flex items-center justify-center bg-color-section-theme p-[20px] '>
                   {!openSelect && (
                         <button
-                              className='w-[150px] h-[40px] bg-[#ffffff] border-[1px] border-blue-400 text-blue-400 rounded'
+                              className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-main text-[#fff]  flex items-center justify-center rounded-[4px]'
                               onClick={() => setOpenSelect(true)}
                         >
                               Đăng sản phẩm
@@ -95,14 +95,14 @@ const RegisterSell = () => {
                   )}
 
                   {openSelect && (
-                        <div className='w-full h-full flex flex-col justify-center'>
-                              <div className='w-full h-[50px] flex justify-center'>
+                        <div className='w-full h-full flex flex-col '>
+                              <div className='w-full h-[50px] flex '>
                                     <Select
                                           className='w-[150px] '
                                           placeholder='Loại sản phẩm'
                                           options={[
-                                                { value: 'Book', label: 'Book' },
-                                                { value: 'Food', label: 'Food' },
+                                                { value: 'Book', label: 'Sách' },
+                                                { value: 'Food', label: 'Đồ ăn' },
                                           ]}
                                           onChange={(type: 'Book' | 'Food') => {
                                                 setProductType(type)
@@ -111,7 +111,7 @@ const RegisterSell = () => {
                                     />
                               </div>
                               {createBaseProductId.isSuccess && (
-                                    <div className='w-full h-max '>
+                                    <div className='w-full h-max mt-[16px]'>
                                           {productType === 'Book' && (
                                                 <ProductFormUpload<TTimeLineBookField, TTimeLineBookLabel>
                                                       ProductType={'Book'}

@@ -18,9 +18,11 @@ const CommentImageAll = (props: TProps) => {
       const [imageActive, setImageActive] = useState<string>('')
 
       const getAllCommentImage = useQuery({
-            queryKey: ['get-all-comment-image'],
+            queryKey: ['get-all-comment-image', product_id],
             queryFn: () => CommentService.getAllCommentImage({ product_id }),
       })
+
+
 
       const comment_images = getAllCommentImage.data?.data.metadata.comment_images
 
@@ -50,18 +52,18 @@ const CommentImageAll = (props: TProps) => {
       return (
             <>
                   {getAllCommentImage.isSuccess && getAllCommentImage.data.data.metadata.comment_images.length > 0 && (
-                        <div className=' my-[25px] min-h-[60px] xl:min-h-[120px] p-[16px_20px] h-max flex flex-col gap-[16px]'>
-                              <h4 className='text-[18px] font-semibold text-slate-900'>Tất cả hình ảnh</h4>
+                        <div className=' my-[25px] xl:min-h-[120px] p-[16px_20px] h-max flex flex-col gap-[16px]'>
+                              <h4 className='text-[18px] font-semibold '>Tất cả hình ảnh</h4>
                               {getAllCommentImage.isSuccess && (
-                                    <div className='relative w-full  flex  gap-[8px] xl:gap-[8px] h-[80px]'>
-                                          <div className='w-[80px] h-full  '>
+                                    <div className='relative w-full  flex  gap-[16px] min-h-[80px] overflow-auto'>
+                                          <div className=' h-full  '>
                                                 <div className='w-full h-full flex flex-1  gap-[16px]'>
                                                       {comment_images?.map((image) => (
                                                             <img
                                                                   onClick={() => onClickOpenModel(image.image.secure_url)}
                                                                   key={image.image._id}
                                                                   src={image.image.secure_url}
-                                                                  className='min-w-[80px] h-[80px] rounded hover:cursor-pointer'
+                                                                  className='w-[80px] h-[80px] rounded hover:cursor-pointer'
                                                                   alt='comment'
                                                             />
                                                       ))}

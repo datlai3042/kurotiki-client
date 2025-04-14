@@ -9,7 +9,7 @@ import Auth from '../../apis/auth.api'
 import { useDispatch } from 'react-redux'
 import { checkAxiosError } from '../../utils/handleAxiosError'
 import TErrorAxios from '../../types/axios.response.error'
-import {  fetchUser } from '../../Redux/authenticationSlice'
+import { fetchUser } from '../../Redux/authenticationSlice'
 import { addToast } from '../../Redux/toast'
 import BoxLoading from '../BoxUi/BoxLoading'
 import { doCloseBoxLogin } from '../../Redux/authSlice'
@@ -18,7 +18,7 @@ type TProps = {
       setModeAuth: React.Dispatch<SetStateAction<TModeAuth>>
 }
 
-type TFormLogin = {
+export type TFormLogin = {
       email: string
       password: string
 }
@@ -37,7 +37,7 @@ const loginSchema = z.object({
       password: z.string().min(1, { message: 'Mật khẩu là bắt buộc' }).max(50, { message: 'Tối đa 50 kí tự' }),
 })
 
-type TloginZodSchema = z.infer<typeof loginSchema>
+export type TloginZodSchema = z.infer<typeof loginSchema>
 
 const AuthLogin = (props: TProps) => {
       //Mode Login | register
@@ -117,15 +117,16 @@ const AuthLogin = (props: TProps) => {
       }, [errors, dispatch])
 
       return (
-            <div className=' flex flex-col items-center gap-[15px] py-[35px]'>
-                  <h3 className={`text-slate-900 font-black tracking-[5px] text-[24px]`}>Login</h3>
-                  <h4 className={`text-stone-600 italic text-[16px] opacity-80 px-[12px]`}>Đăng nhập để trải nghiệm mua sắm thỏa thích</h4>
-                  <form className='flex flex-1 flex-col gap-[20px] mt-[12px] w-[70%]' noValidate onSubmit={handleSubmit(onSubmit)}>
+            <div className=' flex flex-col items-center gap-[15px] px-[24px] py-[35px] min-w-[360px] bg-color-section-theme text-text-theme'>
+                  <h3 className={` font-black text-[24px]`}>
+                        Đăng nhập vào <span className='text-color-main font-bold'>KuroTiki</span>
+                  </h3>
+                  <form className='flex flex-1 flex-col gap-[16px] mt-[12px] w-[85%]' noValidate onSubmit={handleSubmit(onSubmit)}>
                         <div className='w-full flex flex-col gap-[16px]'>
                               <input
                                     {...register('email')}
                                     type='text'
-                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px] border-slate-900 placeholder:text-stone-500  `}
+                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px]  placeholder:text-stone-500  inputCommon`}
                                     placeholder='Email'
                               />
                         </div>
@@ -133,33 +134,30 @@ const AuthLogin = (props: TProps) => {
                               <input
                                     {...register('password')}
                                     type={typePassword}
-                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px] border-slate-900 placeholder:text-stone-500 `}
+                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px]  placeholder:text-stone-500 inputCommon`}
                                     placeholder='Mật khẩu'
                               />
                               <span className='absolute right-[5px]' onClick={handleShowHidePassword}>
-                                    {typePassword === 'text' ? (
-                                          <EyeOff size={'20px'} color={'black'} />
-                                    ) : (
-                                          <Eye size={'20px'} color={'black'} />
-                                    )}
+                                    {typePassword === 'text' ? <EyeOff size={'20px'} /> : <Eye size={'20px'} />}
                               </span>
                         </div>
 
-                        <div className=''>
-                              <p>
-                                    Bạn chưa có tài khoản,{' '}
-                                    <span className='underline text-slate-900' onClick={() => setModeAuth('Register')}>
-                                          đăng kí nhé
-                                    </span>
-                              </p>
+                        <div className='w-full flex justify-start gap-[6px]'>
+                              Bạn chưa có tài khoản,{' '}
+                              <span
+                                    className='underline text-color-main cursor-pointer text-[15px]'
+                                    onClick={() => setModeAuth('Register')}
+                              >
+                                    đăng kí nhé
+                              </span>
                         </div>
                         <button
                               type='submit'
-                              className='flex justify-center items-center gap-[8px] w-full h-[60px] rounded-lg bg-slate-900 text-white disabled:opacity-40 disabled:cursor-not-allowed'
+                              className='flex justify-center items-center gap-[8px] w-full min-h-[20px] p-[10px] rounded-[4px] bg-color-main text-white disabled:opacity-40 disabled:cursor-not-allowed'
                               disabled={authLogin.isPending && Object.keys(errors).length > 0}
                               title={Object.keys(errors).length > 0 ? 'Vui lòng nhập thông tin hợp lệ' : `Đăng nhập`}
                         >
-                              <span>Login</span>
+                              <span>Đăng nhập</span>
                               {authLogin.isPending && <BoxLoading />}
                         </button>
                   </form>

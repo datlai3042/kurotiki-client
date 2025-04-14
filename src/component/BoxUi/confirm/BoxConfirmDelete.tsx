@@ -5,8 +5,8 @@ import { X } from 'lucide-react'
 import BoxLoading from '../BoxLoading'
 
 type BoxConfirmDeleteProps<ParamsActive> = {
-      content: string
-      subContent?: string
+      content: React.ReactNode
+      subContent?: React.ReactNode
       ButtonConfrimContent: string
       ButtonCancellContent: string
       isLoadng?: boolean
@@ -36,51 +36,53 @@ const BoxConfirmDelete = <T,>(props: BoxConfirmDeleteProps<T>) => {
 
       const styleEffect = {
             onLoading: (check: boolean) => {
-                  if (check) return 'bg-red-400 border-red-400 border-[1px] text-white'
-                  return 'bg-[#ffffff] border-[1px] border-red-400 text-red-400 hover:text-white hover:bg-red-400'
+                  if (check) return 'bg-red-400 border-red-400 border-[1px] text-white '
+                  return 'bg-[#dc2626] opacity-80 hover:opacity-100'
             },
       }
 
       return (
             <Portal>
-                  <div className='fixed inset-0 bg-[rgba(0,0,0,0.75)] flex items-center justify-center z-[900]'>
+                  <div className='fixed inset-0 bg-[#1145683b] flex items-center justify-center z-[900]'>
                         <div
-                              className='relative  w-[80%] xl:w-[500px] h-[160px] bg-[#ffffff] rounded-lg flex flex-col gap-[24px] mx-[15px] xl:m-0 p-[14px_10px] xl:px-[24px] xl:py-[20px]'
+                              className='relative  w-[80%] xl:w-[500px]  bg-color-section-theme text-text-theme rounded-lg flex flex-col gap-[24px] mx-[15px] xl:m-0 p-[14px_10px] xl:px-[24px] xl:py-[20px]'
                               ref={wrapperRef}
                         >
-                              <button className='absolute top-[-20px]  right-[-20px] w-[40px] h-[40px]  bg-slate-900 text-white rounded-full flex items-center justify-center'>
+                              <button className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] border-[1px] border-[var(--border-color-input)] bg-white hover:bg-color-main hover:text-[#fff] hover:border-transparent rounded-full flex items-center justify-center'>
                                     <X onClick={() => onClose(false)} />
                               </button>
                               <div className='flex flex-col gap-[8px]'>
-                                    <span>{content}</span>
-                                    <span>{subContent}</span>
+                                    <div className=' '>{content}</div>
+                                    <div>{subContent}</div>
                               </div>
                               <div
                                     style={{ width: widthBreakLine.width, marginLeft: -widthBreakLine.marginLeft }}
-                                    className='bg-slate-200 h-[1px] mt-[-10px]'
+                                    className='bg-[var(--border-color-input)] h-[1px] mt-[-10px]'
                               ></div>
 
-                              <div className='flex justify-end gap-[8px] h-[40px] xl:h-[50px]'>
-                                    <div className='w-[38%] xl:w-[30%] '>
-                                          <BoxButton
-                                                content={ButtonCancellContent}
+                              <div className='flex justify-end gap-[8px] h-[36px] '>
+                                    <div className=' '>
+                                          <button
+                                                className={`bg-color-main text-[#fff] opacity-80 hover:opacity-100 min-w-[100px] h-[36px] p-[8px] flex items-center justify-center gap-[8px] rounded-[4px] `}
                                                 onClick={() => {
                                                       onClose(false)
                                                 }}
-                                          />
+                                          >
+                                                <span>{ButtonCancellContent}</span>
+                                          </button>
                                     </div>
 
-                                    <div className='w-max min-w-[38%] xl:min-w-[30%] '>
+                                    <div className=' '>
                                           <button
                                                 className={`${styleEffect.onLoading(
                                                       isLoadng || false,
-                                                )} min-w-[100px] h-[50px] flex items-center justify-center gap-[8px] rounded-lg `}
+                                                )} min-w-[100px] text-[#fff] h-[36px] p-[8px] flex items-center justify-center gap-[8px] rounded-[4px] `}
                                                 onClick={() => {
                                                       onActive(paramsActive)
                                                 }}
                                           >
                                                 <span>{ButtonConfrimContent}</span>
-                                                {isLoadng && <BoxLoading color='text-ưhite' />}
+                                                {isLoadng && <BoxLoading color='text-white' />}
                                           </button>
                                     </div>
                               </div>

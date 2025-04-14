@@ -73,7 +73,7 @@ const Shop = () => {
       return (
             <>
                   {shopQuery.isSuccess && (
-                        <div className='sticky top-[10px] w-full min-h-screen h-max bg-[rgb(245_245_250)] '>
+                        <div className='sticky top-[10px] w-full min-h-screen h-max bg-color-section-theme text-text-theme '>
                               <div className='w-full xl:w-[1240px] mx-auto  h-max'>
                                     <header className='relative w-full h-[300px] xl:h-[150px]'>
                                           <img src={bgCore} className='w-full h-[300px] xl:h-[150px]' alt='background shop' />

@@ -45,7 +45,14 @@ const Book = (props: TProps) => {
                   <Controller
                         name={'attribute.description'}
                         control={form.control}
-                        render={({ field }) => <TextArea {...field} maxLength={10000} rows={30} />}
+                        render={({ field }) => (
+                              <TextArea
+                                    {...field}
+                                    maxLength={10000}
+                                    rows={16}
+                                    className='bg-color-section-theme text-text-theme border-[1px] border-[var(--border-color-input)]'
+                              />
+                        )}
                   />
 
                   {errors?.attribute && (

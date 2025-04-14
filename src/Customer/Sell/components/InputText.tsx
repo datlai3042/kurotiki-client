@@ -37,7 +37,7 @@ const InputText = <T extends FieldValues>(props: TProps<T>) => {
 
       return (
             <div className={`${styleEffect.widthContainer} ${styleEffect.gap} ${styleEffect.flexDirectionContrainer} flex  `}>
-                  <label htmlFor={id} className='relative flex flex-row items-center max-w-max min-w-[100px]'>
+                  <label htmlFor={id} className='relative flex flex-row items-center max-w-max min-w-[75px]'>
                         <span>{LabelMessage}</span>
                         {/* {require && <span className='block absolute top-[50%] translate-y-[-40%] text-red-500 text-[24px]  right-[-12px]'>*</span>} */}
                   </label>
@@ -48,7 +48,7 @@ const InputText = <T extends FieldValues>(props: TProps<T>) => {
                         id={id}
                         autoFocus={autofocus}
                         defaultValue={defaultValue && formNested.watch(FieldName as string)}
-                        className='flex-1 border-[1px] border-slate-400 outline-none px-[12px] py-[10px] rounded-[6px]'
+                        className='flex-1 border-[1px] border-[var(--border-color-input)] bg-color-section-theme outline-none px-[12px] py-[5px] rounded-[4px]'
                   />
                   {showError && errors[FieldName as string] && (
                         <span className={`${styleEffect.fontSizeError} ${styleEffect.colorError}`}>

@@ -27,7 +27,7 @@ const OrderComment = () => {
       }
 
       return (
-            <div className='relative w-full min-h-[600px] h-max px-[30px] bg-[#ffffff] pt-[30px] pb-[70px]'>
+            <div className='relative w-full min-h-[600px] h-max px-[30px] bg-color-section-theme text-text-theme pt-[30px] pb-[70px]'>
                   {getMeAllComment.isSuccess &&
                         getMeAllComment.data.data.metadata.comments.map((commet) => <OrderCommentItem key={commet._id} comment={commet} />)}
 

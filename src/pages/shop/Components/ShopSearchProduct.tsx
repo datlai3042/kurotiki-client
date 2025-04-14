@@ -23,11 +23,11 @@ const ShopSearchProduct = (props: TProps) => {
       }, [search])
 
       return (
-            <form className='w-full min-w-[320px] h-[40px] flex items-center p-[8px] bg-[#ffffff]  rounded-lg gap-[8px]' onSubmit={onSubmit}>
+            <form className='w-full min-w-[320px] h-[40px] flex items-center p-[8px] bg-color-section-theme text text-text-theme  rounded-lg gap-[8px]' onSubmit={onSubmit}>
                   <Search />
                   <input
                         type='text'
-                        className='w-full h-full outline-none placeholder:text-[13px] placeholder:text-slate-400 '
+                        className='w-full h-full outline-none placeholder:text-[13px] placeholder:text-slate-400  bg-color-section-theme text-[#fff]'
                         placeholder='Nhập tên sản phẩm tại cửa hàng'
                         value={searchName}
                         onChange={(e) => setSearchName(e.target.value)}

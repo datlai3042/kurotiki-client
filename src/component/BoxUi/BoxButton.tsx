@@ -16,13 +16,13 @@ const BoxButton = (props: Props) => {
       const styleEffect = {
             widthEfect: width ? width : 'w-full',
             heightEfect: height ? height : 'h-full',
-            roundedEffect: rounded ? rounded : 'rounded-lg',
+            roundedEffect: rounded ? rounded : 'rounded-[4px]',
       }
 
       return (
             <button
                   {...propButton}
-                  className={`${styleEffect.widthEfect} ${styleEffect.heightEfect} ${styleEffect.roundedEffect} flex items-center justify-center bg-slate-700 text-white p-[8px_6px] xl:px-[12px] xl:py-[8px] gap-[8px] `}
+                  className={`${styleEffect.widthEfect} ${styleEffect.heightEfect} ${styleEffect.roundedEffect} flex items-center justify-center bg-color-main opacity-80 hover:opacity-100 text-white p-[8px_6px] xl:px-[12px] xl:py-[8px] gap-[8px] `}
             >
                   {content}
 

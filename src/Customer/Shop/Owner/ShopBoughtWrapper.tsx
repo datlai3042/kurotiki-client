@@ -33,7 +33,7 @@ const ShopBoughtWrapper = (props: TProps) => {
 
                   <div className='w-full h-[65px] flex items-center justify-center'>
                         <button
-                              className='  min-w-[180px] px-[16px] w-max h-[40px] bg-[#ffffff] border-[1px] border-blue-500 text-blue-500 flex items-center justify-center rounded-lg hover:bg-blue-50 hover:text-blue-500'
+                              className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-main text-[#fff]  flex items-center justify-center rounded-[4px]'
                               onClick={() => getMyOrderShop.fetchNextPage()}
                               disabled={!getMyOrderShop.hasNextPage}
                         >

@@ -18,6 +18,8 @@ import Comment from '../../component/Comment/Comment'
 import CommentImageAll from '../../component/Comment/CommentImageAll'
 import ContentProduct from '../../component/Content/Components/ContentProduct'
 import CommentService from '../../apis/comment.service'
+import { Footer } from 'antd/es/layout/layout'
+import ProductSkeleton from './ProductSkeleton'
 
 export type TImage = {
       secure_url: string
@@ -90,12 +92,12 @@ const Product = () => {
             <div className='flex flex-col w-full text-[12px] text-text-theme gap-[20px]'>
                   <div className=' w-full flex flex-col gap-[4px] '>
                         {getProductWithId.data?.data && (
-                              <div className='flex items-center gap-[4px] p-[12px_20px] xl:px-0 text-[20px] font-extrabold '>
+                              <div className='flex items-center gap-[4px] p-[0px_20px_6px_20px] xl:px-0 text-[20px] font-extrabold '>
                                     <Link to='/'>Trang chủ</Link>
 
-                                    <ChevronRight size={16}  />
+                                    <ChevronRight size={16} />
                                     <Link to={`/${product?.product_type}`}>{product?.product_type}</Link>
-                                    <ChevronRight size={16}  />
+                                    <ChevronRight size={16} />
                                     <Link to={`/${product?.product_type}`}>{product?.attribute.type}</Link>
                               </div>
                         )}
@@ -134,38 +136,9 @@ const Product = () => {
                               </div>
                         )}
 
-                        {getProductWithId.isPending && (
-                              <div className='animate-pulse bg-gray-100 flex gap-[16px]'>
-                                    <div className=' w-full flex flex-col gap-[24px]'>
-                                          <div className='top w-full min-h-[1000px] h-max flex flex-col xl:flex-row gap-[24px]'>
-                                                <div className='basis-[40%] bg-gray-100 static min-h-[800px] h-[900px] xl:sticky top-[16px]  p-[8px] rounded-sm   flex flex-col gap-[16px]'>
-                                                      <div className='animate-pulse bg-gray-400  basis-[35%] w-full'></div>
-                                                      <div className='flex bg-gray-100 h-[50px] gap-[16px]'>
-                                                            {Array(5)
-                                                                  .fill(0)
-                                                                  .map((skeleton, index) => (
-                                                                        <div
-                                                                              className='animate-pulse bg-gray-400 w-[20%] flex items-center justify-center'
-                                                                              key={index}
-                                                                        >
-                                                                              <Image size='30' />
-                                                                        </div>
-                                                                  ))}
-                                                      </div>
-                                                      <div className='animate-pulse flex-1 bg-gray-400 w-full'></div>
-                                                </div>
-                                                <div className='animate-pulse basis-[60%] bg-gray-400  h-[5000px] mt-[20px] xl:mt-0 rounded-lg '>
-                                                      {/* <ProductIntro product={product} /> */}
-                                                </div>
-                                          </div>
-                                          <div className='animate-pulse bg-gray-400 comment w-full h-[1000px] '></div>
-                                    </div>
-                                    {/* <div className='animate-pulse bg-gray-400 basis-[20%] sticky top-[16px] h-[300px]'></div> */}
-                              </div>
-                        )}
+                        {getProductWithId.isPending && <ProductSkeleton />}
                   </div>
                   <ContentProduct />
-
             </div>
       )
 }

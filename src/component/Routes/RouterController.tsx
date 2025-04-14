@@ -46,7 +46,7 @@ const RouterController = () => {
       const styleEffect = {
             matchPathName: window.location.pathname !== '/payment' ? '  pt-[65px] md:pt-[84px] pb-[45px] xl:pb-0' : '',
             matchPathNameCustomer: pathName.startsWith('/customer') ? 'top-[0px] ' : 'top-[60px] lg:h-[calc(100vh-100px)]',
-            layoutFull: pathName?.startsWith('/customer') ? '' : 'mx-auto max-w-full md:max-w-[1023px] xl:max-w-[1400px]',
+            layoutFull: pathName?.startsWith('/customer') ? '' : 'mx-auto max-w-full  xl:max-w-[1400px]',
       }
 
       return (
@@ -54,7 +54,7 @@ const RouterController = () => {
                   {!hiddenHeader && <Header />}
 
                   <div
-                        className={`${styleEffect.matchPathName} ${styleEffect.layoutFull} z-[1]  flex-1 w-full  items-stretch h-max  flex flex-col xl:flex-row gap-[6px]    bg-color-gap-empty 
+                        className={`${styleEffect.matchPathName} ${styleEffect.layoutFull} z-[1]  flex-1 w-full  items-stretch h-max  flex flex-col md:flex-row gap-[6px]    bg-color-gap-empty 
 `}
                   >
                         <Sidebar />

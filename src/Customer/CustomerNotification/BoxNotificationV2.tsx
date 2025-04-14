@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { History, Home, Notebook, Store, User } from 'lucide-react'
 import BoxBuild from '../../component/BoxUi/BoxBuild'
 import NotificationSection from './NotificationSection'
+import { useDebouncedCallback } from '@mantine/hooks'
 
 type NotificationTypeActive =
       | {
@@ -58,6 +59,38 @@ const BoxNotification = () => {
                   wrapperRef.current.style.transform = `translateX(${-width * numberTranslate}px)`
             }
       }, [activeNotification])
+      const debounceResize = useDebouncedCallback(() => {
+            if (wrapperRef.current) {
+                  const width = wrapperRef.current.getBoundingClientRect().width
+                  let numberTranslate = 0
+                  if (activeNotification.title === 'Thông báo chung') {
+                        numberTranslate = 0
+                  }
+                  if (activeNotification.title === 'Thông báo cá nhân') {
+                        numberTranslate = 1
+                  }
+
+                  if (activeNotification.title === 'Thông báo sản phẩm') {
+                        numberTranslate = 2
+                  }
+
+                  if (activeNotification.title === 'Thông báo hệ thống') {
+                        numberTranslate = 3
+                  }
+
+                  if (activeNotification.title === 'Thông báo Shop') {
+                        numberTranslate = 4
+                  }
+                  wrapperRef.current.style.transform = `translateX(${-width * numberTranslate}px)`
+            }
+      }, 100)
+      useEffect(() => {
+            window.addEventListener('resize', debounceResize)
+
+            return () => {
+                  window.removeEventListener('resize', debounceResize)
+            }
+      }, [])
 
       const styleEffect = {
             activeHash: (notification: string) => (notification === location ? 'bg-blue-100' : ''),
@@ -65,7 +98,7 @@ const BoxNotification = () => {
 
       return (
             <div className='relative w-full  pb-[10px] h-max flex flex-col gap-[16px] '>
-                  <div className='w-full min-h-[60px]  xl:min-h-[80px] h-[40px] overflow-x-scroll flex items-center bg-[#ffffff] gap-[24px] flex-nowrap '>
+                  <div className='w-full min-h-[60px]  xl:min-h-[80px] h-[40px] overflow-auto flex items-center bg-color-section-theme text-text-theme gap-[24px] flex-nowrap '>
                         <button
                               className={`${
                                     activeNotification.title === 'Thông báo chung' ? ' border-blue-500' : 'border-transparent'
@@ -119,9 +152,9 @@ const BoxNotification = () => {
 
                   <div className='w-full  overflow-hidden'>
                         <div className='w-full min-h-[600px] h-max flex transition-all duration-500      ' ref={wrapperRef}>
-                              <div className='min-w-full'>
+                              <div className='min-w-full h-full'>
                                     {activeNotification.title === 'Thông báo chung' && (
-                                          <div className='w-full h-[300px]'>
+                                          <div className='w-full h-[400px] min-h-full'>
                                                 <BoxBuild />
                                           </div>
                                     )}

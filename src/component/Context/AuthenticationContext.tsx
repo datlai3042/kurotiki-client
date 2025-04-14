@@ -24,36 +24,8 @@ import { RootState } from '../../store'
 const pathPrivate = ['/cart']
 
 const AuthenticationContext = () => {
-      const dispatch = useDispatch()
-      const router = useLocation()
+   
 
-      const user = useSelector((state: RootState) => state.authentication.user)
-
-      const cartRouter = router.pathname.startsWith('/cart')
-      const customerRouter = router.pathname.startsWith('/customer')
-      const updateProductRouter = router.pathname.startsWith('/product/update')
-      const payment = router.pathname.startsWith('/payment')
-
-      const routerAuthentication = cartRouter || customerRouter || updateProductRouter || payment
-      const enableAPI = routerAuthentication
-
-      const getMe = useQuery({
-            queryKey: ['getMeQuery'],
-            queryFn: () => AccountService.getMeQuery(),
-            enabled: enableAPI
-      })
-
-      useEffect(() => {
-            if (getMe.isSuccess) {
-                  const { user } = getMe.data.data.metadata
-                  dispatch(fetchUser({ user }))
-            }
-
-            if (getMe.isError) {
-
-                  dispatch(fetchUser({ user: undefined }))
-            }
-      }, [getMe.isSuccess, getMe.isError, dispatch, getMe.data, router])
 
       return <></>
 }

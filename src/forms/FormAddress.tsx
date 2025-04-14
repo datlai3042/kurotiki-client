@@ -218,7 +218,7 @@ const FormAddress = (props: TProps) => {
       return (
             <FormProvider {...addressForm}>
                   <form
-                        className='relative  w-full  p-[16px_10px]  xl:px-[36px] xl:py-[50px] flex flex-col gap-[30px] bg-[#ffffff] rounded-md'
+                        className='relative  w-full  p-[24px_10px]   flex flex-col gap-[18px] bg-color-section-theme text-text-theme rounded-md'
                         onSubmit={addressForm.handleSubmit(onSubmit)}
                         spellCheck={false}
                   >
@@ -238,7 +238,7 @@ const FormAddress = (props: TProps) => {
                                                             field.onChange(foundNameProvince?.name)
                                                       }}
                                                       placeholder='Chọn tỉnh thành phố'
-                                                      className='w-full xl:w-[80%]'
+                                                      className='w-full xl:w-[80%] bg-color-section-theme border-[var(--border-color-input)] customSelect'
                                                 />
                                           )
                                     }}
@@ -258,7 +258,7 @@ const FormAddress = (props: TProps) => {
                                                             field.onChange(foundNameDistrict?.name)
                                                       }}
                                                       placeholder='Chọn quận huyện'
-                                                      className='w-full xl:w-[80%]'
+                                                      className='w-full xl:w-[80%] bg-color-section-theme border-[var(--border-color-input)] customSelect'
                                                       disabled={province ? false : true}
                                                 />
                                           )
@@ -280,7 +280,7 @@ const FormAddress = (props: TProps) => {
                                                             field.onChange(foundNameWard?.name)
                                                       }}
                                                       placeholder='Chọn phường xã'
-                                                      className='w-full xl:w-[80%]'
+                                                      className='w-full xl:w-[80%] bg-color-section-theme border-[var(--border-color-input)] customSelect'
 
                                                       // disabled={province && district ? false : true}
                                                 />
@@ -324,7 +324,7 @@ const FormAddress = (props: TProps) => {
                                     }}
                               />
                         </div>
-                        <div className='w-full h-[50px]'>
+                        <div className='w-full h-[36px]'>
                               <BoxButton content='Cập nhập địa chỉ' onLoading={addressMutation.isPending} type='submit' />
                         </div>
                         {onClose && (

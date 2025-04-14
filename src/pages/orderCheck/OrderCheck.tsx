@@ -40,7 +40,7 @@ const OrderCheck = () => {
                                                       <div className='basis-[55%]'>
                                                             <img
                                                                   src={product.product_id.product_thumb_image.secure_url}
-                                                                  className='w-full h-full'
+                                                                  className='w-full h-full object-contain'
                                                                   alt=''
                                                             />
                                                       </div>
@@ -81,11 +81,8 @@ const OrderCheck = () => {
                                                 <div className='flex flex-col gap-[28px] h-max'>
                                                       <div className='flex  gap-[20px]'>
                                                             <img
-                                                                  src={
-                                                                        product.shop_id.shop_avatar?.secure_url ||
-                                                                        product.shop_id.shop_avatar_default
-                                                                  }
-                                                                  className='min-w-[80px] h-[80px] rounded-full'
+                                                                  src={user?.avatar?.secure_url || user.avatar_url_default}
+                                                                  className='min-w-[80px] h-[80px] '
                                                                   alt=''
                                                             />
                                                             <div className=' flex  flex-col gap-[8px] justify-center'>
@@ -94,7 +91,6 @@ const OrderCheck = () => {
                                                             </div>
                                                       </div>
                                                 </div>
-                                                <div className='hidden xl:block relative w-[calc(100%+48px)] ml-[-24px] h-[1px] bg-slate-200 mt-[36px]'></div>
                                           </div>
                                     ))}
                               </div>

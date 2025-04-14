@@ -32,6 +32,7 @@ import InputText from '../Sell/components/InputText'
 import AccountService from '../../apis/account.service'
 import { UserResponse } from '../../types/user.type'
 import BoxAvatarMode from '../Account/Box/BoxAvatarMode'
+import { Key, Mail } from 'lucide-react'
 
 //@type form
 type TFormCustomer = {
@@ -68,7 +69,6 @@ const CustomerAccount = () => {
             },
             mode: 'onChange',
       })
-
 
       const getMe = useMutation({
             mutationKey: ['getMe'],
@@ -119,8 +119,7 @@ const CustomerAccount = () => {
 
       //@[shape] :: error.response.data.error
 
-      const submitfake = (data: TFormCustomer) => {
-      }
+      const submitfake = (data: TFormCustomer) => {}
 
       //submid update info account
       const onSubmit = (form: TFormCustomer) => {
@@ -154,7 +153,7 @@ const CustomerAccount = () => {
       console.log({ watch: methods.watch('fullName') })
 
       return (
-            <div className='bg-[#ffffff] p-[16px] shadow-xl flex flex-col xl:flex-row min-h-full xl:min-h-[650px] w-full h-max gap-[20px] xl:gap-[2%] ]'>
+            <div className='bg-color-section-theme p-[16px] flex flex-col xl:flex-row min-h-full xl:min-h-[650px] w-full h-max gap-[20px] xl:gap-[2%] ]'>
                   {/* {toast && <BoxToast message={'Phien dang nhap het han, vui long xac thuc lai sau 3s'} children={<p>OK</p>} />} */}
 
                   <FormProvider {...methods}>
@@ -164,12 +163,12 @@ const CustomerAccount = () => {
                               spellCheck={false}
                         >
                               {/* @header */}
-                              <h3 className='h-[45px] font-openSans text-[18px] font-semibold'>Thông tin cá nhân</h3>
+                              <h3 className='h-[45px] font-openSans text-[18px]'>Thông tin cá nhân</h3>
 
                               {/* @change mode with avatar */}
-                              <div className='h-[40%] xl:h-[24%]  data-user flex flex-col lg:flex-row gap-[20px] xl:gap-0 xl:items-center'>
+                              <div className='  data-user flex flex-col lg:flex-row gap-[20px] xl:gap-0 xl:items-center'>
                                     {/* @onClick active mode*/}
-                                    <div className='flex flex-col xl:flex-row gap-[28px] xl:gap-0 w-full '>
+                                    <div className='flex flex-row gap-[28px] flex-wrap  w-full '>
                                           <BoxAvatarMode
                                                 AvatartSource={{
                                                       avatar: user.avatar?.secure_url,
@@ -179,7 +178,7 @@ const CustomerAccount = () => {
                                           />
                                           {/* @ form update infomation account */}
                                           {/* @ formLayout - 1 */}
-                                          <div className='min-h-[90px] flex flex-1 gap-[8px] flex-col justify-between'>
+                                          <div className='min-h-[90px] flex flex-1 gap-[8px] flex-col '>
                                                 {/* @ field::name -> fullname */}
                                                 <div className='flex justify-between gap-[32px] w-full h-[35%] items-center text-[14px]'>
                                                       <InputText
@@ -207,20 +206,20 @@ const CustomerAccount = () => {
                                     </div>
                               </div>
                               {/* @ formLayout - 2 */}
-                              <div className='form_user w-full min-h-[50%] sm:min-h-[40%] xl:h-[40%]  max-h-auto mt-[8px] flex xl:mt-[20px]'>
-                                    <div className='flex flex-col w-full gap-[16px] justify-between xl:gap-[32px] lg:pt-[15px] 2xl:pt-[10px]'>
+                              <div className='form_user w-full min-h-[50%] sm:min-h-[40%] xl:h-[40%]  max-h-auto  flex '>
+                                    <div className='flex flex-col w-full gap-[16px] xl:gap-[32px] lg:pt-[15px]'>
                                           {/* @ field::bob */}
-                                          <div className=' flex flex-col md:flex-row justify-between w-full  sm:items-center text-[14px] gap-[20px]'>
+                                          <div className=' flex flex-col md:flex-row justify-between w-full   text-[14px] gap-[20px]'>
                                                 <p className='w-max text-left lg:w-[100px]'>Ngày sinh</p>
                                                 <CustomerAccountBirth />
                                           </div>
                                           {/* @ field::gender */}
-                                          <div className='flex flex-col md:flex-row justify-between w-full sm:items-center text-[14px] gap-[12px] mt-[8px] lg:mt-0'>
+                                          <div className='flex flex-col md:flex-row justify-between w-full  text-[14px] gap-[12px] mt-[8px] lg:mt-0'>
                                                 <p className='w-max text-left lg:w-[100px]'>Giới tính</p>
                                                 <CustomerAccountGender />
                                           </div>
                                           {/* @ form::action -> submit */}
-                                          <div className='w-full mt-0 mb-[24px] xl:mb-0 xl:mt-[50px] flex justify-center xl:block sm:mt-0 pl:[35px] sm:pl-[130px]'>
+                                          <div className='w-full mt-0 mb-[24px] xl:mb-0  flex justify-end xl:flex  '>
                                                 <button
                                                       disabled={updateInfo.isPending}
                                                       className='flex items-center justify-center gap-[6px] ml-0 w-full xl:w-[180px] h-[20px] p-[20px] bg-blue-700 text-white rounded-md'
@@ -243,20 +242,23 @@ const CustomerAccount = () => {
                         </form>
                   </FormProvider>
                   {/* Right */}
-                  <div className='hidden xl:block w-[1px] min-h-full bg-slate-200'></div>
-                  <div className='w-full xl:w-[45%] min-h-full '>
+                  <div className='hidden xl:block w-[1px] min-h-full bg-[var(--border-color-input)]'></div>
+                  <div className='w-full xl:w-[45%] min-h-full  '>
                         {/* @customer::account -> update::email */}
                         <div className='flex flex-col gap-[8px]'>
-                              <span className='text-[16px] text-black font-semibold'>Email & liên hệ</span>
+                              <span className='text-[14px] text-[#1f4e94] font-semibold'>Email & liên hệ</span>
 
                               <div className='flex flex-col 2xl:flex-row  2xl:items-center min-h-[20px] pb-[15px] gap-[15px] 2xl:gap-0 '>
-                                    <div className='w-full flex items-center  gap-[8px]'>
-                                          <div className='min-w-[50px]'>Địa chỉ email:</div>
-                                          <span className='flex-grow truncate max-w-[180px]   font-semibold'>{user.email}</span>
+                                    <div className='flex gap-[16px] flex-1'>
+                                          <Mail />
+                                          <div className='w-full flex flex-col  '>
+                                                <div className='min-w-[50px]'>Địa chỉ email:</div>
+                                                <span className='flex-grow truncate max-w-[180px]   font-semibold'>{user.email}</span>
+                                          </div>
                                     </div>
                                     <Link
                                           to={'/customer/account/update/email'}
-                                          className='w-full xl:w-[100px]  flex items-center justify-center rounded-md bg-white border-[1px] border-blue-700 text-blue-700 h-[15%] p-[6px] '
+                                          className='w-[100px]  flex items-center justify-center rounded-[4px] min-h-[20px] bg-color-main opacity-80 hover:opacity-100 text-[#fff] cursor-pointer p-[2px] '
                                     >
                                           Cập nhập
                                     </Link>
@@ -264,15 +266,19 @@ const CustomerAccount = () => {
                         </div>
 
                         <div className='flex flex-col gap-[8px]'>
-                              <span className='text-[16px] text-black font-semibold'>Bảo mật</span>
+                              <span className='text-[14px] text-[#1f4e94] font-semibold'>Bảo mật</span>
 
                               <div className='flex flex-col 2xl:flex-row  2xl:items-center min-h-[20px] pb-[15px] gap-[15px] 2xl:gap-0 '>
-                                    <div className='w-full flex items-center  gap-[16px]'>
-                                          <div className='min-w-[100px]'>Đổi mật khẩu</div>
+                                    <div className='flex gap-[16px] flex-1'>
+                                          <Key />
+                                          <div className='w-full flex items-center  gap-[8px]'>
+                                                <div className='min-w-[100px]'>Đổi mật khẩu</div>
+                                          </div>
                                     </div>
+
                                     <Link
                                           to={'/customer/account/update/password'}
-                                          className='w-full xl:w-[100px]  flex items-center justify-center rounded-md bg-white border-[1px] border-blue-700 text-blue-700 h-[15%] p-[6px] '
+                                          className='w-[100px]  min-h-[20px]   flex items-center justify-center rounded-[4px] bg-color-main opacity-80 hover:opacity-100 text-[#fff] cursor-pointer p-[2px] '
                                     >
                                           Cập nhập
                                     </Link>

@@ -129,7 +129,7 @@ const CommentFilter = (props: TProps) => {
                         <button
                               className={`${styleEffect.onActive(
                                     filterVote.isSelectTime,
-                              )} min-w-[120px] h-[36px] flex items-center justify-center gap-[6px] p-[6px_8px]  w-max border-[1px] rounded-[999px]`}
+                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px] flex items-center justify-center gap-[6px] p-[6px_8px]  w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetActive('isSelectTime')
                               }}
@@ -140,7 +140,7 @@ const CommentFilter = (props: TProps) => {
                         <button
                               className={`${styleEffect.onActive(
                                     filterVote.isSelectImage,
-                              )} min-w-[120px] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
+                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetActive('isSelectImage')
                               }}
@@ -151,7 +151,7 @@ const CommentFilter = (props: TProps) => {
                         <button
                               className={`${styleEffect.onActive(
                                     storege.includes(5),
-                              )} min-w-[120px] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
+                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetFilterVote(5)
                               }}
@@ -161,7 +161,7 @@ const CommentFilter = (props: TProps) => {
                         <button
                               className={`${styleEffect.onActive(
                                     storege.includes(4),
-                              )} min-w-[120px] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
+                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetFilterVote(4)
                               }}
@@ -171,7 +171,7 @@ const CommentFilter = (props: TProps) => {
                         <button
                               className={`${styleEffect.onActive(
                                     storege.includes(3),
-                              )} min-w-[120px] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
+                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetFilterVote(3)
                               }}
@@ -181,7 +181,7 @@ const CommentFilter = (props: TProps) => {
                         <button
                               className={`${styleEffect.onActive(
                                     storege.includes(2),
-                              )} min-w-[120px] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
+                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetFilterVote(2)
                               }}
@@ -191,7 +191,7 @@ const CommentFilter = (props: TProps) => {
                         <button
                               className={`${styleEffect.onActive(
                                     storege.includes(1),
-                              )} min-w-[120px] h-[36px]  flex items-center justify-center gap-[6px] p-[8px_6px] w-max border-[1px] rounded-[999px]`}
+                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[8px_6px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetFilterVote(1)
                               }}

@@ -102,20 +102,20 @@ const CustomerUpdatePassword = () => {
       }, [errors, dispatch])
 
       return (
-            <div className='w-full min-h-[360px] h-max bg-[#ffffff] rounded  flex items-center justify-center py-[30px] '>
+            <div className='w-full min-h-[360px] h-max bg-color-section-theme text-text-theme rounded  flex items-center justify-center py-[30px] '>
                   <form
-                        className='flex flex-col gap-[16px]  min-w-[150px] xl:min-w-[400px] xl:min-h-[150px] h-max max-w-auto  p-[24px] rounded-sm  shadow-2xl border-[1px] border-slate-100 bg-[#ffffff]'
+                        className='flex flex-col gap-[16px]  min-w-[150px] xl:min-w-[400px] xl:min-h-[150px] h-max max-w-auto  p-[24px] rounded-sm  shadow-2xl border-[1px] border-[var(--border-color-input)] bg-color-section-theme'
                         onSubmit={handleSubmit(onSubmit)}
                   >
                         <div className='h-[25%] flex flex-col gap-[4px]'>
                               <label htmlFor='password'>Mật khẩu hiện tại</label>
                               <div
-                                    className='w-full h-[50px] max-w-auto group flex gap-[10px] px-[18px] py-[2px] items-center border-[1px] border-blue-700 rounded'
+                                    className='w-full h-[50px] max-w-auto group flex gap-[10px] px-[18px] py-[2px] items-center border-[1px] border-[var(--border-color-input)] rounded-[4px]'
                                     tabIndex={0}
                               >
                                     <input
                                           {...register('password')}
-                                          className='w-full max-w-auto border-none h-full outline-none py-[8px]'
+                                          className='w-full max-w-auto border-none h-full outline-none py-[8px] bg-color-section-theme'
                                           type={showPassword}
                                           id='password'
                                           placeholder='Nhập mật khẩu hiện tại'
@@ -125,9 +125,9 @@ const CustomerUpdatePassword = () => {
                                           onClick={() => handleShowHidePassword(showPassword, setShowPassword)}
                                     >
                                           {showPassword === 'text' ? (
-                                                <EyeOff size={'20px'} color={errors.password ? 'red' : 'black'} />
+                                                <EyeOff size={'20px'} className='text-text-theme' />
                                           ) : (
-                                                <Eye size={'20px'} color={errors.password ? 'red' : 'black'} />
+                                                <Eye size={'20px'} className='text-text-theme' />
                                           )}
                                     </div>
                               </div>
@@ -136,7 +136,7 @@ const CustomerUpdatePassword = () => {
                         <div className='h-[25%] flex flex-col gap-[4px]'>
                               <label htmlFor='new_password'>Nhập mật khẩu mới</label>
                               <div
-                                    className='w-full h-[50px] max-w-auto group flex gap-[10px] px-[18px] py-[2px] items-center border-[1px] border-blue-700 rounded'
+                                    className='w-full h-[50px] max-w-auto group flex gap-[10px] px-[18px] py-[2px] items-center border-[1px] border-[var(--border-color-input)] rounded-[4px]'
                                     tabIndex={0}
                               >
                                     <input
@@ -144,26 +144,28 @@ const CustomerUpdatePassword = () => {
                                           type={showNewPassword}
                                           id='new_password'
                                           placeholder='Nhập mật khẩu mới'
-                                          className='w-full max-w-auto border-none h-full outline-none py-[8px]'
+                                          className='w-full max-w-auto border-none h-full outline-none py-[8px] bg-color-section-theme'
                                     />
                                     <div
                                           className='icon w-[15px] h-[15px]'
                                           onClick={() => handleShowHidePassword(showNewPassword, setShowNewPassword)}
                                     >
                                           {showNewPassword === 'text' ? (
-                                                <EyeOff size={'20px'} color={errors.password ? 'red' : 'black'} />
+                                                <EyeOff size={'20px'} className='text-text-theme' />
                                           ) : (
-                                                <Eye size={'20px'} color={errors.password ? 'red' : 'black'} />
+                                                <Eye size={'20px'} className='text-text-theme' />
                                           )}
                                     </div>
                               </div>
-                              <span className='text-[11px] text-stone-600'>Mật khẩu phải dài từ 8 đến 32 ký tự, bao gồm chữ và số</span>
+                              <span className='text-[11px] text-text-theme opacity-90'>
+                                    Mật khẩu phải dài từ 8 đến 32 ký tự, bao gồm chữ và số
+                              </span>
                         </div>
 
                         <div className='h-[25%] flex flex-col gap-[4px]'>
                               <label htmlFor='confirm_password'>Nhập lại mật khẩu mới</label>
                               <div
-                                    className='w-full h-[50px] max-w-auto group flex gap-[10px] px-[18px] py-[2px] items-center border-[1px] border-blue-700 rounded'
+                                    className='w-full h-[50px] max-w-auto group flex gap-[10px] px-[18px] py-[2px] items-center border-[1px] border-[var(--border-color-input)] rounded-[4px]'
                                     tabIndex={0}
                               >
                                     <input
@@ -171,24 +173,26 @@ const CustomerUpdatePassword = () => {
                                           type={showNewConfirmPassword}
                                           id='confirm_password'
                                           placeholder='Nhập lại mật khẩu mới'
-                                          className='w-full max-w-auto border-none h-full outline-none py-[8px]'
+                                          className='w-full max-w-auto border-none h-full outline-none py-[8px] bg-color-section-theme'
                                     />
                                     <div
                                           className='icon w-[15px] h-[15px'
                                           onClick={() => handleShowHidePassword(showNewConfirmPassword, setShowNewConfirmPassword)}
                                     >
                                           {showNewConfirmPassword === 'text' ? (
-                                                <EyeOff size={'20px'} color={errors.new_confirm_password ? 'red' : 'black'} />
+                                                <EyeOff size={'20px'} className='text-text-theme' />
                                           ) : (
-                                                <Eye size={'20px'} color={errors.new_confirm_password ? 'red' : 'black'} />
+                                                <Eye size={'20px'} className='text-text-theme' />
                                           )}
                                     </div>
                               </div>
-                              <span className='text-[11px] text-stone-600'>Mật khẩu phải dài từ 8 đến 32 ký tự, bao gồm chữ và số</span>
+                              <span className='text-[11px] text-text-theme opacity-90'>
+                                    Mật khẩu phải dài từ 8 đến 32 ký tự, bao gồm chữ và số
+                              </span>
                         </div>
                         <button
                               type='submit'
-                              className='w-full h-[45px] flex items-center justify-center gap-[14px] bg-blue-700 text-white rounded-md'
+                              className='w-full h-[45px] flex items-center justify-center gap-[14px]  rounded-[4px] bg-color-main opacity-100 hover:opacity-100 text-[#fff]'
                         >
                               <span>Lưu thay đổi</span>
                               {updatePasswordMutation.isPending && <BoxLoading />}

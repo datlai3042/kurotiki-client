@@ -99,7 +99,7 @@ const ShopProductAll = (props: TProps) => {
 
       if (shop && shop?.shop_products.length === 0) {
             return (
-                  <div className='w-full h-[500px] bg-[#ffffff] flex items-center justify-center text-[18px] font-semibold'>
+                  <div className='w-full h-[500px] bg-color-section-theme text-text-theme flex items-center justify-center text-[18px] font-semibold'>
                         Shop này chưa đăng sản phẩm
                   </div>
             )
@@ -114,8 +114,8 @@ const ShopProductAll = (props: TProps) => {
 
       return (
             <div className='flex flex-col gap-[8px] min-h-[200px] h-max'>
-                  <div className='w-full h-[170px] flex flex-col gap-[8px] bg-[#ffffff] rounded-lg p-[20px_16px]'>
-                        <h3 className='text-[18px] font-semibold text-slate-900 '>Tất cả sản phẩm</h3>
+                  <div className='w-full h-[170px] flex flex-col gap-[8px] bg-color-section-theme text-text-theme rounded-lg p-[20px_16px]'>
+                        <h3 className='text-[18px] font-semibold  '>Tất cả sản phẩm</h3>
                         <div className='w-full h-max min-h-[100px] xl:min-h-[40px] xl:w-[70%] flex items-center justify-between overflow-x-scroll xl:overflow-visible  '>
                               {filter.map((btn) => (
                                     <button
@@ -139,17 +139,17 @@ const ShopProductAll = (props: TProps) => {
                                     </button>
                               ))}
                         </div>
-                        <div className='w-[calc(100%+32px)] ml-[-16px] h-[1px] bg-slate-200 my-[5px]'></div>
+                        <div className='w-[calc(100%+32px)] ml-[-16px] h-[1px] bg-color-section-theme text-text-theme my-[5px]'></div>
                         <div className='flex-grow w-full hidden xl:flex gap-[6px] items-center justify-end text-[14px]'>
-                              <div className='flex gap-[6px] text-slate-500'>
+                              <div className='flex gap-[6px] '>
                                     <span>Giao đến</span>
-                                    <span className='text-slate-800 font-medium underline'>
+                                    <span className='text-color-main font-medium underline'>
                                           {getAddressDefault(user?.user_address) &&
                                                 `${address_default ? renderStringAddressDetailV2(address_default[0]) : ''}`}
                                     </span>
                               </div>
                               <span> - </span>
-                              <button className='text-blue-700' onClick={() => setOpenModelAddress(true)}>
+                              <button className='text-color-main' onClick={() => setOpenModelAddress(true)}>
                                     Đổi địa chỉ
                               </button>
                         </div>
@@ -164,7 +164,7 @@ const ShopProductAll = (props: TProps) => {
                   <div className='w-full h-[65px] flex items-center justify-center mb-[60px] xl:mb-0'>
                         {/* {mode === 'Normal' && ( */}
                         <button
-                              className='  min-w-[180px] px-[16px] w-max h-[40px] bg-[#ffffff] border-[1px] border-blue-500 text-blue-500 flex items-center justify-center rounded-lg hover:bg-blue-50 hover:text-blue-500'
+                              className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-main text-[#fff]  flex items-center justify-center rounded-[4px]'
                               onClick={() => getProductAll.fetchNextPage()}
                               disabled={!getProductAll.hasNextPage}
                         >

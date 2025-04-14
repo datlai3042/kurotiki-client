@@ -14,6 +14,7 @@ import CartEmpty from './CartEmpty'
 import { UserResponse } from '../../types/user.type'
 import ContentProduct from '../Content/Components/ContentProduct'
 import Loading from '../Common/Loading'
+import BoxLoading from '../BoxUi/BoxLoading'
 
 const Cart = () => {
       const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
@@ -81,7 +82,7 @@ const Cart = () => {
 
       return (
             <React.Fragment>
-                  <div className='w-full max-w-full h-max  overflow-hidden xl:mt-0 flex gap-[12px] text-[13px]'>
+                  <div className='w-full max-w-full h-max  overflow-hidden xl:mt-0 flex gap-[12px] text-[13px] text-text-theme'>
                         <div className='px-[8px] w-full pb-[10px]  h-max flex flex-col gap-x-[24px]'>
                               <h3 className='font-extrabold uppercase text-[20px] my-[10px]'>Giỏ hàng</h3>
                               {getMyCart.isSuccess &&
@@ -89,10 +90,10 @@ const Cart = () => {
                                     getMyCart.data.data.metadata.cart.cart_products &&
                                     getMyCart.data.data.metadata.cart.cart_products.length > 0 && (
                                           <React.Fragment>
-                                                <div className='w-full  flex gap-[8px]'>
-                                                      <div className='flex-1 flex flex-col'>
+                                                <div className='w-full flex-col md:flex-row  flex gap-[8px]'>
+                                                      <div className='w-full md:w-[75%] flex flex-col'>
                                                             <div className='sticky w-full py-[6px] items-center z-[10]'>
-                                                                  <div className='bg-[#ffffff] rounded h-[36px] px-[12px] flex items-center'>
+                                                                  <div className='bg-color-section-theme text-text-theme rounded h-[48px] px-[12px] flex items-center'>
                                                                         <div className='flex gap-[8px] w-[50%] items-center'>
                                                                               <Checkbox
                                                                                     disabled={changeSelectAll.isPending}
@@ -139,10 +140,10 @@ const Cart = () => {
                                                             </div>
                                                       </div>
 
-                                                      <div className='w-[40%] xl:w-[23%] min-h-screen flex flex-col gap-[16px] '>
-                                                            <CartUserInfo />
+                                                      <div className='flex-1 min-h-screen flex flex-col gap-[16px] '>
+                                                            <CartUserInfo products={getMyCart.data.data.metadata.cart.cart_products} />
 
-                                                            <div className='sticky top-[120px] xl:top-0 flex flex-col gap-[16px] bg-[#f5f4f6]  w-full h-max pt-[12px]'>
+                                                            <div className='sticky top-[120px] xl:top-0 flex flex-col gap-[16px] text-text-theme  w-full h-max pt-[12px]'>
                                                                   <CartPayMini />
                                                             </div>
                                                       </div>
@@ -157,13 +158,18 @@ const Cart = () => {
                               {getMyCart.isSuccess &&
                                     (!getMyCart.data.data.metadata.cart ||
                                           getMyCart.data.data.metadata.cart.cart_products.length === 0) && (
-                                          <div className='w-full'>
+                                          <div className='w-full flex flex-col gap-[20px]'>
                                                 <CartEmpty />
                                                 <ContentProduct />
                                           </div>
                                     )}
 
-                              {getMyCart.isPending && <div className='animate-pulse w-full min-h-[500px] bg-gray-200 rounded-lg'></div>}
+                              {getMyCart.isPending && (
+                                    <div className='skeleton__container w-full min-h-[500px] rounded-lg flex gap-[16px] justify-center items-center'>
+                                          <BoxLoading />
+                                          <span>Đang tải</span>
+                                    </div>
+                              )}
                         </div>
                   </div>
             </React.Fragment>
