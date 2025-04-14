@@ -238,7 +238,7 @@ const FormAddress = (props: TProps) => {
                                                             field.onChange(foundNameProvince?.name)
                                                       }}
                                                       placeholder='Chọn tỉnh thành phố'
-                                                      className='w-full xl:w-[80%] bg-color-section-theme border-[var(--border-color-input)] customSelect'
+                                                      className='w-full bg-color-section-theme border-[var(--border-color-input)] customSelect'
                                                 />
                                           )
                                     }}
@@ -258,7 +258,7 @@ const FormAddress = (props: TProps) => {
                                                             field.onChange(foundNameDistrict?.name)
                                                       }}
                                                       placeholder='Chọn quận huyện'
-                                                      className='w-full xl:w-[80%] bg-color-section-theme border-[var(--border-color-input)] customSelect'
+                                                      className='w-full bg-color-section-theme border-[var(--border-color-input)] customSelect'
                                                       disabled={province ? false : true}
                                                 />
                                           )
@@ -280,7 +280,7 @@ const FormAddress = (props: TProps) => {
                                                             field.onChange(foundNameWard?.name)
                                                       }}
                                                       placeholder='Chọn phường xã'
-                                                      className='w-full xl:w-[80%] bg-color-section-theme border-[var(--border-color-input)] customSelect'
+                                                      className='w-full bg-color-section-theme border-[var(--border-color-input)] customSelect'
 
                                                       // disabled={province && district ? false : true}
                                                 />

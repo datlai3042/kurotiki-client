@@ -71,7 +71,7 @@ const NotificationSection = (props: TProps) => {
                                           >
                                                 <div className='flex w-full xl:w-[24%] h-max xl:h-[70%] items-center  justify-between'>
                                                       <p>{convertDateToStringFull(notification.notification_creation_time)}</p>
-                                                      <div className='w-[40px] h-[40px] bg-color-main flex items-center justify-center rounded-full'>
+                                                      <div className='w-[40px] h-[40px] flex items-center justify-center rounded-full'>
                                                             {notification.notification_attribute.notification_type === 'PRODUCT' && (
                                                                   <Inbox size={24} className='text-[#fff]' />
                                                             )}

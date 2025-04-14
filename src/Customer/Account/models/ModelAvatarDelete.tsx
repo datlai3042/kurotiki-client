@@ -69,26 +69,26 @@ const ModelAvatarDelete = (props: TProps) => {
 
       return (
             <div
-                  className='fixed w-full min-h-screen top-0 left-0 flex justify-center items-center bg-[rgba(0,0,0,.7)] z-[11]'
+                  className='fixed w-full min-h-screen top-0 left-0 flex justify-center items-center bg-[rgba(0,0,0,.7)] z-[998]'
                   onClick={() => {
                         modeDispatch({ type: 'CLOSE_MODE_AVATAR_DELETE', payload: { modeAvatarDelete: false, boxModeAvatar: false } })
                   }}
             >
                   <div
-                        className='w-[400px] h-[150px] p-[16px] bg-white rounded-lg shadow-2xl flex flex-col gap-[12px]'
+                        className='w-[400px]  text-[14px] p-[16px] bg-color-section-theme text-text-theme rounded-lg shadow-2xl flex flex-col gap-[6px]'
                         onClick={(e) => e.stopPropagation()}
                   >
+                        <p>Hình ảnh đại diện sẽ quay về mặc định</p>
                         <p>Bạn có chắc muốn xóa bỏ ảnh đại diện ?</p>
-                        <p>Hình ảnh đại diện sẽ quay về mặc định của Tiki</p>
                         <div className='flex justify-end gap-[10px] mt-[12px]'>
                               <button
-                                    className='px-[8px] py-[4px] rounded-md border-[1px] border-blue-400 text-blue-400 w-[40px] flex justify-center items-center'
+                                    className='px-[8px] py-[4px] rounded-[4px] border-[1px]  opacity-80 hover:opacity-100 border-blue-400 text-blue-400 w-[40px] flex justify-center items-center'
                                     onClick={handleCancelActionDelete}
                               >
                                     Hủy
                               </button>
                               <button
-                                    className='px-[8px] py-[4px] rounded-md bg-blue-400 w-[70px] flex justify-center items-center text-white'
+                                    className='px-[8px] py-[4px] rounded-[4px] bg-color-main opacity-80 hover:opacity-100 w-[70px] flex justify-center items-center text-white'
                                     onClick={handleDeleteAvatar}
                               >
                                     Xóa bỏ

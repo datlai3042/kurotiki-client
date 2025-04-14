@@ -64,7 +64,7 @@ const NotFound = (props: TProps) => {
                                     {!onBack ? (
                                           <Link
                                                 to='/'
-                                                className='text-sm font-semibold border-[1px] border-[var(--border-color-input)] px-3.5 py-2.5 text-[#fff] rounded-[4px] hover:bg-color-main hover:border-transparent'
+                                                className='text-sm font-semibold border-[1px] border-[var(--border-color-input)] px-3.5 py-2.5 text-text-theme hover:text-[#fff] rounded-[4px] hover:bg-color-main hover:border-transparent'
                                           >
                                                 Quay về sau {countTime ? count : ''}
                                           </Link>

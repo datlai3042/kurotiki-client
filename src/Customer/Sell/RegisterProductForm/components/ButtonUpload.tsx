@@ -163,7 +163,7 @@ const ButtonUpload = (props: IProps) => {
                               </div>
                               <div
                                     onClick={() => setModalFilePreview(true)}
-                                    className='cursor-pointer w-[100px] ] bg-color-main text-text-theme  h-[35px] flex items-center justify-center rounded-[4px] gap-[16px]'
+                                    className='cursor-pointer w-[100px] ] bg-color-main text-[#fff]  h-[35px] flex items-center justify-center rounded-[4px] gap-[16px]'
                               >
                                     <span>Xem trước</span>
                               </div>

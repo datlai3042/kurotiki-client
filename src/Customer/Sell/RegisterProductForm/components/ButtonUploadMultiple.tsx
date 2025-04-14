@@ -336,7 +336,7 @@ const ButtonUploadMultiple = (props: IProps) => {
                                     onClick={() => setModalFilePreview(true)}
                               >
                                     <View size={28} className=' ' />
-                                    <p>Xem trước</p>
+                                    <p className='text-[#fff]'>Xem trước</p>
                               </div>
                         </div>
                   )}

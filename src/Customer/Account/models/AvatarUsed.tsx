@@ -37,14 +37,16 @@ const AvatarUsed = (props: TProps) => {
             }
       }, [deleteAvatarUsed.isSuccess, dispatch, deleteAvatarUsed.data?.data.metadata.user])
       return (
-            <div className='w-full flex flex-col gap-[8px]'>
-                  <div className='flex justify-between '>
-                        <p className=' bg-slate-700 text-white min-w-[60px] px-[6px] py-[2px]'>
+            <div className='w-full flex  gap-[16px]'>
+                  <img src={avatar?.secure_url} loading='lazy' className=' object-contain rounded-[4px]' alt='avatar_used[]' />
+
+                  <div className='flex flex-col gap-[10px]  '>
+                        <p className='w-[120px] bg-color-main flex items-center text-white min-w-[60px] px-[6px] py-[2px] rounded-[4px]'>
                               {avatar.date_update ? convertDateToString(avatar.date_update) : 'none'}
                         </p>
                         <div
                               onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => handleDeleteAvatarUsed(avatar.public_id, e)}
-                              className=' gap-[8px]  text-[#fff] rounded-md  min-w-[70px] h-[30px] p-[4px] border-[1px]  bg-red-700 hover:border-red-700  flex justify-center items-center z-[2]'
+                              className='cursor-pointer gap-[8px]  text-[#fff] rounded-[4px] opacity-80 hover:opacity-100  min-w-[70px] h-[30px] p-[4px] bg-red-700 hover:border-red-700  flex justify-center items-center z-[2]'
                         >
                               <span className=''>Xóa ảnh</span>
                               {showLoading && (
@@ -55,7 +57,6 @@ const AvatarUsed = (props: TProps) => {
                               )}
                         </div>
                   </div>
-                  <img src={avatar?.secure_url} loading='lazy' className='w-full min-h-full rounded-tr-md' alt='avatar_used[]' />
             </div>
       )
 }

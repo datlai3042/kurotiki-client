@@ -10,6 +10,7 @@ import { OrderItem } from '../../types/order.type'
 import { checkAxiosError } from '../../utils/handleAxiosError'
 import { addToast } from '../../Redux/toast'
 import { useDispatch } from 'react-redux'
+import BoxLoading from '../../component/BoxUi/BoxLoading'
 
 type TProps = {
       carts: CartResponse
@@ -47,7 +48,7 @@ const PaymentCart = (props: TProps) => {
                               error.response.data.message === 'Bad Request'
                               // error.response.data.detail === 'Số lượng sản phẩm được chọn nhiều hơn số lượng trong kho'
                         ) {
-                              dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: error.response.data.detail }))
+                              dispatch(addToast({ id: Math.random().toString(), type: 'ERROR', message: error.response.data.detail }))
                         }
                   }
             },
@@ -112,8 +113,8 @@ const PaymentCart = (props: TProps) => {
                                                             alt='product'
                                                       />
                                                       <p className='self-end min-w-[50px] text-[20px] leading-none text-color-main font-semibold'>
-                                                      <span className='self-end text-[12px]'>x</span>
-                                                          
+                                                            <span className='self-end text-[12px]'>x</span>
+
                                                             {product.quantity}
                                                       </p>
                                                 </div>
@@ -155,11 +156,12 @@ const PaymentCart = (props: TProps) => {
                                     <button
                                           disabled={disable}
                                           onClick={handleVerifyBuy}
-                                          className='w-full h-[45px] flex items-center justify-center bg-red-600 text-white rounded-md text-[16px] mt-[16px]'
+                                          className='w-full h-[45px] flex items-center gap-[8px] justify-center bg-red-600 text-white rounded-md text-[16px] mt-[16px]'
                                     >
                                           Mua hàng {'('}
                                           {carts?.cart_products.length}
                                           {')'}
+                                          {orderPaymentMutation.isPending && <BoxLoading />}
                                     </button>
                               )}
 

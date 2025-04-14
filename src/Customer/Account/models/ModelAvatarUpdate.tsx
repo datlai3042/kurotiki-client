@@ -106,13 +106,13 @@ const ModelAvatarUpdate = (props: TProps) => {
                   }}
             >
                   <div
-                        className={`w-[650px] h-max bg-white rounded-2xl p-[28px] relative`}
+                        className={`w-[650px] h-max bg-color-section-theme text-text-theme rounded-[6px] p-[20px_28px] relative`}
                         onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
                   >
-                        <div className='text-[25px] absolute top-[25px] right-[25px]' onClick={modelControllClose}>
+                        <div className='cursor-pointer text-[25px] absolute top-[25px] right-[25px]' onClick={modelControllClose}>
                               <X />
                         </div>
-                        <div className='h-[10%] flex items-center mb-[15px]'>Cập nhập ảnh đại diện</div>
+                        <div className='h-[10%] flex items-center mb-[15px] text-text-theme'>Cập nhập ảnh đại diện</div>
                         <div className='h-[1px] '></div>
                         <form
                               className='h-[85%]'
@@ -122,9 +122,7 @@ const ModelAvatarUpdate = (props: TProps) => {
                                     return methods.handleSubmit(onSubmit)(e)
                               }}
                         >
-                              <div
-                                    className={`flex flex-col gap-[16px]  p-[8px] items-center justify-center`}
-                              >
+                              <div className={`flex flex-col gap-[16px]  p-[8px] items-center justify-center`}>
                                     {filePreview && (
                                           <img
                                                 src={filePreview}
@@ -135,7 +133,7 @@ const ModelAvatarUpdate = (props: TProps) => {
                                           />
                                     )}
                                     <button
-                                          className='px-[12px] py-[8px] rounded-md text-white bg-blue-700'
+                                          className='cursor-pointer px-[12px] py-[8px] rounded-[4px] bg-color-main text-[#fff] opacity-80 hover:opacity-100'
                                           onClick={(e) => handleClick(e)}
                                     >
                                           {!filePreview ? 'Chọn ảnh' : 'Chọn lại ảnh khác'}
@@ -156,16 +154,16 @@ const ModelAvatarUpdate = (props: TProps) => {
                               </div>
 
                               {filePreview && (
-                                    <div className='w-full min-w-[100px] flex gap-[2%]'>
+                                    <div className='w-full min-w-[100px] flex justify-end gap-[2%] mt-[16px]'>
                                           <button
-                                                className='w-[49%] px-[12px] py-[6px] bg-red-500 text-[#fff] rounded-md'
+                                                className=' px-[12px] py-[6px] bg-red-500 text-[#fff] rounded-[4px]'
                                                 onClick={modelControllClose}
                                           >
                                                 Hủy bỏ
                                           </button>
                                           <button
                                                 type='submit'
-                                                className='w-[49%] px-[12px] py-[6px] rounded-md bg-blue-500 text-white flex justify-center gap-[8px] items-center'
+                                                className=' px-[12px] py-[6px] rounded-[4px] bg-blue-500 text-white flex justify-center gap-[8px] items-center'
                                           >
                                                 <span>Lưu thay đổi</span>
                                                 {onUpdate.isPending && (

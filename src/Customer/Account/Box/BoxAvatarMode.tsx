@@ -82,10 +82,9 @@ const BoxAvatarMode = (props: TProps) => {
             heightImage,
       }
 
-
       return (
             <div
-                  className={`${styleEffect.widthImage}  ${styleEffect.heightImage} flex-shrink flex  items-center justify-center  rounded-full mb-[15px]`}
+                  className={`${styleEffect.widthImage}  ${styleEffect.heightImage} flex-shrink bg-color-section-theme text-text-theme flex  items-center justify-center  rounded-full mb-[15px]`}
                   onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
                         e.stopPropagation()
                         modeDispatch({ type: 'OPEN_BOX_AVATAR', payload: { boxModeAvatar: true } })
@@ -95,27 +94,27 @@ const BoxAvatarMode = (props: TProps) => {
                         <img
                               src={AvatartSource?.avatar || AvatartSource.avatar_default || ''}
                               alt='user_avatar'
-                              className={`${styleEffect.widthImage} ${styleEffect.heightImage} rounded-full border-[4px] border-cyan-200 `}
+                              className={`${styleEffect.widthImage} ${styleEffect.heightImage} object-contain rounded-full border-[4px] border-cyan-200 `}
                         />
 
-                        <div className='absolute bottom-[10px] right-[4px] w-[20px] h-[20px] bg-slate-500 rounded-full flex items-center justify-center'>
-                              <Pencil className=' text-white' size={12} />
+                        <div className='absolute bottom-[10px] right-[4px] w-[20px] h-[20px] bg-color-main cursor-pointer rounded-full flex items-center justify-center'>
+                              <Pencil className=' text-[#fff]' size={12} />
                         </div>
 
                         {/* @box avatar action*/}
                         {state.boxModeAvatar && (
                               <>
                                     <div
-                                          className='absolute z-[10] top-[70%] left-[50%] translate-x-[-50%]  shadow-2xl shadow-blue-700 bg-white rounded-md w-[250px] h-[150px] max-h-auto '
+                                          className='absolute z-[10] top-[70%] left-[50%] translate-x-[-50%]  shadow-2xl shadow-blue-700 bg-color-section-theme rounded-md w-[250px] h-[150px] max-h-auto '
                                           ref={refModelAvatar}
                                     >
                                           <div className='relative z-[500]'>
-                                                <span className='clip-path-modelAvatar absolute w-[20px] h-[13.5px] border-[1px] border-stone-300 border-b-0  bg-white top-[-13px] left-[50%] translate-x-[-50%]'></span>
+                                                <span className='clip-path-modelAvatar absolute w-[20px] h-[13.5px] border-[1px] border-[var(--border-color-input)] border-b-0  bg-color-section-theme top-[-13px] left-[50%] translate-x-[-50%]'></span>
                                                 {/* @ list avatar action*/}
                                                 <ul className='h-full'>
                                                       {/* @ modeAvater::see */}
                                                       <li
-                                                            className='flex items-center w-full h-[50px] px-[20px] hover:bg-sky-100 gap-[8px]'
+                                                            className='cursor-pointer flex items-center w-full h-[50px] px-[20px] hover:bg-color-main hover:text-[#fff] gap-[8px]'
                                                             onClick={handleControllmodelAvatarSee}
                                                       >
                                                             {/* <img src='' alt='' /> */}
@@ -125,7 +124,7 @@ const BoxAvatarMode = (props: TProps) => {
 
                                                       {/* @ modeAvatar::update */}
                                                       <li
-                                                            className='flex items-center w-full h-[50px] px-[20px] hover:bg-sky-100 gap-[8px]'
+                                                            className='cursor-pointer flex items-center w-full h-[50px] px-[20px] hover:bg-color-main hover:text-[#fff] gap-[8px]'
                                                             onClick={handleControllmodelAvatarUpdate}
                                                       >
                                                             <Eye />
@@ -133,7 +132,7 @@ const BoxAvatarMode = (props: TProps) => {
                                                       </li>
                                                       {/* @ modeAvater::delete*/}
                                                       <li
-                                                            className='flex items-center w-full h-[50px] px-[20px] hover:bg-sky-100 gap-[8px]'
+                                                            className='cursor-pointer flex items-center w-full h-[50px] px-[20px] hover:bg-color-main hover:text-[#fff] gap-[8px]'
                                                             onClick={handleControllmodelAvatarDelete}
                                                       >
                                                             <Trash2 />
