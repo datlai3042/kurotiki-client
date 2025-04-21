@@ -16,7 +16,7 @@ const CustomerUserAddress = () => {
       return (
             <div className='w-full  py-[8px] flex flex-col gap-[20px] bg-color-section-theme'>
                   <button
-                        className=' h-[60px] mx-[10px] flex items-center justify-center gap-[8px] bg-color-section-theme border-[1px] border-dotted border-[var(--border-color-input)]'
+                        className=' py-[8px] mx-[10px] bg-color-main text-[#fff] opacity-90 hover:opacity-100 flex items-center justify-center gap-[8px] border-[1px] border-dotted border-[var(--border-color-input)]'
                         onClick={() => setOpenFormAddress((prev) => !prev)}
                   >
                         <Plus />
@@ -24,7 +24,7 @@ const CustomerUserAddress = () => {
                   </button>
                   {openFormAddress && (
                         <Portal>
-                              <div className='fixed inset-0 bg-[rgba(0,0,0,.4)] h-screen flex items-center justify-center z-[998]'>
+                              <div className='fixed inset-0 bg-[var(--bg-overlay)] h-screen flex items-center justify-center z-[998]'>
                                     <div className='animate-authBox  min-w-[575px]'>
                                           <FormAddress iconClose={<X />} onClose={setOpenFormAddress} />
                                     </div>

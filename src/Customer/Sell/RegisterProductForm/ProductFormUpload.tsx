@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 //@icon
-import { Check } from 'lucide-react'
+import { Check, Maximize, Minimize2 } from 'lucide-react'
 
 //@api
 import ProductApi, { ProductData } from '../../../apis/product.api'
@@ -37,7 +37,7 @@ type SchemaProduct = typeof ProductBookFormSchema | typeof ProductFoodFormSchema
 
 export const ui = {
       gapElementChild: 'gap-[6px]',
-      gapElementChildButton: 'gap-[12px]',
+      gapElementChildButton: 'gap-[6px]',
       fontSizeError: 'text-[12px]',
       colorError: 'text-red-700',
 }
@@ -85,6 +85,8 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
             numberImage: 0,
             isUploadImage: false,
       })
+
+      const [expandTimeLine, setExpandTimeLine] = useState(true)
 
       //@lấy thông tin tên các hình
       const [getFileName, setGetFileName] = useState<string[]>([])
@@ -162,11 +164,11 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
 
       return (
             <React.Fragment>
-                  <div className='animate-mountComponent w-full h-auto flex justify-center '>
-                        <div className=' w-[full] lg:w-[65%]  h-full'>
+                  <div className='animate-mountComponent w-full h-auto flex gap-[16px] justify-center '>
+                        <div className={`${expandTimeLine ? 'w-[full] md:w-[65%]' : 'w-full'}   h-full`}>
                               <FormProvider {...methods}>
                                     <form
-                                          className='w-full lg:w-[60%]  flex flex-col gap-[24px] p-[16px]'
+                                          className='w-full md:w-[80%] flex flex-col gap-[24px]'
                                           onSubmit={methods.handleSubmit(onSubmit)}
                                           spellCheck={false}
                                     >
@@ -232,7 +234,11 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
                               </FormProvider>
                         </div>
 
-                        <div className='hidden h-max min-w-[160px] w-auto lg:flex flex-col gap-[28px]  py-[24px] pl-[8px] pr-[24px] bg-bgTimeLine border-r-4 border-blue-300 rounded-lg'>
+                        <div
+                              className={`${
+                                    expandTimeLine ? 'hidden lg:flex' : 'hidden'
+                              } hidden h-max min-w-[160px] w-auto  flex-col gap-[28px]  py-[24px] pl-[8px] pr-[24px] bg-bgTimeLine border-r-4 border-blue-300 rounded-lg`}
+                        >
                               <Timeline
                                     attribute={false}
                                     methods={methods}
@@ -292,6 +298,14 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
                               <div className='flex items-center justify-center bg-blue-700 w-[20px] h-[20px] rounded-full'>
                                     <Check color='white' size={12} />
                               </div>
+                        </div>
+
+                        <div className='hidden md:flex text-color-main  justify-end'>
+                              {expandTimeLine ? (
+                                    <Minimize2 onClick={() => setExpandTimeLine(false)}  className='cursor-pointer'/>
+                              ) : (
+                                    <Maximize onClick={() => setExpandTimeLine(true)}  className='cursor-pointer'/>
+                              )}
                         </div>
                   </div>
             </React.Fragment>

@@ -131,7 +131,7 @@ const ProductPay = (props: TProps) => {
 
       return (
             <section className='w-full h-full flex flex-col gap-[16px] p-[12px] text-[12px] xl:text-[14px]'>
-                  <div className='flex flex-col xl:flex-row items-center gap-[8px] pb-[15px] border-b-[1px] border-slate-200'>
+                  <div className='flex flex-col xl:flex-row items-center gap-[8px] pb-[15px] border-b-[1px] border-[var(--border-color-input)]'>
                         <img
                               src={product.shop_id.shop_avatar?.secure_url || product.shop_id.shop_avatar_default}
                               className='w-[40px] h-[40px] rounded-md'

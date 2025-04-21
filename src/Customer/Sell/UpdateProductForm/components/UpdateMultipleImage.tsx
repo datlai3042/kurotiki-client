@@ -210,7 +210,7 @@ const UpdateMultipleImage = (props: IProps) => {
             stateButton:
                   isSubmit && cloudinaryImage.length === 0
                         ? 'border-[2px] border-red-700 text-red-700 bg-color-section-theme '
-                        : 'text-white bg-color-main border-[2px] border-[var(--border-color-input)]',
+                        : 'text-white bg-color-main opacity-80 hover:opacity-100 border-[2px] border-[var(--border-color-input)]',
 
             flexContainerModal: cloudinaryImage.length === 1 ? 'flex-row' : cloudinaryImage.length > 2 ? 'flex-row' : `flex-col`,
             widthImageModal:
@@ -229,7 +229,6 @@ const UpdateMultipleImage = (props: IProps) => {
             <div className={`${styleEffect.withContainer} ${styleEffect.gap} relative min-h-[80px] h-auto flex flex-col`}>
                   <div className='w-full flex items-center gap-[6px]'>
                         <label htmlFor={id}>{labelMessage}</label>
-                        <ImagePlus size={20} />
                   </div>
                   <input type='file' id={id} hidden ref={inputRef} multiple onChange={(e) => handleInputChange(e)} />
 
@@ -291,10 +290,10 @@ const UpdateMultipleImage = (props: IProps) => {
                   {/* {@nút upload file} */}
                   {cloudinaryImage.length < 4 && (
                         <button
-                              className={`${styleEffect.stateButton} xl:w-[32%] rounded-md min-h-[40px]`}
+                              className={`${styleEffect.stateButton}  rounded-md py-[8px]`}
                               onClick={(e) => handleButtonClick(e)}
                         >
-                              {cloudinaryImage.length > 0 ? 'Tải lên thêm' : 'Tải lên'}
+                              {cloudinaryImage.length > 0 ? 'Tải ảnh lên thêm' : 'Tải ảnh lên'}
                         </button>
                   )}
 

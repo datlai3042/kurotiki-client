@@ -45,7 +45,7 @@ const BoxConfirmDelete = <T,>(props: BoxConfirmDeleteProps<T>) => {
             <Portal>
                   <div className='fixed inset-0 bg-[#1145683b] flex items-center justify-center z-[900]'>
                         <div
-                              className='relative  w-[80%] xl:w-[500px]  bg-color-section-theme text-text-theme rounded-lg flex flex-col gap-[24px] mx-[15px] xl:m-0 p-[14px_10px] xl:px-[24px] xl:py-[20px]'
+                              className='relative  w-[80%] xl:w-[400px]  bg-color-section-theme text-text-theme rounded-lg flex flex-col gap-[24px] mx-[15px] xl:m-0 p-[14px_10px] xl:px-[24px] xl:py-[16px]'
                               ref={wrapperRef}
                         >
                               <button className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] border-[1px] border-[var(--border-color-input)] bg-white hover:bg-color-main hover:text-[#fff] hover:border-transparent rounded-full flex items-center justify-center'>

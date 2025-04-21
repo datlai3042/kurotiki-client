@@ -12,6 +12,7 @@ import { RootState } from './store'
 import { useQuery } from '@tanstack/react-query'
 import AccountService from './apis/account.service'
 import { fetchUser } from './Redux/authenticationSlice'
+import { SocketProvider } from './Socket/Socket.provider'
 function App() {
       const boxLogin = useSelector((state: RootState) => state.auth.isOpenBoxLogin)
       const [, setShowBoxAuth] = useState(true)
@@ -55,10 +56,12 @@ function App() {
       return (
             <div className=' min-h-screen  w-full min-w-full bg-color-gap-empty '>
                   <div id='main w-full ' className='min-h-screen flex flex-col'>
-                        <AuthenticationContext />
-                        <RouterController />
-                        <FooterMobile className='block md:hidden' />
-                        <ScrollToAnchor />
+                        <SocketProvider>
+                              <AuthenticationContext />
+                              <RouterController />
+                              <FooterMobile className='block md:hidden' />
+                              <ScrollToAnchor />
+                        </SocketProvider>
                   </div>
 
                   {boxLogin && <AuthWrapper setShowBoxAuth={setShowBoxAuth} />}

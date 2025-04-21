@@ -85,6 +85,10 @@ const client = new QueryClient({
                                     // store.dispatch(addToast({ type: 'ERROR', message: 'Token hết hạn', id: Math.random().toString() }))
                               }
                         }
+                        if (error.response?.status === 400 && error.response.data) {
+                              store.dispatch(addToast({ type: 'ERROR', message: error.response.data.detail, id: Math.random().toString() }))
+                              return
+                        }
                   }
             },
       }),

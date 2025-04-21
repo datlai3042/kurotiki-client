@@ -16,7 +16,7 @@ type TProps = {
 
 const WrapperCountProduct = (props: TProps) => {
       const { product_id, cart_quantity, readOnly, product, modeAction = 'ADD' } = props
-      const [productQuantity, setProductQuantity] = useState<number | undefined>(cart_quantity)
+      const [productQuantity, setProductQuantity] = useState<number>(cart_quantity || 1)
       const queryClient = useQueryClient()
       const [openBoxConfirmDelete, setOpenBoxConfirmDelete] = useState<boolean>(false)
       const deleteCartWithProductId = useMutation({
@@ -62,14 +62,14 @@ const WrapperCountProduct = (props: TProps) => {
 
       const getValueChangeQuanity = (mode: TModeChangeQuantityProductCart) => {
             if (mode.mode === 'DECREASE') {
+                  console.log({ mode })
                   if (modeAction === 'EDIT') {
-                        if (mode.quantity === 0 || mode.quantity < 0) {
+                        if (mode.quantity === 0 || productQuantity + mode.quantity < 1) {
                               setOpenBoxConfirmDelete(true)
-                              setProductQuantity(0)
                               return
                         }
                   } else {
-                        if (mode.quantity === 0 || mode.quantity < 0) {
+                        if (mode.quantity === 0 || productQuantity + mode.quantity < 0) {
                               setProductQuantity(0)
                               return
                         }
@@ -113,19 +113,22 @@ const WrapperCountProduct = (props: TProps) => {
                         <BoxConfirmDelete
                               content='Bạn sẽ xóa sản phẩm này chứ'
                               subContent={
-                                    <div className='flex flex-col gap-[8px]'>
-                                          <span>{product!.product_id.product_name}</span>
-                                          <div className='w-full justify-end gap-[8px]'>
-                                                <div className='flex gap-[8px]'>
-                                                      <span>Số lượng:</span>
-                                                      <span>{cart_quantity}</span>
-                                                </div>
+                                    <div className='flex justify-between'>
+                                          <div className='flex-1 flex flex-col gap-[8px]'>
+                                                <span>{product!.product_id.product_name}</span>
+                                                <div className='w-full justify-end gap-[8px]'>
+                                                      <div className='flex gap-[8px]'>
+                                                            <span>Số lượng:</span>
+                                                            <span>{cart_quantity}</span>
+                                                      </div>
 
-                                                <div className='flex gap-[8px]'>
-                                                      <span>Giá:</span>
-                                                      <span>{formatMoneyVND(cart_quantity * product!.product_id.product_price)}</span>
+                                                      <div className='flex gap-[8px]'>
+                                                            <span>Giá:</span>
+                                                            <span>{formatMoneyVND(cart_quantity * product!.product_id.product_price)}</span>
+                                                      </div>
                                                 </div>
                                           </div>
+                                          <img src={product?.product_id.product_thumb_image.secure_url} className='w-[80px] aspect-square' />
                                     </div>
                               }
                               ButtonCancellContent='Hủy'

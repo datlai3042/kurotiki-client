@@ -20,7 +20,7 @@ const FoodUpdate: React.FC<TProps> = (props: TProps) => {
       useEffect(() => {}, [product])
 
       return (
-            <div className='w-[1000px] mx-auto bg-white px-[20px] flex justify-center'>
+            <div className='w-[1000px] mx-auto bg-color-section-theme text-text-theme px-[20px] flex justify-center'>
                   <ProductFormUpdate<TimelineFoodFieldName, TimelineFoodLabel>
                         ProductAttribute={<Food />}
                         product_id={product._id}

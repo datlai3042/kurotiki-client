@@ -18,8 +18,8 @@ import Comment from '../../component/Comment/Comment'
 import CommentImageAll from '../../component/Comment/CommentImageAll'
 import ContentProduct from '../../component/Content/Components/ContentProduct'
 import CommentService from '../../apis/comment.service'
-import { Footer } from 'antd/es/layout/layout'
 import ProductSkeleton from './ProductSkeleton'
+import Footer from '../../component/Footer/Footer'
 
 export type TImage = {
       secure_url: string
@@ -82,7 +82,7 @@ const Product = () => {
                   return (
                         <NotFound
                               ContentHeader='Không tìm thấy sản phẩm'
-                              ContentDescription={user._id === product?.shop_id.owner._id ? message[1] : message[0]}
+                              ContentDescription={user?._id === product?.shop_id?.owner?._id ? message[1] : message[0]}
                         />
                   )
             }
@@ -106,7 +106,7 @@ const Product = () => {
                               <div className='  flex gap-[16px] xl:gap-[16px] xl:mt-0'>
                                     <div className='w-full xl:w-[74%] flex flex-col gap-[24px]'>
                                           <div className='top w-full min-h-[1000px] h-max flex flex-col xl:flex-row gap-[24px]'>
-                                                <div className='xl:w-[40%] static xl:sticky top-[32px] xl:top-[16px] bg-color-section-theme px-[3px] py-[6px] rounded-lg  h-max flex flex-col gap-[16px] '>
+                                                <div className='xl:w-[40%] static xl:sticky top-[32px] xl:top-[85px] bg-color-section-theme px-[3px] py-[6px] rounded-lg  h-max flex flex-col gap-[16px] '>
                                                       <ProductDetail product={product} isSuccess={getProductWithId.isSuccess} />
                                                 </div>
                                                 <div className='xl:w-[60%]  min-h-[500px] h-max mt-[20px] xl:mt-0 rounded-lg '>
@@ -130,7 +130,7 @@ const Product = () => {
                                                 <Comment product_id={product?._id} />
                                           </div>
                                     </div>
-                                    <div className='hidden xl:flex w-[40%] xl:w-[26%] sticky top-[100px] xl:top-[16px] h-max pb-[15px] bg-color-section-theme  rounded-md'>
+                                    <div className='hidden xl:flex w-[40%] xl:w-[26%] sticky top-[100px] xl:top-[85px] h-max pb-[15px] bg-color-section-theme  rounded-md'>
                                           <ProductPay product={product} />
                                     </div>
                               </div>
@@ -139,6 +139,8 @@ const Product = () => {
                         {getProductWithId.isPending && <ProductSkeleton />}
                   </div>
                   <ContentProduct />
+                  <Footer className='hidden xl:block bg-color-section-theme' />
+                  
             </div>
       )
 }

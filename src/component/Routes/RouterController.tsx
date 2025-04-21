@@ -34,6 +34,7 @@ import { RootState } from '../../store'
 import { useSelector } from 'react-redux'
 import ShopWrapper from '../../Customer/Shop/ShopWrapper'
 import ShopProductList from '../../Customer/Shop/ShopProductList'
+import PrintDev from '../Dev/Print/PrintDev'
 
 const RouterController = () => {
       const pathHiddenHeader = ['/admin', '/payment', '/box']
@@ -62,6 +63,8 @@ const RouterController = () => {
                               <Route path='/admin' element={<Admin />} />
                               <div id='' className={`${styleEffect.matchPathNameCustomer}  relative  lg:flex  gap-8 `}>
                                     <Route path='/' element={<Content />} />
+                                    <Route path='/dev/print' element={<PrintDev />} />
+
                                     <Route path='/product/:id' element={<Product />} />
                                     <Route path='/order-check/:order_id' element={<OrderCheck />} />
                                     <Route path='/book' element={<Category product_type='Book' />} />

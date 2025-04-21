@@ -9,6 +9,7 @@ import toast from './Redux/toast'
 import cartSlice from './Redux/cartSlice'
 import categorySlice from './Redux/category.slice'
 import commentSlice from './Redux/comment.slice'
+import notificationSlice from './Redux/notification.slice'
 
 // const authPersistConfig = {
 //   key: 'auth',
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
       toast: toast,
       category: categorySlice,
       commentSlice: commentSlice,
+      notifcation: notificationSlice
 })
 
 export const store = configureStore({

@@ -14,7 +14,7 @@ type TProps = {
       shop: ShopResponse
 }
 
-const LIMIT = 1
+const LIMIT = 16
 
 const OwnerShopFilterName = (props: TProps) => {
       const { shop } = props
@@ -76,7 +76,7 @@ const OwnerShopFilterName = (props: TProps) => {
 
       return (
             <div className='flex gap-[16px] flex-wrap'>
-                  <div className='w-full h-max text-right'>
+                  <div className='w-full h-max text-right text-text-theme'>
                         <ShopSearchProduct search={search} setSearch={setSearch} />
                   </div>
 

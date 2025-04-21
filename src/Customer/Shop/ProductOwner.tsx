@@ -34,7 +34,7 @@ const ProductOwner = (props: TProps) => {
                   </Link>
 
                   <Link
-                        to={`/product/update-book/${product?._id}`}
+                        to={`/product/update/${product?._id}`}
                         className='relative group w-[150px] h-[30px] p-[12px_8px] flex items-center justify-center bg-[#ffffff] border-[1px] border-slate-300 text-slate-800 rounded font-medium overflow-hidden hover:text-white hover:border-[#ffffff]  before:absolute before:left-0 before:bottom-0 before:w-0 before:bg-blue-400 before:h-0 hover:before:h-full hover:before:w-full before:transition-all before:duration-500 '
                   >
                         <button className=' absolute z-[2]  transition-all duration-500'>Chỉnh sửa sản phẩm</button>

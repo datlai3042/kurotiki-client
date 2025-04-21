@@ -91,8 +91,8 @@ const Cart = () => {
                                     getMyCart.data.data.metadata.cart.cart_products.length > 0 && (
                                           <React.Fragment>
                                                 <div className='w-full flex-col md:flex-row  flex gap-[8px]'>
-                                                      <div className='w-full md:w-[75%] flex flex-col'>
-                                                            <div className='sticky w-full py-[6px] items-center z-[10]'>
+                                                      <div className='w-full md:w-[60%] flex flex-col'>
+                                                            <div className='sticky w-full pb-[6px] items-center z-[10]'>
                                                                   <div className='bg-color-section-theme text-text-theme rounded h-[48px] px-[12px] flex items-center'>
                                                                         <div className='flex gap-[8px] w-[50%] items-center'>
                                                                               <Checkbox
@@ -123,7 +123,7 @@ const Cart = () => {
                                                                         </div>
                                                                   </div>
                                                             </div>
-                                                            <div className='flex flex-1 flex-col gap-[24px]'>
+                                                            <div className='flex flex-1 flex-col gap-[24px] '>
                                                                   {getMyCart.isSuccess &&
                                                                         getMyCart.data.data.metadata.cart.cart_products.length > 0 &&
                                                                         getMyCart.data.data.metadata.cart.cart_products.map(

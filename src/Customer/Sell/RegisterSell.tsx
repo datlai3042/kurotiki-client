@@ -27,7 +27,8 @@ import {
       timelineLabelNameFood,
 } from '../../types/timeline/timeline.food.type'
 import { Link } from 'react-router-dom'
-
+import { Plus } from 'lucide-react'
+import image from './logistic.jpg'
 // const version2 = t
 
 const defaultValuesForm: TRegisterFormBook = {
@@ -84,19 +85,26 @@ const RegisterSell = () => {
             )
       }
       return (
-            <div className='min-w-full  h-auto flex items-center justify-center bg-color-section-theme p-[20px] '>
+            <div className='min-w-full flex-1  h-auto  flex flex-col items-center justify-center p-[20px] '>
                   {!openSelect && (
-                        <button
-                              className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-main text-[#fff]  flex items-center justify-center rounded-[4px]'
-                              onClick={() => setOpenSelect(true)}
-                        >
-                              Đăng sản phẩm
-                        </button>
+                        <div className='bg-color-section-theme py-[20px] flex justify-center items-center w-full'>
+                              <button
+                                    className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-main text-[#fff]    flex gap-[6px] items-center justify-center rounded-[4px]'
+                                    onClick={() => setOpenSelect(true)}
+                              >
+                                    <Plus />
+                                    <span>Đăng sản phẩm</span>
+                              </button>
+                        </div>
                   )}
-
+                  {!openSelect && (
+                        <div className='h-[300px] w-full mt-[20px] '>
+                              <img src={image} className='min-w-full w-full max-h-full object-cover' />
+                        </div>
+                  )}
                   {openSelect && (
-                        <div className='w-full h-full flex flex-col '>
-                              <div className='w-full h-[50px] flex '>
+                        <div className='w-full h-full flex flex-col bg-color-section-theme py-[20px]'>
+                              <div className='w-full h-[50px] flex px-[20px]'>
                                     <Select
                                           className='w-[150px] '
                                           placeholder='Loại sản phẩm'
@@ -110,8 +118,13 @@ const RegisterSell = () => {
                                           }}
                                     />
                               </div>
+                              {!createBaseProductId.isSuccess && (
+                                    <div className='h-[300px] w-full mt-[20px] '>
+                                          <img src={image} className='min-w-full w-full max-h-full object-cover' />
+                                    </div>
+                              )}
                               {createBaseProductId.isSuccess && (
-                                    <div className='w-full h-max mt-[16px]'>
+                                    <div className='w-full h-max px-[20px]'>
                                           {productType === 'Book' && (
                                                 <ProductFormUpload<TTimeLineBookField, TTimeLineBookLabel>
                                                       ProductType={'Book'}

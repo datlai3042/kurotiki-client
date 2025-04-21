@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 type TProps = {
       productQuantity: number | undefined
-      setProductQuantity: React.Dispatch<SetStateAction<number | undefined>>
+      setProductQuantity: React.Dispatch<SetStateAction<number>>
       getValueChangeQuanity: (mode: TModeChangeQuantityProductCart) => void
       disable: boolean
       readOnly: boolean

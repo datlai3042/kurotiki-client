@@ -5,6 +5,7 @@
 
 @layer base {
       :root {
+            --bg-overlay: #1145683b;
             --borderInputAnswerFocus: '#ccc', --background: 0 0% 100%;
             --bg-input-core: #ffffff;
             --bg-input-core-2: #000000;
@@ -68,6 +69,7 @@
 
       html {
             scroll-behavior: smooth;
+            color: var(--text-theme) !important;
       }
 
       body.light {
@@ -116,6 +118,33 @@
             --bg-scrollbar-thumb-normal: rgba(203, 191, 191, 0.758);
             --bg-scrollbar-track-normal: #2c2c2c;
       }
+
+      @media print {
+            .flex {
+              display: flex !important;
+            }
+          
+            .flex-col {
+              flex-direction: column !important;
+            }
+          
+            .gap-\[36px\] {
+              gap: 36px !important;
+            }
+          
+            .gap-\[40px\] {
+              gap: 40px !important;
+            }
+          
+            .justify-center {
+              justify-content: center !important;
+            }
+          
+            .items-center {
+              align-items: center !important;
+            }
+          }
+          
 }
 
 @layer components {

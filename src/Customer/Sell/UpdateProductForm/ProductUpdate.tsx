@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 //@icon
-import { Check } from 'lucide-react'
+import { Check, Maximize, Minimize2 } from 'lucide-react'
 
 //@api
 import ProductApi, { ProductData } from '../../../apis/product.api'
@@ -65,6 +65,7 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
       } else {
             schema = productSchema.merge(productFoodSchema)
       }
+      const [expandTimeLine, setExpandTimeLine] = useState(true)
 
       const queryClient = useQueryClient()
       //@lấy thông tin hình ảnh
@@ -98,7 +99,6 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
       //@hàm submit sản phẩm
       const onSubmit = (data: typeof defaultValues) => {
             setFormStateSubmit(true)
-          
 
             // return
             if (!urlProductMultipleImage.isUploadImage) {
@@ -136,7 +136,6 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
             }
       }
 
-
       useEffect(() => {
             const callAgain = async () => {
                   queryClient.invalidateQueries({
@@ -155,11 +154,11 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
 
       return (
             <React.Fragment>
-                  <div className='mb-[70px] animate-mountComponent w-full h-auto flex justify-center '>
-                        <div className=' w-[full] lg:w-[65%]  h-full'>
+                  <div className='animate-mountComponent w-full h-auto flex gap-[16px] justify-center py-[12px]'>
+                        <div className={`${expandTimeLine ? 'w-[full] md:w-[65%]' : 'w-full'}   h-full`}>
                               <FormProvider {...methods}>
                                     <form
-                                          className='w-full lg:w-[60%]  flex flex-col gap-[24px] p-[16px]'
+                                          className='w-full lg:w-[80%]  flex flex-col gap-[24px] p-[16px]'
                                           onSubmit={methods.handleSubmit(onSubmit)}
                                           spellCheck={false}
                                     >
@@ -212,7 +211,7 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
                                           <>{ProductAttribute}</>
                                           <button
                                                 type='submit'
-                                                className='min-w-[150px] px-[12px] py-[6px] bg-slate-700 text-white flex justify-center items-center gap-[8px]'
+                                                className='min-w-[150px] px-[12px] py-[6px] bg-color-main opacity-80 hover:opacity-100 text-white flex justify-center items-center gap-[8px] disabled:cursor-not-allowed'
                                           >
                                                 <span>{!uploadProductFull.isSuccess ? 'Đăng bán' : 'Đăng sản phẩm thành công'}</span>
 
@@ -227,7 +226,11 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
                               </FormProvider>
                         </div>
 
-                        <div className='hidden h-max min-w-[160px] w-auto lg:flex flex-col gap-[28px]  py-[24px] pl-[8px] pr-[24px] bg-bgTimeLine border-r-4 border-blue-300 rounded-lg'>
+                        <div
+                              className={`${
+                                    expandTimeLine ? 'hidden lg:flex' : 'hidden'
+                              }  h-max min-w-[160px] w-auto  flex-col gap-[28px]  py-[24px] pl-[8px] pr-[24px] bg-bgTimeLine border-r-4 border-blue-300 rounded-lg`}
+                        >
                               <Timeline
                                     attribute={false}
                                     methods={methods}
@@ -288,6 +291,14 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
                               <div className='flex items-center justify-center bg-blue-700 w-[20px] h-[20px] rounded-full'>
                                     <Check color='white' size={12} />
                               </div>
+                        </div>
+
+                        <div className='hidden md:flex text-color-main  justify-end'>
+                              {expandTimeLine ? (
+                                    <Minimize2 onClick={() => setExpandTimeLine(false)} className='cursor-pointer' />
+                              ) : (
+                                    <Maximize onClick={() => setExpandTimeLine(true)} className='cursor-pointer' />
+                              )}
                         </div>
                   </div>
 

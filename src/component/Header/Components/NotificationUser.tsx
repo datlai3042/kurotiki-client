@@ -8,7 +8,7 @@ type TProps = {
       notification: NotificationMessage
 }
 
-const NotificationSystem = (props: TProps) => {
+const NotificationUser = (props: TProps) => {
       const { notification } = props
       return (
             <Link to={`/customer/notification#${notification._id}`} className='w-full h-full flex flex-col gap-[5px]'>
@@ -21,4 +21,4 @@ const NotificationSystem = (props: TProps) => {
       )
 }
 
-export default NotificationSystem
+export default NotificationUser

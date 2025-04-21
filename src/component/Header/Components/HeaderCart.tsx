@@ -23,7 +23,7 @@ const HeaderCart = () => {
       return (
             <Link className='2xl:w-[45px] flex items-center justify-centen p-2 hover:bg-color-main rounded group' to={'/cart'}>
                   <span className='flex relative'>
-                        <ShoppingCart size={24} className='text-blue-600 group-hover:text-[#fff]' />
+                        <ShoppingCart size={20} className='text-blue-600 group-hover:text-[#fff]' />
 
                         {cartQuery.isSuccess && (
                               <div className='absolute top-[-12px] right-[-5px] w-[18px] h-[18px] rounded-full bg-red-400 flex items-center justify-center'>

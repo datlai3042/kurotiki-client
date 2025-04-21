@@ -71,12 +71,12 @@ const AddressItem = (props: TProps) => {
 
       const styleEffect = {
             btnAddressDefault: address.address_default
-                  ? 'animate-Custome border-[2px] border-blue-700 rounded bg-[#fffff] text-blue-700 '
+                  ? 'animate-Custome bg-color-main text-[#fff] '
                   : ' border-[1px] border-blue-300 rounded  text-blue-300',
       }
       return (
             <div
-                  style={{ height: detailAddress ? 'max-content !important' : 200 }}
+                  style={{ height: detailAddress ? 'max-content !important' : '' }}
                   className={` relative border-b-[1px] border-[var(--border-color-input)] transition-all  duration-300 flex flex-col gap-[20px] bg-color-section-theme text-text-theme p-[16px]`}
                   key={address._id}
             >
@@ -88,11 +88,11 @@ const AddressItem = (props: TProps) => {
                                           {index + 1}
                                     </span>
                               </div> */}
-                              <div className='flex flex-col gap-[24px] w-full '>
+                              <div className='flex flex-col gap-[12px] w-full '>
                                     <div className='flex flex-wrap gap-[6px]'>
                                           <span>Địa chỉ:</span>
                                           <div
-                                                className='hover:cursor-pointer  bg-color-main text-white p-[12px_6px] min-w-[50px] w-[auto] max-w-[400px] h-[20px] rounded flex items-center justify-center gap-[8px]'
+                                                className='hover:cursor-pointer  text-color-main font-semibold w-[auto] max-w-[400px] h-[20px] rounded flex items-center justify-center gap-[8px]'
                                                 onClick={() =>
                                                       openSearchGoogle(
                                                             address.address_street +
@@ -109,7 +109,7 @@ const AddressItem = (props: TProps) => {
                                                 <p className='flex gap-[2px] items-center'>
                                                       <span>Phường/Xã:</span>
                                                       <button
-                                                            className='  bg-color-main text-white p-[12px_6px] min-w-[20px] w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
+                                                            className=' text-color-main font-semibold min-w-[20px] w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
                                                             onClick={() => openSearchGoogle(address.address_ward.text)}
                                                       >
                                                             {address.address_ward.text}
@@ -130,11 +130,11 @@ const AddressItem = (props: TProps) => {
                                           </div>
                                     </div>
 
-                                    <div className='flex flex-col xl:flex-row gap-[16px]  xl:gap-[4px]'>
+                                    <div className='flex flex-col xl:flex-row gap-[12px]  '>
                                           <p className='flex gap-[4px]'>
                                                 <span>Quận/Huyện:</span>
                                                 <button
-                                                      className='  bg-color-main text-white p-[12px_6px] min-w-[50px] w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
+                                                      className='  text-color-main font-semibold w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
                                                       onClick={() => openSearchGoogle(address.address_district.text)}
                                                 >
                                                       {address.address_district.text}
@@ -144,7 +144,7 @@ const AddressItem = (props: TProps) => {
                                           <p className='flex gap-[4px]'>
                                                 <span>Tỉnh/Thành phố:</span>
                                                 <button
-                                                      className='  bg-color-main text-white p-[12px_6px] min-w-[50px] w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
+                                                      className='  text-color-main font-semibold w-[auto] max-w-[250px] h-[20px] rounded flex items-center justify-center'
                                                       onClick={() => openSearchGoogle(address.address_province.text)}
                                                 >
                                                       {address.address_province.text}

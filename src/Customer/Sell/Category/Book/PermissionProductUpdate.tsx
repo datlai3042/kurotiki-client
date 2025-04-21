@@ -14,14 +14,18 @@ const PermisionProductUpdate = () => {
             queryKey: ['get-product-with-id', product_id],
             queryFn: () => ProductApi.protectProduct({ id: product_id as string }),
       })
-
       useEffect(() => {
             if (protectProduct.isSuccess) {
             }
       }, [protectProduct.isSuccess])
 
       return (
-            <div className='w-full'>
+            <div className='w-full text-text-theme'>
+                  {protectProduct.isSuccess && !protectProduct.data.data.metadata.product && (
+                        <div className='w-full h-full flex justify-center items-center font-semibold text-[16px]'>
+                              <p>Sản phẩm có id {product_id} không được tìm thấy trong shop của bạn</p>
+                        </div>
+                  )}
                   {protectProduct.isSuccess && protectProduct.data.data.metadata.product?.product_type === 'Book' && (
                         <ProtectProductUpdate
                               isSuccess={protectProduct.isSuccess}

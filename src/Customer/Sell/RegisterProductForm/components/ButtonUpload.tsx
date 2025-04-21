@@ -121,7 +121,7 @@ const ButtonUpload = (props: IProps) => {
 
       const styleEffect = {
             cursorButtonUpload: uploadProductThumb.isPending ? 'cursor-not-allowed' : 'cursor-pointer',
-            widthButtonUpload: width ? 'w-full xl:w-[25%]' : 'w-full',
+            widthButtonUpload: width ? 'w-full ' : 'w-full',
             stateButton:
                   isSubmit && !cloudinaryImage?.secure_url
                         ? 'border-[2px] border-red-700 text-red-700 bg-color-section-theme '
@@ -137,7 +137,6 @@ const ButtonUpload = (props: IProps) => {
             <div className={`${styleEffect.gap} w-full min-h-[70px] h-auto flex flex-col`}>
                   <div className='w-full flex items-center gap-[6px]'>
                         <label htmlFor={id}>{labelMessage}</label>
-                        <Image size={20} />
                   </div>
                   <input type='file' id={id} hidden ref={inputRef} onChange={(e) => handleInputChange(e)} />
 
@@ -195,7 +194,7 @@ const ButtonUpload = (props: IProps) => {
                   <button
                         hidden={cloudinaryImage?.secure_url ? true : false}
                         disabled={uploadProductThumb.isPending}
-                        className={`${styleEffect.widthButtonUpload} ${styleEffect.widthButtonUpload} ${styleEffect.stateButton}  xl:w-[32%] min-h-[40px] flex-1 bg-color-main opacity-80 hover:opacity-100 text-[#fff]  rounded-md`}
+                        className={`${styleEffect.widthButtonUpload} ${styleEffect.widthButtonUpload} ${styleEffect.stateButton}  py-[8px] flex-1 bg-color-main opacity-80 hover:opacity-100 text-[#fff]  rounded-md`}
                         onClick={(e) => handleButtonClick(e)}
                   >
                         Tải ảnh lên

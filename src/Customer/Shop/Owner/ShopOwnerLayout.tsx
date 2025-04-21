@@ -42,14 +42,16 @@ const ShopOwnerLayout = (props: TProps) => {
                               Chỉnh sửa thông tin
                         </button>
                   </div>
-                  <div className='relative w-full min-h-[140px] py-[30px] xl:py-0 h-max bg-[#FFA500] flex items-center'>
+                  <div
+                        style={{ borderRadius: '0px 150px 12px 0px' }}
+                        className='relative w-full min-h-[160px] mt-[20px] py-[30px] xl:py-0 bg-[#0c67fe] flex items-center'
+                  >
                         <div className='absolute top-[-50%] translate-y-[137%] xl:translate-y-0 left-[20px]  xl:left-[60px]  w-[70px] h-[70px] xl:h-[140px] xl:w-[140px] rounded-full'>
-                              <BoxAvatarMode
-                                    AvatartSource={{ avatar: shop.shop_avatar?.secure_url, avatar_default: shop.shop_avatar_default }}
-                                    widthImage='w-[140px]'
-                                    heightImage='h-[140px]'
-                                    Mode='SHOP'
+                              <img
+                                    src={shop.shop_avatar?.secure_url || shop.shop_avatar_default}
+                                    className='w-full rounded-full h-full object-cover'
                               />
+
                               {/* <img src={shop.shop_avatar_default} className='h-full w-full rounded-full' alt='shop_image' /> */}
                         </div>
 

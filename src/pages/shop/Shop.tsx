@@ -13,6 +13,7 @@ import ShopSearchProduct from './Components/ShopSearchProduct'
 import { useDispatch } from 'react-redux'
 import ShopBuild from './ShopBuild'
 import { ShopResponse } from '../../types/shop.type'
+import Footer from '../../component/Footer/Footer'
 type TagShopActive = 'Store' | 'AllProduct' | 'Collection' | 'Discount' | 'ProfileShop'
 type TagShopLabel = 'Cửa hàng' | 'Tất cả sản phẩm' | 'Bộ sưu tập' | 'Giá sốc hôm nay' | 'Hồ sơ cửa hàng'
 
@@ -148,6 +149,7 @@ const Shop = () => {
                                           </>
                                     </div>
                               </div>
+                              <Footer className='hidden xl:block bg-color-section-theme' />
                         </div>
                   )}
 

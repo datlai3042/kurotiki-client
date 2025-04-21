@@ -9,6 +9,9 @@ import axiosCustom from './http'
 export type NotificationType = 'PRODUCT' | 'SYSTEM' | 'ADMIN' | 'SHOP' | 'USER'
 
 class NotificationService {
+
+      
+
       static async getMyNotification({ page, type, limit = limitNotification }: { page: number; type: NotificationType; limit: number }) {
             return axiosCustom.get<
                   TResponseApi<{ notifications: { notification: Notification; total_notification_type: number; total_page: number } }>

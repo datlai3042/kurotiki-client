@@ -85,6 +85,9 @@ const ProductIntro = (props: TProps) => {
                                     )}
                               </p>
                               <p className=' text-[14px] opacity-80'>Sản phẩm trong kho: {product.product_available || 0}</p>
+                              {!product.product_state && (
+                                    <span className='uppercase font-bold text-[20px] my-[6px] text-red-700'>Sản phẩm ngừng kinh doanh</span>
+                              )}
                         </div>
                   </section>
 

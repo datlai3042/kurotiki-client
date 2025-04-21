@@ -43,11 +43,17 @@
 /*Radio*/
 :where(.css-dev-only-do-not-override-1tvv740).ant-radio-wrapper {
       color: var(--text-theme) !important;
-
 }
-
 
 /*Fix checkbox*/
 :where(.css-dev-only-do-not-override-1tvv740).ant-checkbox-wrapper:after {
       content: unset;
+}
+
+/*Tab text*/
+:where(.css-dev-only-do-not-override-1tvv740).ant-tabs .ant-tabs-tab {
+      color: var(--text-theme) !important;
+}
+:where(.css-dev-only-do-not-override-1tvv740).ant-tabs-top > .ant-tabs-nav::before {
+      border-bottom: 1px solid var(--border-color-input) !important;
 }

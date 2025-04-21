@@ -48,15 +48,13 @@ const CartItem = (props: TProps) => {
             },
       })
 
-  
-
       const changeSelect = (e: CheckboxChangeEvent) => {
             updateSelectOneMutation.mutate({ value: e.target.checked, product_id: product.product_id._id })
       }
 
       const styleEffect = {
-            product_not_avaiable: !product._id ? 'text-[12px]' : 'text-[14px]',
-            readOnly: !product.product_id.product_state ? true : false,
+            product_not_avaiable: !product._id ? 'text-[12px]' : '',
+            readOnly: false
       }
 
       // const cart_address_type = product.cart_address.type === 'Home' ? <Home /> : product.cart_address.type === 'Company' ? ''
@@ -68,7 +66,10 @@ const CartItem = (props: TProps) => {
             product.cart_address.type === 'Home' ? 'Nhà' : product.cart_address.type === 'Company' ? 'Công ty / cơ quan' : 'Nơi ở riêng tư'
       // if (!product.product_id.s) return null
       return (
-            <div className=' flex flex-col gap-[24px] bg-color-section-theme text-text-theme p-[0px_12px_16px]' key={product._id}>
+            <div
+                  className=' flex flex-col gap-[24px] bg-color-section-theme text-text-theme p-[0px_12px_16px] text-[13px]'
+                  key={product._id}
+            >
                   <div className='w-full flex  py-[24px] flex-wrap gap-[10px]  items-center justify-between'>
                         <div className='flex gap-[12px]  items-center'>
                               {/* <Checkbox disabled={styleEffect.readOnly} /> */}
@@ -89,12 +90,7 @@ const CartItem = (props: TProps) => {
                   </div>
                   <div className='w-full flex flex-col  gap-[40px]'>
                         <div className='w-full flex  flex-col xl:flex-row gap-[30px] min-h-[230px] h-max xl:min-h-[80px]'>
-                              <Checkbox
-                                    disabled={styleEffect.readOnly}
-                                    className='z-[5] hidden xl:block'
-                                    checked={select}
-                                    onChange={changeSelect}
-                              />
+                              <Checkbox disabled={styleEffect.readOnly} className='z-[5] block' checked={select} onChange={changeSelect} />
                               <Link className='inline-block h-[250px] xl:h-[80px]' to={`/product/${product.product_id._id}`}>
                                     <img
                                           src={product.product_id.product_thumb_image.secure_url}
@@ -108,14 +104,13 @@ const CartItem = (props: TProps) => {
                                     <div className='w-full flex justify-between'>
                                           <span>{product.product_id.product_name}</span>
 
-                                          <div className='w-[120px] flex items-center h-max xl:h-full  xl:my-0'>
+                                          <div className='ml-auto flex items-center h-max xl:h-full  xl:my-0'>
                                                 <WrapperCountProduct
-                                                      readOnly={!product.product_id.product_state}
+                                                      readOnly={false}
                                                       product_id={product.product_id._id}
                                                       cart_quantity={product.quantity}
                                                       product={product}
                                                       modeAction='EDIT'
-
                                                 />
                                           </div>
                                     </div>
@@ -126,9 +121,7 @@ const CartItem = (props: TProps) => {
                                           </div>
 
                                           <div className=' flex items-center gap-[8px] h-max xl:h-full  xl:my-0 text-color-main text-[20px]'>
-                                                <span>
-                                                      x{product.quantity}: {'=>'}{' '}
-                                                </span>
+                                              
                                                 <BoxMoney name='VNĐ' money={product.quantity * product.product_id.product_price} />
                                           </div>
                                     </div>
@@ -176,7 +169,6 @@ const CartItem = (props: TProps) => {
                         Xem chi tiết
                   </button>
                   {openModelDetail && <CartItemDetail product={product} setOpenModel={setOpenModelDetail} />}
-                  
             </div>
       )
 }

@@ -1,3 +1,5 @@
+import { TProductFull } from "./product/product.type"
+
 export type Notification = {
       notification_count: number
       notifications_message: [NotificationMessage]
@@ -22,10 +24,11 @@ interface NotificationUser {
 
 export type NotificationProduct = {
       notification_type: 'PRODUCT'
-      product_id: string
+      product_id: TProductFull,
       notification_content: string
       product_name: string
       product_quantity: number
+
       order_id: string
 }
 

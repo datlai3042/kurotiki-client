@@ -15,7 +15,7 @@ import ContentBook from './Components/ContentBook'
 import ContentFood from './Components/ContentFood'
 import ContentProduct from './Components/ContentProduct'
 import { useLocation } from 'react-router-dom'
-
+const showFooter = ['/', '/product']
 const Content = () => {
       const pathName = useLocation().pathname
 
@@ -57,7 +57,7 @@ const Content = () => {
 
                   <ContentProduct />
 
-                  {pathName === '/' && <Footer className='hidden xl:block bg-color-section-theme' />}
+                  {showFooter.includes(pathName) && <Footer className='hidden xl:block bg-color-section-theme' />}
             </div>
       )
 }
