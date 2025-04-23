@@ -8,7 +8,7 @@ let retry = false
 let i = 5
 export const REACT_BACK_END_URL = process.env.REACT_APP_MODE === 'DEV' ? 'http://localhost:4001' : 'https://api.kurotiki.io.vn'
 let refreshTokenPromise: Promise<any> | null = null // this holds any in-progress token refresh requests
-console.log({ REACT_BACK_END_URL, mode: process.env.REACT_APP_MODE })
+console.log({ REACT_BACK_END_URL, mode: process.env.REACT_APP_MODE, vv: process.env.VERSION })
 class AxiosCustom {
       instance: AxiosInstance
 
