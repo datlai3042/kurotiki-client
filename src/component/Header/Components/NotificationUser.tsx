@@ -12,6 +12,8 @@ const NotificationUser = (props: TProps) => {
       const { notification } = props
       return (
             <Link to={`/customer/notification#${notification._id}`} className='w-full h-full flex flex-col gap-[5px]'>
+                  {notification?.new && <span className='p-[.1rem_.4rem] text-[12px] w-max bg-color-main text-[#fff] rounded'>Mới</span>}
+                 
                   <p className='w-full flex justify-between font-semibold'>
                         <span>{renderStringNotificationType({ notification_type: notification.notification_attribute })}</span>
                         <span className='text-[11px] opacity-60'>{convertDateToStringFull(notification.notification_creation_time)}</span>

@@ -65,20 +65,17 @@ const ProductPay = (props: TProps) => {
 
       const handleClickBuy = () => {
             if (!user) {
-                  console.log('map 1')
                   dispatch(doOpenBoxLogin())
                   return
             }
 
             if (user._id === product.shop_id.owner._id) {
-                  console.log('map 2')
 
                   dispatch(addToast({ type: 'WARNNING', message: 'Không thể thêm sản phẩm của chính mình', id: Math.random().toString() }))
                   return
             }
 
             if (!Boolean(cartCurrent.cart_current_address)) {
-                  console.log('map 3')
 
                   dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: 'Vui lòng chọn địa chỉ trước khi thêm' }))
                   setDisableBtn(true)
@@ -90,7 +87,6 @@ const ProductPay = (props: TProps) => {
             //       return
             // }
 
-            console.log('map 4')
 
             const formData = new FormData()
             formData.append('product_id', product._id)
@@ -127,7 +123,7 @@ const ProductPay = (props: TProps) => {
 
       useEffect(() => {
             if (cartMutation.isSuccess) {
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Cart', id: Math.random().toString() }))
+                  dispatch(addToast({ type: 'SUCCESS', message: 'Đã thêm sản phẩm vào giỏ', id: Math.random().toString() }))
                   queryClient.invalidateQueries({
                         queryKey: ['v1/api/cart/cart-get-my-cart'],
                   })

@@ -57,3 +57,8 @@
 :where(.css-dev-only-do-not-override-1tvv740).ant-tabs-top > .ant-tabs-nav::before {
       border-bottom: 1px solid var(--border-color-input) !important;
 }
+
+/*Select marign*/
+:where(.css-dev-only-do-not-override-1tvv740).ant-tabs-top >.ant-tabs-nav {
+      margin: 0 !important;
+}

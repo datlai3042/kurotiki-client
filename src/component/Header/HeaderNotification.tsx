@@ -146,7 +146,7 @@ const HeaderNotification = () => {
                                           items={items}
                                     />
                               </p>
-                              <div className='h-[70vh] overflow-auto flex flex-col gap-[16px]'>
+                              <div className='h-[70vh] overflow-auto flex flex-col gap-[6px]'>
                                     {notificationCache.cache?.length > 0 ? (
                                           notificationCache.cache.map((notification, index) => {
                                                 return (

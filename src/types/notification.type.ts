@@ -10,6 +10,7 @@ export type NotificationMessage = {
       notification_isRead: boolean
       notification_attribute: NotificationAttribute
       notification_creation_time: Date
+      new: boolean,
       _id: string
 }
 

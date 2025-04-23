@@ -50,9 +50,15 @@ const notificationSlice = createSlice({
                   const { type, data, page } = actions.payload
                   state[type as NotificationType].cache = state[type as NotificationType].cache.concat(data)
                   state[type as NotificationType].page = page
+            },
+            onClearCacheNotifiaction: (state, actions: PayloadAction<{ type: NotificationType }>) => {
+                  const { type, } = actions.payload
+
+                  state[type].cache = []
+                  state[type].page = 1
             }
       }
 })
 
-export const { onSocketAddNotification, onAddPageNotification } = notificationSlice.actions
+export const { onSocketAddNotification, onAddPageNotification, onClearCacheNotifiaction } = notificationSlice.actions
 export default notificationSlice.reducer

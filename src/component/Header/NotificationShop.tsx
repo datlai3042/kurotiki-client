@@ -16,11 +16,13 @@ type TProps = {
 const NotificationShop = (props: TProps) => {
       const {
             orderProductId,
-            notification: { notification_attribute, _id, notification_creation_time },
+            notification: { notification_attribute, _id, notification_creation_time, new: notiNew },
       } = props
 
       return (
             <Link to={`/customer/notification#${_id}`} className='w-full h-full flex flex-col gap-[2px]'>
+                  {notiNew && <span className='p-[.1rem_.4rem] text-[12px] w-max bg-color-main text-[#fff] rounded'>Mới</span>}
+
                   <div className='flex w-full justify-between font-semibold'>
                         <p className='mb-[4px] flex justify-between gap-[4px] '>
                               <span>
@@ -30,7 +32,6 @@ const NotificationShop = (props: TProps) => {
                               </span>
                         </p>
                         <span className='text-[11px] opacity-60'>{convertDateToStringFull(notification_creation_time)}</span>
-
                   </div>
                   <div className='flex gap-[12px]'>
                         <header className='w-full flex flex-col text-[12px]'>

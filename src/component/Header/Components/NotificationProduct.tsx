@@ -17,6 +17,8 @@ const NotificationProduct = (props: TProps) => {
       const { notification, notificationProduct, ...propsElement } = props
       return (
             <Link to={`/customer/notification#${notification._id}`} className='w-full h-full flex flex-col gap-[2px]'>
+                  {notification?.new && <span className='p-[.1rem_.4rem] text-[12px] w-max bg-color-main text-[#fff] rounded'>Mới</span>}
+
                   <div className='flex w-full justify-between font-semibold'>
                         <p className='mb-[4px] flex justify-between gap-[4px] '>
                               <span>

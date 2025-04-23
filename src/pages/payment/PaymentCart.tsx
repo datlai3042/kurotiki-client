@@ -4,13 +4,14 @@ import { CartProduct, CartResponse } from '../../types/cart.type'
 import BoxMoney from '../../component/BoxUi/BoxMoney'
 import { ChevronUp } from 'lucide-react'
 import { Address } from '../../types/address.type'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import OrderService from '../../apis/Order.service'
 import { OrderItem } from '../../types/order.type'
 import { checkAxiosError } from '../../utils/handleAxiosError'
 import { addToast } from '../../Redux/toast'
 import { useDispatch } from 'react-redux'
 import BoxLoading from '../../component/BoxUi/BoxLoading'
+import { onClearCacheNotifiaction } from '../../Redux/notification.slice'
 
 type TProps = {
       carts: CartResponse
@@ -27,12 +28,18 @@ export type ParamOrderAdd = {
 const PaymentCart = (props: TProps) => {
       const { carts, price, product_payment, onOrderSuccess } = props
       const productWrapperRef = useRef<HTMLDivElement>(null)
-
+      const queryClient = useQueryClient()
       const heightElement = useRef<number>(40)
       const [height, setHeight] = useState<number>(0)
       const [disable, setDisable] = useState<boolean>(false)
       const [openSeeProduct, setOpenSeeProduct] = useState<boolean>(false)
       const dispatch = useDispatch()
+
+      const onClearEffect = () => {
+            queryClient.invalidateQueries({ queryKey: ['v1/api/cart/cart-get-my-cart'] })
+            queryClient.invalidateQueries({ queryKey: ['/v1/api/notification/get-my-notification', 'PRODUCT'] })
+            dispatch(onClearCacheNotifiaction({ type: 'PRODUCT' }))
+      }
 
       const orderPaymentMutation = useMutation({
             mutationKey: ['/v1/api/order/order-payment-product'],
@@ -40,6 +47,7 @@ const PaymentCart = (props: TProps) => {
             onSuccess: (axiosResponse) => {
                   const { message, order_success } = axiosResponse.data.metadata
                   onOrderSuccess({ message, order_success })
+                  onClearEffect()
             },
             onError: (error: unknown) => {
                   if (checkAxiosError<{ code: number; message: string; detail: string }>(error)) {

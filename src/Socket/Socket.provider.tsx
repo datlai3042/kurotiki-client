@@ -22,7 +22,6 @@ const SocketProvider = ({ children }: { children: React.ReactNode }) => {
             }
 
             const onSoldProduct = (socketPayload: SocketSoldProduct) => {
-                  console.log({socketPayload})
                   dispatch(onSocketAddNotification({ type: socketPayload.type, data: [socketPayload.info] }))
             }
 

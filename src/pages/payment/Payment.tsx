@@ -94,7 +94,7 @@ const Payment = () => {
                               </div>
                         </header>
                         {payQuery.isSuccess && payQuery.data.data.metadata.carts?.cart_products?.length > 0 && (
-                              <section className='mt-[30px] w-full  mx-auto min-h-screen h-max  flex flex-col xl:flex-row gap-[16px]'>
+                              <section className='mt-[30px] pb-[45px] md:pb-0 w-full  mx-auto min-h-screen h-max  flex flex-col xl:flex-row gap-[16px]'>
                                     {!stateOrder && (
                                           <div className='w-full xl:w-[70%] bg-color-section-theme text-text-theme p-[20px] h-max'>
                                                 <h4>Chọn hình thức giao hàng</h4>
