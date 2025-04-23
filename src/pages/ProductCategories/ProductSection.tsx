@@ -45,12 +45,12 @@ const ProductSection = (props: TProps) => {
             <div className='w-full min-h-full h-max'>
                   {products && products.length > 0 && (
                         <>
-                              <div className='grid grid-cols-2 xl:grid-cols-4 grid-rows-[450px] gap-[28px] auto-rows-[450px] '>
+                              <div className='grid grid-cols-2 xl:grid-cols-4 grid-rows-[450px] gap-[12px] auto-rows-[450px] '>
                                     {products.map((product, index) => (
                                           <Link
                                                 to={`/product/${product._id}`}
                                                 key={product._id}
-                                                className='bg-[#ffffff] p-[12px] flex flex-col gap-[20px] rounded-md border-[1px] border-gray-50 hover:shadow-lg'
+                                                className='bg-color-section-theme p-[12px] flex flex-col gap-[20px] rounded-md border-[1px] border-[var(--border-color-input)] hover:shadow-lg'
                                           >
                                                 <div className='w-full h-[40%] xl:h-[50%] flex justify-center '>
                                                       <img
@@ -60,7 +60,7 @@ const ProductSection = (props: TProps) => {
                                                       />
                                                 </div>
                                                 <div className='flex-1 flex flex-col gap-[10px]'>
-                                                      <p className='text-slate-800 text-[20px] font-extrabold'>
+                                                      <p className=' text-[20px] font-extrabold'>
                                                             {new Intl.NumberFormat('vi-VN', {
                                                                   style: 'currency',
                                                                   currency: 'VND',
@@ -68,7 +68,7 @@ const ProductSection = (props: TProps) => {
                                                       </p>
                                                       <div className='flex flex-col gap-[8px] text-[16px]'>
                                                             <p>{product.shop_id.shop_name}</p>
-                                                            <p className='break-all'>{product.product_name}</p>
+                                                            <p className='break-all truncate'>{product.product_name}</p>
                                                             <div className='flex flex-col xl:flex-row gap-[8px] text-[14px] xl:items-center'>
                                                                   <Rate
                                                                         disabled
@@ -80,30 +80,30 @@ const ProductSection = (props: TProps) => {
                                                             </div>
                                                       </div>
                                                 </div>
-                                                <footer className='self-end w-full h-[36px] xl:h-[28px] flex items-center pt-[2px] border-t-[1px] border-gray-200'>
+                                                <div className='self-end w-full text-[13px] flex items-center py-[4px] border-t-[1px] border-[var(--border-color-input)]'>
                                                       <p className='w-full flex flex-col xl:flex-row xl:items-center justify-between'>
                                                             <span className='hidden xl:inline-block'>Giao vào {convertWeekday(d)}</span>
                                                             <span>{convertDateToString(d)}</span>
                                                       </p>
-                                                </footer>
+                                                </div>
                                           </Link>
                                     ))}
                               </div>
                               <div className='mt-[30px] w-full h-max flex justify-center'>
                                     <button
-                                          className='min-w-[150px] w-max h-[40px] px-[32px] bg-[#ffffff] flex items-center justify-center gap-[8px] border-[1px] border-blue-400 text-blue-400 rounded'
+                                          className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-section-theme border-[1px] border-blue-500 text-blue-500 flex items-center justify-center rounded-lg hover:bg-blue-50 hover:text-blue-500'
                                           onClick={() => onIncreasePage()}
                                     >
                                           {getProductCategory.hasNextPage ? 'Xem thêm' : 'Hết dữ liệu sản phẩm'}
-                                          {(getProductCategory.isPending || getProductCategory.isFetchingNextPage) && (
-                                                <BoxLoading color='text-blue-400' />
-                                          )}
+                                          {/* {(getProductCategory.isPending || getProductCategory.isFetchingNextPage) && (
+                                                <BoxLoading color='text-[#fff]' />
+                                          )} */}
                                     </button>
                               </div>
                         </>
                   )}
                   {products && products.length === 0 && (
-                        <div className='w-full h-[300px] bg-[#ffffff] flex items-center justify-center text-[28px] font-extrabold'>
+                        <div className='w-full h-[300px] bg-color-section-theme text-text-theme flex items-center justify-center text-[28px] font-extrabold'>
                               Không tìm thấy sản phẩm
                         </div>
                   )}

@@ -14,6 +14,7 @@ import ProductApi, { IFormDataDeleteImage, IFormDataImage } from '../../../../ap
 import { TCheckDescriptionImage } from '../../../../types/product/product.type'
 import { ui } from '../../RegisterProductForm/ProductFormUpload'
 import { TCloudinaryImage } from '../../types/cloudinary.typs'
+import BoxLoading from '../../../../component/BoxUi/BoxLoading'
 
 //@Props
 interface IProps {
@@ -102,6 +103,7 @@ const UpdateMultipleImage = (props: IProps) => {
             //@chặn submit tới form cha
             e.preventDefault()
             if (inputRef.current) {
+                  inputRef.current.value = ''
                   inputRef.current.click()
             }
       }
@@ -249,7 +251,7 @@ const UpdateMultipleImage = (props: IProps) => {
                                                 {cloudinaryImage.map((preview, index) => {
                                                       return (
                                                             <div
-                                                                  className='relative w-[65px] h-[72px] bg-gray-300 animate-pulseCustome flex justify-center items-center'
+                                                                  className='relative w-[65px] h-[72px]  animate-pulseCustome flex justify-center items-center'
                                                                   key={preview.secure_url}
                                                                   onClick={() => {
                                                                         setSelectImageModal(preview.secure_url! as string)
@@ -258,7 +260,11 @@ const UpdateMultipleImage = (props: IProps) => {
                                                                         // handleDeleteImageOne({})
                                                                   }}
                                                             >
-                                                                  <img src={preview.secure_url} alt='preview' className='w-full h-full' />
+                                                                  <img
+                                                                        src={preview.secure_url}
+                                                                        alt='preview'
+                                                                        className='w-full h-full object-contain'
+                                                                  />
 
                                                                   <div
                                                                         className='cursor-pointer absolute top-[-15px] right-[-15px] bg-red-700 h-[24px] w-[24px] p-[2px] flex items-center justify-center'
@@ -281,18 +287,15 @@ const UpdateMultipleImage = (props: IProps) => {
                               </React.Fragment>
                         )}
                         {uploadProductDescriptionImageOne.isPending && (
-                              <div className='skeleton__container w-full h-[80px] '>
-                                 
+                              <div className='skeleton__container flex-1 h-[80px] flex justify-center items-center'>
+                                    <BoxLoading color='text-color-main' />
                               </div>
                         )}{' '}
                   </div>
 
                   {/* {@nút upload file} */}
                   {cloudinaryImage.length < 4 && (
-                        <button
-                              className={`${styleEffect.stateButton}  rounded-md py-[8px]`}
-                              onClick={(e) => handleButtonClick(e)}
-                        >
+                        <button className={`${styleEffect.stateButton}  rounded-md py-[8px]`} onClick={(e) => handleButtonClick(e)}>
                               {cloudinaryImage.length > 0 ? 'Tải ảnh lên thêm' : 'Tải ảnh lên'}
                         </button>
                   )}
@@ -345,7 +348,7 @@ const UpdateMultipleImage = (props: IProps) => {
                                                       setSelectImageModal('')
                                                 }}
                                           >
-                                                <X  size={40} />
+                                                <X size={40} />
                                           </div>
                                     </div>
                               )}
@@ -371,7 +374,7 @@ const UpdateMultipleImage = (props: IProps) => {
                                                       setSelectImageModal('')
                                                 }}
                                           >
-                                                <X  size={40} />
+                                                <X size={40} />
                                           </div>
                                     </div>
                               )}

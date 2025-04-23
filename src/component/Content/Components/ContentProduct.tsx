@@ -122,7 +122,7 @@ const ContentProduct = () => {
       return (
             <div className=' z-[5] w-full min-h-[370px] h-max  flex flex-col gap-[8px]  bg-color-section-theme text-text-theme  xl:p-0'>
                   <div className='animate-mountComponent  w-full sticky top-[65px] md:top-[75px]   z-[2] ' ref={stickyRef}>
-                        <div className=' w-full  bg-color-section-theme  rounded  border[1px] border-b-[1px] border-[var(--border-color-input)]  flex flex-col gap-[10px] pt-[10px]'>
+                        <div className=' w-full  bg-color-section-theme  rounded  border[1px] border-b-[1px] border-[var(--border-color-input)]  flex flex-col gap-[28px] pt-[20px]'>
                               <h3 className='w-full pl-[20px] font-bold text-[16px]'>Gợi ý hôm nay</h3>
                               <div className='grow grid  grid-cols-[repeat(3,170px)] auto-cols-[170px] grid-flow-col  xl:grid-flow-row  xl:grid-cols-6  justify-items-center overflow-auto pb-[8px]'>
                                     {arrayCategory.map((category) => (
@@ -131,7 +131,7 @@ const ContentProduct = () => {
                                                 key={category.href + category.label}
                                                 className={`${styleEffect.onActive(
                                                       tagActive === category.href,
-                                                )} flex w-full h-full items-center flex-col gap-[8px] py-[6px]`}
+                                                )} flex w-full h-full items-center flex-col gap-[8px] py-[6px] rounded-[4px]`}
                                                 onClick={() => setTagActive(category.href)}
                                           >
                                                 <img

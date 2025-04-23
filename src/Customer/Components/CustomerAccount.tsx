@@ -150,7 +150,6 @@ const CustomerAccount = () => {
             }
       }, [getMe.isSuccess, dispatch])
 
-      console.log({ watch: methods.watch('fullName') })
 
       return (
             <div className='bg-color-section-theme p-[16px] flex flex-col xl:flex-row min-h-full  w-full h-max gap-[20px] xl:gap-[2%] ]'>
@@ -243,7 +242,7 @@ const CustomerAccount = () => {
                   </FormProvider>
                   {/* Right */}
                   <div className='hidden xl:block w-[1px] min-h-full bg-[var(--border-color-input)]'></div>
-                  <div className='w-full xl:w-[45%] min-h-full  '>
+                  <div className='w-full xl:w-[45%] '>
                         {/* @customer::account -> update::email */}
                         <div className='flex flex-col gap-[8px]'>
                               <span className='text-[14px] text-[#1f4e94] font-semibold'>Email & liên hệ</span>

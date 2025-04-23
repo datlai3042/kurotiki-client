@@ -17,6 +17,8 @@ import HeaderBoxHover from '../../component/Header/Components/HeaderBoxHover'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { UserResponse } from '../../types/user.type'
+import OrderCheck from '../orderCheck/OrderCheck'
+import PaymentInvoice from './PaymendInvoice'
 
 const Payment = () => {
       const [price, setPrice] = useState<number>(0)
@@ -107,33 +109,8 @@ const Payment = () => {
 
                                     {stateOrder && dataOrder && (
                                           <div className='animate-mountComponent w-full xl:w-[70%] mb-[20px] bg-color-section-theme p-[20px] h-max'>
-                                                <p className='text-center text-[28px] text-text-theme'>Thanh toán thành công</p>
-                                                <div className='hidden xl:block w-[550px] min-h-[400px] h-max mx-auto'>
-                                                      <PDFInvoice
-                                                            orderTime={dataOrder.order_time_payment}
-                                                            products={dataOrder.products}
-                                                            orderTotal={dataOrder.order_total}
-                                                      />
-                                                </div>
-                                                <div className='animate-pulse w-full hidden xl:flex justify-center items-center h-[40px] my-[40px]'>
-                                                      <PDFDownloadLink
-                                                            document={
-                                                                  <PDFInvoiceImage
-                                                                        orderTime={dataOrder.order_time_payment}
-                                                                        products={dataOrder.products}
-                                                                        orderTotal={dataOrder.order_total}
-                                                                  />
-                                                            }
-                                                            fileName='hoadon_muahang'
-                                                            style={{
-                                                                  padding: '12px 16px',
-                                                                  backgroundColor: 'var(--color-main)',
-                                                                  color: '#ffffff',
-                                                                  borderRadius: 6,
-                                                            }}
-                                                      >
-                                                            Tải hóa đơn
-                                                      </PDFDownloadLink>
+                                                <div className=' max-w-full min-h-[400px] h-max mx-auto'>
+                                                      <PaymentInvoice carts={dataOrder.products} orders={dataOrder} />
                                                 </div>
                                           </div>
                                     )}

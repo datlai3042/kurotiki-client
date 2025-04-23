@@ -62,7 +62,6 @@ const WrapperCountProduct = (props: TProps) => {
 
       const getValueChangeQuanity = (mode: TModeChangeQuantityProductCart) => {
             if (mode.mode === 'DECREASE') {
-                  console.log({ mode })
                   if (modeAction === 'EDIT') {
                         if (mode.quantity === 0 || productQuantity + mode.quantity < 1) {
                               setOpenBoxConfirmDelete(true)
@@ -113,7 +112,7 @@ const WrapperCountProduct = (props: TProps) => {
                         <BoxConfirmDelete
                               content='Bạn sẽ xóa sản phẩm này chứ'
                               subContent={
-                                    <div className='flex justify-between'>
+                                    <div className='flex justify-between gap-[10px]'>
                                           <div className='flex-1 flex flex-col gap-[8px]'>
                                                 <span>{product!.product_id.product_name}</span>
                                                 <div className='w-full justify-end gap-[8px]'>
@@ -128,7 +127,10 @@ const WrapperCountProduct = (props: TProps) => {
                                                       </div>
                                                 </div>
                                           </div>
-                                          <img src={product?.product_id.product_thumb_image.secure_url} className='w-[80px] aspect-square' />
+                                          <img
+                                                src={product?.product_id.product_thumb_image.secure_url}
+                                                className='w-[80px] aspect-square object-contain'
+                                          />
                                     </div>
                               }
                               ButtonCancellContent='Hủy'

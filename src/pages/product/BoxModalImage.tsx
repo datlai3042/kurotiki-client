@@ -82,7 +82,7 @@ const BoxModalImage = (props: TProps) => {
                                           <div className='w-full h-full flex     ' ref={wrapperRef}>
                                                 {secure_url.map((image) => (
                                                       <img
-                                                            className='w-full h-full min-w-full max-w-full rounded-[.4rem]'
+                                                            className='w-full h-full min-w-full max-w-full rounded-[.4rem] object-contain'
                                                             src={image.secure_url}
                                                             alt='product'
                                                             key={image.secure_url}

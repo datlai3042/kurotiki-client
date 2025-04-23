@@ -32,13 +32,16 @@ const CountDown = () => {
 
       return (
             <div className='flex gap-1'>
-                  <BoxCenter ClassName='w-[30px] h-[30px] rounded-[4px] bg-[red] text-white' content={hour > 9 ? hour : `0${hour}`} />
+                  <BoxCenter ClassName='w-[30px] h-[30px] rounded-[4px] bg-color-main text-white' content={hour > 9 ? hour : `0${hour}`} />
                   <span className='font-bold font-sm'>:</span>
-                  <BoxCenter ClassName='w-[30px] h-[30px] rounded-[4px] bg-[red] text-white' content={minute > 9 ? minute : `0${minute}`} />
+                  <BoxCenter
+                        ClassName='w-[30px] h-[30px] rounded-[4px] bg-color-main text-white'
+                        content={minute > 9 ? minute : `0${minute}`}
+                  />
                   <span className='font-bold font-sm'>:</span>
 
                   <BoxCenter
-                        ClassName='w-[30px] h-[30px] rounded-[4px] bg-[red] text-white'
+                        ClassName='w-[30px] h-[30px] rounded-[4px] bg-color-main text-white'
                         content={seconds > 9 ? seconds : `0${seconds}`}
                   />
             </div>

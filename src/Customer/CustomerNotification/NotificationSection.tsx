@@ -61,9 +61,6 @@ const NotificationSection = (props: TProps) => {
                   <div className=' flex flex-col gap-[40px]'>
                         {getMyNotification.data?.pages.map((page) =>
                               page.data.metadata.notifications.notification.notifications_message.map((notification) => {
-                                    console.log({
-                                          notification,
-                                    })
                                     return (
                                           <div
                                                 className={`${styleEffect.isRead(
@@ -111,8 +108,13 @@ const NotificationSection = (props: TProps) => {
                                                                               </span>
                                                                               <p className='flex flex-wrap gap-[4px] items-center'>
                                                                                     <span className='whitespace-pre'>Người mua: </span>
-                                                                                    <span className='  text-text-theme underlinex inline-block  py-1'>
-                                                                                          {notification.notification_attribute.user_buy_id}
+                                                                                    <span className=' underline inline-block  py-1 text-color-main font-extrabold hover:cursor-pointer'>
+                                                                                          {notification.notification_attribute.buyer_info
+                                                                                                ?.nickName ||
+                                                                                                notification.notification_attribute
+                                                                                                      .buyer_info?.fullName ||
+                                                                                                notification.notification_attribute
+                                                                                                      .buyer_info?.email}
                                                                                     </span>
                                                                               </p>
                                                                               <p className='flex flex-wrap gap-[4px] items-center'>

@@ -14,7 +14,7 @@ const FilterWrapper = (props: TProps) => {
       return (
             <div className='w-full h-full flex items-center'>
                   <button
-                        className='xl:ml-[32px] min-w-[100px] w-max flex items-center justify-center gap-[4px] h-[40px] bg-[#ffffff] rounded-[999px] px-[32px] border-[1px] border-gray-400'
+                        className='xl:ml-[32px] min-w-[100px] w-max flex items-center justify-center gap-[4px] h-[40px] bg-color-section-theme text-text-theme rounded-[999px] px-[32px] border-[1px] border-[var(--border-color-input)]'
                         onClick={() => setOpenFilter(true)}
                   >
                         <Filter />

@@ -82,12 +82,14 @@ const Customer = () => {
       //@element
       return (
             <>
-                  <div className=' text-[14px] max-w-[98vw] w-[1240px] mx-auto min-h-full flex flex-col pt-[15px] xl:pt-[0px] mt-0 gap-[6px]'>
+                  <div className=' text-[14px] max-w-[98vw]  w-[1240px] mx-auto min-h-full flex flex-col pt-[15px] xl:pt-[0px] mt-0 gap-[6px]'>
                         {/* @header */}
                         <div className='hidden lg:block text-[16px] text-[#66666b] p-[6px_0] '>
-                              <Link to={'/'}>Trang chủ</Link>
+                              <Link to={'/'} className='font-bold'>
+                                    Trang chủ
+                              </Link>
                               <span> {' > '}</span>
-                              <Link className='' to={textLink?.path as string}>
+                              <Link className='text-color-main font-bold' to={textLink?.path as string}>
                                     {textLink?.text}
                               </Link>
                         </div>
@@ -95,13 +97,11 @@ const Customer = () => {
                         {user ? (
                               <div className=' w-full flex gap-[2%]  text-text-theme '>
                                     {/* @navigate pathname */}
-                                    <LeftSide textLink={textLink}/>
+                                    <LeftSide textLink={textLink} />
                                     {/*@ Outlet */}
 
                                     <div className='w-full xl:w-[75%] flex flex-col flex-1'>
-                                          <div className='hidden xl:flex h-[40px]  text-[20px]  items-center'>
-                                                {textLink?.text}
-                                          </div>
+                                          <div className='hidden xl:flex h-[40px]  text-[20px]  items-center'>{textLink?.text}</div>
                                           {auth ? (
                                                 <CustomerWrapperItem>
                                                       <div className='w-full flex flex-col gap-[8px]'>
@@ -134,8 +134,14 @@ const Customer = () => {
                                     </div>
                               </div>
                         ) : (
-                              <div className='flex-1'>
-                                    {getMe.isLoading ? <div className='w-full h-full skeleton__container'></div> : <AuthPermission />}
+                              <div className='flex-1 min-h-[80vh]'>
+                                    {getMe.isLoading ? (
+                                          <div className='w-full h-full skeleton__container'></div>
+                                    ) : (
+                                          <div className='h-[80vh]'>
+                                                <AuthPermission />
+                                          </div>
+                                    )}
                               </div>
                         )}
                   </div>

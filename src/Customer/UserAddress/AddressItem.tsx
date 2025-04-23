@@ -72,7 +72,7 @@ const AddressItem = (props: TProps) => {
       const styleEffect = {
             btnAddressDefault: address.address_default
                   ? 'animate-Custome bg-color-main text-[#fff] '
-                  : ' border-[1px] border-blue-300 rounded  text-blue-300',
+                  : ' border-[1px] border-color-main rounded  text-color-main hover:bg-color-main hover:text-[#fff]',
       }
       return (
             <div

@@ -3,7 +3,7 @@ import { Bell } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import NotificationService, { NotificationType } from '../../apis/notification.service'
 import { convertDateToStringFull } from '../../utils/date.utils'
-import { useMatch } from 'react-router-dom'
+import { useLocation, useMatch } from 'react-router-dom'
 import NotificationProduct from './Components/NotificationProduct'
 import NotificationShop from './NotificationShop'
 import NotificationSystem from './Components/NotificationSystem'
@@ -36,7 +36,7 @@ const HeaderNotification = () => {
       const notificationCache = useSelector((state: RootState) => state.notifcation[tab])
       const { ref, inViewport } = useInViewport()
       const countRef = useRef<number | null>(null)
-      console.log({ notificationCache, tab })
+      const {pathname} = useLocation()
       // const getMyNotification = useQuery({
       //       queryKey: ['/v1/api/notification/get-my-notification'],
       //       queryFn: () => NotificationService.getMyNotification({ page: 1, limit: 20, type: 'SHOP' }),
@@ -56,11 +56,15 @@ const HeaderNotification = () => {
             },
       })
 
-      console.log({ match: notificationCache.cache.length === 0 && notificationCache.page >= 1 && !inViewport })
-
       const onControllShowNotification = () => {
             setShowNotification((prev) => !prev)
       }
+
+      useEffect(() => {
+            if(showNotification) {
+                  setShowNotification(false)
+            }
+      }, [pathname])
 
       useEffect(() => {
             if (getMyNotification.isSuccess) {
@@ -133,7 +137,7 @@ const HeaderNotification = () => {
                         ref={boxNotificationRef}
                         className='xl:animate-mountComponent rounded-[8px] fixed left-[10px] top-[65px] md:absolute md:top-[37px] md:left-auto h-[80vh] md:right-[-20px] xl:right-0 w-[95vw] md:w-[430px] min-h-[200px] bg-color-section-theme text-text-theme shadow-2xl z-[500] '
                   >
-                        <div className='relative w-full  rounded-[8px] pb-[10px]  flex flex-col '>
+                        <div onClick={(e) => e.stopPropagation()} className='relative w-full  rounded-[8px] pb-[10px]  flex flex-col '>
                               <p className='sticky px-[12px]  rounded-[8px] text-text-theme bg-color-section-theme top-[0px] left-[0px]  w-full  flex items-center  text-[16px] '>
                                     <Tabs
                                           style={{ width: '100%', overflow: 'hidden' }}
@@ -203,11 +207,18 @@ const HeaderNotification = () => {
                                           })
                                     ) : getMyNotification.isPending ? (
                                           <div className='flex flex-col gap-[10px]'>
-                                                <div className='w-full h-[20px] px-[12px] mt-[10px]'>
+                                                <div className='w-full  px-[12px] mt-[10px]'>
                                                       <NotificationSkeleton />
                                                 </div>
 
-                                                <div className='w-full h-[20px] px-[12px] mt-[10px]'>
+                                                <div className='w-full  px-[12px] mt-[10px]'>
+                                                      <NotificationSkeleton />
+                                                </div>
+                                                <div className='w-full  px-[12px] mt-[10px]'>
+                                                      <NotificationSkeleton />
+                                                </div>
+
+                                                <div className='w-full  px-[12px] mt-[10px]'>
                                                       <NotificationSkeleton />
                                                 </div>
                                           </div>

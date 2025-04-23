@@ -4,8 +4,10 @@ const ProductSkeleton = () => {
       return (
             <div className='animate-pulse bg-color-section-theme flex gap-[16px]'>
                   <div className=' w-full flex flex-col gap-[24px]'>
+                        <div className=' w-[240px] h-[30px] skeleton__container comment '></div>
+
                         <div className='top w-full h-screen flex flex-col xl:flex-row gap-[16px]'>
-                              <div className='basis-[35%]  static  h-screen xl:sticky top-[16px]    flex flex-col gap-[16px]'>
+                              <div className='basis-[25%]  static  h-screen xl:sticky top-[16px]    flex flex-col gap-[16px]'>
                                     <div className=' skeleton__container  basis-[55%] w-full  rounded-lg'></div>
                                     <div className='flex  h-[65px] gap-[12px]'>
                                           {Array(5)
@@ -19,7 +21,7 @@ const ProductSkeleton = () => {
                                     </div>
                                     <div className=' flex-1 skeleton__container w-full'></div>
                               </div>
-                              <div className=' basis-[50%]   mt-[20px] xl:mt-0  flex flex-col gap-[16px] '>
+                              <div className=' basis-[60%]   mt-[20px] xl:mt-0  flex flex-col gap-[16px] '>
                                     <div className='w-full h-[300px]  skeleton__container rounded-lg '></div>
 
                                     <div className='w-full h-[400px]  skeleton__container rounded-lg'></div>

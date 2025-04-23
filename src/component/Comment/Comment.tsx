@@ -7,7 +7,7 @@ import CommentFilter from './CommentFilter'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchComment } from '../../Redux/comment.slice'
 import { RootState } from '../../store'
-
+import Empty from '../../component/Content/assets/img/empty.webp'
 type TProps = {
       product_id: string
 }
@@ -58,7 +58,12 @@ const Comment = (props: TProps) => {
                   />
                   {getAllCommentQuery.isSuccess && comments.map((comment) => <CommentItem key={comment._id} comment={comment} />)}
                   {comments.length === 0 && (
-                        <div className='w-full h-[400px] flex items-center justify-center text-[20px] font-semibold'>Không có kết quả</div>
+                        <div className='w-full h-[400px] flex items-center justify-center text-[20px] font-semibold'>
+                              <div className='w-full h-full flex flex-col items-center gap-[16px]'>
+                                    <img src={Empty} className='w-full h-[80%] object-contain' />
+                                    <span className='text-[20px] font-extrabold'>Không có bình luận tương ứng</span>
+                              </div>
+                        </div>
                   )}
 
                   {getAllCommentQuery.isPending && (

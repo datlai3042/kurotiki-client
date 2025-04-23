@@ -61,7 +61,7 @@ const HeaderResultSearch = (props: Props) => {
 
       return (
             <>
-                  <div className=' absolute left-0 top-full right-0  m-h-25 overflow-hidden   bg-color-section-theme border-[1px] border-solid border-[var(--border-color-input)] min-h-55 z-[9999] min-h-[400px] rounded-lg'>
+                  <div className=' absolute w-[80vw] md:w-full left-0 top-full right-0  m-h-25 overflow-hidden   bg-color-section-theme border-[1px] border-solid border-[var(--border-color-input)] min-h-55 z-[9999] min-h-[400px] rounded-lg'>
                         <div className='sanPhamTheoTen dienThoai:my-2 flex flex-col gap-y-2 overflow-hidden min-h-[150px] '>
                               {!text && getProductTopSearch.isSuccess && getProductTopSearch.data.data.metadata.products.length === 0 && (
                                     <span className='p-2 opacity-50'>Hãy nhập tìm kiếm</span>
@@ -145,9 +145,9 @@ const HeaderResultSearch = (props: Props) => {
                                           <Link
                                                 to={category.href}
                                                 key={category.href + category.label}
-                                                className='w-full h-full hover:bg-color-main hover:text-[#fff] hover:shadow-2xl  rounded-[4px] flex flex-col items-center gap-[6px] p-[8px]'
+                                                className='w-full h-full hover:bg-color-main hover:text-[#fff] hover:shadow-2xl  rounded-[4px] flex flex-col items-center gap-[10px] p-[8px]'
                                           >
-                                                <img src={category.image} className='w-[110px] h-[110px] rounded-full' alt='category' />
+                                                <img src={category.image} className='w-[100px] h-[100px] rounded-full' alt='category' />
                                                 <span className=' text-[13px]'>{category.label}</span>
                                           </Link>
                                     ))}

@@ -81,9 +81,9 @@ const CustomerUpdateEmail = () => {
       })
 
       return (
-            <div className='flex items-center justify-center w-full min-h-[200px] h-max  bg-color-section-theme text-text-theme py-[60px] rounded'>
+            <div className='flex items-center justify-center w-full  min-h-[200px] h-max  bg-color-section-theme text-text-theme py-[60px] rounded'>
                   <form
-                        className='flex flex-col gap-[16px]  min-w-[150px] xl:min-w-[400px] xl:min-h-[150px] h-max max-w-auto  p-[24px] rounded-sm  shadow-2xl border-[1px] border-[var(--border-color-input)] '
+                        className='flex flex-col gap-[16px] min-w-[80%]  md:min-w-[150px] xl:min-w-[400px] xl:min-h-[150px] h-max max-w-auto  p-[24px] rounded-sm  shadow-2xl border-[1px] border-[var(--border-color-input)] '
                         style={{ width: Number(user.email.length) * 10 }}
                         onSubmit={onSubmit}
                   >

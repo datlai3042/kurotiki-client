@@ -63,7 +63,6 @@ const RouterController = () => {
                               <Route path='/admin' element={<Admin />} />
                               <div id='' className={`${styleEffect.matchPathNameCustomer}  relative  lg:flex  gap-8 `}>
                                     <Route path='/' element={<Content />} />
-                                    <Route path='/dev/print' element={<PrintDev />} />
 
                                     <Route path='/product/:id' element={<Product />} />
                                     <Route path='/order-check/:order_id' element={<OrderCheck />} />
@@ -98,7 +97,6 @@ const RouterController = () => {
                                                 <Route path='account/address' element={<CustomerUserAddress />} />
 
                                                 <Route path='register-sell' element={<RegisterSell />} />
-                                                <Route path='router' element={<CustomerRouter />} />
                                           </Route>
                                           <Route path='product/update/:product_id' element={<PermisionProductUpdate />} />
                                           <Route path='query-params' element={<QueryParams />} />

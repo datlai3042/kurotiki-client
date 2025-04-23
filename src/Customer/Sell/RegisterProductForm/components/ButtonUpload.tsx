@@ -142,7 +142,7 @@ const ButtonUpload = (props: IProps) => {
 
                   {cloudinaryImage?.secure_url && (
                         <div className='animate-pulseCustome  w-[150px]  relative  flex flex-col gap-[8px] justify-center '>
-                              <img src={cloudinaryImage.secure_url} width={150} height={150} alt='preview' className={`w-full h-full`} />
+                              <img src={cloudinaryImage.secure_url} width={150} height={150} alt='preview' className={`w-full h-full object-contain`} />
                               <div className='w-[100px]  h-[35px]  '>
                                     <button
                                           disabled={uploadProductThumb.isPending}

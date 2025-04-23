@@ -46,12 +46,12 @@ const ARRAY_IMAGE = [
 const ContentLabel = () => {
       return (
             <div className='w-full h-[150px] flex items-center justify-center bg-color-section-theme text-text-theme rounded-lg'>
-                  <div className='w-full h-full flex justify-between items-center overflow-auto pb-[8px]  px-[16px]'>
+                  <div className='w-full h-full flex gap-[8px] justify-between items-center overflow-auto pb-[8px]  px-[16px]'>
                         {ARRAY_IMAGE.map((image) => (
                               <div className='flex flex-col gap-[8px] min-w-[100px] h-full justify-center  items-center' key={image.value}>
                                     <img
                                           src={image.value}
-                                          className='h-[60px] w-[60px] border-[1px] border-slate-400 rounded-full'
+                                          className='h-[60px] w-[60px] border-[1px] border-[var(--border-color-input)] rounded-full'
                                           alt='label'
                                     />
                                     <p className='h-[20px] text-[13px] text-center'>{image.label}</p>

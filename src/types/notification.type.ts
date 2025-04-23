@@ -1,4 +1,5 @@
 import { TProductFull } from "./product/product.type"
+import { UserResponse } from "./user.type"
 
 export type Notification = {
       notification_count: number
@@ -41,6 +42,7 @@ export type NotificationShop = {
       order_id: string
       order_product_id: string
       user_buy_id: string
+      buyer_info: UserResponse
 }
 
 export type NotificationAdmin = {

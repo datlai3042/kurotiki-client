@@ -47,7 +47,7 @@ const ContentBook = () => {
             onActive: (isActive: boolean) => {
                   if (isActive) return 'bg-blue-50 border-blue-600 text-blue-600'
 
-                  return 'bg-transparent border-gray-400 text-slate-600'
+                  return 'bg-transparent border-gray-400 text-slate-600   hover:bg-blue-50 hover:border-blue-600 hover:text-blue-600'
             },
       }
 
@@ -71,11 +71,13 @@ const ContentBook = () => {
                   <h3>Các sản phẩm về sách</h3>
 
                   <div className='overflow-hidden'>
-                        <div className='h-[40px] max-w-full flex gap-[20px]  overflow-auto md:overflow-hidden'>
+                        <div className=' max-w-full flex gap-[20px]  overflow-auto md:overflow-hidden'>
                               {CATEGORY_BOOK.map((btn) => (
                                     <button
                                           key={btn.label}
-                                          className={`${styleEffect.onActive(btn.value === type)} min-w-[150px] max-w-full rounded-[999px]`}
+                                          className={`${styleEffect.onActive(
+                                                btn.value === type,
+                                          )} py-[6px] min-w-[150px] max-w-full rounded-[999px]`}
                                           onClick={() => setType(btn.value as TypeFilterBook)}
                                     >
                                           {btn.label}

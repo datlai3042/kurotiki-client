@@ -44,9 +44,9 @@ const ShopOwnerLayout = (props: TProps) => {
                   </div>
                   <div
                         style={{ borderRadius: '0px 150px 12px 0px' }}
-                        className='relative w-full min-h-[160px] mt-[20px] py-[30px] xl:py-0 bg-[#0c67fe] flex items-center'
+                        className='relative w-full min-h-[180px] pt-[75px] pb-[30px] my-[20px] xl:py-0 bg-[#0c67fe] flex items-center'
                   >
-                        <div className='absolute top-[-50%] translate-y-[137%] xl:translate-y-0 left-[20px]  xl:left-[60px]  w-[70px] h-[70px] xl:h-[140px] xl:w-[140px] rounded-full'>
+                        <div className='absolute top-[-120px] translate-y-[50%]  left-[20px]  xl:left-[60px] h-[120px] w-[120px] rounded-full'>
                               <img
                                     src={shop.shop_avatar?.secure_url || shop.shop_avatar_default}
                                     className='w-full rounded-full h-full object-cover'
@@ -55,7 +55,7 @@ const ShopOwnerLayout = (props: TProps) => {
                               {/* <img src={shop.shop_avatar_default} className='h-full w-full rounded-full' alt='shop_image' /> */}
                         </div>
 
-                        <div className='ml-[20px] mt-[100px] xl:mt-0 xl:ml-[240px] flex flex-col xl:flex-row min-h-[40px] xl:items-center gap-[16px]'>
+                        <div className='ml-[20px]   xl:ml-[240px] flex flex-row flex-wrap min-h-[40px] xl:items-center gap-[16px]'>
                               <button
                                     className={`${styleEffect.onActive(
                                           filterMode === 'PRODUCT_SHOP',

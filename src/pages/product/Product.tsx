@@ -20,9 +20,28 @@ import ContentProduct from '../../component/Content/Components/ContentProduct'
 import CommentService from '../../apis/comment.service'
 import ProductSkeleton from './ProductSkeleton'
 import Footer from '../../component/Footer/Footer'
+import { ProductType, TProductDetail, TProductFull } from '../../types/product/product.type'
 
 export type TImage = {
       secure_url: string
+}
+
+const renderType = (type: TProductDetail['product_type']) => {
+      let name = 'Hàng hóa'
+      switch (type) {
+            case 'Book': {
+                  name = 'Sách'
+                  break
+            }
+            case 'Food': {
+                  name = 'Đồ ăn'
+                  break
+            }
+            default: {
+            }
+      }
+
+      return name
 }
 
 const Product = () => {
@@ -96,7 +115,7 @@ const Product = () => {
                                     <Link to='/'>Trang chủ</Link>
 
                                     <ChevronRight size={16} />
-                                    <Link to={`/${product?.product_type}`}>{product?.product_type}</Link>
+                                    <Link to={`/${product?.product_type}`}>{renderType(product?.product_type as ProductType)}</Link>
                                     <ChevronRight size={16} />
                                     <Link to={`/${product?.product_type}`}>{product?.attribute.type}</Link>
                               </div>
@@ -140,7 +159,6 @@ const Product = () => {
                   </div>
                   <ContentProduct />
                   <Footer className='hidden xl:block bg-color-section-theme' />
-                  
             </div>
       )
 }

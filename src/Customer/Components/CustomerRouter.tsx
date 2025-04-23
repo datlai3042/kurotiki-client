@@ -33,7 +33,7 @@ const CustomerRouter = () => {
 
 
       return (
-            <div className='block w-full py-[20px] bg-[#ffffff]'>
+            <div className='block w-full py-[20px] bg-color-section-theme text-text-theme'>
                   <div className='ml-[20px] h-[75px] flex items-center gap-[8px] overflow-x-hidden' title={`Account ${user?.email}` || ''}>
                         {user ? (
                               <>

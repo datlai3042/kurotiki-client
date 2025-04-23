@@ -139,19 +139,19 @@ const SliderProductV2 = () => {
                   </div>
 
                   <BoxButtonCircle
-                        className='hidden group-hover:flex absolute top-[50%] translate-x-[-50%] left-[20px]'
+                        className='hidden group-hover:flex  bg-color-main text-[#fff] absolute top-[50%] translate-x-[-50%] left-[20px]'
                         width={30}
                         height={30}
-                        icon={<ChevronLeft className='text-blue-600' />}
+                        icon={<ChevronLeft className='#fff' />}
                         onClick={onClickPrev}
                         disabled={indexImage === 1}
                   />
 
                   <BoxButtonCircle
-                        className='hidden group-hover:flex absolute top-[50%] translate-x-[-50%] right-[-10px]'
+                        className='hidden group-hover:flex  bg-color-main text-[#fff] absolute top-[50%] translate-x-[-50%] right-[-10px]'
                         width={30}
                         height={30}
-                        icon={<ChevronRight className='text-blue-600' />}
+                        icon={<ChevronRight className='#fff' />}
                         onClick={onClickNext}
                         disabled={indexImage === LIMIT}
                   />

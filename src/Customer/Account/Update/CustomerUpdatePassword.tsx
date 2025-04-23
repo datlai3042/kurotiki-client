@@ -104,7 +104,7 @@ const CustomerUpdatePassword = () => {
       return (
             <div className='w-full min-h-[360px] h-max bg-color-section-theme text-text-theme rounded  flex items-center justify-center py-[30px] '>
                   <form
-                        className='flex flex-col gap-[16px]  min-w-[150px] xl:min-w-[400px] xl:min-h-[150px] h-max max-w-auto  p-[24px] rounded-sm  shadow-2xl border-[1px] border-[var(--border-color-input)] bg-color-section-theme'
+                        className='flex flex-col gap-[16px]   min-w-[80%]  md:min-w-[150px] xl:min-w-[400px] xl:min-h-[150px] h-max max-w-auto  p-[24px] rounded-sm  shadow-2xl border-[1px] border-[var(--border-color-input)] bg-color-section-theme'
                         onSubmit={handleSubmit(onSubmit)}
                   >
                         <div className='h-[25%] flex flex-col gap-[4px]'>

@@ -62,7 +62,7 @@ const ShopCategory = (props: TProps) => {
                                           <div
                                                 style={{
                                                       backgroundImage: `url(${shop.shop_avatar?.secure_url || shop.shop_avatar_default}) `,
-                                                      filter: 'blur(50px)',
+                                                      filter: 'blur(10px)',
                                                 }}
                                                 className='min-w-full w-full h-full'
                                           ></div>
@@ -81,14 +81,14 @@ const ShopCategory = (props: TProps) => {
                         ))}
                   </div>
                   <button
-                        className='absolute  border-[1px] border-blue-100 left-[0px]  bg-gray-300 h-[60px] w-[36px] top-[50%] translate-y-[-50%] hidden xl:flex items-center justify-center shadow-lg'
+                        className='absolute  left-[0px]  bg-color-main h-[60px] w-[36px] top-[50%] translate-y-[-50%] hidden xl:flex items-center justify-center shadow-lg'
                         onClick={onTranslatePrev}
                         disabled={countTranslate === 1}
                   >
                         <ArrowLeft size={20} color='white' />
                   </button>
                   <button
-                        className='absolute  border-[1px] border-blue-100 right-[0px]  bg-gray-300 h-[60px] w-[36px] top-[50%] translate-y-[-50%] hidden xl:flex items-center justify-center shadow-lg'
+                        className='absolute  right-[0px]  bg-color-main h-[60px] w-[36px] top-[50%] translate-y-[-50%] hidden xl:flex items-center justify-center shadow-lg'
                         onClick={onTranslateNext}
                         disabled={countTranslate === ShopCount}
                   >

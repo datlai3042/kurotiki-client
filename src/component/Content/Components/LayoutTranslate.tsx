@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ProductSmall from './ProductSmall'
 import { TProductDetail } from '../../../types/product/product.type'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-
+import useResetTransform from '../hooks/useResetTransform'
+import Empty from '../assets/img/empty.webp'
 type TProps = {
       products: TProductDetail[]
 }
@@ -12,13 +13,21 @@ const LayoutTranslate = (props: TProps) => {
 
       const wrapperListProductsRef = useRef<HTMLDivElement>(null)
       const PositionScrollCurrent = useRef<number>(0)
-      const [count, setCount] = useState(1)
+      const [count, setCount] = useState(0)
+      const [widthElemnet, setWidthElement] = useState(150)
+      const [limitShowProduct, setLimitShowProduct] = useState<number>(0)
 
+      const { widthContainer } = useResetTransform(wrapperListProductsRef, (width: number) => {
+            setCount(0)
+            let result = width / Math.floor(width / 150)
+            setWidthElement(result)
+            PositionScrollCurrent.current = 0
+      })
       const handleClickNext = () => {
             if (wrapperListProductsRef.current) {
                   setCount((prev) => prev + 1)
-                  const width = wrapperListProductsRef.current.getBoundingClientRect().width
-                  PositionScrollCurrent.current = PositionScrollCurrent.current - width
+                  const numberScroll = widthElemnet * Math.floor(widthContainer / widthElemnet)
+                  PositionScrollCurrent.current = PositionScrollCurrent.current - numberScroll
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
             }
@@ -28,8 +37,9 @@ const LayoutTranslate = (props: TProps) => {
             if (wrapperListProductsRef.current) {
                   setCount((prev) => prev - 1)
 
-                  const width = wrapperListProductsRef.current.getBoundingClientRect().width
-                  PositionScrollCurrent.current = PositionScrollCurrent.current + width
+                  const numberScroll = widthElemnet * Math.floor(widthContainer / widthElemnet)
+
+                  PositionScrollCurrent.current = PositionScrollCurrent.current + numberScroll
 
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
@@ -37,10 +47,10 @@ const LayoutTranslate = (props: TProps) => {
       }
 
       const styleEffect = {
-            buttonPrev: count === 1 ? 'xl:hidden' : 'xl:flex',
+            buttonPrev: count === 0 ? 'xl:hidden' : 'xl:flex',
 
-            disButtonPrev: count === 1 ? true : false,
-            disButtonNext: 2 === count ? true : false,
+            disButtonPrev: count === 0 ? true : false,
+            disButtonNext: count === limitShowProduct ? true : false,
             onHidden: (length: number) => (length === count ? 'xl:hidden' : 'xl:flex'),
 
             onDisable: (length: number) => (length === count ? true : false),
@@ -52,35 +62,53 @@ const LayoutTranslate = (props: TProps) => {
             },
       }
 
+      useEffect(() => {
+            if (wrapperListProductsRef.current) {
+                  const num = Math.ceil(widthContainer / widthElemnet)
+                  setLimitShowProduct(Math.ceil(products.length / num))
+            }
+      }, [products, widthContainer, widthElemnet])
+
       return (
-            <div className='h-full max-w-full flex gap-[20px] overflow-auto pb-[8px] ' ref={wrapperListProductsRef}>
-                  {products?.map((product) => (
-                        <div
-                              key={product._id}
-                              className='h-full min-w-[calc((100%-40px)/2)] sm:min-w-[calc((100%-40px)/4)]  xl:min-w-[calc((100%-120px)/6)]'
-                        >
-                              <ProductSmall product={product} />
+            <>
+                  {products.length > 0 ? (
+                        <div className='relative w-full h-[85%] overflow-hidden'>
+                              <>
+                                    <div className=' h-full w-full flex gap-[10px] pb-[8px] ' ref={wrapperListProductsRef}>
+                                          {products?.map((product) => (
+                                                <div
+                                                      style={{ flexBasis: widthElemnet, flexShrink: 0 }}
+                                                      key={product._id}
+                                                      className='h-full '
+                                                >
+                                                      <ProductSmall product={product} />
+                                                </div>
+                                          ))}
+                                    </div>
+                                    <button
+                                          className={` flex p-[4px] disabled:cursor-not-allowed absolute top-[50%] left-[0px] translate-y-[-50%]  bg-color-main text-[#fff]  rounded-full shadow-3xl`}
+                                          onClick={handleClickPrev}
+                                          disabled={styleEffect.disButtonPrev}
+                                    >
+                                          <ChevronLeft size={20} color='#fff' />
+                                    </button>
+
+                                    <button
+                                          className={` flex p-[4px]  disabled:cursor-not-allowed absolute top-[50%] right-[0px] translate-y-[-50%] bg-color-main text-[#fff]  rounded-full shadow-3xl `}
+                                          onClick={handleClickNext}
+                                          disabled={styleEffect.disButtonNext}
+                                    >
+                                          <ChevronRight size={20} color='#fff' />
+                                    </button>
+                              </>
                         </div>
-                  ))}
-
-                  <button
-                        className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[-50%]  bg-[#ffffff]  rounded-full shadow-3xl`}
-                        onClick={handleClickPrev}
-                        disabled={styleEffect.disButtonPrev}
-                  >
-                        <ChevronLeft size={24} color='blue' />
-                  </button>
-
-                  <button
-                        className={`${styleEffect.onHidden(
-                              products?.length / 6 || 0,
-                        )} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[-50%] bg-[#ffffff]  rounded-full shadow-3xl `}
-                        onClick={handleClickNext}
-                        disabled={styleEffect.onDisable(products?.length / 6 || 0)}
-                  >
-                        <ChevronRight size={26} color='blue' />
-                  </button>
-            </div>
+                  ) : (
+                        <div className='w-full h-full flex flex-col items-center gap-[16px]'>
+                              <img src={Empty} className='w-full h-[80%] object-contain' />
+                              <span className='text-[20px] font-extrabold'>Không có sản phẩm tương ứng</span>
+                        </div>
+                  )}
+            </>
       )
 }
 

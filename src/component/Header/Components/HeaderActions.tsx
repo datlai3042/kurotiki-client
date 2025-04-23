@@ -66,7 +66,7 @@ const HeaderActions = () => {
                               </button>
                         )
                   ) : (
-                        <BoxLoading />
+                        <BoxLoading color='text-text-theme'/>
                   )}
                   <HeaderCart />
                   <ButtonDarkMode />

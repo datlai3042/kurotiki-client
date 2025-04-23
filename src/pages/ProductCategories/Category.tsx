@@ -54,30 +54,28 @@ const Category = (props: TProps) => {
       }
 
       return (
-            <div className='w-full xl:max-w-[1450px] xl:w-[1450px] mx-auto flex flex-col gap-[24px] px-[20px] xl:px-0 mt-[70px] mb-[70px] xl:mt-0 text-[14px]'>
-                  <Link to={'/'} className='underline text-slate-800 font-bold'>
-                        Trang chủ
-                  </Link>
+            <div className='w-full xl:max-w-[1450px] xl:w-[1450px] text-text-theme mx-auto flex flex-col gap-[24px] px-[20px] xl:px-0 mt-[70px] mb-[70px] xl:mt-0 text-[14px]'>
+                  <div className='flex items-center underline gap-[4px] p-[0px_20px_6px_20px] xl:px-0 text-[20px] font-extrabold '>
+                        <Link to='/'>Trang chủ</Link>
+                  </div>
                   <div className='w-full h-max flex  gap-[24px]'>
                         <CategoryTitle title={onSetTitleProductType({ product_type })} onGetNameCategory={onClickCategory} />
                         <div className='max-w-full w-full xl:w-[81%] min-h-[1000px] h-max '>
                               {activeData ? (
-                                    <header className='w-full min-h-full h-max flex flex-col gap-[28px] overflow-hidden'>
-                                          <div className='p-[25px] w-full h-[60px] flex items-center bg-[#ffffff]'>
-                                                <h1 className='text-[22px] font-semibold text-slate-700'>
-                                                      {onSetHeaderProductType({ product_type })}
-                                                </h1>
+                                    <header className='w-full min-h-full h-max flex flex-col gap-[14px] overflow-hidden'>
+                                          <div className='p-[25px] w-full h-[60px] flex items-center bg-color-section-theme'>
+                                                <h1 className='text-[22px] font-semibold '>{onSetHeaderProductType({ product_type })}</h1>
                                           </div>
                                           <div className='w-full'>
                                                 <FeaturedCategory type={product_type} />
                                           </div>
-                                          <div className=' w-full overflow-hidden min-h-[200px] h-max bg-[#ffffff]'>
+                                          <div className=' w-full overflow-hidden min-h-[200px] h-max bg-color-section-theme'>
                                                 <ShopCategory product_type={product_type} />
                                           </div>
-                                          <div className='w-full  h-[80px] flex items-center bg-[#ffffff] rounded-lg px-[8px]'>
+                                          <div className='w-full  h-[80px] flex items-center bg-color-section-theme rounded-lg px-[8px]'>
                                                 <FilterWrapper product_type={product_type} />
                                           </div>
-                                          <div className='w-full h-max mt-[20px]'>
+                                          <div className='w-full h-max'>
                                                 <ProductSection product_type={product_type} />
                                           </div>
                                     </header>

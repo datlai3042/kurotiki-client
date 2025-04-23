@@ -74,7 +74,7 @@ const ProductDetail = (props: TProps) => {
                                     src={image.secure_url}
                                     className={`${
                                           imageActive === image.secure_url ? styleEffect.isActive : 'border-[2px] border-[var(--border-color-input)] object-contain'
-                                    }  w-[47%] xl:w-[55px] xl:h-[55px] md:w-[60px] md:h-[80px]  rounded p-[4px]`}
+                                    }  w-[47%] xl:w-[55px] xl:h-[55px] md:w-[60px] md:h-[80px]  rounded p-[4px]  object-contain`}
                                     alt='product_sub'
                                     key={image.secure_url}
                                     onMouseLeave={handleMouseLeave}

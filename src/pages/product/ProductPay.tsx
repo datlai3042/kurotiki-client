@@ -40,17 +40,17 @@ const ProductPay = (props: TProps) => {
             mutationKey: ['add-cart'],
             mutationFn: ({ cart }: { cart: ProductCart }) => CartService.addCart({ cart }),
             onSuccess: () => {},
-            onError: (error: unknown) => {
-                  if (checkAxiosError<{ code: number; message: string; detail: string }>(error)) {
-                        if (
-                              error.response?.data.code === 400 &&
-                              error.response.data.message === 'Bad Request' &&
-                              error.response.data.detail === 'Số lượng sản phẩm được chọn nhiều hơn số lượng trong kho'
-                        ) {
-                              dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: error.response.data.detail }))
-                        }
-                  }
-            },
+            // onError: (error: unknown) => {
+            //       if (checkAxiosError<{ code: number; message: string; detail: string }>(error)) {
+            //             if (
+            //                   error.response?.data.code === 400 &&
+            //                   error.response.data.message === 'Bad Request' &&
+            //                   error.response.data.detail === 'Số lượng sản phẩm được chọn nhiều hơn số lượng trong kho'
+            //             ) {
+            //                   dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: error.response.data.detail }))
+            //             }
+            //       }
+            // },
       })
 
       const handleIncreaseProductQuantity = () => {
@@ -65,16 +65,21 @@ const ProductPay = (props: TProps) => {
 
       const handleClickBuy = () => {
             if (!user) {
+                  console.log('map 1')
                   dispatch(doOpenBoxLogin())
                   return
             }
 
             if (user._id === product.shop_id.owner._id) {
+                  console.log('map 2')
+
                   dispatch(addToast({ type: 'WARNNING', message: 'Không thể thêm sản phẩm của chính mình', id: Math.random().toString() }))
                   return
             }
 
             if (!Boolean(cartCurrent.cart_current_address)) {
+                  console.log('map 3')
+
                   dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: 'Vui lòng chọn địa chỉ trước khi thêm' }))
                   setDisableBtn(true)
                   return
@@ -84,6 +89,8 @@ const ProductPay = (props: TProps) => {
             //       console.log({ cartCurrent })
             //       return
             // }
+
+            console.log('map 4')
 
             const formData = new FormData()
             formData.append('product_id', product._id)

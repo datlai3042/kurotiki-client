@@ -54,10 +54,10 @@ const NotFound = (props: TProps) => {
                               <p className='mt-6 text-base leading-7 text-gray-600'>
                                     {ContentDescription || 'Trang này chưa được xây dựng'}
                               </p>
-                              <div className='mt-10 flex items-center justify-center gap-x-6'>
+                              <div className='mt-10 flex items-center justify-center gap-x-2'>
                                     <Link
                                           to='/Contact'
-                                          className='rounded-md bg-color-main px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                                          className='rounded-[4px] bg-color-main px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
                                     >
                                           Gửi hỗ trợ
                                     </Link>
@@ -70,7 +70,7 @@ const NotFound = (props: TProps) => {
                                           </Link>
                                     ) : (
                                           <button
-                                                className='text-sm font-semibold border-[1px] border-[var(--border-color-input)] px-3.5 py-2.5 text-[#fff] rounded-[4px] hover:bg-color-main hover:border-transparent'
+                                                className='text-sm font-semibold border-[1px] border-[var(--border-color-input)] px-3.5 py-2.5 text-text-theme hover:text-[#fff] rounded-[4px] hover:bg-color-main hover:border-transparent'
                                                 onClick={onBack}
                                           >
                                                 Đóng thông báo

@@ -119,6 +119,7 @@
             --bg-scrollbar-track-normal: #2c2c2c;
       }
 
+
       @media print {
             .flex {
               display: flex !important;
@@ -329,14 +330,14 @@ code {
 /* Handle */
 .scrollCustome::-webkit-scrollbar,
 *::-webkit-scrollbar-thumb {
-      background-color: #ccc;
+      background-color: #1d4ed8;
       border-radius: 5px;
 }
 
 /* Handle on hover */
 .scrollCustome::-webkit-scrollbar,
 *::-webkit-scrollbar-thumb:hover {
-      background: #555;
+      background: var(--color-main);
 }
 
 .hide-scroll::-webkit-scrollbar {

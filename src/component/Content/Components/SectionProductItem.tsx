@@ -8,6 +8,8 @@ import { useQuery } from '@tanstack/react-query'
 import ProductApi, { TProduct, TProductReturn } from '../../../apis/product.api'
 import { Link } from 'react-router-dom'
 import BoxMoneyV2 from '../../BoxUi/BoxMoneyV2'
+import useResetTransform from '../hooks/useResetTransform'
+import { debounce } from 'lodash'
 
 type Props = {}
 
@@ -15,7 +17,15 @@ const SectionProductItem = (props: Props) => {
       const wrapperListProductsRef = useRef<HTMLDivElement>(null)
       const PositionScrollCurrent = useRef<number>(0)
       const [limitShowProduct, setLimitShowProduct] = useState<number>(0)
-      const [count, setCount] = useState(1)
+      const [widthElemnet, setWidthElement] = useState(160)
+      const [count, setCount] = useState(0)
+
+      const { widthContainer } = useResetTransform(wrapperListProductsRef, (width: number) => {
+            setCount(0)
+            let result = width / Math.floor(width / 160) - 16
+            setWidthElement(result)
+            PositionScrollCurrent.current = 0
+      })
 
       const allProduct = useQuery({
             queryKey: ['get-all-product'],
@@ -26,8 +36,8 @@ const SectionProductItem = (props: Props) => {
       const handleClickNext = () => {
             if (wrapperListProductsRef.current) {
                   setCount((prev) => prev + 1)
-                  const width = wrapperListProductsRef.current.getBoundingClientRect().width
-                  PositionScrollCurrent.current = PositionScrollCurrent.current - width
+                  const numberScroll = widthElemnet * Math.floor(widthContainer / widthElemnet)
+                  PositionScrollCurrent.current = PositionScrollCurrent.current - numberScroll
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
             }
@@ -36,9 +46,9 @@ const SectionProductItem = (props: Props) => {
       const handleClickPrev = () => {
             if (wrapperListProductsRef.current) {
                   setCount((prev) => prev - 1)
+                  const numberScroll = widthElemnet * Math.floor(widthContainer / widthElemnet)
 
-                  const width = wrapperListProductsRef.current.getBoundingClientRect().width
-                  PositionScrollCurrent.current = PositionScrollCurrent.current + width
+                  PositionScrollCurrent.current = PositionScrollCurrent.current + numberScroll
 
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
@@ -47,42 +57,46 @@ const SectionProductItem = (props: Props) => {
 
       useEffect(() => {
             if (allProduct.isSuccess) {
-                  setLimitShowProduct(Math.ceil(allProduct.data.data.metadata.products.length / 6))
+                  if (wrapperListProductsRef.current) {
+                        const num = Math.ceil(widthContainer / widthElemnet)
+                        setLimitShowProduct(Math.ceil(allProduct.data.data.metadata.products.length / num))
+                  }
             }
-      }, [allProduct.isSuccess, allProduct?.data?.data.metadata.products.length])
+      }, [allProduct.isSuccess, allProduct?.data?.data.metadata.products.length, widthContainer, widthElemnet])
 
       const styleEffect = {
-            buttonPrev: count === 1 ? 'xl:hidden' : 'xl:flex',
+            buttonPrev: count === 0 ? 'xl:hidden' : 'xl:flex',
             buttonNext: limitShowProduct === count ? 'xl:hidden' : 'xl:flex',
-            disButtonPrev: count === 1 ? true : false,
+            disButtonPrev: count === 0 ? true : false,
             disButtonNext: limitShowProduct === count ? true : false,
       }
 
       return (
-            <div className='h-[85%] mx-[4px] relative overflow-auto md:overflow-hidden pb-[8px] bg-color-section-theme text-text-theme '>
-                  <div
-                        ref={wrapperListProductsRef}
-                        className=' h-full  flex  gap-[12px] xl:gap-[34px] px-[18px] min-w-[370px] w-[370px]  xl:w-full snap-mandatory	'
-                  >
+            <div className='h-[85%] mx-[4px] group relative overflow-hidden pb-[8px] bg-color-section-theme text-text-theme '>
+                  <div ref={wrapperListProductsRef} className=' h-full  flex  gap-[12px] xl:gap-[34px] px-[18px] w-full snap-mandatory	'>
                         {allProduct.isSuccess &&
                               allProduct?.data?.data?.metadata.products.map((product: TProductReturn) => {
                                     return (
                                           <Link
+                                                style={{ flexBasis: widthElemnet, flexShrink: 0 }}
                                                 to={`/product/${product._id}`}
-                                                className='flex flex-col w-[calc((100%-24px)/2)]    xl:w-[calc((100%-170px)/6)] h-full snap-always snap-start	 '
+                                                className='flex flex-col  h-full snap-always snap-start	 '
                                                 key={product._id}
                                           >
-                                                <div className='w-[160px] h-full flex flex-col gap-[12px]'>
+                                                <div className='w-full h-full flex flex-col gap-[12px]'>
                                                       <img
                                                             src={product?.product_thumb_image?.secure_url}
-                                                            className='w-full h-[156px] max-h-[160px]'
+                                                            className='w-full h-[156px] max-h-[160px] object-contain'
                                                             alt='product'
                                                       />
                                                       <div className='w-full h-[20px] text-[16px]'>
                                                             <BoxMoneyV2 money={product.product_price} />
                                                       </div>
-                                                      <div className='relative w-full h-[20px] flex items-center justify-center bg-red-200 rounded-[999px]'>
-                                                            <div className='absolute top-0 left-0 w-[20px] h-full rounded-full bg-red-500'></div>
+                                                      <div
+                                                            style={{ backgroundColor: 'rgba(53, 51, 106, .25)' }}
+                                                            className='relative w-full h-[20px] flex items-center justify-center  rounded-[999px]'
+                                                      >
+                                                            <div className='absolute top-0 left-0 w-[20px] h-full rounded-full bg-color-main'></div>
                                                             <span className='text-[11px] text-white'>Vừa mở bán</span>
                                                       </div>
                                                 </div>
@@ -111,19 +125,19 @@ const SectionProductItem = (props: Props) => {
                   {allProduct.isSuccess && allProduct?.data?.data?.metadata.products.length > 0 && (
                         <>
                               <button
-                                    className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[-50%]  bg-[#ffffff]  rounded-full shadow-3xl`}
+                                    className={`flex md:hidden group-hover:flex p-[4px] disabled:cursor-not-allowed  absolute top-[50%] left-[0px] translate-y-[-50%]  bg-color-main text-[#fff]  rounded-full shadow-3xl`}
                                     onClick={handleClickPrev}
                                     disabled={styleEffect.disButtonPrev}
                               >
-                                    <ChevronLeft size={24} color='blue' />
+                                    <ChevronLeft size={20} />
                               </button>
 
                               <button
-                                    className={`${styleEffect.buttonNext} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[-50%] bg-[#ffffff]  rounded-full shadow-3xl `}
+                                    className={`flex md:hidden group-hover:flex  p-[4px] disabled:cursor-not-allowed absolute top-[50%] right-[0px] translate-y-[-50%] bg-color-main text-[#fff]  rounded-full shadow-3xl `}
                                     onClick={handleClickNext}
                                     disabled={styleEffect.disButtonNext}
                               >
-                                    <ChevronRight size={26} color='blue' />
+                                    <ChevronRight size={20} />
                               </button>
                         </>
                   )}
