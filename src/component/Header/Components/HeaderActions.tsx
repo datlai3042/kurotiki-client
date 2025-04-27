@@ -32,7 +32,7 @@ const HeaderActions = () => {
                   {!getMe.isLoading ? (
                         user ? (
                               <>
-                                    <div className='group relative z-[601] hidden xl:flex items-center px-2 gap-2 '>
+                                    <div className='group relative z-[601] hidden md:flex items-center px-2 gap-2 '>
                                           {user ? (
                                                 <img
                                                       src={user?.avatar?.secure_url || user.avatar_url_default}

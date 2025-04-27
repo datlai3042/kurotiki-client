@@ -108,7 +108,15 @@ function Sidebar(props: TProps) {
 
       return (
             <>
-                  {showSideBar && queryMedia && <div className='w-full h-full fixed inset-0 bg-[rgba(0,0,0,.75)] z-[19] mt-[75px]'></div>}
+                  {showSideBar && queryMedia && (
+                        <div
+                              onClick={() => {
+                                    dispatch(toDoHideSideBar())
+                                    styleEffect.showSideBar = 'hidden'
+                              }}
+                              className='w-full h-full fixed inset-0 bg-[rgba(0,0,0,.75)] z-[19] mt-[75px]'
+                        ></div>
+                  )}
                   <div
                         className={`${styleEffect.showSideBar} bg-color-section-theme hide-scroll border-r-[1px] border-[var(--border-color-input)] md:border-none  fixed md:sticky  w-[180px] xl:w-[230px] min-w-[230px] top-[65px] md:top-[75px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
                   >

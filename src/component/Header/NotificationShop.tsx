@@ -43,7 +43,7 @@ const NotificationShop = (props: TProps) => {
                                     </div>
 
                                     <p>
-                                          <span>Giá:</span>
+                                          <span className='mr-[3px]'>Giá:</span>
                                           <span>{(notification_attribute as TNotificationShop).product_quantity}</span>
                                     </p>
                               </div>

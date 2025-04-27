@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Checkbox, { CheckboxChangeEvent } from 'antd/es/checkbox/Checkbox'
 import { Building2, ChevronRight, Home, TentTree, Trash2 } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { DateTimeFromString } from '../../utils/datetime.util'
 import WrapperCountProduct from '../BoxUi/WrapperCountProduct'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -26,7 +26,7 @@ const CartItem = (props: TProps) => {
       const [select, setSelect] = useState<boolean>(product.isSelect)
       const [openBoxCofirmUpdateAddress, setOpenBoxConfirmUpdateAddress] = useState<boolean>(false)
       const [openModelDetail, setOpenModelDetail] = useState<boolean>(false)
-
+      const {pathname} = useLocation()
       const queryClient = useQueryClient()
 
       useEffect(() => {
@@ -54,7 +54,7 @@ const CartItem = (props: TProps) => {
 
       const styleEffect = {
             product_not_avaiable: !product._id ? 'text-[12px]' : '',
-            readOnly: false
+            readOnly: false,
       }
 
       // const cart_address_type = product.cart_address.type === 'Home' ? <Home /> : product.cart_address.type === 'Company' ? ''
@@ -90,7 +90,14 @@ const CartItem = (props: TProps) => {
                   </div>
                   <div className='w-full flex flex-col  gap-[40px]'>
                         <div className='w-full flex  flex-col xl:flex-row gap-[30px] min-h-[230px] h-max xl:min-h-[80px]'>
-                              <Checkbox disabled={styleEffect.readOnly} className='z-[5] block' checked={select} onChange={changeSelect} />
+                              {pathname === '/cart' && (
+                                    <Checkbox
+                                          disabled={styleEffect.readOnly}
+                                          className='z-[5] block'
+                                          checked={select}
+                                          onChange={changeSelect}
+                                    />
+                              )}
                               <Link className='inline-block h-[250px] xl:h-[80px]' to={`/product/${product.product_id._id}`}>
                                     <img
                                           src={product.product_id.product_thumb_image.secure_url}
@@ -121,7 +128,6 @@ const CartItem = (props: TProps) => {
                                           </div>
 
                                           <div className=' flex items-center gap-[8px] h-max xl:h-full  xl:my-0 text-color-main text-[20px]'>
-                                              
                                                 <BoxMoney name='VNĐ' money={product.quantity * product.product_id.product_price} />
                                           </div>
                                     </div>

@@ -75,7 +75,6 @@ const Customer = () => {
       })
 
       const isSegmentActive = select.find((se) => se.value === pathName)
-console.log({select})
       //@element
       return (
             <>

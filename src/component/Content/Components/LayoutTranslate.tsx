@@ -72,7 +72,7 @@ const LayoutTranslate = (props: TProps) => {
       return (
             <>
                   {products.length > 0 ? (
-                        <div className='relative w-full h-[85%] overflow-hidden'>
+                        <div className='group relative w-full h-[85%] overflow-hidden'>
                               <>
                                     <div className=' h-full w-full flex gap-[10px] pb-[8px] ' ref={wrapperListProductsRef}>
                                           {products?.map((product) => (
@@ -86,7 +86,7 @@ const LayoutTranslate = (props: TProps) => {
                                           ))}
                                     </div>
                                     <button
-                                          className={` flex p-[4px] disabled:cursor-not-allowed absolute top-[50%] left-[0px] translate-y-[-50%]  bg-color-main text-[#fff]  rounded-full shadow-3xl`}
+                                          className={` group-hover:flex hidden p-[4px] disabled:cursor-not-allowed absolute top-[50%] left-[0px] translate-y-[-50%]  bg-color-main text-[#fff]  rounded-full shadow-3xl`}
                                           onClick={handleClickPrev}
                                           disabled={styleEffect.disButtonPrev}
                                     >
@@ -94,7 +94,7 @@ const LayoutTranslate = (props: TProps) => {
                                     </button>
 
                                     <button
-                                          className={` flex p-[4px]  disabled:cursor-not-allowed absolute top-[50%] right-[0px] translate-y-[-50%] bg-color-main text-[#fff]  rounded-full shadow-3xl `}
+                                          className={`group-hover:flex hidden p-[4px]  disabled:cursor-not-allowed absolute top-[50%] right-[0px] translate-y-[-50%] bg-color-main text-[#fff]  rounded-full shadow-3xl `}
                                           onClick={handleClickNext}
                                           disabled={styleEffect.disButtonNext}
                                     >

@@ -58,7 +58,7 @@ const NotificationSection = (props: TProps) => {
 
       return (
             <div className='w-full min-h-[50px] h-max bg-color-section-theme text-text-theme relative py-[20px] mb-[80px] xl:mb-0'>
-                  <div className=' flex flex-col gap-[40px]'>
+                  <div className=' flex flex-col gap-[60px]'>
                         {getMyNotification.data?.pages.map((page) =>
                               page.data.metadata.notifications.notification.notifications_message.map((notification) => {
                                     return (
@@ -68,7 +68,7 @@ const NotificationSection = (props: TProps) => {
                                                 )} bg-color-section-theme text-text-theme w-full   flex flex-col xl:flex-row items-center   gap-[4px] xl:gap-[16px]`}
                                                 key={notification._id}
                                           >
-                                                <div className='w-full flex flex-col gap-[8px]'>
+                                                <div className='w-full flex flex-col gap-[8px] opacity-80'>
                                                       <p className='opacity-80 text-end text-[11px] py-[2px] px-[20px] flex items-center justify-between bg-color-main text-[#fff] '>
                                                             <Circle size={16} color='white' />
                                                             <span>{convertDateToStringFull(notification.notification_creation_time)}</span>
@@ -81,7 +81,7 @@ const NotificationSection = (props: TProps) => {
                                                                               'SHOP' && (
                                                                               // <Clock8 size={24} color='white' />
                                                                               <img
-                                                                                    className='w-[120px] aspect-square rounded'
+                                                                                    className='w-[120px] aspect-square rounded object-contain'
                                                                                     src={notification.notification_attribute.product_image}
                                                                                     alt='product'
                                                                               />
@@ -106,9 +106,9 @@ const NotificationSection = (props: TProps) => {
                                                                               <span className='  text-text-theme underlinex inline-block  py-1'>
                                                                                     {notification.notification_attribute.product_name}
                                                                               </span>
-                                                                              <p className='flex flex-wrap gap-[4px] items-center'>
+                                                                              <p className='flex flex-wrap gap-[4px] items-center '>
                                                                                     <span className='whitespace-pre'>Người mua: </span>
-                                                                                    <span className=' underline inline-block  py-1 text-color-main font-extrabold hover:cursor-pointer'>
+                                                                                    <span className='bg-color-main p-[4px] rounded-md underline inline-block  py-1 text-white font-extrabold hover:cursor-pointer'>
                                                                                           {notification.notification_attribute.buyer_info
                                                                                                 ?.nickName ||
                                                                                                 notification.notification_attribute

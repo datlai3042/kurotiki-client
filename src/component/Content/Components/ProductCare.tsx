@@ -50,7 +50,7 @@ const ProductCare = () => {
       useEffect(() => {
             if (allProduct.isSuccess) {
                   if (wrapperListProductsRef.current) {
-                        const num = Math.ceil(widthContainer / widthElemnet)
+                        const num = Math.round(widthContainer / widthElemnet)
                         setLimitShowProduct(Math.ceil(allProduct.data.data.metadata.products.length / num))
                   }
             }
@@ -62,7 +62,6 @@ const ProductCare = () => {
             disButtonPrev: count === 0 ? true : false,
             disButtonNext: limitShowProduct === count ? true : false,
       }
-
       const products = allProduct.data?.data.metadata.products
 
       return (

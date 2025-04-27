@@ -58,7 +58,7 @@ const SectionProductItem = (props: Props) => {
       useEffect(() => {
             if (allProduct.isSuccess) {
                   if (wrapperListProductsRef.current) {
-                        const num = Math.ceil(widthContainer / widthElemnet)
+                        const num = Math.round(widthContainer / widthElemnet)
                         setLimitShowProduct(Math.ceil(allProduct.data.data.metadata.products.length / num))
                   }
             }
