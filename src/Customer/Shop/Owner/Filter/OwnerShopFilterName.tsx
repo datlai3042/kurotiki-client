@@ -79,10 +79,12 @@ const OwnerShopFilterName = (props: TProps) => {
                   <div className='w-full h-max text-right text-text-theme'>
                         <ShopSearchProduct search={search} setSearch={setSearch} />
                   </div>
+                  <div className='flex flex-wrap gap-[1rem]'>
+                        {shop_owner_products?.map((product) => {
+                              return <ProductOwner product={product} key={product?._id} />
+                        })}
+                  </div>
 
-                  {shop_owner_products?.map((product) => {
-                        return <ProductOwner product={product} key={product?._id} />
-                  })}
                   <div className='w-full h-[65px] flex items-center justify-center'>
                         <button
                               className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-main text-[#fff]  flex items-center justify-center rounded-[4px]'
@@ -94,7 +96,7 @@ const OwnerShopFilterName = (props: TProps) => {
                                     ? 'Xem thêm'
                                     : getProductMyShop.isPending
                                     ? 'Đang tải dữ liệu sản phẩm'
-                                    : 'Không có sản phẩm hiển thị'}
+                                    : 'Hết sản phẩm'}
                         </button>
                   </div>
             </div>

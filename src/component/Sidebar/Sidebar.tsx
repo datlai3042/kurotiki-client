@@ -1,4 +1,4 @@
-import { Link, useMatch } from 'react-router-dom'
+import { Link, useLocation, useMatch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 
@@ -78,6 +78,7 @@ function Sidebar(props: TProps) {
       const showSideBar = useSelector((state: RootState) => state.uiSlice.showSideBar)
       const dispatch = useDispatch()
       const match = useMatch('/')
+      const { pathname } = useLocation()
       const queryMedia = useMediaQuery(
             '(max-width: 767px)',
             false,
@@ -89,57 +90,67 @@ function Sidebar(props: TProps) {
       const show = queryMedia ? (showSideBar ? true : false) : match ? true : false
 
       let styleEffect = {
-            showSideBar: ` ${show ? `flex ${queryMedia  ? 'animate-showSideBarAni' : ''}` : 'hidden'}`,
+            showSideBar: ` ${show ? `flex ${queryMedia ? 'animate-showSideBarAni' : ''}` : 'hidden'}`,
       }
 
       useEffect(() => {
             if (queryMedia) {
                   dispatch(toDoHideSideBar())
+                  styleEffect.showSideBar = 'hidden'
             }
       }, [queryMedia, dispatch])
 
+      useEffect(() => {
+            if (queryMedia && showSideBar) {
+                  dispatch(toDoHideSideBar())
+            }
+      }, [pathname])
+
       return (
-            <div
-                  className={`${styleEffect.showSideBar} bg-color-section-theme hide-scroll border-r-[1px] border-[var(--border-color-input)] md:border-none  fixed md:sticky  w-[180px] xl:w-[230px] min-w-[230px] top-[65px] md:top-[75px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
-            >
-                  <div className='flex flex-col gap-[20px] bg-transparent h-max mb-[50px] text-text-theme'>
-                        <div className='flex flex-col gap-[10px] h-max p-[16px] bg-color-section-theme rounded-[4px] '>
-                              <h3 className='text-[14px] font-semibold '>Danh mục</h3>
-                              <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
-                                    {arrayCategory.map((category) => (
-                                          <li key={category.href}>
-                                                <Link to={category.href} className='flex  gap-[8px] w-full h-[40px] items-center'>
-                                                      <img src={category.image} className='w-[30px] ' alt='catelogy' />
-                                                      <span>{category.label}</span>
-                                                </Link>
-                                          </li>
-                                    ))}
-                              </ul>
-                        </div>
+            <>
+                  {showSideBar && queryMedia && <div className='w-full h-full fixed inset-0 bg-[rgba(0,0,0,.75)] z-[19] mt-[75px]'></div>}
+                  <div
+                        className={`${styleEffect.showSideBar} bg-color-section-theme hide-scroll border-r-[1px] border-[var(--border-color-input)] md:border-none  fixed md:sticky  w-[180px] xl:w-[230px] min-w-[230px] top-[65px] md:top-[75px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
+                  >
+                        <div className='flex flex-col gap-[20px] bg-transparent h-max mb-[50px] text-text-theme'>
+                              <div className='flex flex-col gap-[10px] h-max p-[16px] bg-color-section-theme rounded-[4px] '>
+                                    <h3 className='text-[14px] font-semibold '>Danh mục</h3>
+                                    <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
+                                          {arrayCategory.map((category) => (
+                                                <li key={category.href}>
+                                                      <Link to={category.href} className='flex  gap-[8px] w-full h-[40px] items-center'>
+                                                            <img src={category.image} className='w-[30px] ' alt='catelogy' />
+                                                            <span>{category.label}</span>
+                                                      </Link>
+                                                </li>
+                                          ))}
+                                    </ul>
+                              </div>
 
-                        <div className='flex flex-col gap-[10px] h-max p-[16px]  bg-color-section-theme   rounded-xl'>
-                              <h3 className='text-[14px] font-semibold '>Nổi bật</h3>
-                              <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
-                                    {arrayPopular.map((category) => (
-                                          <li key={category.href}>
-                                                <Link to={category.href} className='flex  gap-[8px] w-full h-[50px] items-center'>
-                                                      <img src={category.image} className='w-[30px] ' alt='catelogy' />
-                                                      <span>{category.label}</span>
-                                                </Link>
-                                          </li>
-                                    ))}
-                              </ul>
-                        </div>
+                              <div className='flex flex-col gap-[10px] h-max p-[16px]  bg-color-section-theme   rounded-xl'>
+                                    <h3 className='text-[14px] font-semibold '>Nổi bật</h3>
+                                    <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
+                                          {arrayPopular.map((category) => (
+                                                <li key={category.href}>
+                                                      <Link to={category.href} className='flex  gap-[8px] w-full h-[50px] items-center'>
+                                                            <img src={category.image} className='w-[30px] ' alt='catelogy' />
+                                                            <span>{category.label}</span>
+                                                      </Link>
+                                                </li>
+                                          ))}
+                                    </ul>
+                              </div>
 
-                        <Link
-                              to={'/customer/register-sell'}
-                              className='w-full h-[70px] flex items-center p-[16px_24px] rounded-lg  gap-[8px] text-slate-500 '
-                        >
-                              <Store />
-                              <span>Bán hàng cùng Tiki</span>
-                        </Link>
+                              <Link
+                                    to={'/customer/register-sell'}
+                                    className='w-full h-[70px] flex items-center p-[16px_24px] rounded-lg  gap-[8px] text-slate-500 '
+                              >
+                                    <Store />
+                                    <span>Bán hàng cùng Tiki</span>
+                              </Link>
+                        </div>
                   </div>
-            </div>
+            </>
       )
 }
 

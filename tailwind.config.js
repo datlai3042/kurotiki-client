@@ -18,7 +18,7 @@ module.exports = {
 				orderQuantity: "136px 20px 20px 20px;",
 			},
 			animation: {
-				showSideBarAni: "showSideBar .8s linear ",
+				showSideBarAni: "showSideBar .4s linear ",
 				hideSideBarAni: "hideSideBar 1s linear ",
 				showToast: "toastAnimation 1s linear forwards",
 				mountComponent: "mountComponent .5s",

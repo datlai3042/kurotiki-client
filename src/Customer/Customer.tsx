@@ -47,9 +47,6 @@ const select = [
       { value: '/customer/shop/product-list', label: 'Danh sách sản phẩm' },
       { value: '/customer/register-sell', label: 'Đăng kí bán hàng' },
       { value: '/customer/account/address', label: 'Số địa chỉ' },
-      { value: '/customer/account/update/email', label: 'Cập nhập Email' },
-      { value: '/customer/account/update/password', label: 'Cập nhập mật khẩu' },
-      { value: '/customer/router', label: '' },
 ]
 
 //@Component
@@ -78,7 +75,7 @@ const Customer = () => {
       })
 
       const isSegmentActive = select.find((se) => se.value === pathName)
-
+console.log({select})
       //@element
       return (
             <>

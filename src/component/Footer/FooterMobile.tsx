@@ -25,6 +25,7 @@ import Auth from '../../apis/auth.api'
 import { doLogout } from '../../Redux/authenticationSlice'
 import { addToast } from '../../Redux/toast'
 import { createPortal } from 'react-dom'
+import { useMediaQuery } from '@mantine/hooks'
 
 interface IProps extends React.HTMLProps<HTMLDivElement> {}
 
@@ -68,10 +69,32 @@ const CustomerRouter = ({ onClose }: { onClose: () => void }) => {
                   dispatch(addToast({ type: 'ERROR', message: 'Đăng xuất không thành công', id: Math.random().toString() }))
             },
       })
+      const queryMedia = useMediaQuery(
+            '(max-width: 767px)',
+            false,
+
+            {
+                  getInitialValueInEffect: false,
+            },
+      )
       const handleLogOut = () => {
             logoutMutation.mutate()
             onClose()
       }
+
+      useEffect(() => {
+            if(!queryMedia) {
+                  onClose()
+            }
+      }, [queryMedia])
+
+      useEffect(() => {
+            document.body.style.overflow = 'hidden'
+
+            return () => {
+                  document.body.style.overflow = 'auto'
+            }
+      }, [])
 
       return (
             <>
@@ -82,7 +105,7 @@ const CustomerRouter = ({ onClose }: { onClose: () => void }) => {
                         >
                               <div
                                     onClick={(e) => e.stopPropagation()}
-                                    className=' w-[60%] rounded-lg  py-[20px] bg-color-section-theme text-text-theme'
+                                    className=' w-[75%] m-[8px] rounded-lg  py-[20px] bg-color-section-theme text-text-theme'
                               >
                                     <div
                                           className='ml-[20px] h-[75px] flex items-center gap-[8px] overflow-x-hidden'
