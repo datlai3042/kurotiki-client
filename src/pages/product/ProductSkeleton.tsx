@@ -3,7 +3,7 @@ import React from 'react'
 const ProductSkeleton = () => {
       return (
             <div className='animate-pulse bg-color-section-theme flex gap-[16px]'>
-                  <div className=' w-full flex flex-col gap-[24px]'>
+                  <div className=' w-full flex flex-col gap-[24px] p-[8px]'>
                         <div className=' w-[240px] h-[30px] skeleton__container comment '></div>
 
                         <div className='top w-full h-screen flex flex-col xl:flex-row gap-[16px]'>

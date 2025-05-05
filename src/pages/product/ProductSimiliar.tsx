@@ -52,15 +52,15 @@ const ProductSimiliar = (props: TProps) => {
       const productData = allProduct.data?.data.metadata.products
       const totalPage = Math.ceil(Number(productData?.length) / 8)
       const styleEffect = {
-            buttonPrev: count === 1 ? 'xl:hidden' : 'xl:flex',
-            buttonNext: totalPage === count ? 'xl:hidden' : 'xl:flex',
+            buttonPrev: count === 1 ? 'md:hidden' : 'md:flex',
+            buttonNext: totalPage === count ? 'md:hidden' : 'md:flex',
             disButtonPrev: count === 1 ? true : false,
             disButtonNext: totalPage === count ? true : false,
             onActive: (check: boolean) => {
                   return check ? 'bg-blue-400 rounded-[999px]' : 'bg-slate-400 rounded-[999px]'
             },
       }
-
+      
       const page1 = productData?.slice(0, 8)
       const page2 = productData?.slice(8, 16)
       const page3 = productData?.slice(16, 24)
