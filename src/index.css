@@ -98,13 +98,13 @@
 
       body.dark {
             --bg-form-nav: #393c73;
-            --color-gap-empty: #12192c;
+            --color-gap-empty: #27292d;
             /* --color-main: #3b36db; */
             --bg-answer-option: rgb(222 224 228);
             --sketeton-theme-to: #2a3342;
             --sketeton-theme-from: #343e4e;
-            --color-main: #35336a;
-            --color-section-theme: #081026;
+            --color-main: #4cb6a0;
+            --color-section-theme: #32363c;
             --text-theme: #ccc;
             --color-main-hover: rgb(229 231 235);
             --border-color: #14113c;
