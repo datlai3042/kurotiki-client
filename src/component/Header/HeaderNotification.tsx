@@ -129,7 +129,7 @@ const HeaderNotification = () => {
                   {showNotification && (
                         <div
                               onClick={() => setShowNotification(false)}
-                              className='top-[0px] fixed left-0 right-0 bg-[#1145683b] h-[100vh]'
+                              className='top-[0px] fixed left-0 right-0 bg-[#030512c4] h-[100vh]'
                         ></div>
                   )}
                   <div
