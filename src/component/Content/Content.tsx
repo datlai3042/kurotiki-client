@@ -26,7 +26,7 @@ const Content = () => {
                         <Banner />
                   </div> */}
 
-                  <div className='w-full p-[20px_16px_32px] h-[400px]   bg-color-section-theme rounded-[4px]'>
+                  <div className='w-full p-[20px_16px_32px] h-[450px]   bg-color-section-theme rounded-[4px]'>
                         <SliderProductV2 />
                   </div>
 
