@@ -77,7 +77,7 @@ const ContentBook = () => {
                                           key={btn.label}
                                           className={`${styleEffect.onActive(
                                                 btn.value === type,
-                                          )} py-[6px] min-w-[150px] max-w-full rounded-[999px]`}
+                                          )} py-[6px] min-w-[150px] max-w-full rounded-[999px] h-max`}
                                           onClick={() => setType(btn.value as TypeFilterBook)}
                                     >
                                           {btn.label}
