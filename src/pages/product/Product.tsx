@@ -125,7 +125,7 @@ const Product = () => {
                               <div className='  flex gap-[16px] xl:gap-[16px] xl:mt-0'>
                                     <div className='w-full xl:w-[74%] flex flex-col gap-[24px]'>
                                           <div className='top w-full min-h-[1000px] h-max flex flex-col xl:flex-row gap-[24px]'>
-                                                <div className='xl:w-[40%] static xl:sticky top-[32px] xl:top-[85px] bg-color-section-theme px-[3px] py-[16px_24px] rounded-lg  h-max flex flex-col gap-[16px] '>
+                                                <div className='xl:w-[40%] static xl:sticky top-[32px] xl:top-[85px] bg-color-section-theme px-[3px] pt-[16px] pb-[24px] rounded-lg  h-max flex flex-col gap-[16px] '>
                                                       <ProductDetail product={product} isSuccess={getProductWithId.isSuccess} />
                                                 </div>
                                                 <div className='xl:w-[60%]  min-h-[500px] h-max mt-[20px] xl:mt-0 rounded-lg '>
