@@ -71,7 +71,7 @@ const ContentBook = () => {
                   <h3>Các sản phẩm về sách</h3>
 
                   <div className='overflow-hidden'>
-                        <div className=' max-w-full flex gap-[20px]  overflow-auto md:overflow-hidden'>
+                        <div className=' max-w-full flex gap-[20px] min-h-[40px]  overflow-auto md:overflow-hidden'>
                               {CATEGORY_BOOK.map((btn) => (
                                     <button
                                           key={btn.label}
