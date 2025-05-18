@@ -55,7 +55,7 @@ const RouterController = () => {
                   {!hiddenHeader && <Header />}
 
                   <div
-                        className={`${styleEffect.matchPathName} ${styleEffect.layoutFull} z-[1]  flex-1 w-full  items-stretch h-max  flex flex-col md:flex-row gap-[3px]    bg-color-gap-empty 
+                        className={`${styleEffect.matchPathName} ${styleEffect.layoutFull} z-[1]  flex-1 w-full  items-stretch h-max  flex flex-col md:flex-row gap-[4px]    bg-color-gap-empty 
 `}
                   >
                         <Sidebar />

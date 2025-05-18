@@ -103,7 +103,7 @@ const ProductSlider = (props: TProps) => {
                                                       <img
                                                             ref={(ref) => (imageRef.current![index] = ref as HTMLImageElement)}
                                                             src={products[index].product_thumb_image.secure_url}
-                                                            className='w-full h-full rounded  shadow-3xl'
+                                                            className='w-full h-full rounded  shadow-3xl object-contain'
                                                             alt=''
                                                       />
                                                       <div className='absolute min-w-[420px] w-max h-[90px] left-[50%] translate-x-[-50%] bottom-[20px] hidden xl:flex gap-[20px] p-[10px] bg-color-section-theme text-text-theme rounded-lg shadow-2xl'>
