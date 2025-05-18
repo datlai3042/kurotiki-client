@@ -112,7 +112,7 @@ const AuthRegister = (props: TProps) => {
       }, [errors, dispatch])
 
       return (
-            <div className=' flex flex-col items-center gap-[15px] px-[24px] py-[35px] min-w-[400px] bg-color-section-theme text-text-theme'>
+            <div className=' flex flex-col items-center gap-[15px] px-[24px] py-[35px] max-w-full md:min-w-[400px] bg-color-section-theme text-text-theme'>
                   <h3 className={` font-black text-[24px]`}>
                         Đăng kí với <span className='text-color-main font-bold'>KuroTiki</span>
                   </h3>
