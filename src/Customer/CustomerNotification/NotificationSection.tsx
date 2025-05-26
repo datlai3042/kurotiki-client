@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import NotificationService, { NotificationType } from '../../apis/notification.service'
 import { limitNotification } from '../../constant/notification.constant'
 import { convertDateToStringFull } from '../../utils/date.utils'
-import { Circle, Clock8, Inbox } from 'lucide-react'
+import { Check, Circle, Clock8, Inbox } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import BoxLoading from '../../component/BoxUi/BoxLoading'
 import BoxConfirmDelete from '../../component/BoxUi/confirm/BoxConfirmDelete'
@@ -53,7 +53,7 @@ const NotificationSection = (props: TProps) => {
       }
 
       const styleEffect = {
-            isRead: (read: boolean) => (read ? 'bg-white' : 'bg-blue-100'),
+            isRead: (read: boolean) => (read ? 'bg-color-section-theme' : 'bg-blue-100'),
       }
 
       return (
@@ -155,10 +155,10 @@ const NotificationSection = (props: TProps) => {
                                                                               </Link>
                                                                         </div>
                                                                   )}
-                                                                  <div className='whitespace-pre flex   gap-[8px]  '>
+                                                                  <div className='whitespace-pre flex   gap-[16px]  '>
                                                                         {!notification.notification_isRead && (
                                                                               <button
-                                                                                    className='   text-blue-400 hover:text-color-main'
+                                                                                    className=' flex items-center gap-[4px]   text-blue-400 hover:text-color-main'
                                                                                     onClick={() =>
                                                                                           onReadNotification({
                                                                                                 notification_id: notification._id,
@@ -166,6 +166,7 @@ const NotificationSection = (props: TProps) => {
                                                                                           })
                                                                                     }
                                                                               >
+                                                                                    <Check size={18}/>
                                                                                     Đánh dấu là đã đọc
                                                                               </button>
                                                                         )}

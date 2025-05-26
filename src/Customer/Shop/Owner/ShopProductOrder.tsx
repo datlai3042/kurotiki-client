@@ -12,7 +12,7 @@ const ShopProductOrder = (props: TProps) => {
       const { CartHistory } = props
 
       return (
-            <div className='bg-[#ffffff] rounded-lg'>
+            <div className=' bg-color-section-theme   rounded-lg'>
                   {/* {CartHistory.map((product) => ( */}
                   <div className='flex gap-[40px] p-[24px]'>
                         <img src={CartHistory.product_id.product_thumb_image?.secure_url} className='w-[200px] ' alt='product' />
