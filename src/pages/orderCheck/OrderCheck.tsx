@@ -30,7 +30,7 @@ const OrderCheck = () => {
 
       return (
             <div className='flex flex-wrap items-start mx-auto gap-[32px] my-[28px]'>
-                  <div className='order-2 md:order-1 w-[720px] max-w-[90vw] mx-auto bg-[#ffffff] flex flex-col p-[24px_16px_50px] xl:p-[24px_20px_50px]'>
+                  <div className='order-2 md:order-1 w-[720px] max-w-[90vw] mx-auto  flex flex-col p-[24px_16px_50px] xl:p-[24px_20px_50px]'>
                         {getOrderId.isSuccess && (
                               <>
                                     <React.Fragment>
@@ -82,11 +82,11 @@ export const OrderPdf = forwardRef<HTMLDivElement, { carts: CartProduct[]; order
             const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
             const now = convertDateToStringFull(new Date())
             return (
-                  <div ref={ref} className='pb-[24px] relative'>
-                        <div className='absolute inset-0 w-full h-full opacity-20 bg-[#fff] '></div>
+                  <div ref={ref} className='pb-[24px] relative w-max '>
+                        <div className='absolute inset-0 w-full h-full opacity-20  '></div>
                         <React.Fragment>
-                              <div className='relative 2'>
-                                    <div className='flex flex-col gap-[36px] p-[12px_36px] print:p-[16px_42px]'>
+                              <div className='relative 2 p-[12px_24px]  bg-[#fff]'>
+                                    <div className='flex flex-col gap-[36px] '>
                                           <div className='flex justify-between flex-wrap gap-[20px]'>
                                                 <div className='flex flex-col gap-[4px]'>
                                                       <div className='text-[#3e4044] text-[20px] font-semibold'>KUROTIKI</div>
@@ -136,7 +136,7 @@ export const OrderPdf = forwardRef<HTMLDivElement, { carts: CartProduct[]; order
                                                                         </div>
                                                                   </div>
                                                                   <div className='flex flex-col gap-[28px]'>
-                                                                        <div className='overflow-x-auto'>
+                                                                        <div className=''>
                                                                               <table className='min-w-full divide-y divide-gray-200 border border-gray-300'>
                                                                                     <thead className='bg-gray-100'>
                                                                                           <tr>

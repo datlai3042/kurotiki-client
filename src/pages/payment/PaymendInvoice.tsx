@@ -29,7 +29,7 @@ const PaymentInvoice = ({ carts, orders }: { carts: CartProduct[]; orders: Order
                               In Hóa đơn
                         </button>
                   </div>
-                  <div className=' max-w-[85%] mx-auto  bg-[#ffffff] flex flex-col '>
+                  <div className=' max-w-[85%] mx-auto overflow-auto bg-[#ffffff] flex flex-col '>
                         <>
                               <React.Fragment>
                                     <OrderPdf carts={carts} ref={contentRef} orders={orders} />
