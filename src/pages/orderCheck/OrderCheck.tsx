@@ -30,7 +30,7 @@ const OrderCheck = () => {
 
       return (
             <div className='flex flex-wrap items-start mx-auto gap-[32px] my-[28px]'>
-                  <div className='order-2 md:order-1 w-[720px] max-w-[90vw] mx-auto  flex flex-col p-[24px_16px_50px] xl:p-[24px_20px_50px]'>
+                  <div className='order-2 md:order-1 w-[720px] max-w-[90vw] mx-auto overflow-auto  flex flex-col p-[24px_16px_50px] xl:p-[24px_20px_50px]'>
                         {getOrderId.isSuccess && (
                               <>
                                     <React.Fragment>
