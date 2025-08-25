@@ -24,6 +24,7 @@ import { ProductForm, ProductType, TCheckDescriptionImage, TProductDetail, TProf
 import UpdateMultipleImage from '../UpdateProductForm/components/UpdateMultipleImage'
 import { Link, useNavigate } from 'react-router-dom'
 import { sleep } from '../../../utils/sleep'
+import ProductReivew from '../UpdateProductForm/components/ProductReivew'
 
 //@Props - Product::Book
 
@@ -37,8 +38,8 @@ type SchemaProduct = typeof ProductBookFormSchema | typeof ProductFoodFormSchema
 
 export const ui = {
       gapElementChild: 'gap-[6px]',
-      gapElementChildButton: 'gap-[6px]',
-      fontSizeError: 'text-[12px]',
+      gapElementChildButton: 'gap-[16px]',
+      fontSizeError: 'text-[14px]',
       colorError: 'text-red-700',
 }
 type TProps<TimelineFieldName, TimelineLabel> = {
@@ -78,12 +79,17 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
             isUploadImage: false,
             FileName: '',
             FileLength: 0,
+            info: {
+                  secure_url: '',
+                  public_id: '',
+            },
       })
 
       //@lấy thông tin các hình
       const [urlProductMultipleImage, setUrlProductMultipleImage] = useState<TCheckDescriptionImage>({
             numberImage: 0,
             isUploadImage: false,
+            info: [],
       })
 
       const [expandTimeLine, setExpandTimeLine] = useState(true)
@@ -164,13 +170,14 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
 
       return (
             <React.Fragment>
-                  <div className='animate-mountComponent w-full h-auto flex gap-[16px] justify-center '>
-                        <div className={`${expandTimeLine ? 'w-[full] md:w-[65%]' : 'w-full'}   h-full`}>
+                  <div className='animate-mountComponent w-full h-auto flex gap-[32px]  '>
+                        <div className={`   h-full flex-1` }>
                               <FormProvider {...methods}>
                                     <form
-                                          className='w-full md:w-[80%] flex flex-col gap-[24px]'
+                                          className='w-[80%] flex flex-col gap-[14px]'
                                           onSubmit={methods.handleSubmit(onSubmit)}
                                           spellCheck={false}
+                                          id='upload_product'
                                     >
                                           <div className='text-[20px] font-semibold text-color-main'>Thông tin cơ bản về sản phẩm</div>
                                           <InputText
@@ -219,7 +226,7 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
                                           <button
                                                 disabled={uploadProductFull.isSuccess}
                                                 type='submit'
-                                                className='min-w-[150px] px-[12px] py-[6px] bg-color-main opacity-80 hover:opacity-100 text-white flex justify-center items-center gap-[8px] disabled:cursor-not-allowed'
+                                                className='flex md:hidden min-w-[150px] px-[12px] py-[6px] bg-color-main opacity-80 hover:opacity-100 text-white  justify-center items-center gap-[8px] disabled:cursor-not-allowed'
                                           >
                                                 <span>{!uploadProductFull.isSuccess ? 'Đăng bán' : 'Đăng sản phẩm thành công'}</span>
 
@@ -233,8 +240,32 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
                                     </form>
                               </FormProvider>
                         </div>
+                        <div className=' '>
+                              <ProductReivew
+                                    productFormImage={[urlProductThumb.info]
+                                          .concat(urlProductMultipleImage.info)
+                                          .filter((image) => image.secure_url)}
+                                    info={methods.watch()}
+                                    buttonSubmit={
+                                          <button
+                                                form={'upload_product'}
+                                                disabled={uploadProductFull.isSuccess}
+                                                type='submit'
+                                                className=' hidden md:flex min-w-[150px] px-[12px] py-[6px] bg-color-main opacity-80 hover:opacity-100 text-white  justify-center items-center gap-[8px] disabled:cursor-not-allowed'
+                                          >
+                                                <span>{!uploadProductFull.isSuccess ? 'Đăng bán' : 'Đăng sản phẩm thành công'}</span>
 
-                        <div
+                                                {uploadProductFull.isPending && (
+                                                      <span
+                                                            className='inline-block h-[25px] w-[25px] text-white animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'
+                                                            role='status'
+                                                      ></span>
+                                                )}
+                                          </button>
+                                    }
+                              />
+                        </div>
+                        {/* <div
                               className={`${
                                     expandTimeLine ? 'hidden lg:flex' : 'hidden'
                               } hidden h-max min-w-[160px] w-auto  flex-col gap-[28px]  py-[24px] pl-[8px] pr-[24px] bg-bgTimeLine border-r-4 border-blue-300 rounded-lg`}
@@ -298,15 +329,9 @@ const ProductFormUpload = <TimelineFieldName, TimelineLabel>(props: TProps<Timel
                               <div className='flex items-center justify-center bg-blue-700 w-[20px] h-[20px] rounded-full'>
                                     <Check color='white' size={12} />
                               </div>
-                        </div>
+                        </div> */}
 
-                        <div className='hidden md:flex text-color-main  justify-end'>
-                              {expandTimeLine ? (
-                                    <Minimize2 onClick={() => setExpandTimeLine(false)}  className='cursor-pointer'/>
-                              ) : (
-                                    <Maximize onClick={() => setExpandTimeLine(true)}  className='cursor-pointer'/>
-                              )}
-                        </div>
+                      
                   </div>
             </React.Fragment>
       )

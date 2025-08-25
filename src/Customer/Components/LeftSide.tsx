@@ -33,7 +33,7 @@ const LeftSide = ({
       }, [])
 
       return (
-            <div ref={containerRef} className='sticky mb-[10px] top-[75px] hidden xl:block   xl:w-[24%] text-text-theme'>
+            <div ref={containerRef} className='sticky mb-[10px] top-[75px] hidden xl:block   text-text-theme'>
                   <div className='h-[75px] flex items-center gap-[8px] overflow-x-hidden' title={`Account ${user?.email}` || ''}>
                         {user ? (
                               <>

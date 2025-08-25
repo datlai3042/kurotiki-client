@@ -85,11 +85,11 @@ const RegisterSell = () => {
             )
       }
       return (
-            <div className='min-w-full flex-1  h-auto  flex flex-col items-center justify-center p-[20px] '>
+            <div className='min-w-full flex-1  h-auto  flex flex-col items-center text-[13px] '>
                   {!openSelect && (
-                        <div className='bg-color-section-theme py-[20px] flex justify-center items-center w-full'>
+                        <div className='  flex justify-start items-center w-full'>
                               <button
-                                    className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-main text-[#fff]    flex gap-[6px] items-center justify-center rounded-[4px]'
+                                    className='  min-w-[120px] w-full p-[8px] bg-color-main text-[#fff]    flex gap-[6px] items-center justify-center rounded-[4px]'
                                     onClick={() => setOpenSelect(true)}
                               >
                                     <Plus />
@@ -97,14 +97,10 @@ const RegisterSell = () => {
                               </button>
                         </div>
                   )}
-                  {!openSelect && (
-                        <div className='h-[300px] w-full mt-[20px] '>
-                              <img src={image} className='min-w-full w-full max-h-full object-cover' />
-                        </div>
-                  )}
+                
                   {openSelect && (
-                        <div className='w-full h-full flex flex-col bg-color-section-theme py-[20px]'>
-                              <div className='w-full h-[50px] flex px-[20px]'>
+                        <div className='w-full h-full flex flex-col bg-color-section-theme p-[16px]'>
+                              <div className='w-full h-[50px] flex'>
                                     <Select
                                           className='w-[150px] '
                                           placeholder='Loại sản phẩm'
@@ -118,13 +114,9 @@ const RegisterSell = () => {
                                           }}
                                     />
                               </div>
-                              {!createBaseProductId.isSuccess && (
-                                    <div className='h-[300px] w-full mt-[20px] '>
-                                          <img src={image} className='min-w-full w-full max-h-full object-cover' />
-                                    </div>
-                              )}
+                          
                               {createBaseProductId.isSuccess && (
-                                    <div className='w-full h-max px-[20px]'>
+                                    <div className='w-full h-max '>
                                           {productType === 'Book' && (
                                                 <ProductFormUpload<TTimeLineBookField, TTimeLineBookLabel>
                                                       ProductType={'Book'}

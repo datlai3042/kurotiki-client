@@ -118,7 +118,7 @@ function Sidebar(props: TProps) {
                         ></div>
                   )}
                   <div
-                        className={`${styleEffect.showSideBar} bg-color-section-theme hide-scroll border-r-[1px] border-[var(--border-color-input)] md:border-none  fixed md:sticky  w-[180px] xl:w-[230px] min-w-[230px] top-[65px] md:top-[75px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
+                        className={`${styleEffect.showSideBar} bg-color-section-theme hide-scroll border-r-[1px] border-[var(--border-color-input)] md:border-none rounded-md  fixed md:sticky  w-[180px] xl:w-[230px] min-w-[230px] top-[65px] md:top-[70px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
                   >
                         <div className='flex flex-col gap-[20px] bg-transparent h-max mb-[50px] text-text-theme'>
                               <div className='flex flex-col gap-[10px] h-max p-[16px] bg-color-section-theme rounded-[4px] '>
@@ -126,7 +126,7 @@ function Sidebar(props: TProps) {
                                     <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
                                           {arrayCategory.map((category) => (
                                                 <li key={category.href}>
-                                                      <Link to={category.href} className='flex  gap-[8px] w-full h-[40px] items-center'>
+                                                      <Link to={category.href} className='flex  gap-[8px] w-full h-[40px] items-center hover:bg-color-main rounded-md'>
                                                             <img src={category.image} className='w-[30px] ' alt='catelogy' />
                                                             <span>{category.label}</span>
                                                       </Link>
@@ -149,13 +149,16 @@ function Sidebar(props: TProps) {
                                     </ul>
                               </div>
 
-                              <Link
+                              <div className='mb-[20px]  p-[8px]'>
+
+                                    <Link
                                     to={'/customer/register-sell'}
-                                    className='w-full h-[70px] flex items-center p-[16px_24px] rounded-lg  gap-[8px] text-slate-500 '
+                                    className='w-full  flex items-center rounded p-[8px]  gap-[8px] text-slate-500 mt-[-20px] mb-[20px] hover:bg-color-main hover:text-[#fff]'
                               >
                                     <Store />
                                     <span>Bán hàng cùng Tiki</span>
                               </Link>
+                              </div>
                         </div>
                   </div>
             </>

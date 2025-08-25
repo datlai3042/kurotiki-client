@@ -27,6 +27,7 @@ const ProductGenuineBrand = () => {
             let result = width / Math.floor(width / 160) - 16
             setWidthElement(result)
             PositionScrollCurrent.current = 0
+
       })
       const handleClickNext = () => {
             if (wrapperListProductsRef.current) {
@@ -55,11 +56,11 @@ const ProductGenuineBrand = () => {
             buttonPrev: count === 0 ? 'xl:hidden' : 'xl:flex',
             buttonNext: 2 === count ? 'xl:hidden' : 'xl:flex',
             disButtonPrev: count === 0 ? true : false,
-            disButtonNext: 2 === count ? true : false,
+            disButtonNext: 2 === count + 1 ? true : false,
       }
 
       return (
-            <div className='relative group flex-1 h-[80%]  px-[18px] bg-color-section-theme text-text-theme'>
+            <div className='relative group flex-1 h-[80%]  p-[18px]  text-text-theme'>
                   <div className='w-full h-full overflow-hidden'>
                         <div className='flex  gap-[20px] h-full w-full pb-[8px]' ref={wrapperListProductsRef}>
                               <img

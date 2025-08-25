@@ -113,14 +113,14 @@ const SliderProductV2 = () => {
             }
       }, [])
       return (
-            <div className='relative group w-full h-full  '>
+            <div className='relative z-[999] group w-full h-full  '>
                   <div className='w-full h-full  overflow-x-hidden'>
-                        <div className='min-w-full w-full  flex h-full gap-[20px] ' ref={wrapperRef}>
+                        <div className='min-w-full w-full  flex h-full gap-[12px] ' ref={wrapperRef}>
                               {arrayImage.map((img) => (
                                     <img
                                           src={img}
                                           key={img}
-                                          className='min-w-[calc(100%-16px)] xl:min-w-[calc((100%-40px)/2)] h-full rounded-xl'
+                                          className='min-w-[calc(100%-16px)] xl:min-w-[calc((100%-24px)/2)] h-full rounded-xl'
                                           alt=''
                                     />
                               ))}
@@ -139,9 +139,9 @@ const SliderProductV2 = () => {
                   </div>
 
                   <BoxButtonCircle
-                        className='hidden group-hover:flex  bg-color-main text-[#fff] absolute top-[50%] translate-x-[-50%] left-[20px]'
-                        width={30}
-                        height={30}
+                        className='hidden group-hover:flex bg-color-main text-[#fff] absolute top-[50%] translate-x-[-50%] left-[0px]'
+                        width={24}
+                        height={24}
                         icon={<ChevronLeft className='#fff' />}
                         onClick={onClickPrev}
                         disabled={indexImage === 1}
@@ -149,8 +149,8 @@ const SliderProductV2 = () => {
 
                   <BoxButtonCircle
                         className='hidden group-hover:flex  bg-color-main text-[#fff] absolute top-[50%] translate-x-[-50%] right-[-10px]'
-                        width={30}
-                        height={30}
+                        width={24}
+                        height={24}
                         icon={<ChevronRight className='#fff' />}
                         onClick={onClickNext}
                         disabled={indexImage === LIMIT}

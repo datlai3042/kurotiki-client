@@ -30,17 +30,17 @@ const NotificationProduct = (props: TProps) => {
                         <span className='text-[11px] opacity-60'>{convertDateToStringFull(notification.notification_creation_time)}</span>
                   </div>
                   <div className='flex gap-[12px]'>
-                        <div className='w-full flex flex-col gap-[8px] md:gap-0 text-[12px]'>
+                        <div className='w-full flex flex-col gap-[8px] md:gap-[8px] text-[12px]'>
                               <span>{notification.notification_attribute.notification_content}</span>
 
-                              <div className=' flex flex-col gap-[4px] '>
+                              <div className=' flex flex-col gap-[4px] mb-[6px]'>
                                     <div style={{ whiteSpace: 'break-spaces' }} className=''>
                                           {notificationProduct?.product_id?.product_name}
                                     </div>
                               </div>
                               <Link
                                     to={`/order-check/${(notification.notification_attribute as TNotificationProduct).order_id}`}
-                                    className='w-max hover:border-transparent hover:bg-color-main hover:text-[#fff] mt-auto p-[6px] border-[1px] border-[var(--border-color-input)] rounded-[4px] bg-color-main text-[#fff] md:bg-transparent md:text-text-theme'
+                                    className='w-max hover:border-transparent  hover:bg-color-main hover:text-[#fff] mt-auto p-[6px] border-[1px] border-[var(--border-color-input)] rounded-[4px] bg-color-main text-[#fff] md:bg-transparent md:text-text-theme'
                               >
                                     Xem hóa đơn
                               </Link>

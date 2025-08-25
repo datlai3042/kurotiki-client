@@ -18,22 +18,30 @@ import { useLocation } from 'react-router-dom'
 const showFooter = ['/', '/product']
 const Content = () => {
       const pathName = useLocation().pathname
-
+      //  md:w-[calc(100%-235px)]
       return (
-            <div className='   w-full md:w-[calc(100%-235px)]  h-max flex flex-col gap-[4px] '>
+            <div className='   w-full md:w-[calc(100%-235px)] h-max flex flex-col gap-[14px] '>
                   {/* <div className=' hidden 2xl:gap-6 2xl:flex'>
                         <SliderProducts hinhAnhSlider={hinhAnhSlider} height={300} delay={1} />
                         <Banner />
                   </div> */}
 
-                  <div className='w-full p-[20px_16px_32px] h-[450px]   bg-color-section-theme rounded-[4px]'>
+                  <div className='w-full p-[20px_0px_16px] h-[380px]   rounded-[4px]'>
                         <SliderProductV2 />
                   </div>
 
                   <SectionProduct
                         title={<TitleProductSection content={<p className='pl-[13px]'>Giá Tốt Hôm Nay</p>} />}
-                        other={<CountDown />}
-                        ListProducts={<SectionProductItem />}
+                        other={
+                              <div className='pr-[16px]'>
+                                    <CountDown />
+                              </div>
+                        }
+                        ListProducts={
+                              <div className=''>
+                                    <SectionProductItem />
+                              </div>
+                        }
                   />
 
                   <ContentLabel />

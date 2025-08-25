@@ -14,10 +14,10 @@ const SectionProduct = (props: Props) => {
       return (
             <div
                   style={{ background: props.background ? props.background : '' }}
-                  className='bg-color-section-theme text-text-theme rounded-lg flex-col   p-[12px]'
+                  className=' text-text-theme rounded-lg flex-col  bg-[var(--bg-color-product-wrapper)]'
             >
-                  <div className='2xl:h[20%] 2xl:h-[8%] flex justify-between my-[16px]'>
-                        <div className=' flex justify-between items-center gap-[8px] 2xl:w-full'>
+                  <div className='2xl:h[20%] 2xl:h-[8%] flex justify-between my-[16px] '>
+                        <div className=' flex justify-between items-center gap-[8px] 2xl:w-full '>
                               {props.title && props.title}
                               {props.other && props.other}
                         </div>

@@ -99,7 +99,7 @@ const HeaderSeacrhInput = () => {
                                           onBlur={() => {}}
                                     />
                               </div>
-                              <div className='hidden xl:flex group basis-[25%]  lg:basis-[28%] 2xl:basis-[11%]   items-center transition-all duration-200 before:content-["|"] before:text-gray-300 before:text-2xl: opacity-80 hover:before:opacity-0 hover:bg-sky-700 '>
+                              {/* <div className='hidden xl:flex group basis-[25%]  lg:basis-[28%] 2xl:basis-[11%]   items-center transition-all duration-200 before:content-["|"] before:text-gray-300 before:text-2xl: opacity-80 hover:before:opacity-0 hover:bg-sky-700 '>
                                     <button
                                           type='submit'
                                           className=' text-sm w-full h-full text-center text-sky-800 group-hover:text-sky-100'
@@ -107,7 +107,7 @@ const HeaderSeacrhInput = () => {
                                     >
                                           Tìm kiếm
                                     </button>
-                              </div>
+                              </div> */}
                         </form>
                         {showSearch && <HeaderResultSearch text={textDelay} onReset={onReset} />}
                   </div>

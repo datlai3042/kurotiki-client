@@ -34,7 +34,20 @@ const NotificationShop = (props: TProps) => {
                         <span className='text-[11px] opacity-60'>{convertDateToStringFull(notification_creation_time)}</span>
                   </div>
                   <div className='flex gap-[12px]'>
-                        <header className='w-full flex flex-col text-[12px]'>
+                        <div className='' key={_id}>
+                              {
+                                    <div className='flex flex-col  gap-[6px]'>
+                                          <div className='w-[60px] h-[60px] aspect-square'>
+                                                <img
+                                                      src={(notification_attribute as TNotificationShop).product_image}
+                                                      className='w-full object-cover object-top min-h-full h-full'
+                                                      alt='product'
+                                                />
+                                          </div>
+                                    </div>
+                              }
+                        </div>
+                        <div className='w-full flex flex-col text-[12px]'>
                               <span>{notification_attribute.notification_content}</span>
 
                               <div className=' flex flex-col gap-[4px] '>
@@ -43,23 +56,10 @@ const NotificationShop = (props: TProps) => {
                                     </div>
 
                                     <p>
-                                          <span className='mr-[3px]'>Giá:</span>
+                                          <span className='mr-[3px]'>Số lượng:</span>
                                           <span>{(notification_attribute as TNotificationShop).product_quantity}</span>
                                     </p>
                               </div>
-                        </header>
-                        <div className='' key={_id}>
-                              {
-                                    <div className='flex flex-col  gap-[6px]'>
-                                          <div className='w-[80px] aspect-square'>
-                                                <img
-                                                      src={(notification_attribute as TNotificationShop).product_image}
-                                                      className='w-full  min-h-full h-full'
-                                                      alt='product'
-                                                />
-                                          </div>
-                                    </div>
-                              }
                         </div>
                   </div>
             </Link>

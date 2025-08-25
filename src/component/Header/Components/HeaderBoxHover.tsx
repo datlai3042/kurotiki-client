@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Auth from '../../../apis/auth.api'
 import { addToast } from '../../../Redux/toast'
 import { UserResponse } from '../../../types/user.type'
+import { Bell, LogOut, ShoppingCart, User } from 'lucide-react'
 
 function HeaderBoxHover() {
       const navigate = useNavigate()
@@ -35,30 +36,34 @@ function HeaderBoxHover() {
 
       return (
             <>
-                  <ul className='flex flex-col min-w-[250px] bg-color-section-theme shadow-xl py-2 gap-2 border border-[var(--border-color-input)] text-text-theme rounded z-20'>
-                        <li className='flex items-center h-[35px] hover:bg-color-main hover:text-[#fff] px-2'>
-                              <Link to={'/customer/account'} className='w-full h-full flex items-center'>
+                  <ul className=' min-w-[250px] bg-color-section-theme shadow-xl gap-2 border border-[var(--border-color-input)] text-text-theme rounded z-20'>
+                        <li className='flex items-center hover:bg-color-main hover:text-[#fff] px-2 py-3'>
+                              <Link to={'/customer/account'} className='w-full h-full flex gap-[8px] items-center'>
+                                    <User size={20} />
                                     {user ? `Tài khoản: ${user?.fullName || user?.nickName || user.email}` : 'Thông tin tài khoản'}
                               </Link>
                         </li>
 
-                        <li className='flex items-center h-[35px] hover:bg-color-main hover:text-[#fff] px-2'>
-                              <Link to={'/customer/notification'} className='w-full h-full flex items-center'>
+                        <li className='flex  items-center hover:bg-color-main hover:text-[#fff] px-2 py-3'>
+                              <Link to={'/customer/notification'} className='w-full h-full flex  gap-[8px] items-center'>
+                                    <Bell size={20} />
                                     Thông báo của tôi
                               </Link>
                         </li>
 
-                        <li className='flex items-center h-[35px] hover:bg-color-main hover:text-[#fff] px-2'>
-                              <Link to={'/customer/order_history'} className='w-full h-full flex items-center'>
+                        <li className='flex items-center hover:bg-color-main hover:text-[#fff] px-2 py-3'>
+                              <Link to={'/customer/order_history'} className='w-full h-full flex gap-[8px] items-center'>
+                                    <ShoppingCart size={20} />
                                     Đơn hàng của tôi
                               </Link>
                         </li>
 
                         {user && (
                               <li
-                                    className='flex items-center h-[35px] px-2  hover:bg-color-main hover:text-[#fff] hover:cursor-pointer'
+                                    className='flex gap-[8px] items-center px-2 py-3  hover:bg-color-main hover:text-[#fff] hover:cursor-pointer'
                                     onClick={handleLogOut}
                               >
+                                    <LogOut size={20}/>
                                     Đăng xuất
                               </li>
                         )}

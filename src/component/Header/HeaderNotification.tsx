@@ -122,7 +122,7 @@ const HeaderNotification = () => {
             <div ref={boxNotificationRef} className='relative'>
                   <div className='relative w-max h-max cursor-pointer'>
                         <Bell color='blue' size={20} onClick={onControllShowNotification} />
-                        <div className='absolute top-[-12px] right-[-12px] w-[20px] h-[20px] text-[10px] bg-red-500 text-white rounded-full flex items-center justify-center'>
+                        <div className='absolute top-[-14px] right-[-4px] w-[20px] h-[20px] text-[10px] bg-red-500 text-white rounded-full flex items-center justify-center'>
                               {countRef.current ? (countRef.current >= 99 ? '99+' : countRef.current) : 0}
                         </div>
                   </div>
@@ -135,7 +135,7 @@ const HeaderNotification = () => {
                   <div
                         style={{ display: showNotification ? 'flex' : 'none' }}
                         ref={boxNotificationRef}
-                        className='xl:animate-mountComponent rounded-[8px] fixed left-[10px] top-[65px] md:absolute md:top-[37px] md:left-auto h-[80vh] md:right-[-20px] xl:right-0 w-[95vw] md:w-[430px] min-h-[200px] bg-color-section-theme text-text-theme shadow-2xl z-[500] '
+                        className='xl:animate-mountComponent rounded-[8px] fixed left-[10px] top-[65px] md:absolute md:top-[37px] md:left-auto h-[80vh] md:right-[-20px] xl:right-0 w-[95vw] md:w-[480px] min-h-[200px] bg-color-section-theme text-text-theme shadow-2xl z-[500] '
                   >
                         <div onClick={(e) => e.stopPropagation()} className='relative w-full  rounded-[8px] pb-[10px]  flex flex-col '>
                               <p className='sticky px-[12px]  rounded-[8px] text-text-theme bg-color-section-theme top-[0px] left-[0px]  w-full  flex items-center  text-[16px] '>

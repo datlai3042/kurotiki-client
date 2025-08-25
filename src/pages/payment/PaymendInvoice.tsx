@@ -19,7 +19,7 @@ const PaymentInvoice = ({ carts, orders }: { carts: CartProduct[]; orders: Order
 
       return (
             <div className='flex flex-col  mx-auto gap-[50px] '>
-                  <div className='w-full flex flex-wrap justify-center items-center gap-[16px]'>
+                  <div className='w-full flex flex-col justify-center items-center gap-[16px]'>
                         <p className='text-center text-[28px] text-text-theme'>Thanh toán thành công</p>
                         <button
                               onClick={() => reactToPrintFn()}
@@ -29,7 +29,7 @@ const PaymentInvoice = ({ carts, orders }: { carts: CartProduct[]; orders: Order
                               In Hóa đơn
                         </button>
                   </div>
-                  <div className=' max-w-[85%] mx-auto overflow-auto bg-[#ffffff] flex flex-col '>
+                  <div className=' max-w-[85%] mx-auto overflow-auto bg-[#ffffff] flex flex-col hidden'>
                         <>
                               <React.Fragment>
                                     <OrderPdf carts={carts} ref={contentRef} orders={orders} />

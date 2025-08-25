@@ -93,18 +93,21 @@
             --bg-module-other: #e1e1e1ca;
             --border-color-input: rgb(200 205 214 / 42%);
             --border-color-side: rgb(200 205 214 / 42%);
+            --bg-color-product: #f5f5f5;
+            --bg-color-product-wrapper: #fff;
+            --bg-product-intro: #fff;
             /* --color-btn-primarily: #2d68ff;ư */
       }
 
       body.dark {
             --bg-form-nav: #393c73;
-            --color-gap-empty: #1e273a;
+            --color-gap-empty: #242424;
             /* --color-main: #3b36db; */
             --bg-answer-option: rgb(222 224 228);
-            --sketeton-theme-to: #181f2a;
-            --sketeton-theme-from: #181a1dab;
-            --color-main: #4c56b6;
-            --color-section-theme: #061730;
+            --sketeton-theme-to: #676d77;
+            --sketeton-theme-from: #5b5e64ab;
+            --color-main: #0d3188;
+            --color-section-theme: #1b1b1b;
             --text-theme: #ccc;
             --color-main-hover: rgb(229 231 235);
             --border-color: #14113c;
@@ -117,6 +120,10 @@
             --border-color-side: rgb(200 205 214 / 18%);
             --bg-scrollbar-thumb-normal: rgba(203, 191, 191, 0.758);
             --bg-scrollbar-track-normal: #2c2c2c;
+            --bg-color-product: #0e1b33;
+            --bg-color-product-wrapper: #1b1b1b;
+            --bg-product-intro: #091323;
+
       }
 
 
@@ -184,7 +191,7 @@
       }
 
       .inputCommon {
-            @apply border-[1px] border-[var(--border-color-input)] bg-color-section-theme text-text-theme;
+            @apply border-[1px] border-[rgb(200_205_214_42%)];
       }
 
       hr {

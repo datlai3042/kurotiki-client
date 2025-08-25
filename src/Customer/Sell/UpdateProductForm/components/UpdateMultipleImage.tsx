@@ -88,6 +88,12 @@ const UpdateMultipleImage = (props: IProps) => {
                               secure_url: axiosResponse.data.metadata.product.secure_url,
                               public_id: axiosResponse.data.metadata.product.public_id,
                         })
+                        setUrlProductMultipleImage((prev) => {
+                              return {
+                                    ...prev,
+                                    info: newArray,
+                              }
+                        })
                         return newArray
                   })
             },
@@ -158,6 +164,12 @@ const UpdateMultipleImage = (props: IProps) => {
 
       const handleDeleteProductDescriptionImageOne = ({ public_id, secure_url }: { public_id: string; secure_url: string }) => {
             setCloudinaryImage((cloud) => cloud.filter((filter) => filter.public_id !== public_id && filter.secure_url !== secure_url))
+            setUrlProductMultipleImage((prev) => {
+                  return {
+                        ...prev,
+                        info: prev.info.filter((filter) => filter.public_id !== public_id && filter.secure_url !== secure_url),
+                  }
+            })
             const formData: IFormDataDeleteImage = new FormData()
             formData.append('product_id', product_id)
             formData.append('public_id', public_id)
@@ -173,7 +185,7 @@ const UpdateMultipleImage = (props: IProps) => {
 
             setGetFileName([])
             setCloudinaryImage([])
-            setUrlProductMultipleImage({ numberImage: 0, isUploadImage: false })
+            setUrlProductMultipleImage({ numberImage: 0, isUploadImage: false, info: [] })
             deleteImages.mutate({ id: product_id })
       }
 
@@ -189,10 +201,10 @@ const UpdateMultipleImage = (props: IProps) => {
 
       useEffect(() => {
             if (cloudinaryImage.length === 4) {
-                  setUrlProductMultipleImage({ numberImage: cloudinaryImage.length, isUploadImage: true })
+                  setUrlProductMultipleImage({ numberImage: cloudinaryImage.length, isUploadImage: true, info: cloudinaryImage })
                   return
             }
-            setUrlProductMultipleImage({ numberImage: cloudinaryImage.length, isUploadImage: false })
+            setUrlProductMultipleImage({ numberImage: cloudinaryImage.length, isUploadImage: false, info: cloudinaryImage })
       }, [cloudinaryImage, setUrlProductMultipleImage])
 
       useEffect(() => {
@@ -243,15 +255,30 @@ const UpdateMultipleImage = (props: IProps) => {
                   )}
 
                   {/* {@các hình review} */}
-                  <div className='w-full flex gap-[8px]'>
+                  <div className='w-full flex gap-[8px] '>
+                        {cloudinaryImage.length < 4 && (
+                              <button
+                                    className={`${styleEffect.stateButton} ${
+                                          cloudinaryImage.length > 0 ? 'w-[60%] max-w-[40%] h-[100px]' : 'w-[100%] h-[40px]'
+                                    }  rounded-md py-[8px] flex justify-center items-center gap-[8px] `}
+                                    onClick={(e) => handleButtonClick(e)}
+                              >
+                                    {cloudinaryImage.length > 0 ? 'Tải ảnh lên thêm' : 'Tải ảnh lên'}
+                                    {uploadProductDescriptionImageOne.isPending && cloudinaryImage.length === 0 && (
+                                          <BoxLoading color='text-[#fff]' />
+                                    )}{' '}
+                              </button>
+                        )}
                         {cloudinaryImage.length > 0 && (
                               <React.Fragment>
-                                    <div style={{ width: styleEffect.widthContainerImage }} className='animate-mountComponent'>
-                                          <div className='min-w-full min-h-full flex items-center flex-wrap gap-[20px]'>
+                                    <div style={{ width: styleEffect.widthContainerImage }} className='animate-mountComponent flex-1'>
+                                          <div className='min-w-full min-h-full flex items-center flex-wrap gap-[10px]'>
                                                 {cloudinaryImage.map((preview, index) => {
                                                       return (
                                                             <div
-                                                                  className='relative w-[65px] h-[72px]  animate-pulseCustome flex justify-center items-center'
+                                                                  className={`${
+                                                                        cloudinaryImage.length === 4 ? 'h-[160px]' : 'h-[100px]'
+                                                                  } relative basis-[44%] min-w-[44%] flex-shrink-0  group  animate-pulseCustome flex justify-center items-center`}
                                                                   key={preview.secure_url}
                                                                   onClick={() => {
                                                                         setSelectImageModal(preview.secure_url! as string)
@@ -260,61 +287,53 @@ const UpdateMultipleImage = (props: IProps) => {
                                                                         // handleDeleteImageOne({})
                                                                   }}
                                                             >
-                                                                  <img
-                                                                        src={preview.secure_url}
-                                                                        alt='preview'
-                                                                        className='w-full h-full object-contain'
-                                                                  />
-
-                                                                  <div
-                                                                        className='cursor-pointer absolute top-[-15px] right-[-15px] bg-red-700 h-[24px] w-[24px] p-[2px] flex items-center justify-center'
-                                                                        onClick={(e) => {
-                                                                              e.stopPropagation()
-                                                                              e.preventDefault()
-                                                                              handleDeleteProductDescriptionImageOne({
-                                                                                    public_id: preview.public_id,
-                                                                                    secure_url: preview.secure_url,
-                                                                              })
-                                                                        }}
-                                                                  >
-                                                                        <X size={20} color='white' />
+                                                                  <img src={preview.secure_url} alt='preview' className='w-full h-full ' />
+                                                                  <div className='cursor-pointer hidden group-hover:flex absolute inset-0 bg-[rgba(0,0,0,.5)] justify-center items-center w-full'>
+                                                                        <div
+                                                                              className=' hover:bg-red-500 h-[30px] w-[70%] bg-[#fff] flex text-[#000] rounded-[4px] hover:text-[#fff]  p-[2px] items-center justify-center font-bold text-[14px]'
+                                                                              onClick={(e) => {
+                                                                                    e.stopPropagation()
+                                                                                    e.preventDefault()
+                                                                                    handleDeleteProductDescriptionImageOne({
+                                                                                          public_id: preview.public_id,
+                                                                                          secure_url: preview.secure_url,
+                                                                                    })
+                                                                              }}
+                                                                        >
+                                                                              <span>Xóa hình</span>
+                                                                        </div>
                                                                   </div>
                                                             </div>
                                                       )
                                                 })}
+                                                {uploadProductDescriptionImageOne.isPending && (
+                                                      <div className='skeleton__container flex-1 h-[100px] flex justify-center items-center'>
+                                                            <BoxLoading color='text-color-main' />
+                                                      </div>
+                                                )}{' '}
                                           </div>
                                     </div>
                               </React.Fragment>
                         )}
-                        {uploadProductDescriptionImageOne.isPending && (
-                              <div className='skeleton__container flex-1 h-[80px] flex justify-center items-center'>
-                                    <BoxLoading color='text-color-main' />
-                              </div>
-                        )}{' '}
                   </div>
 
                   {/* {@nút upload file} */}
-                  {cloudinaryImage.length < 4 && (
-                        <button className={`${styleEffect.stateButton}  rounded-md py-[8px]`} onClick={(e) => handleButtonClick(e)}>
-                              {cloudinaryImage.length > 0 ? 'Tải ảnh lên thêm' : 'Tải ảnh lên'}
-                        </button>
-                  )}
 
                   {/* {@Nút button reset, chỉ có khi khi upload ít nhất 1 file hình} */}
                   {cloudinaryImage.length > 0 && (
-                        <div className='mt-[25px]  w-[95px] flex flex-col  gap-[16px] '>
+                        <div className='  flex gap-[10px] text-[12px] '>
                               <button
                                     disabled={cloudinaryImage.length < 0}
                                     onClick={(e) => {
                                           e.preventDefault()
                                           handleDeleteProductImages()
                                     }}
-                                    className='min-w-[150px] px-[12px] py-[6px]  bg-color-main opacity-80 hover:opacity-100 text-[#fff] rounded-md '
+                                    className=' px-[12px] py-[6px]  bg-color-main  text-[#fff] rounded-[4px] '
                               >
                                     Chọn lại từ đầu
                               </button>
                               <div
-                                    className='cursor-pointer bg-color-main text-text-theme h-[35px] flex justify-center items-center  gap-[8px] rounded-md '
+                                    className='cursor-pointer bg-color-main text-[#fff] px-[12px] py-[6px] flex justify-center items-center  gap-[8px] rounded-[4px] '
                                     onClick={() => setModalFilePreview(true)}
                               >
                                     <p>Xem trước</p>
@@ -339,7 +358,7 @@ const UpdateMultipleImage = (props: IProps) => {
                                                 key={selectImageModal}
                                                 src={selectImageModal}
                                                 alt='preview'
-                                                className='w-[600px] h-[600px] bg-yellow-700 object-cover'
+                                                className='w-[600px] h-[600px] bg-slate-300 object-cover'
                                           />
                                           <div
                                                 className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] border-[1px] text-text-theme border-[var(--border-color-input)] bg-white hover:bg-color-main hover:text-[#fff] hover:border-transparent rounded-full flex items-center justify-center'
@@ -354,16 +373,14 @@ const UpdateMultipleImage = (props: IProps) => {
                               )}
 
                               {!selectImageModal && (
-                                    <div
-                                          className={` relative top-[50%] translate-y-[-50%] min-w-[600px] w-auto h-[300px] flex flex-wrap mx-[50px] items-center gap-[16px] justify-center`}
-                                    >
+                                    <div className={` relative   w-auto  flex flex-wrap mx-[50px] items-center gap-[16px] justify-center`}>
                                           {cloudinaryImage.map((preview) => (
                                                 <img
                                                       style={{ width: styleEffect.widthImageModal }}
                                                       key={Math.random().toString()}
                                                       src={preview.secure_url}
                                                       alt='preview'
-                                                      className=' h-full bg-yellow-700'
+                                                      className='w-[24%] h-[240px] bg-slate-300 '
                                                 />
                                           ))}
 
@@ -374,7 +391,7 @@ const UpdateMultipleImage = (props: IProps) => {
                                                       setSelectImageModal('')
                                                 }}
                                           >
-                                                <X size={40} />
+                                                <X size={32} />
                                           </div>
                                     </div>
                               )}

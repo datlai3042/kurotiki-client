@@ -99,7 +99,7 @@ const BoxShopForm = (props: TProps) => {
 
       return (
             <Portal>
-                  <div className='fixed inset-0 bg-[rgba(0,0,0,.4)] h-screen flex items-center justify-center z-[998]'>
+                  <div className='fixed inset-0 bg-[rgba(0,0,0,.75)] h-screen flex items-center justify-center z-[998]'>
                         <div className='animate-authBox  h-max  mx-[10px] xl:mx-0   '>
                               <FormProvider {...form}>
                                     <div className='relative   pr-[10px'>

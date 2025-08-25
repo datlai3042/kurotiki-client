@@ -8,25 +8,25 @@ export type ProductForm = TRegisterFormBook | ProductFoodForm
 
 export type TProductFull =
       | {
-              _id: string
-              shop_id: string
-              product_name: string
-              product_price: number
-              product_thumb_image: {
-                    secure_url: string
-                    public_id: string
-              }
+            _id: string
+            shop_id: string
+            product_name: string
+            product_price: number
+            product_thumb_image: {
+                  secure_url: string
+                  public_id: string
+            }
 
-              product_desc_image: {
-                    secure_url: string
-                    public_id: string
-              }[]
-              product_state: boolean
-              isProductFull?: boolean
-              expireAt?: Date
-              product_type: string
-              attribute: IProductBook
-        }
+            product_desc_image: {
+                  secure_url: string
+                  public_id: string
+            }[]
+            product_state: boolean
+            isProductFull?: boolean
+            expireAt?: Date
+            product_type: string
+            attribute: IProductBook
+      }
       | undefined
 
 export type TProductDetail = {
@@ -82,6 +82,10 @@ export type TProfileImage = {
       isUploadImage: boolean
       FileName: string
       FileLength: number
+      info: {
+            secure_url: string
+            public_id: string
+      }
 }
 
 //@type upload 1 mảng
@@ -95,6 +99,10 @@ export type TChekUploadImage = {
 
 export type TCheckDescriptionImage = TChekUploadImage & {
       numberImage: number
+      info: {
+            secure_url: string
+            public_id: string
+      }[]
 }
 
 export type TProductFormCommon = {

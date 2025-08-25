@@ -112,48 +112,64 @@ const AuthRegister = (props: TProps) => {
       }, [errors, dispatch])
 
       return (
-            <div className=' flex flex-col items-center gap-[15px] px-[24px] py-[35px] max-w-full md:min-w-[400px] bg-color-section-theme text-text-theme'>
-                  <h3 className={` font-black text-[24px]`}>
-                        Đăng kí với <span className='text-color-main font-bold'>KuroTiki</span>
-                  </h3>
-                  <form className='flex flex-1 flex-col gap-[26px] mt-[12px] w-[85%]' noValidate onSubmit={handleSubmit(onSubmit)}>
-                        <div className='w-full'>
+            <div className=' flex flex-col rounded-md items-center gap-[24px] px-[24px] py-[48px] min-w-[550px] bg-[#fff] text-[#000]'>
+                  <div className='mb- w-full text-left'>
+                        <h1 className='text-3xl font-black text-[#040404] mb-1'>Welcome To</h1>
+                        <h2 className='text-3xl font-black text-blue-900'>KuroTiki</h2>
+                  </div>
+                  <form className='flex flex-1 flex-col gap-[26px] mt-[12px] w-full' noValidate onSubmit={handleSubmit(onSubmit)}>
+                        <div className='w-full flex flex-col items-start gap-[8px]'>
+                              <label htmlFor='email' className='block text-sm font-black text-gray-700'>
+                                    Email
+                              </label>
                               <input
                                     {...register('email')}
+                                    id='email'
                                     type='text'
-                                    className={`h-[43px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px]  placeholder:text-stone-500 inputCommon`}
-                                    placeholder='Nhập email của bạn'
+                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px]  placeholder:text-stone-500  inputCommon`}
+                                    placeholder='Email'
                               />
+                        </div>
+                        <div className='w-full flex flex-col items-start gap-[8px]'>
+                              <label htmlFor='password' className='block text-sm font-black text-gray-700'>
+                                    Mật khẩu
+                              </label>
+                              <div className='w-full relative flex flex-col items-start gap-[8px]'>
+                                    <input
+                                          {...register('password')}
+                                          id='password'
+                                          type={typePassword}
+                                          className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px]  placeholder:text-stone-500 inputCommon`}
+                                          placeholder='Mật khẩu'
+                                    />
+                                    <span className='absolute right-[5px] top-[50%] translate-y-[-50%]' onClick={handleShowHidePassword}>
+                                          {typePassword === 'text' ? <EyeOff size={'20px'} /> : <Eye size={'20px'} />}
+                                    </span>
+                              </div>
+                        </div>
+                        <div className='w-full flex flex-col items-start gap-[8px]'>
+                              <label htmlFor='confirm_password' className='block text-sm font-black text-gray-700'>
+                                    Xác nhận mật khẩu
+                              </label>
+                              <div className='w-full relative flex flex-col items-start gap-[8px]'>
+                                    <input
+                                          {...register('confirm_password')}
+                                          id='confirm_password'
+                                          type={typeConfirmPassword}
+                                          className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px]  placeholder:text-stone-500 inputCommon`}
+                                          placeholder='Xác nhận lại mật khẩu'
+                                    />
+                                    <span className='absolute right-[5px]  top-[50%] translate-y-[-50%] ' onClick={handleShowHidePasswordConfirm}>
+                                          {typeConfirmPassword === 'text' ? <EyeOff size={'20px'} /> : <Eye size={'20px'} />}
+                                    </span>
+                              </div>
                         </div>
 
-                        <div className='w-full relative flex items-center'>
-                              <input
-                                    {...register('password')}
-                                    type={typePassword}
-                                    className={`h-[43px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px]  placeholder:text-stone-500 inputCommon`}
-                                    placeholder='Nhập mật khẩu của bạn'
-                              />
-                              <span className='absolute right-[5px]' onClick={handleShowHidePassword}>
-                                    {typePassword === 'text' ? <EyeOff size={'20px'} /> : <Eye size={'20px'} />}
-                              </span>
-                        </div>
-
-                        <div className='w-full relative flex items-center'>
-                              <input
-                                    {...register('confirm_password')}
-                                    type={typeConfirmPassword}
-                                    className={`h-[43px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px]  placeholder:text-stone-500 inputCommon`}
-                                    placeholder='Xác nhận lại mật khẩu'
-                              />
-                              <span className='absolute right-[5px]  ' onClick={handleShowHidePasswordConfirm}>
-                                    {typeConfirmPassword === 'text' ? <EyeOff size={'20px'} /> : <Eye size={'20px'} />}
-                              </span>
-                        </div>
-                        <div className='w-full flex justify-start gap-[6px]'>
+                        <div className='w-full flex justify-start '>
                               <p>
                                     Bạn đã có tài khoản, {''}
                                     <span
-                                          className='underline text-color-main cursor-pointer text-[15px]'
+                                          className='underline text-color-main cursor-pointer text-[15px] font-extrabold'
                                           onClick={() => setModeAuth('Login')}
                                     >
                                           quay lại đăng nhập

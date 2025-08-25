@@ -218,7 +218,7 @@ const FormAddress = (props: TProps) => {
       return (
             <FormProvider {...addressForm}>
                   <form
-                        className='relative  w-full  p-[24px_10px]   flex flex-col gap-[18px] bg-color-section-theme text-text-theme rounded-md'
+                        className='relative  w-full  p-[12px]   flex flex-col gap-[18px] bg-color-section-theme text-text-theme rounded-md'
                         onSubmit={addressForm.handleSubmit(onSubmit)}
                         spellCheck={false}
                   >

@@ -59,7 +59,7 @@ function App() {
                         <SocketProvider>
                               <AuthenticationContext />
                               <RouterController />
-                              <FooterMobile className='block md:hidden' />
+                              <FooterMobile className='block lg:hidden' />
                               <ScrollToAnchor />
                         </SocketProvider>
                   </div>

@@ -58,7 +58,7 @@ const NotificationSection = (props: TProps) => {
 
       return (
             <div className='w-full min-h-[50px] h-max bg-color-section-theme text-text-theme relative py-[20px] mb-[80px] xl:mb-0'>
-                  <div className=' flex flex-col gap-[60px]'>
+                  <div className=' flex flex-col gap-[24px]'>
                         {getMyNotification.data?.pages.map((page) =>
                               page.data.metadata.notifications.notification.notifications_message.map((notification) => {
                                     return (
@@ -69,11 +69,6 @@ const NotificationSection = (props: TProps) => {
                                                 key={notification._id}
                                           >
                                                 <div className='w-full flex flex-col gap-[8px] opacity-80'>
-                                                      <p className='opacity-80 text-end text-[11px] py-[2px] px-[20px] flex items-center justify-between bg-color-main text-[#fff] '>
-                                                            <Circle size={16} color='white' />
-                                                            <span>{convertDateToStringFull(notification.notification_creation_time)}</span>
-                                                      </p>
-
                                                       <div className='w-full flex gap-[24px]'>
                                                             <div className='flex  h-max xl:h-[70%] items-center  justify-between'>
                                                                   <div className=' flex items-center justify-center rounded-full'>
@@ -88,7 +83,7 @@ const NotificationSection = (props: TProps) => {
                                                                         )}
                                                                   </div>
                                                             </div>
-                                                            <div className='flex flex-col flex-1 w-full gap-[8px]  '>
+                                                            <div className='flex flex-col  flex-1 w-full gap-[8px]   '>
                                                                   {notification.notification_attribute.notification_type === 'SYSTEM' && (
                                                                         <span>
                                                                               {notification.notification_attribute.notification_content}
@@ -147,15 +142,18 @@ const NotificationSection = (props: TProps) => {
                                                                                           }
                                                                                     </span>
                                                                               </p>
+                                                                        </div>
+                                                                  )}
+                                                                  <div className='whitespace-pre flex   gap-[16px]  '>
+                                                                        {notification.notification_attribute.notification_type ===
+                                                                              'PRODUCT' && (
                                                                               <Link
                                                                                     to={`/order-check/${notification.notification_attribute.order_id}`}
                                                                                     className='text-left'
                                                                               >
                                                                                     Xem chi tiết
                                                                               </Link>
-                                                                        </div>
-                                                                  )}
-                                                                  <div className='whitespace-pre flex   gap-[16px]  '>
+                                                                        )}
                                                                         {!notification.notification_isRead && (
                                                                               <button
                                                                                     className=' flex items-center gap-[4px]   text-blue-400 hover:text-color-main'
@@ -166,7 +164,7 @@ const NotificationSection = (props: TProps) => {
                                                                                           })
                                                                                     }
                                                                               >
-                                                                                    <Check size={18}/>
+                                                                                    <Check size={18} />
                                                                                     Đánh dấu là đã đọc
                                                                               </button>
                                                                         )}

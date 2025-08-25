@@ -3,18 +3,18 @@ import React from 'react'
 const ProductSkeleton = () => {
       return (
             <div className='animate-pulse bg-color-section-theme flex gap-[16px]'>
-                  <div className=' w-full flex flex-col gap-[24px] p-[8px]'>
-                        <div className=' w-[240px] h-[30px] skeleton__container comment '></div>
+                  <div className=' w-full flex flex-col gap-[16px] p-[8px]'>
+                        <div className=' w-[240px] h-[30px] skeleton__container comment  rounded-lg'></div>
 
                         <div className='top w-full h-screen flex flex-col xl:flex-row gap-[16px]'>
                               <div className='basis-[25%]  static  h-screen xl:sticky top-[16px]    flex flex-col gap-[16px]'>
                                     <div className=' skeleton__container  basis-[55%] w-full  rounded-lg'></div>
-                                    <div className='flex  h-[65px] gap-[12px]'>
-                                          {Array(5)
+                                    <div className='flex  h-[65px] gap-[12px] '>
+                                          {Array(3)
                                                 .fill(0)
                                                 .map((skeleton, index) => (
                                                       <div
-                                                            className=' skeleton__container w-[25%] flex items-center justify-center'
+                                                            className=' skeleton__container  rounded-lg w-[25%] flex items-center justify-center'
                                                             key={index}
                                                       ></div>
                                                 ))}

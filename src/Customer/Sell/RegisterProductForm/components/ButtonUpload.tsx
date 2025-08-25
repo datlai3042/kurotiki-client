@@ -64,6 +64,10 @@ const ButtonUpload = (props: IProps) => {
                         newObject.isUploadImage = true
                         newObject.FileLength = secure_url ? 1 : 0
                         newObject.FileName = secure_url as string
+                        newObject.info = {
+                              secure_url,
+                              public_id,
+                        }
                         return newObject
                   })
             },
@@ -75,7 +79,7 @@ const ButtonUpload = (props: IProps) => {
             mutationFn: ({ public_id, id }: { public_id: string; id: string }) => ProductApi.deleteProductThumb({ public_id, id }),
             onSuccess: () => {
                   setCloudinaryImage({ secure_url: '', public_id: '' })
-                  setUrlProductThumb({ isUploadImage: false, FileLength: 0, FileName: '' })
+                  setUrlProductThumb({ isUploadImage: false, FileLength: 0, FileName: '', info: { secure_url: '', public_id: '' } })
             },
       })
 
@@ -110,6 +114,7 @@ const ButtonUpload = (props: IProps) => {
                   isUploadImage: false,
                   FileName: '',
                   FileLength: 0,
+                  info: { secure_url: '', public_id: '' },
             })
       }
 
@@ -127,44 +132,52 @@ const ButtonUpload = (props: IProps) => {
                         ? 'border-[2px] border-red-700 text-red-700 bg-color-section-theme '
                         : 'text-white bg-color-main border-[2px] border-[var(--border-color-input)]',
 
-            gap: ui.gapElementChildButton || 'gap-[8px]',
+            gap: ui.gapElementChildButton || 'gap-[16px]',
             fontSizeError: ui.fontSizeError || 'text-[12px]',
             colorError: ui.colorError || 'text-red-700',
       }
 
       //@element
       return (
-            <div className={`${styleEffect.gap} w-full min-h-[70px] h-auto flex flex-col`}>
-                  <div className='w-full flex items-center gap-[6px]'>
+            <div className={`${styleEffect.gap} w-full min-h-[70px] h-auto flex flex-col `}>
+                  <div className='w-full flex items-center gap-[16px]'>
                         <label htmlFor={id}>{labelMessage}</label>
                   </div>
                   <input type='file' id={id} hidden ref={inputRef} onChange={(e) => handleInputChange(e)} />
 
                   {cloudinaryImage?.secure_url && (
-                        <div className='animate-pulseCustome  w-[150px]  relative  flex flex-col gap-[8px] justify-center '>
-                              <img src={cloudinaryImage.secure_url} width={150} height={150} alt='preview' className={`w-full h-full object-contain`} />
-                              <div className='w-[100px]  h-[35px]  '>
-                                    <button
-                                          disabled={uploadProductThumb.isPending}
-                                          onClick={(e) => {
-                                                e.stopPropagation()
-                                                e.preventDefault()
-                                                handleDeleteProductThumb(
-                                                      uploadProductThumb.data?.data.metadata.product.product_thumb_image
-                                                            .public_id as string,
-                                                )
-                                                inputRef.current?.click()
-                                          }}
-                                          className=' py-[6px] px-[6px] bg-color-main opacity-80 hover:opacity-100 text-[#fff] rounded-md '
+                        <div className='animate-pulseCustome   relative  flex flex-col gap-[16px] justify-center '>
+                              <img
+                                    src={cloudinaryImage.secure_url}
+                                    width={150}
+                                    height={150}
+                                    alt='preview'
+                                    className={`w-full h-full object-contain`}
+                              />
+                              <div className='flex gap-[8px] text-[12px]'>
+                                    <div className='    '>
+                                          <button
+                                                disabled={uploadProductThumb.isPending}
+                                                onClick={(e) => {
+                                                      e.stopPropagation()
+                                                      e.preventDefault()
+                                                      handleDeleteProductThumb(
+                                                            uploadProductThumb.data?.data.metadata.product.product_thumb_image
+                                                                  .public_id as string,
+                                                      )
+                                                      inputRef.current?.click()
+                                                }}
+                                                className=' py-[6px] px-[6px] bg-color-main  text-[#fff] rounded-[4px] '
+                                          >
+                                                Chọn lại
+                                          </button>
+                                    </div>
+                                    <div
+                                          onClick={() => setModalFilePreview(true)}
+                                          className='cursor-pointer bg-color-main !text-[12px] text-[#fff] py-[6px] px-[6px]  flex items-center justify-center rounded-[4px] gap-[16px]'
                                     >
-                                          Chọn lại
-                                    </button>
-                              </div>
-                              <div
-                                    onClick={() => setModalFilePreview(true)}
-                                    className='cursor-pointer w-[100px] ] bg-color-main text-[#fff]  h-[35px] flex items-center justify-center rounded-[4px] gap-[16px]'
-                              >
-                                    <span>Xem trước</span>
+                                          <span>Xem trước</span>
+                                    </div>
                               </div>
 
                               {modalFilePreview && (
@@ -173,13 +186,13 @@ const ButtonUpload = (props: IProps) => {
                                                 <img
                                                       src={cloudinaryImage.secure_url}
                                                       alt='preview'
-                                                      className='w-full h-full bg-yellow-700 object-contain'
+                                                      className='w-full h-full  object-contain'
                                                 />
                                                 <div
                                                       className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] border-[1px] border-[var(--border-color-input)] text-text-theme bg-white hover:bg-color-main hover:text-[#fff] hover:border-transparent rounded-full flex items-center justify-center'
                                                       onClick={() => setModalFilePreview(false)}
                                                 >
-                                                      <X  size={40} />
+                                                      <X size={40} />
                                                 </div>
                                           </div>
                                     </BoxModal>

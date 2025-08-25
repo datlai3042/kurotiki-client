@@ -65,14 +65,14 @@ const LayoutTranslate = (props: TProps) => {
       useEffect(() => {
             if (wrapperListProductsRef.current) {
                   const num = Math.ceil(widthContainer / widthElemnet)
-                  setLimitShowProduct(Math.ceil(products.length / num))
+                  setLimitShowProduct(Math.ceil(products.length / num -1))
             }
       }, [products, widthContainer, widthElemnet])
 
       return (
             <>
                   {products.length > 0 ? (
-                        <div className='group relative w-full h-[85%] overflow-hidden'>
+                        <div className='group relative w-full h-full overflow-hidden'>
                               <>
                                     <div className=' h-full w-full flex gap-[10px] pb-[8px] ' ref={wrapperListProductsRef}>
                                           {products?.map((product) => (

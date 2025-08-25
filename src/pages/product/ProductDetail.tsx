@@ -62,7 +62,7 @@ const ProductDetail = (props: TProps) => {
                   <div className='basis-[20%] md:basis-[35%] h-max flex justify-center rounded-xl p-[12px]  '>
                         <img
                               src={product!.product_thumb_image.secure_url}
-                              className='cursor-pointer object-contain w-[90%] h-[360px] min-h-[240px] xl:min-h-[360px] xl:max-h-[360px]  transition-all duration-700 rounded-lg'
+                              className='cursor-pointer object-cover object-top w-[90%] h-[360px] min-h-[240px] xl:min-h-[360px] xl:max-h-[360px]  transition-all duration-700 rounded-lg'
                               alt='product'
                               ref={image}
                               onClick={handleOpenModal}

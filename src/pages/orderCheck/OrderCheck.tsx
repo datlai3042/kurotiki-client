@@ -30,7 +30,7 @@ const OrderCheck = () => {
 
       return (
             <div className='flex flex-wrap items-start mx-auto gap-[32px] my-[28px]'>
-                  <div className='order-2 md:order-1 w-[720px] max-w-[90vw] mx-auto overflow-auto  flex flex-col p-[24px_16px_50px] xl:p-[24px_20px_50px]'>
+                  <div className='order-2 md:order-1 max-w-[90vw] mx-auto overflow-auto  flex flex-col '>
                         {getOrderId.isSuccess && (
                               <>
                                     <React.Fragment>
@@ -82,141 +82,106 @@ export const OrderPdf = forwardRef<HTMLDivElement, { carts: CartProduct[]; order
             const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
             const now = convertDateToStringFull(new Date())
             return (
-                  <div ref={ref} className='pb-[24px] relative w-max '>
+                  <div ref={ref} className='pb-[24px] relative w-max h-screen'>
                         <div className='absolute inset-0 w-full h-full opacity-20  '></div>
                         <React.Fragment>
-                              <div className='relative 2 p-[12px_24px]  bg-[#fff]'>
-                                    <div className='flex flex-col gap-[36px] '>
-                                          <div className='flex justify-between flex-wrap gap-[20px]'>
-                                                <div className='flex flex-col gap-[4px]'>
-                                                      <div className='text-[#3e4044] text-[20px] font-semibold'>KUROTIKI</div>
-                                                      <span className='text-[12px] text-color-main font-semibold'>{orders._id}</span>
-                                                </div>
+                              <div className='relative p-6 bg-white shadow-md rounded-md h-screen'>
+                                    {/* Header */}
+                                    <div className='flex justify-between items-center border-b pb-4'>
+                                          <div className='flex items-center gap-3'>
+                                                <img src='/logo.png' alt='Logo' className='' />
                                                 <div>
-                                                      <img src={'/logo.png'} className='min-w-[80px] h-[36px] ' alt='' />
+                                                      <h1 className='text-lg font-semibold'>KUROTIKI</h1>
+                                                      <p className='text-xs text-gray-500'>Invoice Number: {orders._id}</p>
+                                                      <p className='text-xs text-gray-500'>
+                                                            Date: {convertDateToStringFull(orders.order_time_payment as Date)}
+                                                      </p>
                                                 </div>
                                           </div>
+                                          <div className='bg-blue-900 text-white font-bold px-6 py-2 text-lg rounded'>HÓA ĐƠN</div>
+                                    </div>
 
-                                          <div className='flex flex-col gap-[100px] my-[16px]'>
-                                                {carts?.map((product, index) => (
-                                                      <div className='flex flex-col gap-[16px]' key={product.product_id._id}>
-                                                            <div className='flex flex-col h-max gap-[14px]'>
-                                                                  <div className='flex justify-between gap-[16px] border-y-[1px] border-[#ebecef]'>
-                                                                        <div className='flex-1 py-[10px] px-[6px] border-r-[1px] border-l-[1px] border-[#ebecef]'>
-                                                                              <div className='flex flex-col gap-[1px] text-[13px]'>
-                                                                                    <span className='text-[#4a4b4f] text-[14px] font-semibold'>
-                                                                                          Khách hàng
-                                                                                    </span>
-                                                                                    <span className='text-[#92969d]'>
-                                                                                          {user?.fullName || user?.nickName || user?.email}
-                                                                                    </span>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div className='flex-1 py-[10px] px-[6px] border-r-[1px] border-[#ebecef]'>
-                                                                              <div className='flex flex-col gap-[1px] text-[13px]'>
-                                                                                    <span className='text-[#4a4b4f] text-[14px] font-semibold'>
-                                                                                          Địa chỉ
-                                                                                    </span>
-                                                                                    <span className='text-[#92969d]'>
-                                                                                          {renderStringAddressDetailV2(
-                                                                                                product.cart_address,
-                                                                                          )}
-                                                                                    </span>
-                                                                              </div>
-                                                                        </div>
-                                                                        <div className='flex-1 py-[10px] px-[6px] border-r-[1px] border-[#ebecef]'>
-                                                                              <div className='flex flex-col gap-[1px] text-[13px]'>
-                                                                                    <span className='text-[#4a4b4f] text-[14px] font-semibold'>
-                                                                                          Nhà cung cấp
-                                                                                    </span>
-                                                                                    <span className='text-[#92969d]'>
-                                                                                          {product.shop_id.shop_name}
-                                                                                    </span>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div className='flex flex-col gap-[28px]'>
-                                                                        <div className=''>
-                                                                              <table className='min-w-full divide-y divide-gray-200 border border-gray-300'>
-                                                                                    <thead className='bg-gray-100'>
-                                                                                          <tr>
-                                                                                                <th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
-                                                                                                      Hình ảnh
-                                                                                                </th>
-                                                                                                <th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
-                                                                                                      Tên sản phẩm
-                                                                                                </th>
-                                                                                                <th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
-                                                                                                      Số lượng
-                                                                                                </th>
-                                                                                                <th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider'>
-                                                                                                      Giá
-                                                                                                </th>
-                                                                                          </tr>
-                                                                                    </thead>
-                                                                                    <tbody className='bg-white divide-y divide-gray-200'>
-                                                                                          <tr>
-                                                                                                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
-                                                                                                      <div className='w-[40px] rounded-[.4rem] h-[40px]'>
-                                                                                                            <img
-                                                                                                                  src={
-                                                                                                                        product.product_id
-                                                                                                                              .product_thumb_image
-                                                                                                                              .secure_url
-                                                                                                                  }
-                                                                                                                  className='w-full h-full rounded-[.4rem] object-contain'
-                                                                                                                  alt=''
-                                                                                                            />
-                                                                                                      </div>
-                                                                                                </td>
-                                                                                                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
-                                                                                                     <p className='w-[200px] whitespace-pre-wrap'>
-                                                                                                       {product.product_id.product_name}
-                                                                                                     </p>
-                                                                                                </td>
-                                                                                                <td className='px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700'>
-                                                                                                      {product.quantity}
-                                                                                                </td>
-                                                                                                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-700'>
-                                                                                                      <BoxMoney
-                                                                                                            money={
-                                                                                                                  product.quantity *
-                                                                                                                  product.product_id
-                                                                                                                        .product_price
-                                                                                                            }
-                                                                                                            name='VNĐ'
-                                                                                                      />
-                                                                                                </td>
-                                                                                          </tr>
-                                                                                    </tbody>
-                                                                              </table>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                ))}
+                                    {/* Bill From / To */}
+                                    <div className='grid grid-cols-2 gap-8 border-b py-6'>
+                                          <div>
+                                                <p className='font-semibold text-gray-700'>Bill from:</p>
+                                                <p className='text-gray-600 text-sm'>Company Name</p>
+                                                <p className='text-gray-600 text-sm'>Street Address, Zip Code</p>
+                                          </div>
+                                          <div>
+                                                <p className='font-semibold text-gray-700'>Bill to:</p>
+                                                <p className='text-gray-600 text-sm'>{user?.fullName || user?.nickName || user?.email}</p>
+                                                <p className='text-gray-600 text-sm'>
+                                                      {renderStringAddressDetailV2(carts?.[0]?.cart_address)}
+                                                </p>
                                           </div>
                                     </div>
 
-                                    <div className='flex flex-col gap-[36px] mt-auto  p-[12px_0px] print:p-[12px_0px]'>
-                                          <div className='w-full max-w-sm ml-auto mr-[36px] text-sm text-gray-800'>
-                                                <div className='space-y-3 border-b border-gray-300 pb-4'>
-                                                      <div className='flex justify-between font-medium'>
-                                                            <span>Thời gian thanh toán</span>
-                                                            <span>{convertDateToStringFull(orders.order_time_payment as Date)}</span>
-                                                      </div>
-                                                      <div className='flex justify-between'>
-                                                            <span>Tiền phải trả</span>
-                                                            <span>{orders.order_total}</span>
-                                                      </div>
-                                                      <div className='flex justify-between'>
-                                                            <span>Thuế (0%)</span>
-                                                            <span>0.00</span>
-                                                      </div>
-                                                      <div className='flex justify-between pt-4 border-t-4 border-purple-500 font-semibold text-purple-600'>
-                                                            <span>Tổng thanh toán</span>
-                                                            <span>{orders.order_total}</span>
-                                                      </div>
+                                    {/* Items Table */}
+                                    <div className='overflow-x-auto my-6'>
+                                          <table className='min-w-full border border-gray-300'>
+                                                <thead className='bg-gray-100'>
+                                                      <tr>
+                                                            <th className='px-4 py-2 text-left text-sm font-semibold text-gray-700'>
+                                                                  Sản phẩm
+                                                            </th>
+                                                            <th className='px-4 py-2 text-center text-sm font-semibold text-gray-700'>
+                                                                  Số lượng
+                                                            </th>
+                                                            <th className='px-4 py-2 text-center text-sm font-semibold text-gray-700'>
+                                                                  Giá
+                                                            </th>
+                                                            <th className='px-4 py-2 text-center text-sm font-semibold text-gray-700'>
+                                                                  Thuế
+                                                            </th>
+                                                            <th className='px-4 py-2 text-right text-sm font-semibold text-gray-700'>
+                                                                  Tổng cộng
+                                                            </th>
+                                                      </tr>
+                                                </thead>
+                                                <tbody className='divide-y'>
+                                                      {carts?.map((product) => (
+                                                            <tr key={product.product_id._id}>
+                                                                  <td className='px-4 py-2 text-sm text-gray-700'>
+                                                                        {product.product_id.product_name}
+                                                                  </td>
+                                                                  <td className='px-4 py-2 text-sm text-center text-gray-700'>
+                                                                        {product.quantity}
+                                                                  </td>
+                                                                  <td className='px-4 py-2 text-sm text-center text-gray-700'>
+                                                                        <BoxMoney money={product.product_id.product_price} name='VNĐ' />
+                                                                  </td>
+                                                                  <td className='px-4 py-2 text-sm text-center text-gray-700'>0.00</td>
+                                                                  <td className='px-4 py-2 text-sm text-right text-gray-700'>
+                                                                        <BoxMoney
+                                                                              money={product.quantity * product.product_id.product_price}
+                                                                              name='VNĐ'
+                                                                        />
+                                                                  </td>
+                                                            </tr>
+                                                      ))}
+                                                </tbody>
+                                          </table>
+                                    </div>
+
+                                    {/* Footer */}
+                                    <div className='flex justify-end mt-6'>
+                                          <div className='w-full max-w-sm space-y-2 text-sm text-gray-800'>
+                                                <div className='flex justify-between'>
+                                                      <span>Tổng cộng:</span>
+                                                      <span>{orders.order_total}</span>
+                                                </div>
+                                                <div className='flex justify-between'>
+                                                      <span>Giảm giá:</span>
+                                                      <span>0.00</span>
+                                                </div>
+                                                <div className='flex justify-between'>
+                                                      <span>Thuế:</span>
+                                                      <span>0.00</span>
+                                                </div>
+                                                <div className='flex justify-between font-semibold text-blue-900 border-t-2 border-blue-900 pt-2 text-lg'>
+                                                      <span>Thành tiền:</span>
+                                                      <span>{orders.order_total}</span>
                                                 </div>
                                           </div>
                                     </div>

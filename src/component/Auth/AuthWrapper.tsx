@@ -3,7 +3,7 @@ import AuthLogin from './AuthLogin'
 import AuthRegister from './AuthRegister'
 import { useDispatch } from 'react-redux'
 import { doCloseBoxLogin } from '../../Redux/authSlice'
-
+import background from './bg.png'
 export type TModeAuth = 'Login' | 'Register'
 
 type TProps = {
@@ -30,7 +30,7 @@ const AuthWrapper = (props: TProps) => {
                   }}
             >
                   <div
-                        className='animate-authBox max-w-[90vw] md:max-w-max relative  bg-color-section-theme text-text-theme  h-auto shadow-lg rounded-lg p-[8px]'
+                        className='animate-authBox max-w-[90vw] flex md:max-w-max relative  bg-color-section-theme text-text-theme  h-auto shadow-lg rounded-lg p-[8px]'
                         onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
                   >
                         {modeAuth === ('Login' as const) ? (
@@ -38,9 +38,13 @@ const AuthWrapper = (props: TProps) => {
                         ) : (
                               <AuthRegister setModeAuth={setModeAuth} />
                         )}
-
+                        <img
+                              src={background}
+                              className='hidden lg:flex lg:w-[400px] lg:min-w-[400px] xl:w-[600px] xl:min-w-[600px]   rounded-md'
+                              alt='product'
+                        />
                         <button
-                              className='absolute bottom-[102%] right-[0px] w-[50px] py-[5px] rounded-[4px]  bg-color-main hover:border-transparent text-white min-w-[100px] flex justify-center items-center'
+                              className='absolute bottom-[103%] right-[0px] w-[50px] py-[5px] rounded-[4px]  bg-color-main hover:border-transparent text-white min-w-[100px] flex justify-center items-center'
                               onClick={handleHideBoxAuth}
                         >
                               Đóng

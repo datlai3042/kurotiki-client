@@ -45,9 +45,9 @@ const ContentBook = () => {
 
       const styleEffect = {
             onActive: (isActive: boolean) => {
-                  if (isActive) return 'bg-blue-50 border-blue-600 text-blue-600'
+                  if (isActive) return 'bg-color-main text-[#fff] border-blue-600 '
 
-                  return 'bg-transparent border-gray-400 text-slate-600   hover:bg-blue-50 hover:border-blue-600 hover:text-blue-600'
+                  return 'bg-transparent border-gray-400 text-slate-600   hover:bg-color-main hover:border-blue-600 hover:text-[#fff]'
             },
       }
 
@@ -67,17 +67,17 @@ const ContentBook = () => {
       }
 
       return (
-            <div className='max-w-full w-full h-[485px] bg-color-section-theme text-text-theme rounded-lg p-[20px] flex flex-col gap-[16px]'>
+            <div className='max-w-full w-full h-[456px] bg-[var(--bg-color-product-wrapper)] text-text-theme rounded-lg p-[12px] flex flex-col gap-[16px]'>
                   <h3>Các sản phẩm về sách</h3>
 
-                  <div className='overflow-hidden'>
+                  <div className=''>
                         <div className=' max-w-full flex gap-[20px] min-h-[40px]  overflow-auto md:overflow-hidden'>
                               {CATEGORY_BOOK.map((btn) => (
                                     <button
                                           key={btn.label}
                                           className={`${styleEffect.onActive(
                                                 btn.value === type,
-                                          )} py-[6px] min-w-[150px] max-w-full rounded-[999px] h-max`}
+                                          )} py-[6px] min-w-[150px]  max-w-full rounded-[999px] h-max`}
                                           onClick={() => setType(btn.value as TypeFilterBook)}
                                     >
                                           {btn.label}
@@ -86,7 +86,7 @@ const ContentBook = () => {
                         </div>
                   </div>
 
-                  <div className='relative w-full h-[85%] overflow-hidden'>
+                  <div className='relative w-full h-[420px] overflow-y-visible overflow-x-hidden '>
                         {getProductBookAllType.isSuccess && type === 'All' && <LayoutTranslate products={productAll as TProductDetail[]} />}
                         {getProductBookAllType.isSuccess && type === 'Manga' && (
                               <LayoutTranslate products={productManga as TProductDetail[]} />

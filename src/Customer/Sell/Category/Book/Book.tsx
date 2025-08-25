@@ -49,7 +49,8 @@ const Book = (props: TProps) => {
                               <TextArea
                                     {...field}
                                     maxLength={10000}
-                                    rows={16}
+                                    placeholder='Nhập mô tả sản phẩm'
+                                    rows={4}
                                     className='bg-color-section-theme text-text-theme border-[1px] border-[var(--border-color-input)]'
                               />
                         )}

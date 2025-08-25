@@ -55,7 +55,7 @@ const CommentImageAll = (props: TProps) => {
                         <div className=' my-[25px] xl:min-h-[120px] p-[16px_20px] h-max flex flex-col gap-[16px]'>
                               <h4 className='text-[18px] font-semibold '>Tất cả hình ảnh</h4>
                               {getAllCommentImage.isSuccess && (
-                                    <div className='relative w-full  flex  gap-[16px] min-h-[80px] overflow-auto'>
+                                    <div className='relative w-full  flex  gap-[16px] min-h-[60px] overflow-auto'>
                                           <div className=' h-full  '>
                                                 <div className='w-full h-full flex flex-1  gap-[16px]'>
                                                       {comment_images?.map((image) => (
@@ -63,7 +63,7 @@ const CommentImageAll = (props: TProps) => {
                                                                   onClick={() => onClickOpenModel(image.image.secure_url)}
                                                                   key={image.image._id}
                                                                   src={image.image.secure_url}
-                                                                  className='w-[80px] h-[80px] rounded hover:cursor-pointer'
+                                                                  className='w-[60px] h-[60px] rounded hover:cursor-pointer'
                                                                   alt='comment'
                                                             />
                                                       ))}
@@ -71,7 +71,7 @@ const CommentImageAll = (props: TProps) => {
                                           </div>
                                           <div
                                                 // style={{ backgroundImage: `url(${comment_images && comment_images[0]?.image.secure_url})` }}
-                                                className='relative w-[80px] h-[80px] hover:cursor-pointer rounded '
+                                                className='relative w-[60px] h-[60px] hover:cursor-pointer rounded '
                                                 onClick={() => onClickOpenModel(imageUrl[0].secure_url)}
                                           >
                                                 <div

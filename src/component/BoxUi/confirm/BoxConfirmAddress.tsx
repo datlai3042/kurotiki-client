@@ -1,5 +1,5 @@
 import React, { SetStateAction, useState } from 'react'
-import { X } from 'lucide-react'
+import { Plus, X } from 'lucide-react'
 import { Radio, RadioChangeEvent } from 'antd'
 import Portal from '../../Portal'
 import FormAddress from '../../../forms/FormAddress'
@@ -189,7 +189,7 @@ const BoxConfirmAddress = (props: TProps) => {
                                                       <div
                                                             className={`${
                                                                   valueAddress === 'Other' ? 'min-h-[30px]' : ''
-                                                            }  mx-[8px]  max-h-[65px] overflow-auto flex flex-col gap-[5px] text-text-theme`}
+                                                            }  mx-[8px]  max-h-[200px] overflow-auto flex flex-col gap-[12px] text-text-theme`}
                                                       >
                                                             {user?.user_address.map((address, index) => {
                                                                   return (
@@ -215,11 +215,16 @@ const BoxConfirmAddress = (props: TProps) => {
                                                                   )
                                                             })}
                                                       </div>
-                                                      <Radio value={'Other'} className='text-text-theme  mx-[8px]'>
-                                                            Chọn địa chỉ khác
-                                                      </Radio>
                                                 </Radio.Group>
-
+                                                <div className='flex w-full justify-start text-[12px] text-[#fff] my-[24px]'>
+                                                      <button
+                                                            className='flex gap-[8px] p-[4px] bg-[#0d3188] items-center justify-center rounded'
+                                                            onClick={() => setValueAddress('Other')}
+                                                      >
+                                                            <Plus />
+                                                            <span>Chọn địa chỉ khác</span>
+                                                      </button>
+                                                </div>
                                                 {valueAddress !== 'Other' && (
                                                       <div className='mt-[20px]' onClick={onVerifyAddress}>
                                                             <BoxButton content='Xác nhận' />

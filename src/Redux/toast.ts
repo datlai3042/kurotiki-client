@@ -5,7 +5,7 @@ const toastSlice = createSlice({
       name: 'toast',
       initialState: {
             toast: [] as TToast[],
-            timerToast: 5,
+            timerToast: 8,
       },
       reducers: {
             addToast: (state, payload: PayloadAction<TToast>) => {

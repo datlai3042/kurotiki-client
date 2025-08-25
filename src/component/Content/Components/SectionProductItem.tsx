@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import PositionIcon from '../../BoxUi/BoxAbsolute'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ShoppingCart } from 'lucide-react'
 import BoxCenter from '../../BoxUi/BoxCenter'
 import BoxIsBought from '../../BoxUi/BoxIsBought'
 import BoxAbsolute from '../../BoxUi/BoxAbsolute'
@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import BoxMoneyV2 from '../../BoxUi/BoxMoneyV2'
 import useResetTransform from '../hooks/useResetTransform'
 import { debounce } from 'lodash'
+import DiscountLogo from '../assets/img/Navigate/discount.png'
 
 type Props = {}
 
@@ -22,7 +23,7 @@ const SectionProductItem = (props: Props) => {
 
       const { widthContainer } = useResetTransform(wrapperListProductsRef, (width: number) => {
             setCount(0)
-            let result = width / Math.floor(width / 160) - 16
+            let result = width / Math.floor(width / 160)
             setWidthElement(result)
             PositionScrollCurrent.current = 0
       })
@@ -33,10 +34,14 @@ const SectionProductItem = (props: Props) => {
             staleTime: 1000 * 60 * 5,
       })
 
+      useEffect(() => {
+            console.log({ pos: PositionScrollCurrent.current })
+      }, [count])
+
       const handleClickNext = () => {
             if (wrapperListProductsRef.current) {
                   setCount((prev) => prev + 1)
-                  const numberScroll = widthElemnet * Math.floor(widthContainer / widthElemnet)
+                  const numberScroll = widthElemnet * Math.floor(widthContainer / widthElemnet) + 16
                   PositionScrollCurrent.current = PositionScrollCurrent.current - numberScroll
                   wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
                   wrapperListProductsRef.current.style.transition = `all 1s`
@@ -46,7 +51,7 @@ const SectionProductItem = (props: Props) => {
       const handleClickPrev = () => {
             if (wrapperListProductsRef.current) {
                   setCount((prev) => prev - 1)
-                  const numberScroll = widthElemnet * Math.floor(widthContainer / widthElemnet)
+                  const numberScroll = widthElemnet * Math.floor(widthContainer / widthElemnet) + 16
 
                   PositionScrollCurrent.current = PositionScrollCurrent.current + numberScroll
 
@@ -59,7 +64,12 @@ const SectionProductItem = (props: Props) => {
             if (allProduct.isSuccess) {
                   if (wrapperListProductsRef.current) {
                         const num = Math.round(widthContainer / widthElemnet)
-                        setLimitShowProduct(Math.ceil(allProduct.data.data.metadata.products.length / num))
+                        console.log({
+                              num,
+                              calc: Math.ceil(allProduct.data.data.metadata.products.length / num),
+                              length: allProduct.data.data.metadata.products.length,
+                        })
+                        setLimitShowProduct(Math.ceil(allProduct.data.data.metadata.products.length / num - 1))
                   }
             }
       }, [allProduct.isSuccess, allProduct?.data?.data.metadata.products.length, widthContainer, widthElemnet])
@@ -72,32 +82,44 @@ const SectionProductItem = (props: Props) => {
       }
 
       return (
-            <div className='h-[85%] mx-[4px] group relative overflow-hidden pb-[8px] bg-color-section-theme text-text-theme '>
-                  <div ref={wrapperListProductsRef} className=' h-full  flex  gap-[12px] xl:gap-[34px] px-[18px] w-full snap-mandatory	'>
+            <div className='h-[85%] mx-[4px] group relative overflow-hidden pb-[8px]  text-text-theme '>
+                  <div ref={wrapperListProductsRef} className=' h-full  flex  gap-[12px] xl:gap-[12px] px-[18px] w-full snap-mandatory	'>
                         {allProduct.isSuccess &&
-                              allProduct?.data?.data?.metadata.products.map((product: TProductReturn) => {
+                              allProduct?.data?.data?.metadata.products.map((product: TProductReturn, index) => {
                                     return (
                                           <Link
                                                 style={{ flexBasis: widthElemnet, flexShrink: 0 }}
                                                 to={`/product/${product._id}`}
-                                                className='flex flex-col  h-full snap-always snap-start	 '
+                                                className='flex flex-col w-full h-[270px] snap-always snap-start	border-[1px] border-[var(--border-color-input)] rounded-md '
                                                 key={product._id}
                                           >
-                                                <div className='w-full h-full flex flex-col gap-[12px]'>
-                                                      <img
-                                                            src={product?.product_thumb_image?.secure_url}
-                                                            className='w-full h-[156px] max-h-[160px] object-contain'
-                                                            alt='product'
-                                                      />
-                                                      <div className='w-full h-[20px] text-[16px]'>
-                                                            <BoxMoneyV2 money={product.product_price} />
+                                                <div className='w-full h-full flex flex-col gap-[12px] p-[12px_12px]  rounded-lg'>
+                                                      <div className='bg-[#fff] flex items-center h-[175px] max-h-[175px] justify-center rounded-md'>
+                                                            <img
+                                                                  src={product?.product_thumb_image?.secure_url}
+                                                                  className='w-[96%] min-w-[96%] h-[96%] max-h-[96%] object-cover object-top rounded-md'
+                                                                  alt='product'
+                                                            />
+                                                      </div>
+
+                                                      <div className='w-full h-[20px] flex justify-center text-[16px]'>
+                                                            <BoxMoneyV2 money={product.product_price} color='text-[#ff4c57]' />
                                                       </div>
                                                       <div
                                                             style={{ backgroundColor: 'rgba(53, 51, 106, .25)' }}
                                                             className='relative w-full h-[20px] flex items-center justify-center  rounded-[999px]'
                                                       >
-                                                            <div className='absolute top-0 left-0 w-[20px] h-full rounded-full bg-color-main'></div>
-                                                            <span className='text-[11px] text-white'>Vừa mở bán</span>
+                                                            <div className='absolute top-0 left-0 w-[20px] flex items-center justify-center h-full rounded-full bg-[#e03a45]'>
+                                                                 
+                                                            </div>
+                                                            {index % 2 === 0 ? (
+                                                                  <span className='text-[11px] text-white'>Vừa mở bán</span>
+                                                            ) : (
+                                                                  <span className='text-[11px] text-white flex gap-[8px]'>
+                                                                        Đã bán {Math.ceil(Math.random() * 100)}
+                                                                        <ShoppingCart size={14} className='text-[#e03a45]'/>
+                                                                  </span>
+                                                            )}
                                                       </div>
                                                 </div>
                                           </Link>

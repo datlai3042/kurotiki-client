@@ -5,6 +5,7 @@ import ShopLogo from '../../../component/Content/assets/img/Label/offical.png'
 import { Rate } from 'antd'
 import { useQuery } from '@tanstack/react-query'
 import ShopApi from '../../../apis/shop.api'
+import { Store } from 'lucide-react'
 
 type TProps = {
       product_id?: string
@@ -29,10 +30,10 @@ const ProductShopInfo = (props: TProps) => {
                                                 className=' w-[40px] h-[40px] rounded-full'
                                                 alt='shop avatar'
                                           />
-                                          <div className='flex  flex-col gap-[6px] xl:gap-[8px]'>
-                                                <div className='w-max flex  flex-col-reverse xl:flex-row gap-[6px]'>
+                                          <div className='flex  flex-col gap-[6px] xl:gap-[4px]'>
+                                                <div className='w-max flex  flex-col-reverse xl:flex-row gap-[10px]'>
                                                       <span className='font-medium text-[14px]'>{shop.shop_name}</span>
-                                                      <img src={ShopLogo} className='object-contain w-[80px]' alt='label logo' />
+                                                      <img src={ShopLogo} className='object-contain w-[64px]' alt='label logo' />
                                                 </div>
                                                 <div className='flex items-center gap-[6px] w-max'>
                                                       <Rate disabled allowHalf value={shop.shop_vote || 4.5} className='text-[12px]' />
@@ -40,13 +41,12 @@ const ProductShopInfo = (props: TProps) => {
                                                             ({shop.shop_count_total_vote} đánh giá)
                                                       </span>
                                                 </div>
+                                                <div className='mt-[8px] self-start justify-self-start flex flex-col gap-[12px]'>
+                                                      <button className='min-w-[60px] w-max h-[30px]  text-[13px] gap-[6px] p-[8px] border-[1px] border-[var(--border-color-input)] hover:border-transparent hover:bg-color-main flex items-center justify-center rounded-md'>
+                                                            <Store size={14} className='mt-[-1px]'/> Xem shop
+                                                      </button>
+                                                </div>
                                           </div>
-                                    </div>
-
-                                    <div className='ml-[30px] self-start justify-self-start flex flex-col gap-[12px]'>
-                                          <button className='min-w-[60px] w-max h-[30px] p-[8px] border-[1px] border-[var(--border-color-input)] hover:border-transparent hover:bg-color-main flex items-center justify-center rounded-md'>
-                                                Xem shop
-                                          </button>
                                     </div>
                               </div>
                         </Link>

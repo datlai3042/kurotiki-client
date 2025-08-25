@@ -24,10 +24,10 @@ const ProductMedium = (props: TProps) => {
                   to={`/product/${product._id}`}
                   className='w-full h-full  flex flex-col  gap-[10px] border-[1px] border-[var(--border-color-input)]  rounded-lg bg-color-section-theme text-text-theme hover:shadow-xl p-1'
             >
-                  <div className='relative w-full h-[60%]'>
+                  <div className='relative w-full h-[60%] p-[8px]'>
                         <img src={product.product_thumb_image?.secure_url} className='object-contain w-full h-[77%] rounded-t-lg' alt='' />
-                        <div className=' absolute bottom-0 left-0 px-[10px] flex flex-col gap-[5px]'>
-                              {TikiBest && <img src={TikiBestLogo} className='w-[80px]' alt='logo-tiki-best' />}
+                        <div className=' absolute bottom-[15px] left-0 px-[10px] flex  gap-[5px]'>
+                              {TikiBest && <img src={TikiBestLogo} className='w-[60px]' alt='logo-tiki-best' />}
                               <ProductLabel content='Chính hãng' />
                         </div>
                   </div>
@@ -35,7 +35,7 @@ const ProductMedium = (props: TProps) => {
                         <span className='w-[95%] break-words  line-clamp-2 text-[12px] font-normal'>{product.product_name}</span>
                         <Rate disabled allowHalf defaultValue={product.product_votes} className='text-[12px]' />
                   </div>
-                  <span className='px-[10px] flex-1 break-words line-clamp-2 text-[14px] font-medium'>{product.product_price}</span>
+                  <span className='px-[10px] flex-1 break-words  text-[14px] font-medium mt-auto flex items-end'>{product.product_price} VNĐ</span>
                   <div className='h-[40px] flex items-center gap-[8px] px-[10px] pt-[4px] border-t-[1px]  border-[var(--border-color-input)]'>
                         {ship ? (
                               <img src={logoNow} className='hidden xl:inline w-[30px] h-[16px] rounded-xl' alt='' />

@@ -45,20 +45,21 @@ const RouterController = () => {
       const showOverload = useSelector((state: RootState) => state.uiSlice.showOverload)
 
       const styleEffect = {
-            matchPathName: window.location.pathname !== '/payment' ? '  pt-[65px] md:pt-[75px] pb-[45px] md:pb-0' : '',
+            matchPathName: window.location.pathname !== '/payment' ? '  pt-[65px] md:pt-[60px] pb-[45px] md:pb-0' : '',
             matchPathNameCustomer: pathName.startsWith('/customer') ? 'top-[0px] ' : 'top-[60px] lg:h-[calc(100vh-100px)]',
-            layoutFull: pathName?.startsWith('/customer') ? '' : 'mx-auto max-w-full  xl:max-w-full',
+            layoutFull: pathName?.startsWith('/customer') ? '' : 'mx-auto max-w-full  xl:max-w-[1400px]',
       }
+      const uiSlice = useSelector((state: RootState) => state.uiSlice.showSideBar)
 
       return (
             <>
                   {!hiddenHeader && <Header />}
 
                   <div
-                        className={`${styleEffect.matchPathName} ${styleEffect.layoutFull} z-[1]  flex-1 w-full  items-stretch h-max  flex flex-col md:flex-row gap-[4px]    bg-color-gap-empty 
+                        className={`${styleEffect.matchPathName} ${styleEffect.layoutFull} z-[1]  flex-1 w-full  items-stretch h-max  flex flex-col md:flex-row gap-[18px]    bg-color-gap-empty 
 `}
                   >
-                        <Sidebar />
+                        {true && <Sidebar />}
                         <Routes>
                               <Route path='/admin' element={<Admin />} />
                               <div id='' className={`${styleEffect.matchPathNameCustomer}  relative  lg:flex  gap-8 `}>
@@ -105,7 +106,7 @@ const RouterController = () => {
 
                               <Route path='*' element={<NotFound />} />
                         </Routes>
-                        {showOverload && <div className='w-full h-full fixed inset-0 bg-[rgba(0,0,0,.75)] z-[500] mt-[75px]'></div>}
+                        {showOverload && <div className='w-full h-full fixed inset-0 bg-[rgba(0,0,0,.75)] z-[500] mt-[60px]'></div>}
                   </div>
             </>
       )

@@ -55,7 +55,7 @@ const ShopOwnerLayout = (props: TProps) => {
                               {/* <img src={shop.shop_avatar_default} className='h-full w-full rounded-full' alt='shop_image' /> */}
                         </div>
 
-                        <div className='ml-[20px]   xl:ml-[240px] flex flex-row flex-wrap min-h-[40px] xl:items-center gap-[16px]'>
+                        <div className='ml-[20px] font-semibold   xl:ml-[240px] flex flex-row flex-wrap min-h-[40px] xl:items-center gap-[16px]'>
                               <button
                                     className={`${styleEffect.onActive(
                                           filterMode === 'PRODUCT_SHOP',

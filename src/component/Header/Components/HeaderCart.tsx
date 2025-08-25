@@ -21,7 +21,7 @@ const HeaderCart = () => {
       useEffect(() => {}, [cartQuery.data?.data.metadata.count])
 
       return (
-            <Link className='2xl:w-[45px] flex items-center justify-center px-2 py-[4px] hover:bg-color-main rounded group' to={'/cart'}>
+            <Link className=' flex items-center justify-center px-2 py-[4px] hover:bg-color-main rounded group' to={'/cart'}>
                   <span className='flex relative'>
                         <ShoppingCart size={20} className='text-blue-600 group-hover:text-[#fff]' />
 

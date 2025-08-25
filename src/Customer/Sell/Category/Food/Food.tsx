@@ -68,7 +68,9 @@ const Food = () => {
                               <TextArea
                                     {...field}
                                     maxLength={10000}
-                                    rows={16}
+                                    rows={4}
+                                    placeholder='Nhập mô tả sản phẩm'
+
                                     className='bg-color-section-theme text-text-theme border-[1px] border-[var(--border-color-input)]'
                               />
                         )}

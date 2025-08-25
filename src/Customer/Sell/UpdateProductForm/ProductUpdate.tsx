@@ -73,12 +73,17 @@ const ProductFormUpdate = <T, K>(props: TProps<T, K>) => {
             isUploadImage: true,
             FileName: product?.product_thumb_image.secure_url as string,
             FileLength: 1,
+            info: {
+                  secure_url: '',
+                  public_id: '',
+            },
       })
 
       //@lấy thông tin các hình
       const [urlProductMultipleImage, setUrlProductMultipleImage] = useState<TCheckDescriptionImage>({
             numberImage: 0,
             isUploadImage: false,
+            info: []
       })
 
       //@lấy thông tin tên các hình

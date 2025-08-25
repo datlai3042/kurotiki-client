@@ -111,7 +111,7 @@ const Product = () => {
             <div className='flex flex-col w-full text-[12px] text-text-theme gap-[20px]'>
                   <div className=' w-full flex flex-col gap-[4px] '>
                         {getProductWithId.data?.data && (
-                              <div className='flex items-center gap-[4px] p-[8px_20px_6px_20px] text-[20px] font-extrabold '>
+                              <div className='flex items-center gap-[4px] p-[12px_20px_10px_0px] text-[20px] font-extrabold '>
                                     <Link to='/'>Trang chủ</Link>
 
                                     <ChevronRight size={16} />
@@ -125,7 +125,7 @@ const Product = () => {
                               <div className='  flex gap-[16px] xl:gap-[12px] xl:mt-0'>
                                     <div className='w-full xl:w-[74%] flex flex-col gap-[12px]'>
                                           <div className='top w-full min-h-[1000px] h-max flex flex-col xl:flex-row gap-[12px]'>
-                                                <div className='xl:w-[40%] static xl:sticky top-[32px] xl:top-[85px] bg-color-section-theme px-[3px] pt-[16px] pb-[24px] rounded-lg  h-max flex flex-col gap-[16px] '>
+                                                <div className='xl:w-[40%] static xl:sticky top-[32px] xl:top-[70px] bg-color-section-theme px-[3px] pt-[16px] pb-[24px] rounded-lg  h-max flex flex-col gap-[16px] '>
                                                       <ProductDetail product={product} isSuccess={getProductWithId.isSuccess} />
                                                 </div>
                                                 <div className='xl:w-[60%]  min-h-[500px] h-max mt-[20px] xl:mt-0 rounded-lg '>
@@ -149,7 +149,7 @@ const Product = () => {
                                                 <Comment product_id={product?._id} />
                                           </div>
                                     </div>
-                                    <div className='hidden xl:flex w-[40%] xl:w-[26%] sticky top-[100px] xl:top-[85px] h-max pb-[15px] bg-color-section-theme  rounded-md'>
+                                    <div className='hidden xl:flex w-[40%] xl:w-[26%] sticky top-[100px] xl:top-[70px] h-max pb-[15px] bg-color-section-theme  rounded-md'>
                                           <ProductPay product={product} />
                                     </div>
                               </div>

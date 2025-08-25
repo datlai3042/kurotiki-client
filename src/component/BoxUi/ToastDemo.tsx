@@ -79,15 +79,8 @@ const ToastDemo = (props: TProps) => {
                         <div
                               onMouseEnter={handleOnMouseEnter}
                               onMouseLeave={handleOnMouseLeave}
-                              className={`${styleEffect.type_toast} animate-toastAnimation min-w-[250px] max-w-[300px] bg-[#ffffff] pt-[8px] px-[6px] xl:pt-[16px] py-[20px] xl:px-[12px]   relative    h-max   rounded-lg transition-all duration-1000  flex items-center justify-center`}
+                              className={`${styleEffect.type_toast} animate-toastAnimation min-w-[250px] max-w-[300px] bg-[#ffffff] pt-[8px] px-[6px] xl:pt-[16px] py-[24px] xl:px-[12px]   relative    h-max   rounded-lg transition-all duration-1000  flex items-center justify-center`}
                         >
-                              <div
-                                    className={`${styleEffect.bgBoxTime} absolute top-[15px] right-[35px] w-[50px] h-[20
-
-px] xl:w-[60px] xl:h-[30px] flex items-center justify-center rounded-md  text-white `}
-                              >
-                                    <span>{DateTime.now().setZone(localDateTime).toLocaleString(DateTime.TIME_24_SIMPLE)}</span>
-                              </div>
                               <span
                                     style={{ width: `${276 / Math.ceil(time)}px` }}
                                     className={`${styleEffect.type_toast}  absolute top-[0px] left-0   h-[3px] transition-all duration-300`}
@@ -98,21 +91,22 @@ px] xl:w-[60px] xl:h-[30px] flex items-center justify-center rounded-md  text-wh
                                     className={`${styleEffect.type_toast}  absolute bottom-[0px] left-0   h-[3px] transition-all duration-1000`}
                               ></span>
 
-                              <div className='w-full flex gap-[8px] mt-[10px] px-[16px] items-center'>
-                                    <span>
-                                          {toast.type === 'SUCCESS' ? (
-                                                <ShieldCheck size={32} />
-                                          ) : toast.type === 'ERROR' ? (
-                                                <ShieldX size={32} />
-                                          ) : (
-                                                <ShieldAlert size={32} />
-                                          )}
-                                    </span>
+                              <div className='w-full flex gap-[8px] mt-[10px] items-center'>
                                     <div className='flex flex-col gap-[8px] h-max text-[13px]'>
-                                          <span className='uppercase'>{toast.type}</span>
-                                          <span className='mb-[12px]'>{toast.message}</span>
+                                          <div className=' flex gap-[8px] items-center'>
+                                                <span>
+                                                      {toast.type === 'SUCCESS' ? (
+                                                            <ShieldCheck size={32} />
+                                                      ) : toast.type === 'ERROR' ? (
+                                                            <ShieldX size={32} />
+                                                      ) : (
+                                                            <ShieldAlert size={32} />
+                                                      )}
+                                                </span>
+                                                {toast.message}
+                                          </div>
                                           {toast.subMessage && toast?.subMessage?.length > 0 && (
-                                                <div className='flex flex-col gap-[8px]'>
+                                                <div className='flex flex-col gap-[8px] mx-[8px] mb-[12px]'>
                                                       {toast.subMessage.map((sub) => (
                                                             <div className='relative flex items-center gap-[8px]' key={sub}>
                                                                   <span
@@ -132,7 +126,7 @@ px] xl:w-[60px] xl:h-[30px] flex items-center justify-center rounded-md  text-wh
                               </span>
                               <span
                                     onClick={(e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => handleControllCloseToast(e, toast.id)}
-                                    className={`absolute flex justify-center items-center top-[5px] animate-pulse right-[5px] w-[30px] h-[30px] p-[4px] text-[12px]  cursor-pointer`}
+                                    className={`absolute flex justify-center items-center top-[5px] animate-pulse right-[5px] w-[30px] h-[30px] p-[4px] text-[11px]  cursor-pointer`}
                               >
                                     <X color={`${styleEffect.type_toast_icon}`} />
                               </span>

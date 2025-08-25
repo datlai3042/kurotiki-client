@@ -13,7 +13,7 @@ import AuthPermission from '../component/Auth/AuthPermission'
 import NotFound from '../component/Errors/NotFound'
 
 //@icon
-import { BellDot, Key, Lock, Mail, MapPinned, NotebookPen, ShoppingBag, ShoppingCart, Store } from 'lucide-react'
+import { BellDot, Key, Lock, Mail, MapPinned, NotebookPen, Plus, ShoppingBag, ShoppingCart, Store } from 'lucide-react'
 import { UserRound } from 'lucide-react'
 import { UserResponse } from '../types/user.type'
 import { useQuery } from '@tanstack/react-query'
@@ -78,26 +78,32 @@ const Customer = () => {
       //@element
       return (
             <>
-                  <div className=' text-[14px] max-w-[98vw]  w-[1240px] mx-auto min-h-full flex flex-col pt-[15px] xl:pt-[0px] mt-0 gap-[6px]'>
+                  <div className=' text-[14px] max-w-[98vw]  w-[1280px] mx-auto min-h-full flex flex-col  pt-[15px] xl:pt-[0px]  pb-[24px] mt-0 '>
                         {/* @header */}
-                        <div className='hidden lg:block text-[16px] text-[#66666b] p-[6px_0] '>
-                              <Link to={'/'} className='font-bold'>
-                                    Trang chủ
-                              </Link>
-                              <span> {' > '}</span>
-                              <Link className='text-color-main font-bold' to={textLink?.path as string}>
-                                    {textLink?.text}
-                              </Link>
-                        </div>
 
                         {user ? (
-                              <div className=' w-full flex gap-[2%]  text-text-theme '>
+                              <div className=' w-full flex gap-[3%] text-[13px]  text-text-theme'>
                                     {/* @navigate pathname */}
-                                    <LeftSide textLink={textLink} />
+                                    <div className='hidden lg:flex flex-col   xl:w-[20%]'>
+                                          <div className='hidden lg:block text-[16px] text-[#66666b] p-[20px_0] '>
+                                                <Link to={'/'} className='font-bold'>
+                                                      Trang chủ
+                                                </Link>
+                                                <span> {' > '}</span>
+                                                <Link className='text-color-main font-bold' to={textLink?.path as string}>
+                                                      {textLink?.text}
+                                                </Link>
+                                          </div>
+                                          <LeftSide textLink={textLink} />
+                                    </div>
                                     {/*@ Outlet */}
 
-                                    <div className='w-full xl:w-[75%] flex flex-col flex-1'>
-                                          <div className='hidden xl:flex h-[40px]  text-[20px]  items-center'>{textLink?.text}</div>
+                                    <div className='w-full px-[16px] lg:px-0 lg:w-[75%] flex flex-col flex-1'>
+                                          <div className='hidden xl:flex justify-between text-[20px] font-semibold  items-center p-[20px_0]'>
+                                                {textLink?.text}
+
+                                               
+                                          </div>
                                           {auth ? (
                                                 <CustomerWrapperItem>
                                                       <div className='w-full flex flex-col gap-[8px]'>

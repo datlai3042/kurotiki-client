@@ -24,7 +24,7 @@ const ProductBestSellerItem = (props: TProps) => {
                   className='flex gap-[10px]  bg-color-section-theme text-text-theme rounded-md max-w-full h-full'
             >
                   <div className='w-[160px] h-full relative'>
-                        <img src={product.product_thumb_image.secure_url} className='w-full h-full' alt='product' />
+                        <img src={product.product_thumb_image.secure_url} className='w-full h-full object-contain' alt='product' />
                         <img src={Logo} alt='logo' className='absolute top-0 left-0 w-[80px] h-[20px] ' />
                         {rank <= 3 && <img src={rankImage} alt='logo' className='absolute top-0 right-[-20px]  w-[80px] h-[60px] ' />}
                   </div>

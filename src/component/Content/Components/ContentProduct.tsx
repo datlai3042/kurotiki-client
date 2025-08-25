@@ -17,6 +17,7 @@ import dienThoaiMayTinhBang from '../../Sidebar/img/danhMuc/dienThoaiMayTinhBang
 import mayAnhCamera from '../../Sidebar/img/danhMuc/mayAnhMayQuayPhim.jpg'
 import oto from '../../Sidebar/img/danhMuc/otoXeMayVaXeDap.jpg'
 import { ShopResponse } from '../../../types/shop.type'
+import BoxLoading from '../../BoxUi/BoxLoading'
 
 type TagActiveArray = '/book' | '/food' | '/watch' | '/phone-laptop' | '/camera' | '/honda'
 
@@ -30,7 +31,7 @@ const arrayCategory: { image: string; label: string; href: TagActiveArray }[] = 
       { image: oto, label: 'Xe máy', href: '/honda' },
 ]
 
-const LIMIT = 8
+const LIMIT = 10
 const ContentProduct = () => {
       const refPos = useRef<HTMLDivElement | null>(null)
       const stickyRef = useRef<HTMLDivElement>(null)
@@ -120,11 +121,11 @@ const ContentProduct = () => {
       }
 
       return (
-            <div className=' z-[5] w-full min-h-[370px] h-max  flex flex-col gap-[8px]  bg-color-section-theme text-text-theme  xl:p-0'>
-                  <div className='animate-mountComponent  w-full sticky top-[65px] md:top-[75px]   z-[2] ' ref={stickyRef}>
-                        <div className=' w-full  bg-color-section-theme  rounded  border[1px] border-b-[1px] border-[var(--border-color-input)]  flex flex-col gap-[28px] pt-[20px]'>
+            <div className=' z-[5] w-full min-h-[370px] h-max  flex flex-col gap-[8px]   text-text-theme  xl:p-0'>
+                  <div className='animate-mountComponent  w-full sticky top-[65px] md:top-[60px]   z-[2] ' ref={stickyRef}>
+                        <div className=' w-full   bg-color-section-theme  rounded  border[1px] border-b-[1px] border-[var(--border-color-input)]  flex flex-col gap-[14px] pt-[10px]'>
                               <h3 className='w-full pl-[20px] font-bold text-[16px]'>Gợi ý hôm nay</h3>
-                              <div className='grow grid  grid-cols-[repeat(3,170px)] auto-cols-[170px] grid-flow-col  xl:grid-flow-row  xl:grid-cols-6  justify-items-center overflow-auto pb-[8px]'>
+                              <div className='grow grid  grid-cols-[repeat(3,160px)] auto-cols-[160px] grid-flow-col  xl:grid-flow-row  xl:grid-cols-6  justify-items-center overflow-auto pb-[8px] gap-[12px]'>
                                     {arrayCategory.map((category) => (
                                           <Link
                                                 to={category.href}
@@ -136,25 +137,25 @@ const ContentProduct = () => {
                                           >
                                                 <img
                                                       src={category.image}
-                                                      className='w-[65px] h-[65px] rounded-full border-[1px] border-[var(--border-color-input)] p-[8px]'
+                                                      className='w-[40px] h-[40px] rounded-full border-[1px] border-[var(--border-color-input)] p-[8px]'
                                                       alt='category'
                                                 />
-                                                <span className='text-[13px]'>{category.label}</span>
+                                                <span className='text-[12px]'>{category.label}</span>
                                           </Link>
                                     ))}
                               </div>
                         </div>
                   </div>
-                  <div className='    w-full h-max min-h-[370px] '>
-                        <div className=' w-full h-full grid grid-col-2 sm:grid-cols-3 xl:grid-cols-6  grid-row-[370px] grid-flow-row auto-cols-[calc((100%-20px)/2)] xl:auto-cols-[calc((100%-120px)/6)] auto-rows-[370px] gap-[10px]'>
+                  <div className='    w-full h-max min-h-[360px] '>
+                        <div className=' w-full h-full grid grid-col-2 sm:grid-cols-3 xl:grid-cols-6  grid-row-[360px] grid-flow-row auto-cols-[calc((100%-20px)/2)] xl:auto-cols-[calc((100%-120px)/6)] auto-rows-[360px] gap-[10px]'>
                               {getAllProduct.isSuccess && (
                                     <>
                                           {shopAdmin && (
                                                 <div className='col-span-2 flex flex-col p-[16px] h-full bg-color-section-theme rounded-lg border-[1px] border-[var(--border-color-input)]'>
-                                                      <Link to={`/shop/${shopAdmin?._id}`} className='h-[55%] flex justify-center'>
+                                                      <Link to={`/shop/${shopAdmin?._id}`} className='h-[48%] flex justify-center'>
                                                             <img
                                                                   src={shopAdmin?.shop_avatar.secure_url || shopAdmin?.shop_avatar_default}
-                                                                  className='object-contain w-[75%] h-full'
+                                                                  className='object-cover w-[90%] h-full'
                                                                   alt='shop admin'
                                                             />
                                                       </Link>
@@ -189,9 +190,9 @@ const ContentProduct = () => {
                               )}
                         </div>
                   </div>
-                  <div className='w-full h-[65px] flex items-center justify-center' ref={refPos}>
+                  <div className='w-full mt-2 flex items-center justify-center' ref={refPos}>
                         <button
-                              className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-section-theme border-[1px] border-blue-500 text-blue-500 flex items-center justify-center rounded-lg hover:bg-blue-50 hover:text-blue-500'
+                              className='  min-w-[180px] px-[16px] gap-3 w-max h-[48px] bg-color-section-theme border-[1px] border-blue-500 text-blue-500 flex items-center justify-center rounded-lg hover:bg-blue-50 hover:text-blue-500'
                               ref={ref}
                               onClick={() => getAllProduct.fetchNextPage()}
                               disabled={!getAllProduct.hasNextPage}
@@ -202,6 +203,7 @@ const ContentProduct = () => {
                                     : getAllProduct.isPending
                                     ? 'Đang tải dữ liệu sản phẩm'
                                     : 'Hết sản phẩm hiển thị'}
+                              {getAllProduct.isLoading && <BoxLoading color='text-[#ccc]' />}{' '}
                         </button>
                   </div>
             </div>

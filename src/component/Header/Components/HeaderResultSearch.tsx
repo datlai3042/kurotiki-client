@@ -134,7 +134,7 @@ const HeaderResultSearch = (props: Props) => {
                                                       </Link>
                                                 ))}
 
-                                          {products?.length === 0 && shops?.length === 0 && <span>Không tìm thấy kết quả</span>}
+                                          {products?.length === 0 && shops?.length === 0 && <span style={{padding: '0px 12px'}}>Không tìm thấy kết quả</span>}
                                     </div>
                               )}
                         </div>

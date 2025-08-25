@@ -13,7 +13,7 @@ const ProductCare = () => {
       const [widthElemnet, setWidthElement] = useState(160)
       const { widthContainer } = useResetTransform(wrapperListProductsRef, (width: number) => {
             setCount(0)
-            let result = width / Math.floor(width / 160) - 16
+            let result = width / Math.floor(width / 160) 
             setWidthElement(result)
             PositionScrollCurrent.current = 0
       })
@@ -51,7 +51,7 @@ const ProductCare = () => {
             if (allProduct.isSuccess) {
                   if (wrapperListProductsRef.current) {
                         const num = Math.round(widthContainer / widthElemnet)
-                        setLimitShowProduct(Math.ceil(allProduct.data.data.metadata.products.length / num))
+                        setLimitShowProduct(Math.ceil(allProduct.data.data.metadata.products.length / num - 1))
                   }
             }
       }, [allProduct.isSuccess, allProduct?.data?.data.metadata.products.length, widthContainer, widthElemnet])
@@ -65,8 +65,8 @@ const ProductCare = () => {
       const products = allProduct.data?.data.metadata.products
 
       return (
-            <div className='relative group flex-1 min-h-[298px] h-max max-w-full px-0 xl:px-[18px]'>
-                  <div className='w-full min-h-[298px] overflow-hidden'>
+            <div className='relative group  flex-1  h-max max-w-full px-0 xl:px-[18px]'>
+                  <div className='w-full  overflow-hidden'>
                         {products && products?.length > 0 && (
                               <div className='gap-[20px] xl:gap-[16px] w-full flex  h-full  pb-[8px] ' ref={wrapperListProductsRef}>
                                     {products &&

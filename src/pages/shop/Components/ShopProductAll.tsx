@@ -113,8 +113,8 @@ const ShopProductAll = (props: TProps) => {
       }
 
       return (
-            <div className='flex flex-col gap-[8px] min-h-[200px] h-max'>
-                  <div className='w-full h-[170px] flex flex-col gap-[8px] bg-color-section-theme text-text-theme rounded-lg p-[20px_16px]'>
+            <div className='flex flex-col gap-[8px] min-h-[200px] h-max mt-[16px]'>
+                  <div className='w-full flex flex-col gap-[8px] bg-color-section-theme text-text-theme rounded-lg '>
                         <h3 className='text-[18px] font-semibold  '>Tất cả sản phẩm</h3>
                         <div className='w-full h-max min-h-[100px] xl:min-h-[40px] xl:w-[70%] flex items-center justify-between overflow-x-scroll xl:overflow-visible  '>
                               {filter.map((btn) => (
@@ -139,11 +139,10 @@ const ShopProductAll = (props: TProps) => {
                                     </button>
                               ))}
                         </div>
-                        <div className='w-[calc(100%+32px)] ml-[-16px] h-[1px] bg-color-section-theme text-text-theme my-[5px]'></div>
-                        <div className='flex-grow w-full hidden xl:flex gap-[6px] items-center justify-end text-[14px]'>
+                        <div className='font-bold w-full hidden xl:flex gap-[6px] items-center justify-end text-[14px]'>
                               <div className='flex gap-[6px] '>
                                     <span>Giao đến</span>
-                                    <span className='text-color-main font-medium underline'>
+                                    <span className='text-color-main  underline'>
                                           {getAddressDefault(user?.user_address) &&
                                                 `${address_default ? renderStringAddressDetailV2(address_default[0]) : ''}`}
                                     </span>

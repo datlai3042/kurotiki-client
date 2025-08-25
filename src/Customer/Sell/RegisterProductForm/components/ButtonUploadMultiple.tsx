@@ -70,7 +70,7 @@ const ButtonUploadMultiple = (props: IProps) => {
             mutationKey: ['upload-image-full'],
             mutationFn: (data: IFormDataImages) => ProductApi.uploadProductImagesFull(data),
             onSuccess: (data) => {
-                  setUrlProductMultipleImage({ isUploadImage: true, numberImage: 4 })
+                  setUrlProductMultipleImage({ isUploadImage: true, numberImage: 4 , info: []})
                   setProductId(data.data.metadata.product.productDemo._id)
             },
       })
@@ -206,7 +206,7 @@ const ButtonUploadMultiple = (props: IProps) => {
             setFilePreview([])
             setFileProduct([])
             setGetFileName([])
-            setUrlProductMultipleImage({ numberImage: 0, isUploadImage: false })
+            setUrlProductMultipleImage({ numberImage: 0, isUploadImage: false, info: [] })
             deleteImages.mutate({ id: product_id })
       }
 
@@ -227,7 +227,7 @@ const ButtonUploadMultiple = (props: IProps) => {
 
       useEffect(() => {
             if (publicId.length === 4) {
-                  setUrlProductMultipleImage({ numberImage: publicId.length, isUploadImage: true })
+                  setUrlProductMultipleImage({ numberImage: publicId.length, isUploadImage: true, info: [] })
             }
       }, [publicId])
 
