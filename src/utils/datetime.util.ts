@@ -6,5 +6,5 @@ export const DateTimeFromString = (time: Date): string => {
       const day = dayTime.day
       const month = dayTime.month
       const year = dayTime.year
-      return `${clock} -  Ngày ${day} - tháng ${month} - năm ${year}`
+      return `${clock} - ${day}/${month}/${year}`
 }

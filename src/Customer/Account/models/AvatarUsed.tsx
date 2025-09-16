@@ -37,10 +37,15 @@ const AvatarUsed = (props: TProps) => {
             }
       }, [deleteAvatarUsed.isSuccess, dispatch, deleteAvatarUsed.data?.data.metadata.user])
       return (
-            <div className='w-full flex  gap-[16px]'>
-                  <img src={avatar?.secure_url} loading='lazy' className=' object-contain rounded-[4px]' alt='avatar_used[]' />
+            <div className='w-full flex  gap-[16px] h-[200px]'>
+                  <img
+                        src={avatar?.secure_url}
+                        loading='lazy'
+                        className=' object-cover rounded-[4px] w-[200px] h-[200px]'
+                        alt='avatar_used[]'
+                  />
 
-                  <div className='flex flex-col gap-[10px]  '>
+                  <div className='flex flex-col gap-[10px] h-[200px] '>
                         <p className='w-[120px] bg-color-main flex items-center text-white min-w-[60px] px-[6px] py-[2px] rounded-[4px]'>
                               {avatar.date_update ? convertDateToString(avatar.date_update) : 'none'}
                         </p>

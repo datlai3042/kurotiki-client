@@ -1,11 +1,11 @@
-import { Route, Routes, useLocation, useMatch, useSearchParams } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 //page
 import Admin from '../../pages/admin/Admin'
 // import Buy from '../Content/Content_right/Buy/Buy'
 // import Contact from '../Contact/Contact'
-import Content from '../Content/Content'
 import Cart from '../Cart/Cart'
+import Content from '../Content/Content'
 import NotFound from '../Errors/NotFound'
 
 // section layout
@@ -13,28 +13,27 @@ import Header from '../Header/Header'
 import Sidebar from '../Sidebar/Sidebar'
 
 //page -> path /customer
-import Customer from '../../Customer/Customer'
+import { useSelector } from 'react-redux'
+import CustomerUpdateEmail from '../../Customer/Account/Update/CustomerUpdateEmail'
+import CustomerUpdatePassword from '../../Customer/Account/Update/CustomerUpdatePassword'
 import CustomerAccount from '../../Customer/Components/CustomerAccount'
 import CustomerNotification from '../../Customer/Components/CustomerNotification'
 import CustomerOrderHistory from '../../Customer/Components/CustomerOrderHistory'
-import QueryParams from '../../QueryParams'
-import CustomerUpdateEmail from '../../Customer/Account/Update/CustomerUpdateEmail'
-import CustomerUpdatePassword from '../../Customer/Account/Update/CustomerUpdatePassword'
-import RegisterSell from '../../Customer/Sell/RegisterSell'
-import Product from '../../pages/product/Product'
-import CustomerRouter from '../../Customer/Components/CustomerRouter'
-import Payment from '../../pages/payment/Payment'
-import CustomerUserAddress from '../../Customer/UserAddress/CustomerUserAddress'
+import Customer from '../../Customer/Customer'
 import PermisionProductUpdate from '../../Customer/Sell/Category/Book/PermissionProductUpdate'
-import OrderCheck from '../../pages/orderCheck/OrderCheck'
-import Category from '../../pages/ProductCategories/Category'
-import Box from '../BoxUi/Box'
-import Shop from '../../pages/shop/Shop'
-import { RootState } from '../../store'
-import { useSelector } from 'react-redux'
-import ShopWrapper from '../../Customer/Shop/ShopWrapper'
+import RegisterSell from '../../Customer/Sell/RegisterSell'
+import { ShopAnalysisTopBuy, ShopAnalysisTopComment, ShopAnalysisTopView } from '../../Customer/Shop/ShopAnalysis'
 import ShopProductList from '../../Customer/Shop/ShopProductList'
-import PrintDev from '../Dev/Print/PrintDev'
+import ShopWrapper from '../../Customer/Shop/ShopWrapper'
+import CustomerUserAddress from '../../Customer/UserAddress/CustomerUserAddress'
+import OrderCheck from '../../pages/orderCheck/OrderCheck'
+import Payment from '../../pages/payment/Payment'
+import Product from '../../pages/product/Product'
+import Category from '../../pages/ProductCategories/Category'
+import Shop from '../../pages/shop/Shop'
+import QueryParams from '../../QueryParams'
+import { RootState } from '../../store'
+import Box from '../BoxUi/Box'
 
 const RouterController = () => {
       const pathHiddenHeader = ['/admin', '/payment', '/box']
@@ -68,7 +67,8 @@ const RouterController = () => {
                                     <Route path='/product/:id' element={<Product />} />
                                     <Route path='/order-check/:order_id' element={<OrderCheck />} />
                                     <Route path='/book' element={<Category product_type='Book' />} />
-                                    <Route path='/shop' element={<ShopWrapper />} />
+                                    <Route path='/shop' element={<ShopWrapper />}></Route>
+
                                     <Route path='/food' element={<Category product_type='Food' />} />
                                     <Route path='/shop/:shop_id' element={<Shop />} />
 
@@ -96,6 +96,9 @@ const RouterController = () => {
                                                 <Route path='shop' element={<ShopWrapper />} />
                                                 <Route path='shop/product-list' element={<ShopProductList />} />
                                                 <Route path='account/address' element={<CustomerUserAddress />} />
+                                                <Route path='shop/top-buy' element={<ShopAnalysisTopBuy />} />
+                                                <Route path='shop/top-view' element={<ShopAnalysisTopView />} />
+                                                <Route path='shop/top-comment' element={<ShopAnalysisTopComment />} />
 
                                                 <Route path='register-sell' element={<RegisterSell />} />
                                           </Route>

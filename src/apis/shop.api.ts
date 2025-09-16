@@ -2,7 +2,7 @@ import { ModeForm } from '../component/BoxUi/BoxShopForm'
 import { TResponseApi } from '../types/axiosResponse'
 import { CartProduct, CartResponse } from '../types/cart.type'
 import { Order } from '../types/order.type'
-import { ProductType, TProductDetail } from '../types/product/product.type'
+import { ProductType, TProductDetail, TProductFull } from '../types/product/product.type'
 import { ShopResponse } from '../types/shop.type'
 import { UserResponse } from '../types/user.type'
 import axiosCustom from './http'
@@ -92,7 +92,16 @@ class ShopApi {
       static async getShopAdmin() {
             return axiosCustom.get<TResponseApi<{ shopAdmin: ShopResponse }>>('/v1/api/shop/get-shop-admin')
       }
+      static async getShopProductTopView() {
+            return axiosCustom.get<TResponseApi<{ reportShop: { [key: string]: { info: TProductFull, view: number } } }>>('/v1/api/shop-product/get-product-top-view')
+      }
 
+      static async getShopProductTopBuy() {
+            return axiosCustom.get<TResponseApi<{ reportShop: { [key: string]: { info: TProductFull, quantity: number } } }>>('/v1/api/shop-product/get-product-top-buy')
+      }
+      static async getShopProductTopComment() {
+            return axiosCustom.get<TResponseApi<{ reportShop: { [key: string]: { info: TProductFull, comment: number } } }>>('/v1/api/shop-product/get-product-top-comment')
+      }
       static async getProductFilter({
             shop_id,
             sort,

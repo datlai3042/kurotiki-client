@@ -37,7 +37,7 @@ const InputText = <T extends FieldValues>(props: TProps<T>) => {
 
       return (
             <div className={`${styleEffect.widthContainer} ${styleEffect.gap} ${styleEffect.flexDirectionContrainer} flex  `}>
-                  <label htmlFor={id} className='relative flex flex-row items-center max-w-max min-w-[75px]'>
+                  <label htmlFor={id} className='relative flex flex-row items-center text-[13px] max-w-max min-w-[75px]'>
                         <span>{LabelMessage}</span>
                         {/* {require && <span className='block absolute top-[50%] translate-y-[-40%] text-red-500 text-[24px]  right-[-12px]'>*</span>} */}
                   </label>

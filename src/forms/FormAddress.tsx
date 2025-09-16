@@ -14,6 +14,7 @@ import AccountService from '../apis/account.service'
 import { doOpenBoxLogin, fetchUser } from '../Redux/authenticationSlice'
 import { RootState } from '../store'
 import { Address } from '../types/address.type'
+import Portal from '../component/Portal'
 
 export type AddressForm = {
       address_type: 'Home' | 'Company' | 'Private'
@@ -216,127 +217,152 @@ const FormAddress = (props: TProps) => {
       }, [addressForm.formState.errors])
 
       return (
-            <FormProvider {...addressForm}>
-                  <form
-                        className='relative  w-full  p-[12px]   flex flex-col gap-[18px] bg-color-section-theme text-text-theme rounded-md'
-                        onSubmit={addressForm.handleSubmit(onSubmit)}
-                        spellCheck={false}
-                  >
-                        <div className='] flex flex-col   gap-[16px]'>
-                              <Controller
-                                    control={addressForm.control}
-                                    name='address_province'
-                                    render={({ field }) => {
-                                          return (
-                                                <Select
-                                                      options={renderProvinces}
-                                                      onChange={(e: string) => {
-                                                            handleChangeProvince(e)
-                                                            const foundNameProvince = provinceApi.data?.data.metadata.find(
-                                                                  (province) => province.code === e,
-                                                            )
-                                                            field.onChange(foundNameProvince?.name)
-                                                      }}
-                                                      placeholder='Chọn tỉnh thành phố'
-                                                      className='w-full bg-color-section-theme border-[var(--border-color-input)] customSelect'
-                                                />
-                                          )
-                                    }}
-                              />
-                              <Controller
-                                    control={addressForm.control}
-                                    name='address_district'
-                                    render={({ field }) => {
-                                          return (
-                                                <Select
-                                                      options={renderDistrict}
-                                                      onChange={(e) => {
-                                                            handleChangeDistrict(e)
-                                                            const foundNameDistrict = districtApi.data?.data.metadata.find(
-                                                                  (district) => district.code === e,
-                                                            )
-                                                            field.onChange(foundNameDistrict?.name)
-                                                      }}
-                                                      placeholder='Chọn quận huyện'
-                                                      className='w-full bg-color-section-theme border-[var(--border-color-input)] customSelect'
-                                                      disabled={province ? false : true}
-                                                />
-                                          )
-                                    }}
-                              />
-
-                              <Controller
-                                    control={addressForm.control}
-                                    name='address_ward'
-                                    render={({ field }) => {
-                                          return (
-                                                <Select
-                                                      options={renderWard}
-                                                      onChange={(e) => {
-                                                            handleChangeWard(e)
-                                                            const foundNameWard = wardApi.data?.data.metadata.find(
-                                                                  (ward) => ward.code === e,
-                                                            )
-                                                            field.onChange(foundNameWard?.name)
-                                                      }}
-                                                      placeholder='Chọn phường xã'
-                                                      className='w-full bg-color-section-theme border-[var(--border-color-input)] customSelect'
-
-                                                      // disabled={province && district ? false : true}
-                                                />
-                                          )
-                                    }}
-                              />
-                        </div>
-
-                        <div className=''>
-                              {/* <Controller */}
-                              {/* control={addressForm.control} */}
-                              {/* name='address_street' */}
-                              {/* render={({ field }) => { */}
-                              {/* return ( */}
-                              <InputText
-                                    showError={false}
-                                    methods={addressForm}
-                                    FieldName='address_street'
-                                    LabelMessage='Địa chỉ cụ thể'
-                                    placehorder='Thêm thông tin về địa chỉ'
-                                    autofocus={false}
-                                    // onChange={(e) => field.onChange(e.target.value)}
-                              />
-                              {/* ) */}
-                              {/* }} */}
-                              {/* /> */}
-                        </div>
-                        <div className=''>
-                              <Controller
-                                    control={addressForm.control}
-                                    name='address_type'
-                                    render={({ field }) => {
-                                          return (
-                                                <Select
-                                                      className='min-w-[200px]'
-                                                      options={address_type}
-                                                      onChange={field.onChange}
-                                                      placeholder='Nơi giao hàng'
-                                                />
-                                          )
-                                    }}
-                              />
-                        </div>
-                        <div className='w-full h-[36px]'>
-                              <BoxButton content='Cập nhập địa chỉ' onLoading={addressMutation.isPending} type='submit' />
-                        </div>
-                        {onClose && (
-                              <button
-                                    className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] rounded-full bg-slate-900 text-white flex items-center justify-center'
-                                    onClick={() => onClose(false)}
+            <>
+                  <Portal>
+                        <div
+                              onClick={() => onClose && onClose(false)}
+                              className='fixed inset-0 bg-[rgba(0,0,0,.7)] flex justify-center items-center z-[999]'
+                        >
+                              <div
+                                    onClick={(e) => e.stopPropagation()}
+                                    className='absolute top-0 bottom-0 w-[400px] p-[24px_12px] bg-[#fff] right-0'
                               >
-                                    {iconClose}
-                              </button>
-                        )}
-                  </form>
-            </FormProvider>
+                                    <FormProvider {...addressForm}>
+                                          <form
+                                                className='relative  w-full  p-[12px]   flex flex-col gap-[20px] bg-color-section-theme text-text-theme rounded-md'
+                                                onSubmit={addressForm.handleSubmit(onSubmit)}
+                                                spellCheck={false}
+                                          >
+                                                <div className='] flex flex-col   gap-[16px]'>
+                                                      <Controller
+                                                            control={addressForm.control}
+                                                            name='address_province'
+                                                            render={({ field }) => {
+                                                                  return (
+                                                                        <Select
+                                                                              options={renderProvinces}
+                                                                              onChange={(e: string) => {
+                                                                                    handleChangeProvince(e)
+                                                                                    const foundNameProvince =
+                                                                                          provinceApi.data?.data.metadata.find(
+                                                                                                (province) => province.code === e,
+                                                                                          )
+                                                                                    field.onChange(foundNameProvince?.name)
+                                                                              }}
+                                                                              placeholder='Chọn tỉnh thành phố'
+                                                                              className='w-full bg-color-section-theme border-[var(--border-color-input)] customSelect'
+                                                                        />
+                                                                  )
+                                                            }}
+                                                      />
+                                                      <Controller
+                                                            control={addressForm.control}
+                                                            name='address_district'
+                                                            render={({ field }) => {
+                                                                  return (
+                                                                        <Select
+                                                                              options={renderDistrict}
+                                                                              onChange={(e) => {
+                                                                                    handleChangeDistrict(e)
+                                                                                    const foundNameDistrict =
+                                                                                          districtApi.data?.data.metadata.find(
+                                                                                                (district) => district.code === e,
+                                                                                          )
+                                                                                    field.onChange(foundNameDistrict?.name)
+                                                                              }}
+                                                                              placeholder='Chọn quận huyện'
+                                                                              className='w-full bg-color-section-theme border-[var(--border-color-input)] customSelect'
+                                                                              disabled={province ? false : true}
+                                                                        />
+                                                                  )
+                                                            }}
+                                                      />
+
+                                                      <Controller
+                                                            control={addressForm.control}
+                                                            name='address_ward'
+                                                            render={({ field }) => {
+                                                                  return (
+                                                                        <Select
+                                                                              options={renderWard}
+                                                                              onChange={(e) => {
+                                                                                    handleChangeWard(e)
+                                                                                    const foundNameWard = wardApi.data?.data.metadata.find(
+                                                                                          (ward) => ward.code === e,
+                                                                                    )
+                                                                                    field.onChange(foundNameWard?.name)
+                                                                              }}
+                                                                              placeholder='Chọn phường xã'
+                                                                              className='w-full bg-color-section-theme border-[var(--border-color-input)] customSelect'
+
+                                                                              // disabled={province && district ? false : true}
+                                                                        />
+                                                                  )
+                                                            }}
+                                                      />
+                                                </div>
+
+                                                <div className=''>
+                                                      {/* <Controller */}
+                                                      {/* control={addressForm.control} */}
+                                                      {/* name='address_street' */}
+                                                      {/* render={({ field }) => { */}
+                                                      {/* return ( */}
+                                                      <InputText
+                                                            showError={false}
+                                                            methods={addressForm}
+                                                            FieldName='address_street'
+                                                            LabelMessage='Địa chỉ cụ thể'
+                                                            placehorder='Thêm thông tin về địa chỉ'
+                                                            autofocus={false}
+                                                            // onChange={(e) => field.onChange(e.target.value)}
+                                                      />
+                                                      {/* ) */}
+                                                      {/* }} */}
+                                                      {/* /> */}
+                                                </div>
+                                                <div className=''>
+                                                      <Controller
+                                                            control={addressForm.control}
+                                                            name='address_type'
+                                                            render={({ field }) => {
+                                                                  return (
+                                                                        <Select
+                                                                              className='min-w-[200px] w-full'
+                                                                              options={address_type}
+                                                                              onChange={field.onChange}
+                                                                              placeholder='Nơi giao hàng'
+                                                                        />
+                                                                  )
+                                                            }}
+                                                      />
+                                                </div>
+                                                <div className='flex justify-end gap-[8px]'>
+                                                      {onClose && (
+                                                            <div className='w-max h-[32px]'>
+                                                                  <BoxButton
+                                                                        content=' Đóng Form'
+                                                                        type='submit'
+                                                                        onClick={() => onClose(false)}
+                                                                        className='!bg-gray-600 text-[13px]'
+                                                                  />
+                                                            </div>
+                                                      )}
+                                                      <div className='w-max h-[32px]'>
+                                                            <BoxButton
+                                                                  content='Cập nhập địa chỉ'
+                                                                  onLoading={addressMutation.isPending}
+                                                                  type='submit'
+                                                                  className='! text-[13px]'
+                                                            />
+                                                      </div>
+                                                </div>
+                                          </form>
+                                    </FormProvider>
+                              </div>
+                        </div>
+                  </Portal>
+            </>
       )
 }
 

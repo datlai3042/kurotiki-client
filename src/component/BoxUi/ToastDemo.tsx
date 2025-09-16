@@ -120,7 +120,7 @@ const ToastDemo = (props: TProps) => {
                                     </div>
                               </div>
                               <span
-                                    className={`${styleEffect.textColor} !text-white absolute flex justify-center items-center bottom-[5px] animate-pulse right-[5px] w-[30px] h-[30px] p-[4px] text-[12px] rounded-full border-[2px] `}
+                                    className={`${styleEffect.textColor} !text-white absolute flex justify-center items-center bottom-[5px] animate-pulse right-[5px] w-[24px] h-[24px] p-[4px] text-[12px] rounded-full border-[2px] `}
                               >
                                     {time}
                               </span>

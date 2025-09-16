@@ -22,7 +22,7 @@ const BoxButton = (props: Props) => {
       return (
             <button
                   {...propButton}
-                  className={`${styleEffect.widthEfect} ${styleEffect.heightEfect} ${styleEffect.roundedEffect} flex items-center justify-center bg-color-main opacity-80 hover:opacity-100 text-white p-[8px_6px] xl:px-[12px] xl:py-[8px] gap-[8px] `}
+                  className={`${styleEffect.widthEfect} ${styleEffect.heightEfect} ${styleEffect.roundedEffect} ${propButton?.className} flex items-center justify-center bg-color-main opacity-80 hover:opacity-100 text-white p-[8px_6px] xl:px-[12px] xl:py-[8px] gap-[8px] `}
             >
                   {content}
 

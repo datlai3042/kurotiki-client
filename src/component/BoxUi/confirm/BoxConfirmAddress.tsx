@@ -166,7 +166,7 @@ const BoxConfirmAddress = (props: TProps) => {
             <Portal>
                   <div className='fixed inset-0 bg-[rgba(0,0,0,.45)] flex justify-center items-center z-[999]'>
                         <div
-                              className='relative w-[450px] max-h-[96vh] bg-color-section-theme p-[12px_8px]  xl:p-[18px_12px] mx-[16px] xl:mx-0 
+                              className='relative w-[550px] max-h-[96vh] bg-color-section-theme p-[12px_8px]  xl:p-[18px_12px] mx-[16px] xl:mx-0 
  rounded'
                         >
                               <div className='flex flex-col gap-[10px] h-full'>
@@ -197,19 +197,22 @@ const BoxConfirmAddress = (props: TProps) => {
                                                                               <Radio
                                                                                     value={address._id}
                                                                                     defaultChecked={address.address_default}
-                                                                                    className='flex flex-wrap'
+                                                                                    className='flex w-full'
+                                                                                    style={{ display: 'flex' }}
                                                                               >
-                                                                                    <span>
-                                                                                          {renderStringAddressDetailV2(address)!.replace(
-                                                                                                'Địa chỉ:',
-                                                                                                '',
-                                                                                          ) || ''}
-                                                                                    </span>
-                                                                                    {addNew && user?.user_address.length === index + 1 && (
-                                                                                          <span className='ml-[6px] flex justify-center items-center w-[44px] bg-color-main rounded-[4px] p-[1px] text-white'>
-                                                                                                Mới
+                                                                                    <div className='w-full flex'>
+                                                                                          <span>
+                                                                                                {renderStringAddressDetailV2(
+                                                                                                      address,
+                                                                                                )!.replace('Địa chỉ:', '') || ''}
                                                                                           </span>
-                                                                                    )}
+                                                                                          {addNew &&
+                                                                                                user?.user_address.length === index + 1 && (
+                                                                                                      <span className='ml-[6px] flex justify-center items-center w-[44px] bg-color-main rounded-[4px] p-[1px] text-white'>
+                                                                                                            Mới
+                                                                                                      </span>
+                                                                                                )}
+                                                                                    </div>
                                                                               </Radio>
                                                                         </div>
                                                                   )
@@ -218,7 +221,7 @@ const BoxConfirmAddress = (props: TProps) => {
                                                 </Radio.Group>
                                                 <div className='flex w-full justify-start text-[12px] text-[#fff] my-[24px]'>
                                                       <button
-                                                            className='flex gap-[8px] p-[4px] bg-[#0d3188] items-center justify-center rounded'
+                                                            className='flex gap-[8px] w-full p-[4px] bg-[#0d3188] items-center justify-center rounded'
                                                             onClick={() => setValueAddress('Other')}
                                                       >
                                                             <Plus />
@@ -231,7 +234,14 @@ const BoxConfirmAddress = (props: TProps) => {
                                                       </div>
                                                 )}
 
-                                                {valueAddress === 'Other' && <FormAddress onSuccessAddAddress={onSuccessAddAddress} />}
+                                                {valueAddress === 'Other' && (
+                                                      <FormAddress
+                                                            onSuccessAddAddress={onSuccessAddAddress}
+                                                            onClose={() => {
+                                                                  setValueAddress('')
+                                                            }}
+                                                      />
+                                                )}
                                           </div>
                                     </div>
                               </div>

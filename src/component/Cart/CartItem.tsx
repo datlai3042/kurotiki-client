@@ -67,7 +67,7 @@ const CartItem = (props: TProps) => {
       // if (!product.product_id.s) return null
       return (
             <div
-                  className=' flex flex-col gap-[24px] bg-color-section-theme text-text-theme p-[0px_12px_16px] text-[13px]'
+                  className=' flex flex-col gap-[32px] bg-color-section-theme text-text-theme p-[0px_12px_16px] text-[13px]'
                   key={product._id}
             >
                   <div className='w-full flex  py-[24px] flex-wrap gap-[10px]  items-center justify-between'>
@@ -106,10 +106,10 @@ const CartItem = (props: TProps) => {
                                     />{' '}
                               </Link>
                               <div
-                                    className={`${styleEffect.product_not_avaiable} flex-1 flex  flex-col   gap-[12px]  content-between justify-between font-semibold text-text-theme`}
+                                    className={`${styleEffect.product_not_avaiable} flex-1 flex  flex-col   gap-[12px]  content-between justify-between  text-text-theme`}
                               >
                                     <div className='w-full flex justify-between'>
-                                          <span>{product.product_id.product_name}</span>
+                                          <span className='font-semibold'>{product.product_id.product_name}</span>
 
                                           <div className='ml-auto flex items-center h-max xl:h-full  xl:my-0'>
                                                 <WrapperCountProduct

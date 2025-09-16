@@ -55,10 +55,10 @@ const ModelAvatarSee = <T extends ParamAvatarQuery>(props: TProps<T>) => {
                                     />
                               </div>
                               {AvatarImageUsed && AvatarImageUsed.length > 0 && (
-                                    <div className='mt-[70px] w-full min-h-[360px] h-auto flex flex-col gap-[20px] '>
+                                    <div className='mt-[70px] w-full  h-auto flex flex-col gap-[20px] '>
                                           <div className='pb-[10px] border-b-[1px] border-[var(--border-color-input)] font-openSans text-[20px] font-medium text-text-theme'>Các ảnh đại diện trước đó</div>
                                           {userAvatarUsed.isSuccess && (
-                                                <div className='flex gap-[45px] mb-[70px] min-h-[360px] h-auto flex-wrap '>
+                                                <div className='flex gap-[45px] mb-[70px]  h-auto flex-wrap '>
                                                       {userAvatarUsed?.data?.data.metadata?.avatar_used
                                                             ?.reverse()
                                                             .map((avatar: UserAvatarUsed) => (

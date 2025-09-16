@@ -30,10 +30,15 @@ const link = [
       { path: '/customer/account/update/password', text: 'Cập nhập password' },
       { path: '/customer/shop', text: 'Quản lí cửa hàng' },
       { path: '/customer/shop/product-list', text: 'Danh sách sản phẩm' },
+      { path: '/customer/shop/top-buy', text: 'Shop - Top lượt bán' },
+      { path: '/customer/shop/top-view', text: 'Shop - Top lượt xem' },
+      { path: '/customer/shop/top-comment', text: 'Shop - Top bình luận' },
+
       { path: '/customer/register-sell', text: 'Đăng kí bán hàng' },
       { path: '/customer/account/address', text: 'Số địa chỉ' },
       { path: '/customer/account/update/email', text: 'Cập nhập Email' },
       { path: '/customer/account/update/password', text: 'Cập nhập mật khẩu' },
+
       { path: '/customer/router', text: '' },
 ]
 
@@ -44,6 +49,10 @@ const select = [
       { value: '/customer/account/update/email', label: 'Cập nhập email' },
       { value: '/customer/account/update/password', label: 'Cập nhập password' },
       { value: '/customer/shop', label: 'Quản lí cửa hàng' },
+      { path: '/customer/shop/top-buy', label: 'Shop - Top lượt bán' },
+      { path: '/customer/shop/top-view', label: 'Shop - Top lượt xem' },
+      { path: '/customer/shop/top-comment', label: 'Shop - Top bình luận' },
+
       { value: '/customer/shop/product-list', label: 'Danh sách sản phẩm' },
       { value: '/customer/register-sell', label: 'Đăng kí bán hàng' },
       { value: '/customer/account/address', label: 'Số địa chỉ' },
@@ -78,11 +87,11 @@ const Customer = () => {
       //@element
       return (
             <>
-                  <div className=' text-[14px] max-w-[98vw]  w-[1280px] mx-auto min-h-full flex flex-col  pt-[15px] xl:pt-[0px]  pb-[24px] mt-0 '>
+                  <div className=' text-[14px] max-w-[98vw]  w-[1400px] mx-auto min-h-full flex flex-col  pt-[15px] xl:pt-[0px]  pb-[24px] mt-0 '>
                         {/* @header */}
 
                         {user ? (
-                              <div className=' w-full flex gap-[3%] text-[13px]  text-text-theme'>
+                              <div className=' w-full flex gap-[3%] text-[14px]  text-text-theme'>
                                     {/* @navigate pathname */}
                                     <div className='hidden lg:flex flex-col   xl:w-[20%]'>
                                           <div className='hidden lg:block text-[16px] text-[#66666b] p-[20px_0] '>
@@ -101,8 +110,6 @@ const Customer = () => {
                                     <div className='w-full px-[16px] lg:px-0 lg:w-[75%] flex flex-col flex-1'>
                                           <div className='hidden xl:flex justify-between text-[20px] font-semibold  items-center p-[20px_0]'>
                                                 {textLink?.text}
-
-                                               
                                           </div>
                                           {auth ? (
                                                 <CustomerWrapperItem>
