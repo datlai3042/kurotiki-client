@@ -46,7 +46,7 @@ const RouterController = () => {
       const styleEffect = {
             matchPathName: window.location.pathname !== '/payment' ? '  pt-[65px] md:pt-[60px] pb-[45px] md:pb-0' : '',
             matchPathNameCustomer: pathName.startsWith('/customer') ? 'top-[0px] ' : 'top-[60px] lg:h-[calc(100vh-100px)]',
-            layoutFull: pathName?.startsWith('/customer') ? '' : 'mx-auto max-w-full  xl:max-w-[1400px]',
+            layoutFull: pathName?.startsWith('/customer') ? '' : 'mx-auto max-w-full  xl:max-w-[1360px]',
       }
       const uiSlice = useSelector((state: RootState) => state.uiSlice.showSideBar)
 

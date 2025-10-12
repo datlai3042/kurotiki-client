@@ -120,13 +120,13 @@ function Sidebar(props: TProps) {
                   <div
                         className={`${styleEffect.showSideBar} bg-color-section-theme hide-scroll border-r-[1px] border-[var(--border-color-input)] md:border-none rounded-md  fixed md:sticky  w-[180px] xl:w-[230px] min-w-[230px] top-[65px] md:top-[70px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
                   >
-                        <div className='flex flex-col gap-[20px] bg-transparent h-max mb-[50px] text-text-theme'>
+                        <div className='flex flex-col gap-[0px] bg-transparent h-max mb-[50px] text-text-theme'>
                               <div className='flex flex-col gap-[10px] h-max p-[16px] bg-color-section-theme rounded-[4px] '>
-                                    <h3 className='text-[14px] font-semibold '>Danh mục</h3>
+                                    <h3 className='text-[14px] font-semibold bg-color-main text-[#fff] flex justify-center p-[10px] rounded-md'>Danh mục sản phẩm</h3>
                                     <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
                                           {arrayCategory.map((category) => (
                                                 <li key={category.href}>
-                                                      <Link to={category.href} className='flex  gap-[8px] w-full h-[40px] items-center hover:bg-color-main rounded-md'>
+                                                      <Link to={category.href} className='flex  gap-[8px] w-full h-[40px] items-center hover:bg-color-main rounded-md hover:text-[#fff] px-[6px]'>
                                                             <img src={category.image} className='w-[30px] ' alt='catelogy' />
                                                             <span>{category.label}</span>
                                                       </Link>
@@ -136,11 +136,11 @@ function Sidebar(props: TProps) {
                               </div>
 
                               <div className='flex flex-col gap-[10px] h-max p-[16px]  bg-color-section-theme   rounded-xl'>
-                                    <h3 className='text-[14px] font-semibold '>Nổi bật</h3>
+                                    <h3 className='text-[14px] font-semibold  flex justify-center bg-color-main text-[#fff] p-[10px] rounded-md'>Nổi bật</h3>
                                     <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
                                           {arrayPopular.map((category) => (
                                                 <li key={category.href}>
-                                                      <Link to={category.href} className='flex  gap-[8px] w-full h-[50px] items-center'>
+                                                      <Link to={category.href} className='flex  gap-[8px] w-full h-[50px] items-center  hover:bg-color-main rounded-md hover:text-[#fff] px-[6px]'>
                                                             <img src={category.image} className='w-[30px] ' alt='catelogy' />
                                                             <span>{category.label}</span>
                                                       </Link>
@@ -149,7 +149,7 @@ function Sidebar(props: TProps) {
                                     </ul>
                               </div>
 
-                              <div className='mb-[20px]  p-[8px]'>
+                              <div className='mb-[20px]  p-[12px]'>
 
                                     <Link
                                     to={'/customer/register-sell'}

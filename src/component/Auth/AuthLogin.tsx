@@ -1,6 +1,6 @@
 import React, { SetStateAction, useEffect, useRef, useState } from 'react'
 import { TModeAuth } from './AuthWrapper'
-import { Eye, EyeOff, ShieldX } from 'lucide-react'
+import { Eye, EyeOff, LockKeyhole, MailCheck, ShieldX } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,6 +13,7 @@ import { fetchUser } from '../../Redux/authenticationSlice'
 import { addToast } from '../../Redux/toast'
 import BoxLoading from '../BoxUi/BoxLoading'
 import { doCloseBoxLogin } from '../../Redux/authSlice'
+import Input from '../input/Input'
 
 type TProps = {
       setModeAuth: React.Dispatch<SetStateAction<TModeAuth>>
@@ -52,6 +53,7 @@ const AuthLogin = (props: TProps) => {
             register,
             handleSubmit,
             formState: { errors },
+            watch,
       } = useForm<TloginZodSchema>({
             defaultValues,
             resolver: zodResolver(loginSchema),
@@ -78,6 +80,14 @@ const AuthLogin = (props: TProps) => {
                               error?.response?.statusText === 'Not Found' &&
                               error?.response?.data?.detail === 'Not found Email'
                         ) {
+                              dispatch(
+                                    addToast({
+                                          id: Math.random().toString(),
+                                          message: 'Không tìm thấy thông tin đăng nhập',
+                                          type: 'ERROR',
+                                    }),
+                              )
+                        } else {
                               dispatch(
                                     addToast({
                                           id: Math.random().toString(),
@@ -118,60 +128,51 @@ const AuthLogin = (props: TProps) => {
 
       return (
             <div className=' flex flex-col items-center rounded-md gap-[24px] px-[24px] py-[48px] min-w-[450px] bg-[#fff] text-[#000]'>
-                  <div className='mb- w-full text-left'>
-                        <h1 className='text-3xl font-black text-[#040404] mb-1'>Welcome To</h1>
-                        <h2 className='text-3xl font-black text-blue-900'>KuroTiki</h2>
+                  <div className='mb- w-full flex gap-[4px] text-left gradient-app-name'>
+                        <h1 className='text-4xl font-black  mb-1'>Welcome back :)</h1>
                   </div>
 
                   <form className='flex flex-1 flex-col gap-[16px] mt-[12px] w-full' noValidate onSubmit={handleSubmit(onSubmit)}>
-                        <div className='w-full flex flex-col items-start gap-[8px]'>
-                              <label htmlFor='email' className='block text-sm font-black text-gray-700'>
-                                    Email
-                              </label>
-                              <input
-                                    {...register('email')}
-                                    id='email'
-                                    type='text'
-                                    className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px]  placeholder:text-stone-500  inputCommon`}
-                                    placeholder='Email'
-                              />
-                        </div>
-                        <div className='w-full flex flex-col items-start gap-[8px]'>
-                              <label htmlFor='password' className='block text-sm font-black text-gray-700'>
-                                    Mật khẩu
-                              </label>
-                              <div className='w-full relative flex flex-col items-start gap-[8px]'>
-                                    <input
-                                          {...register('password')}
-                                          id='password'
-                                          type={typePassword}
-                                          className={`h-[36px] w-full border-[1px]  outline-none px-[12px] py-[4px] rounded-[3px]  placeholder:text-stone-500 inputCommon`}
-                                          placeholder='Mật khẩu'
-                                    />
-                                    <span className='absolute right-[5px] top-[50%] translate-y-[-50%]' onClick={handleShowHidePassword}>
-                                          {typePassword === 'text' ? <EyeOff size={'20px'} /> : <Eye size={'20px'} />}
-                                    </span>
+                        <Input<TloginZodSchema>
+                              FieldKey='email'
+                              placeholder='Email'
+                              type='email'
+                              register={register}
+                              error={errors}
+                              watch={watch}
+                                                            icon={<MailCheck />}
+                              
+                        />
+                        <Input<TloginZodSchema>
+                              FieldKey='password'
+                              placeholder='Mật khẩu'
+                              type='password'
+                              register={register}
+                              error={errors}
+                              watch={watch}
+                              icon={<LockKeyhole />}
+
+                        />
+                        <div className=' mt-[8px] flex flex-col gap-[13px]'>
+                              <div className=' flex gap-[10px]'>
+                                    <button
+                                          type='submit'
+                                          disabled={authLogin.isPending && Object.keys(errors).length > 0}
+                                          title={Object.keys(errors).length > 0 ? 'Vui lòng nhập thông tin hợp lệ' : `Đăng nhập`}
+                                          className='!w-[150px] font-semibold text-[15px] flex items-center justify-center text-[#fff] gap-[6px] !h-[46px] !bg-[var(--color-main)] !rounded-[999px]'
+                                    >
+                                          Đăng nhập
+                                          {authLogin.isPending && <BoxLoading />}
+                                    </button>
+
+                                    <button
+                                          onClick={() => setModeAuth('Register')}
+                                          className='!bg-background-page-color hover:!bg-[#36a420] border-[1px] !text-[#333] hover:!text-[#fff] hover:border-border-page-color font-semibold text-[15px] !h-[46px]  !rounded-[999px] !w-[150px] '
+                                    >
+                                          Đăng kí
+                                    </button>
                               </div>
                         </div>
-
-                        <div className='w-full flex justify-start'>
-                              Bạn chưa có tài khoản,{' '}
-                              <span
-                                    className='underline text-color-main cursor-pointer text-[15px] font-extrabold'
-                                    onClick={() => setModeAuth('Register')}
-                              >
-                                    đăng kí nhé
-                              </span>
-                        </div>
-                        <button
-                              type='submit'
-                              className='flex justify-center items-center gap-[8px] w-full min-h-[20px] p-[10px] rounded-[4px] bg-color-main text-white disabled:opacity-40 disabled:cursor-not-allowed'
-                              disabled={authLogin.isPending && Object.keys(errors).length > 0}
-                              title={Object.keys(errors).length > 0 ? 'Vui lòng nhập thông tin hợp lệ' : `Đăng nhập`}
-                        >
-                              <span>Đăng nhập</span>
-                              {authLogin.isPending && <BoxLoading />}
-                        </button>
                   </form>
             </div>
       )

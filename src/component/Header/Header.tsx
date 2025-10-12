@@ -24,7 +24,7 @@ function Header() {
                   <div
                         className={`fixed text-text-theme  top-0 left-0 w-full z-[100] bg-color-section-theme border-b-[1px] border-solid border-[var(--border-color-input)]`}
                   >
-                        <div className='h-[65px] md:h-[60px] py-2 px-[10px] gap-[24px]  flex items-center  mx-auto  xl:max-w-[1400px]'>
+                        <div className='h-[65px] md:h-[60px] py-2 px-[10px] gap-[24px]  flex items-center  mx-auto  xl:max-w-[1360px]'>
                               <div className='max-w-[200px] flex items-center'>
                                     <HeaderLogoToggle />
                               </div>

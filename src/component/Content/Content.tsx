@@ -26,11 +26,11 @@ const Content = () => {
                         <Banner />
                   </div> */}
 
-                  <div className='w-full p-[20px_0px_16px] h-[380px]   rounded-[4px]'>
+                  <div className='w-full p-[20px_0px_16px] h-[400px]   rounded-[4px]'>
                         <SliderProductV2 />
                   </div>
 
-                  <SectionProduct
+                  {/* <SectionProduct
                         title={<TitleProductSection content={<p className='pl-[13px]'>Giá Tốt Hôm Nay</p>} />}
                         other={
                               <div className='pr-[16px]'>
@@ -42,7 +42,7 @@ const Content = () => {
                                     <SectionProductItem />
                               </div>
                         }
-                  />
+                  /> */}
 
                   <ContentLabel />
 

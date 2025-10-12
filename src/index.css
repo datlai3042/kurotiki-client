@@ -154,6 +154,18 @@
           }
           
 }
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gradient-app-name {
+  /* background: linear-gradient(90deg, var(--primary-color), #ee0979); */
+  background: linear-gradient(90deg, #5b71c5, #1629a7);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 @layer components {
       .isActive {

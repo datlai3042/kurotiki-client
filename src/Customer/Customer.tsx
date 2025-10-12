@@ -87,7 +87,7 @@ const Customer = () => {
       //@element
       return (
             <>
-                  <div className=' text-[14px] max-w-[98vw]  w-[1400px] mx-auto min-h-full flex flex-col  pt-[15px] xl:pt-[0px]  pb-[24px] mt-0 '>
+                  <div className=' text-[14px] max-w-[98vw]  w-[1360px] mx-auto min-h-full flex flex-col  pt-[15px] xl:pt-[0px]  pb-[24px] mt-0 '>
                         {/* @header */}
 
                         {user ? (
