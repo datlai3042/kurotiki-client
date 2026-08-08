@@ -23,7 +23,18 @@ import LeftSide from './Components/LeftSide'
 
 //@const
 const link = [
-      { path: '/customer/account', text: 'Thông tin tài khoản' },
+      {
+            path: '/customer/account',
+            text: 'Thông tin tài khoản',
+            component: (
+                  <>
+                        <div className='flex flex-col gap-[4px]'>
+                              <h1 className='text-2xl font-bold text-text-theme'>Thông tin tài khoản</h1>
+                              <p className='text-sm text-text-theme font-normal mt-1'>Quản lý và bảo mật thông tin tài khoản của bạn</p>
+                        </div>
+                  </>
+            ),
+      },
       { path: '/customer/notification', text: 'Thông báo của tôi' },
       { path: '/customer/order_history', text: 'Quản lí đơn hàng' },
       { path: '/customer/account/update/email', text: 'Cập nhập email' },
@@ -87,14 +98,14 @@ const Customer = () => {
       //@element
       return (
             <>
-                  <div className=' text-[14px] max-w-[98vw]  w-[1360px] mx-auto min-h-full flex flex-col  pt-[15px] xl:pt-[0px]  pb-[24px] mt-0 '>
+                  <div className=' text-[14px] max-w-[98vw]  w-[1360px] mx-auto min-h-full flex flex-col  pt-[15px] xl:pt-[0px]  mt-0 '>
                         {/* @header */}
 
                         {user ? (
-                              <div className=' w-full flex gap-[3%] text-[14px]  text-text-theme'>
+                              <div className=' w-full flex gap-[2.5%] text-[14px]  text-text-theme'>
                                     {/* @navigate pathname */}
-                                    <div className='hidden lg:flex flex-col   xl:w-[20%]'>
-                                          <div className='hidden lg:block text-[16px] text-[#66666b] p-[20px_0] '>
+                                    <div className='hidden lg:flex flex-col   xl:w-[22%]'>
+                                          {/* <div className='hidden lg:block text-[16px] text-[#66666b] p-[20px_0] '>
                                                 <Link to={'/'} className='font-bold'>
                                                       Trang chủ
                                                 </Link>
@@ -102,14 +113,14 @@ const Customer = () => {
                                                 <Link className='text-color-main font-bold' to={textLink?.path as string}>
                                                       {textLink?.text}
                                                 </Link>
-                                          </div>
+                                          </div> */}
                                           <LeftSide textLink={textLink} />
                                     </div>
                                     {/*@ Outlet */}
 
                                     <div className='w-full px-[16px] lg:px-0 lg:w-[75%] flex flex-col flex-1'>
-                                          <div className='hidden xl:flex justify-between text-[20px] font-semibold  items-center p-[20px_0]'>
-                                                {textLink?.text}
+                                          <div className='hidden xl:flex justify-between text-[20px] font-semibold  items-center p-[28px_0]'>
+                                                {textLink?.component || textLink?.text}
                                           </div>
                                           {auth ? (
                                                 <CustomerWrapperItem>

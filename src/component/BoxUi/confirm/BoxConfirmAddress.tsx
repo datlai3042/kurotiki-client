@@ -1,5 +1,5 @@
 import React, { SetStateAction, useState } from 'react'
-import { Plus, X } from 'lucide-react'
+import { LockKeyhole, Plus, X } from 'lucide-react'
 import { Radio, RadioChangeEvent } from 'antd'
 import Portal from '../../Portal'
 import FormAddress from '../../../forms/FormAddress'
@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../store'
 import { UserAddress, UserResponse } from '../../../types/user.type'
 import { renderStringAddressDetailV2 } from '../../../utils/address.util'
-import BoxButton from '../BoxButton'
 import { AddressType, CartCurrent, setAddressProduct } from '../../../Redux/cartSlice'
 import { addToast } from '../../../Redux/toast'
 import { CartProduct } from '../../../types/cart.type'
@@ -162,95 +161,158 @@ const BoxConfirmAddress = (props: TProps) => {
             setValueAddress(e.target.value)
       }
 
+      const renderAddressType = (type?: UserAddress['type']) => {
+            switch (type) {
+                  case 'Home':
+                        return 'Nhà riêng'
+                  case 'Company':
+                        return 'Cơ quan'
+                  case 'Private':
+                        return 'Nơi ở riêng'
+                  default:
+                        return ''
+            }
+      }
+
+      const receiverName = user?.fullName || user?.nickName || user?.email || 'Chưa cập nhật tên'
+      const userContact = user as UserResponse & {
+            phone?: string
+            phoneNumber?: string
+            user_phone?: string
+      }
+      const receiverPhone = userContact?.phone || userContact?.phoneNumber || userContact?.user_phone || 'Chưa cập nhật SĐT'
+
       return (
             <Portal>
-                  <div className='fixed inset-0 bg-[rgba(0,0,0,.45)] flex justify-center items-center z-[999]'>
-                        <div
-                              className='relative w-[550px] max-h-[96vh] bg-color-section-theme p-[12px_8px]  xl:p-[18px_12px] mx-[16px] xl:mx-0 
- rounded'
-                        >
-                              <div className='flex flex-col gap-[10px] h-full'>
-                                    <div className='bg-color-section-theme text-text-theme rounded-lg  py-[12px] flex flex-col gap-[12px]'>
-                                          <header className='text-[20px] font-medium text-center'>Địa chỉ giao hàng</header>
-                                          <div className='w-full h-[1px] bg-[var(--border-color-input)]'></div>
-                                          <div className='px-[14px] mt-[24px] text-[14px]'>
-                                                <span>
-                                                      Hãy chọn địa chỉ nhận hàng để được dự báo thời gian giao hàng cùng phí đóng gói, vận
-                                                      chuyển một cách chính xác nhất.
-                                                </span>
-                                          </div>
-                                          <div className='max-h-[450px] overflow-y-auto scrollCustome'>
-                                                <Radio.Group
-                                                      className='flex flex-col gap-[12px]'
-                                                      onChange={handleChangeRadio}
-                                                      value={valueAddress}
-                                                      defaultValue={valueAddress}
-                                                >
-                                                      <div
-                                                            className={`${
-                                                                  valueAddress === 'Other' ? 'min-h-[30px]' : ''
-                                                            }  mx-[8px]  max-h-[200px] overflow-auto flex flex-col gap-[12px] text-text-theme`}
-                                                      >
-                                                            {user?.user_address.map((address, index) => {
-                                                                  return (
-                                                                        <div key={address._id}>
-                                                                              <Radio
-                                                                                    value={address._id}
-                                                                                    defaultChecked={address.address_default}
-                                                                                    className='flex w-full'
-                                                                                    style={{ display: 'flex' }}
-                                                                              >
-                                                                                    <div className='w-full flex'>
-                                                                                          <span>
-                                                                                                {renderStringAddressDetailV2(
-                                                                                                      address,
-                                                                                                )!.replace('Địa chỉ:', '') || ''}
-                                                                                          </span>
-                                                                                          {addNew &&
-                                                                                                user?.user_address.length === index + 1 && (
-                                                                                                      <span className='ml-[6px] flex justify-center items-center w-[44px] bg-color-main rounded-[4px] p-[1px] text-white'>
-                                                                                                            Mới
-                                                                                                      </span>
-                                                                                                )}
-                                                                                    </div>
-                                                                              </Radio>
-                                                                        </div>
-                                                                  )
-                                                            })}
-                                                      </div>
-                                                </Radio.Group>
-                                                <div className='flex w-full justify-start text-[12px] text-[#fff] my-[24px]'>
-                                                      <button
-                                                            className='flex gap-[8px] w-full p-[4px] bg-[#0d3188] items-center justify-center rounded'
-                                                            onClick={() => setValueAddress('Other')}
-                                                      >
-                                                            <Plus />
-                                                            <span>Chọn địa chỉ khác</span>
-                                                      </button>
-                                                </div>
-                                                {valueAddress !== 'Other' && (
-                                                      <div className='mt-[20px]' onClick={onVerifyAddress}>
-                                                            <BoxButton content='Xác nhận' />
-                                                      </div>
-                                                )}
+                  <div className='fixed inset-0 z-[999] flex items-center justify-center bg-black/70 px-4 backdrop-blur-[2px]'>
+                        <div className='relative flex max-h-[92vh] w-full max-w-[760px] flex-col overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#151922] text-text-theme shadow-[0_24px_80px_rgba(0,0,0,0.55)]'>
+                              <div className='flex items-start justify-between border-b border-white/[0.08] px-6 py-5'>
+                                    <div className='pr-10'>
+                                          <h2 className='text-[20px] font-semibold leading-[28px] text-white'>Chọn địa chỉ giao hàng</h2>
+                                          <p className='mt-1 text-[13px] leading-5 text-[#9aa4b2]'>
+                                                Vui lòng chọn địa chỉ nhận hàng để được dự báo thời gian giao hàng chính xác nhất.
+                                          </p>
+                                    </div>
 
-                                                {valueAddress === 'Other' && (
-                                                      <FormAddress
-                                                            onSuccessAddAddress={onSuccessAddAddress}
-                                                            onClose={() => {
-                                                                  setValueAddress('')
-                                                            }}
-                                                      />
-                                                )}
+                                    <button
+                                          type='button'
+                                          onClick={handleCloseModal}
+                                          className='absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-lg text-[#9aa4b2] transition hover:bg-white/[0.06] hover:text-white'
+                                    >
+                                          <X size={19} strokeWidth={1.8} />
+                                    </button>
+                              </div>
+
+                              <div className='min-h-0 flex-1 overflow-y-auto px-6 py-5 scrollCustome'>
+                                    <div className='mb-3 text-[12px] font-semibold uppercase tracking-[0.04em] text-[#9aa4b2]'>
+                                          Địa chỉ của tôi
+                                    </div>
+
+                                    <Radio.Group
+                                          className='flex w-full flex-col gap-2.5'
+                                          onChange={handleChangeRadio}
+                                          value={valueAddress}
+                                          defaultValue={valueAddress}
+                                    >
+                                          {user?.user_address.map((address, index) => {
+                                                const isSelected = valueAddress === address._id
+                                                const addressType = renderAddressType(address.type)
+
+                                                return (
+                                                      <label
+                                                            key={address._id}
+                                                            className={`group flex cursor-pointer items-center gap-4 rounded-[10px] border px-4 py-4 transition-all duration-150 ${
+                                                                  isSelected
+                                                                        ? 'border-[#1677ff] bg-[#1677ff]/[0.06] shadow-[0_0_0_1px_rgba(22,119,255,0.12)]'
+                                                                        : 'border-white/[0.09] bg-[#171c25] hover:border-white/[0.16] hover:bg-[#1a202a]'
+                                                            }`}
+                                                      >
+                                                            <Radio value={address._id} className='shrink-0' />
+
+                                                            <div className='min-w-0 flex-1'>
+                                                                  <div className='flex flex-wrap items-center gap-2'>
+                                                                        {address.address_default && (
+                                                                              <span className='rounded-md bg-[#1677ff]/15 px-2 py-0.5 text-[11px] font-medium text-[#4d9cff]'>
+                                                                                    Mặc định
+                                                                              </span>
+                                                                        )}
+
+                                                                        {addNew && user?.user_address.length === index + 1 && (
+                                                                              <span className='rounded-md bg-emerald-500/10 px-2 py-0.5 text-[11px] font-medium text-emerald-400'>
+                                                                                    Mới
+                                                                              </span>
+                                                                        )}
+
+                                                                        <p className='min-w-0 text-[14px] font-semibold leading-5 text-[#f1f5f9]'>
+                                                                              {renderStringAddressDetailV2(address)!.replace('Địa chỉ:', '') || ''}
+                                                                        </p>
+                                                                  </div>
+
+                                                                  <div className='mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-[#98a2b3]'>
+                                                                        <span className='font-medium text-[#cbd5e1]'>{receiverName}</span>
+                                                                        <span className='h-1 w-1 rounded-full bg-[#667085]' />
+                                                                        <span>{receiverPhone}</span>
+                                                                  </div>
+
+                                                                  {addressType && (
+                                                                        <div className='mt-2 flex flex-wrap items-center gap-2'>
+                                                                              <span className='rounded-md bg-white/[0.06] px-2 py-1 text-[11px] font-medium text-[#9aa4b2]'>
+                                                                                    {addressType}
+                                                                              </span>
+                                                                        </div>
+                                                                  )}
+                                                            </div>
+                                                      </label>
+                                                )
+                                          })}
+                                    </Radio.Group>
+
+                                    {valueAddress === 'Other' && (
+                                          <div className='mt-4 rounded-[10px] border border-white/[0.08] bg-[#11151c] p-3'>
+                                                <FormAddress
+                                                      onSuccessAddAddress={onSuccessAddAddress}
+                                                      onClose={() => {
+                                                            setValueAddress('')
+                                                      }}
+                                                />
                                           </div>
+                                    )}
+                              </div>
+
+                              <div className='border-t border-white/[0.08] bg-[#121720] px-6 py-4'>
+                                    <button
+                                          type='button'
+                                          className='mb-4 flex h-12 w-full items-center justify-center gap-2 rounded-[8px] border border-dashed border-[#1677ff]/70 bg-[#1677ff]/[0.03] text-[14px] font-medium text-[#3690ff] transition hover:border-[#3690ff] hover:bg-[#1677ff]/[0.08]'
+                                          onClick={() => setValueAddress('Other')}
+                                    >
+                                          <Plus size={20} strokeWidth={1.8} />
+                                          <span>Thêm địa chỉ mới</span>
+                                    </button>
+
+                                    <div className='grid grid-cols-2 gap-3'>
+                                          <button
+                                                type='button'
+                                                onClick={handleCloseModal}
+                                                className='h-12 rounded-[8px] border border-white/[0.18] bg-transparent text-[14px] font-medium text-[#d7dce3] transition hover:bg-white/[0.05] hover:text-white'
+                                          >
+                                                Hủy
+                                          </button>
+
+                                          <button
+                                                type='button'
+                                                onClick={onVerifyAddress}
+                                                disabled={valueAddress === 'Other'}
+                                                className='h-12 rounded-[8px] bg-[#1677ff] text-[14px] font-medium text-white transition hover:bg-[#2b84ff] disabled:cursor-not-allowed disabled:opacity-40'
+                                          >
+                                                Xác nhận
+                                          </button>
+                                    </div>
+
+                                    <div className='mt-4 flex items-center justify-center gap-1.5 text-[11px] text-[#707b8c]'>
+                                          <LockKeyhole size={13} strokeWidth={1.7} />
+                                          <span>Thông tin địa chỉ của bạn được bảo mật.</span>
                                     </div>
                               </div>
-                              <button
-                                    className='absolute top-[-15px] right-[-15px] w-[30px] h-[30px] border-[1px] border-[var(--border-color-input)] bg-white hover:bg-color-main hover:text-[#fff] hover:border-transparent rounded-full flex items-center justify-center'
-                                    onClick={handleCloseModal}
-                              >
-                                    <X size={18} />
-                              </button>
                         </div>
                   </div>
             </Portal>

@@ -21,18 +21,24 @@ const HeaderCart = () => {
       useEffect(() => {}, [cartQuery.data?.data.metadata.count])
 
       return (
-            <Link className=' flex items-center justify-center px-2 py-[4px] hover:bg-color-main rounded group' to={'/cart'}>
-                  <span className='flex relative'>
-                        <ShoppingCart size={20} className='text-blue-600 group-hover:text-[#fff]' />
+            <Link
+                  className='group relative flex h-10 w-10 items-center justify-center rounded-xl text-blue-600 transition hover:bg-blue-50 dark:hover:bg-blue-500/10'
+                  to={'/cart'}
+                  aria-label='Giỏ hàng'
+            >
+                  <ShoppingCart
+                        size={21}
+                        strokeWidth={1.9}
+                        className='transition-transform duration-200 group-hover:scale-105'
+                  />
 
-                        {cartQuery.isSuccess && (
-                              <div className='absolute top-[-12px] right-[-5px] w-[18px] h-[18px] rounded-full bg-red-400 flex items-center justify-center'>
-                                    <span className=' text-[#ffffff] font-bold text-[12px] xl:text-[14px]'>
-                                          {cartQuery.data.data.metadata.count || 0}
-                                    </span>
-                              </div>
-                        )}
-                  </span>
+                  {cartQuery.isSuccess && (
+                        <div className='absolute right-[1px] top-[1px] flex h-[18px] min-w-[18px] items-center justify-center rounded-full border-2 border-color-section-theme bg-red-500 px-1'>
+                              <span className='text-[10px] font-bold leading-none text-white'>
+                                    {cartQuery.data.data.metadata.count || 0}
+                              </span>
+                        </div>
+                  )}
             </Link>
       )
 }

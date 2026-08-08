@@ -7,6 +7,7 @@ import ProductSection from './ProductSection'
 import FilterWrapper from './Components/FilterWrapper'
 import ShopCategory from './ShopCategory'
 import CategoryTitle from './Components/CategoryTitle'
+import { ChevronRight } from 'lucide-react'
 
 const productBook = ['Sách tiếng Việt', 'Sách tiếng Anh', 'Truyện tranh', 'Tiểu thuyết', 'Ngôn tình', 'Sach giáo khoa']
 const productFood = ['Đồ đóng hộp', 'Bia', 'Nước ngọt', 'Bánh kẹo', 'Snacks']
@@ -42,45 +43,72 @@ const onSetHeaderProductType = ({ product_type }: { product_type: ProductType })
 
 const Category = (props: TProps) => {
       const { product_type } = props
-      const [activeData, setActiveData] = useState<boolean>(true)
-      const [categoryNotFound, setCategoryNotFound] = useState<string>('')
+      const [activeData, setActiveData] = useState(true)
+      const [categoryNotFound, setCategoryNotFound] = useState('')
 
       const onClickCategory = (nameCategory: string) => {
             setCategoryNotFound(nameCategory)
             setActiveData(false)
       }
+
       const onBack = () => {
             setActiveData(true)
       }
 
       return (
-            <div className='w-full xl:max-w-[1450px] xl:w-[1450px] text-text-theme mx-auto flex flex-col gap-[24px] px-[20px] xl:px-0 mt-[70px] mb-[70px] xl:mt-0 text-[14px]'>
-                  <div className='flex items-center underline gap-[4px] p-[0px_20px_6px_20px] xl:px-0 text-[20px] font-extrabold '>
-                        <Link to='/'>Trang chủ</Link>
+            <div className='mx-auto mb-[70px] mt-[70px] flex w-full max-w-[1450px] flex-col  px-4 text-[14px] text-text-theme xl:mt-0 xl:px-0'>
+                  {/* Breadcrumb */}
+                  <div className='flex items-center gap-2 text-sm text-slate-500 py-[16px]'>
+                        <Link to='/' className='transition hover:text-blue-500'>
+                              Trang chủ
+                        </Link>
+                        <ChevronRight size={14} />
+                        <span className='font-semibold text-text-theme'>
+                              {onSetHeaderProductType({ product_type })}
+                        </span>
                   </div>
-                  <div className='w-full h-max flex  gap-[24px]'>
-                        <CategoryTitle title={onSetTitleProductType({ product_type })} onGetNameCategory={onClickCategory} />
-                        <div className='max-w-full w-full xl:w-[81%] min-h-[1000px] h-max '>
+
+                  <div className='flex w-full items-start gap-4 xl:gap-5'>
+                        {/* Left category navigation - keep old component/logic */}
+                        <aside className='hidden w-[220px] shrink-0 xl:block'>
+                              <div className='sticky top-[90px] overflow-hidden rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme shadow-[0_10px_30px_rgba(0,0,0,0.15)]'>
+                                    <div className='border-b border-[var(--border-color-input)] px-4 py-4'>
+                                          <h3 className='font-semibold text-text-theme'>Danh mục</h3>
+                                    </div>
+
+                                    <CategoryTitle
+                                          title={onSetTitleProductType({ product_type })}
+                                          onGetNameCategory={onClickCategory}
+                                    />
+                              </div>
+                        </aside>
+
+                        <div className='min-h-[1000px] min-w-0 flex-1'>
                               {activeData ? (
-                                    <header className='w-full min-h-full h-max flex flex-col gap-[14px] overflow-hidden'>
-                                          <div className='p-[25px] w-full h-[60px] flex items-center bg-color-section-theme'>
-                                                <h1 className='text-[22px] font-semibold '>{onSetHeaderProductType({ product_type })}</h1>
+                                    <header className='flex min-h-full w-full flex-col gap-4 overflow-hidden'>
+                                          {/* Page title */}
+                                          <div className='flex min-h-[64px] w-full items-center rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme px-5 shadow-sm'>
+                                                <h1 className='text-[22px] font-semibold tracking-[-0.02em] text-text-theme'>
+                                                      {onSetHeaderProductType({ product_type })}
+                                                </h1>
                                           </div>
-                                          <div className='w-full'>
-                                                <FeaturedCategory type={product_type} />
-                                          </div>
-                                          <div className=' w-full overflow-hidden min-h-[200px] h-max bg-color-section-theme'>
+
+                                          <FeaturedCategory type={product_type} />
+
+                                          <div className='w-full overflow-hidden rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme'>
                                                 <ShopCategory product_type={product_type} />
                                           </div>
-                                          <div className='w-full  h-[80px] flex items-center bg-color-section-theme rounded-lg px-[8px]'>
+
+                                          <div className='w-full rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme px-3 py-3'>
                                                 <FilterWrapper product_type={product_type} />
                                           </div>
-                                          <div className='w-full h-max'>
+
+                                          <div className='w-full'>
                                                 <ProductSection product_type={product_type} />
                                           </div>
                                     </header>
                               ) : (
-                                    <div className='min-w-full w-full  h-[500px]'>
+                                    <div className='h-[500px] min-w-full w-full'>
                                           <NotFound
                                                 ContentHeader={`Danh mục ${categoryNotFound} chưa được xây dựng`}
                                                 countTime={false}

@@ -53,7 +53,7 @@ const ProductIntro = (props: TProps) => {
       })
 
       return (
-            <div className='flex flex-col min-h-full h-max gap-[12px] text-[13px]'>
+            <div className='flex flex-col min-h-full h-max gap-[18px] text-[13px]'>
                   <section className='bg-color-section-theme w-full min-h-[160px] h-auto p-[18px]  rounded-lg'>
                         <div className='flex flex-col gap-[4px]'>
                               <header>

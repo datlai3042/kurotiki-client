@@ -18,24 +18,32 @@ import mayAnhCamera from '../../Sidebar/img/danhMuc/mayAnhMayQuayPhim.jpg'
 import oto from '../../Sidebar/img/danhMuc/otoXeMayVaXeDap.jpg'
 import { ShopResponse } from '../../../types/shop.type'
 import BoxLoading from '../../BoxUi/BoxLoading'
+import { Bike, BookOpen, Camera, FlaskConical, Gem, LucideIcon, Smartphone } from 'lucide-react'
 
-type TagActiveArray = '/book' | '/food' | '/watch' | '/phone-laptop' | '/camera' | '/honda'
+type TagActiveArray = '/book' | '/food' | '/watch' | '/phone-laptop' | '/camera' | '/honda' | '/'
+const categoryIcons = {
+      book: BookOpen,
+      flask: FlaskConical,
+      gem: Gem,
+      phone: Smartphone,
+      camera: Camera,
+      bike: Bike,
+}
+const arrayCategory: { image: LucideIcon; label: string; href: TagActiveArray }[] = [
+      { image: BookOpen, label: 'Nhà sách Tiki', href: '/book' },
+      { image: FlaskConical, label: 'Bách hóa Online', href: '/food' },
 
-const arrayCategory: { image: string; label: string; href: TagActiveArray }[] = [
-      { image: NhaSachTikiLogo, label: 'Nhà sách Tiki', href: '/book' },
-      { image: bachHoaOnline, label: 'Bách hóa Online', href: '/food' },
-
-      { image: dongHoVaTrangSuc, label: 'Đồng hồ và trang sức', href: '/watch' },
-      { image: dienThoaiMayTinhBang, label: 'Điện thoại và máy tính', href: '/phone-laptop' },
-      { image: mayAnhCamera, label: 'Máy ảnh', href: '/camera' },
-      { image: oto, label: 'Xe máy', href: '/honda' },
+      { image: Gem, label: 'Đồng hồ và trang sức', href: '/watch' },
+      { image: Smartphone, label: 'Điện thoại và máy tính', href: '/phone-laptop' },
+      { image: Camera, label: 'Máy ảnh', href: '/camera' },
+      { image: Bike, label: 'Xe máy', href: '/honda' },
 ]
 
-const LIMIT = 10
+const LIMIT = 24
 const ContentProduct = () => {
       const refPos = useRef<HTMLDivElement | null>(null)
       const stickyRef = useRef<HTMLDivElement>(null)
-      const [tagActive, setTagActive] = useState<TagActiveArray>('/book')
+      const [tagActive, setTagActive] = useState<TagActiveArray>('/')
       const [totalPage, setTotalPage] = useState<number>(1)
       const [page, setPage] = useState<number>(1)
 
@@ -123,26 +131,37 @@ const ContentProduct = () => {
       return (
             <div className=' z-[5] w-full min-h-[370px] h-max  flex flex-col gap-[8px]   text-text-theme  xl:p-0'>
                   <div className='animate-mountComponent  w-full sticky top-[65px] md:top-[60px]   z-[2] ' ref={stickyRef}>
-                        <div className=' w-full   bg-color-section-theme  rounded  border[1px] border-b-[1px] border-[var(--border-color-input)]  flex flex-col gap-[14px] pt-[10px]'>
+                        <div className=' w-full   bg-color-section-theme  rounded  border[1px] border-b-[1px] border-[var(--border-color-input)]  flex flex-col gap-[8px] pt-[10px]'>
                               <h3 className='w-full pl-[20px] font-bold text-[16px]'>Gợi ý hôm nay</h3>
                               <div className='grow grid  grid-cols-[repeat(3,160px)] auto-cols-[160px] grid-flow-col  xl:grid-flow-row  xl:grid-cols-6  justify-items-center overflow-auto pb-[8px] gap-[12px]'>
-                                    {arrayCategory.map((category) => (
-                                          <Link
-                                                to={category.href}
-                                                key={category.href + category.label}
-                                                className={`${styleEffect.onActive(
-                                                      tagActive === category.href,
-                                                )} flex w-full h-full items-center flex-col gap-[8px] py-[6px] rounded-[4px]`}
-                                                onClick={() => setTagActive(category.href)}
-                                          >
-                                                <img
-                                                      src={category.image}
-                                                      className='w-[40px] h-[40px] rounded-full border-[1px] border-[var(--border-color-input)] p-[8px]'
-                                                      alt='category'
-                                                />
-                                                <span className='text-[12px]'>{category.label}</span>
-                                          </Link>
-                                    ))}
+                                    {arrayCategory.map((category) => {
+                                          const isActive = tagActive === category.href
+
+                                          return (
+                                                <Link
+                                                      to={category.href}
+                                                      key={category.href + category.label}
+                                                      className={`${styleEffect.onActive(
+                                                            tagActive === category.href,
+                                                      )} flex w-full h-full items-center flex-col gap-[8px] py-[18px] rounded-[4px]`}
+                                                      onClick={() => setTagActive(category.href)}
+                                                >
+                                                      <div
+                                                            className={
+                                                                  'w-9 h-9 rounded-full flex items-center justify-center ' +
+                                                                  (isActive ? 'bg-white/15' : 'bg-gray-100')
+                                                            }
+                                                      >
+                                                            <category.image
+                                                                  size={18}
+                                                                  className={isActive ? 'text-white' : 'text-gray-500'}
+                                                            />
+                                                      </div>
+
+                                                      <span className='text-[12px]'>{category.label}</span>
+                                                </Link>
+                                          )
+                                    })}
                               </div>
                         </div>
                   </div>
@@ -152,18 +171,18 @@ const ContentProduct = () => {
                                     <>
                                           {shopAdmin && (
                                                 <div className='col-span-2 flex flex-col p-[16px] h-full bg-color-section-theme rounded-lg border-[1px] border-[var(--border-color-input)]'>
-                                                      <Link to={`/shop/${shopAdmin?._id}`} className='h-[48%] flex justify-center'>
-                                                            <img
+                                                      <Link to={`/shop/${shopAdmin?._id}`} className='flex justify-center h-full'>
+                                                            {/* <img
                                                                   src={shopAdmin?.shop_avatar.secure_url || shopAdmin?.shop_avatar_default}
                                                                   className='object-cover w-[90%] h-full'
                                                                   alt='shop admin'
-                                                            />
+                                                            /> */}
+                                                            <div className='w-full h-full flex-1 py-[6px] flex justify-center'>
+                                                                  <ProductShopInfo
+                                                                        shop={shopAdminQuery.data?.data.metadata.shopAdmin as ShopResponse}
+                                                                  />
+                                                            </div>
                                                       </Link>
-                                                      <div className='w-full h-[35%] flex-1 py-[6px] flex justify-center'>
-                                                            <ProductShopInfo
-                                                                  shop={shopAdminQuery.data?.data.metadata.shopAdmin as ShopResponse}
-                                                            />
-                                                      </div>
                                                 </div>
                                           )}
 

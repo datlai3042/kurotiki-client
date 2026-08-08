@@ -2,7 +2,7 @@ import React, { SetStateAction, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CartProduct, CartResponse } from '../../types/cart.type'
 import BoxMoney from '../../component/BoxUi/BoxMoney'
-import { ChevronUp } from 'lucide-react'
+import { ChevronUp, ImageOff } from 'lucide-react'
 import { Address } from '../../types/address.type'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import OrderService from '../../apis/Order.service'
@@ -96,6 +96,7 @@ const PaymentCart = (props: TProps) => {
                         </div>
 
                         <div className='w-[calc(100%+32px)] ml-[-16px] bg-[var(--border-color-input)] h-[1px] my-[8px] '></div>
+
                         <div
                               style={{ height, paddingTop: height > 0 ? 10 : 0, paddingBottom: height > 0 ? 10 : 0 }}
                               className={` flex flex-col gap-[8px] transition-all duration-100`}
@@ -103,32 +104,29 @@ const PaymentCart = (props: TProps) => {
                         >
                               {carts?.cart_products.map((product) => {
                                     return (
-                                          <div
-                                                style={{
-                                                      height: heightElement.current,
-                                                      display: height > 0 ? 'flex' : 'none',
-                                                }}
-                                                className=' justify-between  items-center'
-                                                key={product._id}
-                                          >
-                                                <div className='flex gap-[12px] h-full items-center justify-between'>
-                                                      <img
-                                                            style={{
-                                                                  width: (height / carts?.cart_products.length / 100) * 70,
-                                                            }}
-                                                            src={product.product_id.product_thumb_image.secure_url}
-                                                            className=' h-[100%] object-contain'
-                                                            alt='product'
-                                                      />
-                                                      <p className='self-end min-w-[50px] text-[20px] leading-none text-color-main font-semibold'>
-                                                            <span className='self-end text-[12px]'>x</span>
-
-                                                            {product.quantity}
-                                                      </p>
+                                          <div key={product.product_id._id} className='flex items-center gap-2.5'>
+                                                <div className='relative shrink-0'>
+                                                      <div className='w-10 h-10 rounded-lg bg-gray-100 overflow-hidden flex items-center justify-center'>
+                                                            {product.product_id.product_thumb_image ? (
+                                                                  <img
+                                                                        src={product.product_id.product_thumb_image.secure_url}
+                                                                        alt={product.product_id.product_name}
+                                                                        className='w-full h-full object-cover'
+                                                                  />
+                                                            ) : (
+                                                                  <ImageOff size={16} className='text-gray-300' />
+                                                            )}
+                                                      </div>
+                                                      <span className='absolute -top-1.5 -right-1.5 bg-white border border-gray-200 rounded-full text-[10px] px-[5px] py-px text-gray-500 leading-tight'>
+                                                            x{product.quantity}
+                                                      </span>
                                                 </div>
-                                                <p className=' min-w-[50px] w-max text-left text-slate-900 font-bold text-[16px]'>
-                                                      {product.quantity * product.product_id.product_price}
-                                                </p>
+                                                <span className='flex-1 text-xs text-gray-600 truncate'>
+                                                      {product.product_id.product_name}
+                                                </span>
+                                                <span className='shrink-0 text-xs font-medium text-gray-900'>
+                                                      <BoxMoney money={product.quantity * product.product_id.product_price} name='đ' />
+                                                </span>
                                           </div>
                                     )
                               })}

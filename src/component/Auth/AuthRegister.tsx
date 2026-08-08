@@ -1,6 +1,6 @@
 import React, { SetStateAction, useEffect, useState } from 'react'
 import { TModeAuth } from './AuthWrapper'
-import { Eye, EyeOff, LockKeyhole, MailCheck, ShieldX } from 'lucide-react'
+import { LockKeyhole, MailCheck } from 'lucide-react'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -12,6 +12,7 @@ import { addToast } from '../../Redux/toast'
 import { checkAxiosError } from '../../utils/handleAxiosError'
 import Input from '../input/Input'
 import BoxLoading from '../BoxUi/BoxLoading'
+
 type TProps = {
       setModeAuth: React.Dispatch<SetStateAction<TModeAuth>>
 }
@@ -24,7 +25,10 @@ const registerSchema = z
                   .email({ message: 'Email không hợp lệ' })
                   .max(50, { message: 'Giới hạn 50 kí tự' }),
             password: z.string().min(1, { message: 'Mật khẩu là bắt buộc' }).max(50, { message: 'Tối đa 50 kí tự' }),
-            confirm_password: z.string().min(1, { message: 'Xác thực mật khẩu là bắt buộc' }).max(50, { message: 'Tối đa 50 kí tự' }),
+            confirm_password: z
+                  .string()
+                  .min(1, { message: 'Xác thực mật khẩu là bắt buộc' })
+                  .max(50, { message: 'Tối đa 50 kí tự' }),
       })
       .refine((form) => form.password === form.confirm_password, {
             message: 'Mật khẩu không khớp',
@@ -32,6 +36,7 @@ const registerSchema = z
       })
 
 type TRegisterZodSchema = z.infer<typeof registerSchema>
+
 const defaultValues: TRegisterZodSchema = {
       email: '',
       password: '',
@@ -39,11 +44,9 @@ const defaultValues: TRegisterZodSchema = {
 }
 
 const AuthRegister = (props: TProps) => {
-      //Mode auth => Login | register
       const { setModeAuth } = props
       const dispatch = useDispatch()
 
-      //react hooks form
       const {
             handleSubmit,
             register,
@@ -59,7 +62,13 @@ const AuthRegister = (props: TProps) => {
             mutationFn: (data: Omit<TRegisterZodSchema, 'confirm_password'>) => Auth.register(data),
             onSuccess: (res) => {
                   dispatch(fetchUser({ user: res.data.metadata.user }))
-                  dispatch(addToast({ type: 'SUCCESS', message: 'Welcome các bạn đến với project của mình', id: Math.random().toString() }))
+                  dispatch(
+                        addToast({
+                              type: 'SUCCESS',
+                              message: 'Welcome các bạn đến với project của mình',
+                              id: Math.random().toString(),
+                        }),
+                  )
                   dispatch(doCloseBoxLogin())
             },
 
@@ -76,52 +85,54 @@ const AuthRegister = (props: TProps) => {
             },
       })
 
-    
-
       const onSubmit = (data: TRegisterZodSchema) => {
             authRegister.mutate(data)
       }
 
-      // useEffect(() => {
-      //       if (Object.keys(errors).length > 0) {
-      //             const subMessage: string[] = []
-      //             Object.keys(errors).map((key) => {
-      //                   subMessage.push(`Field ${key} đã xảy ra lỗi, vui lòng ${errors[key as keyof TRegisterZodSchema]?.message}`)
-      //             })
-
-      //             dispatch(addToast({ id: Math.random().toString(), subMessage, message: 'Error', type: 'WARNNING' }))
-      //       }
-      // }, [errors, dispatch])
-
       return (
-            <div className=' flex flex-col rounded-md items-center gap-[24px] px-[24px] py-[48px] min-w-[550px] bg-[#fff] text-[#000]'>
-                  <div className='mb- w-full flex gap-[4px]  gradient-app-name text-left'>
-                        <h1 className='text-4xl font-black  mb-1'>@Hi, Welcome...</h1>
+            <div className='flex w-full flex-col px-6 py-8 sm:px-8 lg:px-10'>
+                  <div className='mb-7'>
+                        <span className='inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400'>
+                              Bắt đầu ngay
+                        </span>
+
+                        <h1 className='mt-4 text-3xl font-semibold tracking-[-0.03em] text-slate-900 dark:text-white'>
+                              Tạo tài khoản
+                        </h1>
+
+                        <p className='mt-2 text-sm leading-6 text-slate-500'>
+                              Đăng ký nhanh để bắt đầu mua sắm và sử dụng đầy đủ tính năng.
+                        </p>
                   </div>
-                  <form className='flex flex-1 flex-col gap-[26px] mt-[12px] w-full' noValidate onSubmit={handleSubmit(onSubmit)}>
+
+                  <form
+                        className='flex w-full flex-col gap-4'
+                        noValidate
+                        onSubmit={handleSubmit(onSubmit)}
+                  >
                         <Input<TRegisterZodSchema>
                               FieldKey='email'
-                              placeholder='email'
+                              placeholder='Email'
                               type='email'
                               register={register}
                               watch={watch}
                               error={errors}
                               icon={<MailCheck />}
                         />
+
                         <Input<TRegisterZodSchema>
                               FieldKey='password'
-                              placeholder='mật khẩu'
+                              placeholder='Mật khẩu'
                               type='password'
                               register={register}
                               watch={watch}
                               error={errors}
                               icon={<LockKeyhole />}
-
-                              // formState={registerForm.formState}
                         />
+
                         <Input<TRegisterZodSchema>
                               FieldKey='confirm_password'
-                              placeholder='xác nhận mật khẩu'
+                              placeholder='Xác nhận mật khẩu'
                               type='password'
                               register={register}
                               watch={watch}
@@ -129,26 +140,28 @@ const AuthRegister = (props: TProps) => {
                               icon={<LockKeyhole />}
                         />
 
-                        <div className=' mt-[8px] flex flex-col gap-[13px]'>
-                              <div className=' flex gap-[10px]'>
-                                    <button
-                                          type='submit'
-                                          disabled={authRegister.isPending}
-                                          className='!w-[150px] font-semibold text-[15px] flex items-center justify-center text-[#fff] gap-[6px] !h-[46px] !bg-[var(--color-main)] !rounded-[999px]'
-                                    >
-                                          Đăng kí
-                                          {authRegister.isPending && <BoxLoading />}
-                                    </button>
+                        <button
+                              type='submit'
+                              disabled={authRegister.isPending}
+                              className='mt-2 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(37,99,235,0.22)] transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60'
+                        >
+                              Đăng kí
+                              {authRegister.isPending && <BoxLoading />}
+                        </button>
 
-                                    <button
-                                          onClick={() => setModeAuth('Login')}
-                                          className='!bg-background-page-color hover:!bg-[#36a420] border-[1px] !text-[#333] hover:!text-[#fff] hover:border-border-page-color font-semibold text-[15px] !h-[46px]  !rounded-[999px] !w-[150px] '
-                                    >
-                                          Đăng nhập
-                                    </button>
-                              </div>
+                        <div className='flex items-center gap-3 py-1'>
+                              <div className='h-px flex-1 bg-slate-200 dark:bg-slate-700' />
+                              <span className='text-xs text-slate-400'>Đã có tài khoản?</span>
+                              <div className='h-px flex-1 bg-slate-200 dark:bg-slate-700' />
                         </div>
-                        
+
+                        <button
+                              type='button'
+                              onClick={() => setModeAuth('Login')}
+                              className='h-12 w-full rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-600 dark:border-slate-700 dark:bg-[#121720] dark:text-slate-200'
+                        >
+                              Quay lại đăng nhập
+                        </button>
                   </form>
             </div>
       )

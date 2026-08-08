@@ -12,7 +12,6 @@ import AccountService from '../../../apis/account.service'
 import { fetchUser } from '../../../Redux/authenticationSlice'
 import BoxLoading from '../../../component/BoxUi/BoxLoading'
 
-// () => api
 const CustomerUpdateEmail = () => {
       const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
 
@@ -51,8 +50,6 @@ const CustomerUpdateEmail = () => {
                   return
             }
             updateEmailMutation.mutate({ password, newEmail: email })
-            // const checkEmail = validateEmail(email)
-            // console.log({ checkEmail })
       }
 
       useEffect(() => {
@@ -81,38 +78,65 @@ const CustomerUpdateEmail = () => {
       })
 
       return (
-            <div className='flex items-center justify-center w-full  min-h-[200px] h-max  bg-color-section-theme text-text-theme py-[60px] rounded'>
-                  <form
-                        className='flex flex-col gap-[16px] min-w-[80%]  md:min-w-[150px] xl:min-w-[400px] xl:min-h-[150px] h-max max-w-auto  p-[24px] rounded-sm  shadow-2xl border-[1px] border-[var(--border-color-input)] '
-                        style={{ width: Number(user.email.length) * 10 }}
-                        onSubmit={onSubmit}
-                  >
-                        <label htmlFor='account_email_update' className='[word-spacing:1px] text-[16px]  font-medium '>
-                              Địa chỉ Email
-                        </label>
+            <div className='w-full rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme text-text-theme shadow-[0_8px_30px_rgba(15,23,42,0.05)]'>
+                  <div className='border-b border-[var(--border-color-input)] px-5 py-4 xl:px-6'>
+                        <h2 className='text-lg font-semibold text-text-theme'>Cập nhập email</h2>
+                        <p className='mt-1 text-sm text-slate-500'>
+                              Thay đổi địa chỉ email dùng để đăng nhập và nhận thông báo tài khoản.
+                        </p>
+                  </div>
 
-                        <div
-                              className='w-full h-[50px] max-w-auto group flex gap-[10px] px-[8px] py-[2px] items-center border-[1px] border-[var(--border-color-input)] rounded'
-                              tabIndex={0}
+                  <div className='flex min-h-[420px] items-center justify-center px-4 py-8 xl:px-8'>
+                        <form
+                              className='w-full max-w-[560px] rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme p-5 shadow-[0_16px_45px_rgba(15,23,42,0.08)] xl:p-6'
+                              style={{ width: Number(user.email.length) * 10 }}
+                              onSubmit={onSubmit}
                         >
-                              <Mail />
-                              <input
-                                    className='w-full max-w-auto border-none h-full outline-none py-[8px] bg-color-section-theme'
-                                    type='text'
-                                    id='account_email_update'
-                                    value={email}
-                                    onChange={onChangeEmail}
-                              />
-                        </div>
-                        <button
-                              type='submit'
-                              className='w-full h-[45px] flex items-center justify-center gap-[14px]  rounded-[4px] bg-color-main opacity-100 hover:opacity-100 text-[#fff]'
-                        >
-                              <span>Lưu thay đổi</span>
+                              <div className='mb-5 flex items-start gap-3'>
+                                    <div className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500'>
+                                          <Mail size={20} strokeWidth={1.8} />
+                                    </div>
 
-                              {updateEmailMutation.isPending && <BoxLoading />}
-                        </button>
-                  </form>
+                                    <div>
+                                          <h3 className='text-base font-semibold text-text-theme'>Địa chỉ Email</h3>
+                                          <p className='mt-1 text-xs leading-5 text-slate-500'>
+                                                Sau khi thay đổi, bạn có thể cần xác thực lại để bảo vệ tài khoản.
+                                          </p>
+                                    </div>
+                              </div>
+
+                              <label
+                                    htmlFor='account_email_update'
+                                    className='mb-2 block text-sm font-medium text-text-theme'
+                              >
+                                    Email mới
+                              </label>
+
+                              <div
+                                    className='group flex h-12 w-full items-center gap-3 rounded-xl border border-[var(--border-color-input)] px-3 transition focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/10 dark:border-slate-700'
+                                    tabIndex={0}
+                              >
+                                    <Mail size={18} className='shrink-0 text-slate-400' />
+                                    <input
+                                          className='h-full w-full border-none bg-transparent text-sm text-text-theme outline-none placeholder:text-slate-400'
+                                          type='text'
+                                          id='account_email_update'
+                                          value={email}
+                                          onChange={onChangeEmail}
+                                    />
+                              </div>
+
+                              <button
+                                    ref={buttonSubmit}
+                                    type='submit'
+                                    className='mt-5 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700'
+                              >
+                                    <span>Lưu thay đổi</span>
+                                    {updateEmailMutation.isPending && <BoxLoading />}
+                              </button>
+                        </form>
+                  </div>
+
                   {openSecurity && (
                         <CustomerPasswordSecurity
                               onCheck={setCheckSecurity}

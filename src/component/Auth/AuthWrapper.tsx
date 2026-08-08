@@ -4,6 +4,8 @@ import AuthRegister from './AuthRegister'
 import { useDispatch } from 'react-redux'
 import { doCloseBoxLogin } from '../../Redux/authSlice'
 import background from './bg.png'
+import { X } from 'lucide-react'
+
 export type TModeAuth = 'Login' | 'Register'
 
 type TProps = {
@@ -16,39 +18,44 @@ const AuthWrapper = (props: TProps) => {
       const dispatch = useDispatch()
 
       const handleHideBoxAuth = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-            // setShowBoxAuth(false)
-            // alert(123)
             dispatch(doCloseBoxLogin())
             setShowBoxAuth(false)
       }
+
       return (
             <div
-                  className='fixed w-full min-h-screen top-0 left-0 flex justify-center items-center bg-[rgba(0,0,0,.7)] z-[999] px-[15px]'
+                  className='fixed inset-0 z-[999] flex min-h-screen items-center justify-center bg-black/75 px-4 py-6 backdrop-blur-[3px]'
                   onClick={() => {
                         dispatch(doCloseBoxLogin())
                         setShowBoxAuth(false)
                   }}
             >
                   <div
-                        className='animate-authBox max-w-[90vw] flex md:max-w-max relative  bg-color-section-theme text-text-theme  h-auto shadow-lg rounded-lg p-[8px]'
+                        className='animate-authBox relative grid w-full max-w-[980px] overflow-hidden rounded-3xl border border-slate-200/60 bg-white shadow-[0_30px_100px_rgba(0,0,0,0.35)] lg:grid-cols-[430px_minmax(0,1fr)] dark:border-slate-700/70 dark:bg-[#0f131a]'
                         onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
                   >
-                        {modeAuth === ('Login' as const) ? (
-                              <AuthLogin setModeAuth={setModeAuth} />
-                        ) : (
-                              <AuthRegister setModeAuth={setModeAuth} />
-                        )}
-                        <img
-                              src={background}
-                              className='hidden lg:flex lg:w-[400px] lg:min-w-[400px] xl:w-[600px] xl:min-w-[600px]   rounded-md'
-                              alt='product'
-                        />
                         <button
-                              className='absolute bottom-[103%] right-[0px] w-[50px] py-[5px] rounded-[4px]  bg-color-main hover:border-transparent text-white min-w-[100px] flex justify-center items-center'
+                              type='button'
+                              className='absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-black/25 text-white backdrop-blur-md transition hover:bg-black/40'
                               onClick={handleHideBoxAuth}
+                              aria-label='Đóng'
                         >
-                              Đóng
+                              <X size={19} />
                         </button>
+
+                        <div className='relative z-10 flex min-h-[560px] items-center bg-white dark:bg-[#0f131a]'>
+                              {modeAuth === 'Login' ? <AuthLogin setModeAuth={setModeAuth} /> : <AuthRegister setModeAuth={setModeAuth} />}
+                        </div>
+
+                        <div className='relative hidden min-h-[560px] overflow-hidden lg:block'>
+                              <img src={background} className='absolute inset-0 h-full w-full object-cover' alt='product' />
+
+                              <div className='absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-black/10' />
+
+                              <div className='absolute bottom-5 left-5 rounded-full border border-white/30 bg-black/25 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md'>
+                                    Ưu đãi dành cho bạn
+                              </div>
+                        </div>
                   </div>
             </div>
       )

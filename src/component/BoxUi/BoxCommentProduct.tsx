@@ -147,7 +147,7 @@ const BoxCommentProduct = (props: TProps) => {
                               </button>
                               <div className='flex-1 flex flex-col gap-[16px]'>
                                     <div className='w-full h-[80px] flex  gap-[16px]'>
-                                          <img src={product.product_thumb_image?.secure_url} className='w-[65px] h-[65px]' alt='product' />
+                                          <img src={product.product_thumb_image?.secure_url} className='w-[85px] h-[85px]' alt='product' />
                                           <div className='flex-1 flex flex-col gap-[8px]'>
                                                 <p className='w-[180px] xl:w-[250px] text-[14px] truncate'>{product.product_name}</p>
                                                 <Rate value={formComment.vote} onChange={onChangeStar} className='flex-1 text-[28px]' />
@@ -155,25 +155,32 @@ const BoxCommentProduct = (props: TProps) => {
                                     </div>
                                     <div className='w-[calc(100%+32px)] ml-[-16px] bg-gray-200 h-[1px]'></div>
                                     <div className='flex flex-col gap-[8px]'>
-                                          <p>Điều gì làm bạn hài lòng?</p>
+                                          <p>Nhận xét của bạn rất hữu ích với sản phẩm đóo...</p>
                                           <TextArea
                                                 value={formComment.content}
                                                 autoSize={{ minRows: 3 }}
                                                 onChange={(e) => onChangeContent(e)}
                                           />
                                     </div>
-                                    <div className='flex-1 flex gap-[16px] mt-[20px] hover:cursor-pointer' onClick={onClickUpload}>
-                                          <div className='w-[70px]'>
+                                    <div className='flex-1 flex gap-[16px] hover:cursor-pointer' onClick={onClickUpload}>
+                                          <div className=''>
                                                 <input type='file' hidden ref={inputImageRef} onChange={onChangeFile} />
-                                                <div className='w-[65px] h-[65px] flex items-center justify-center border-[1px] border-dashed border-blue-400 hover:cursor-pointer'>
+                                                <div className='w-[85px] h-[85px] flex items-center justify-center border-[1px] border-dashed border-blue-400 hover:cursor-pointer'>
                                                       <Camera className=' text-blue-400' />
                                                 </div>
 
-                                                {formComment.secure_url && mode === 'UPLOAD' && <button type='button'>Chọn lại</button>}
+                                                {formComment.secure_url && mode === 'UPLOAD' && (
+                                                      <button
+                                                            type='button'
+                                                            className='flex items-center w-[85px]  justify-center gap-[12px] bg-blue-400 text-white rounded my-3 p-2'
+                                                      >
+                                                            Chọn lại
+                                                      </button>
+                                                )}
                                           </div>
                                           <div className=''>
                                                 {formComment.secure_url && (
-                                                      <img src={formComment.secure_url} className='w-[65px] h-[75px]' alt='product' />
+                                                      <img src={formComment.secure_url} className='w-[85px] h-[85px]' alt='product' />
                                                 )}
                                           </div>
                                     </div>

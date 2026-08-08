@@ -221,11 +221,11 @@ const FormAddress = (props: TProps) => {
                   <Portal>
                         <div
                               onClick={() => onClose && onClose(false)}
-                              className='fixed inset-0 bg-[rgba(0,0,0,.7)] flex justify-center items-center z-[999]'
+                              className='fixed inset-0 bg-[rgba(0,0,0,.9)] flex justify-center items-center z-[999]'
                         >
                               <div
                                     onClick={(e) => e.stopPropagation()}
-                                    className='absolute top-0 bottom-0 w-[400px] p-[24px_12px] bg-[#fff] right-0'
+                                    className='absolute top-0 bottom-0 w-[70vw] md:w-[40vw] p-[24px_12px] bg-color-section-theme right-0'
                               >
                                     <FormProvider {...addressForm}>
                                           <form

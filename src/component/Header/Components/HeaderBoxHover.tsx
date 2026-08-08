@@ -33,42 +33,54 @@ function HeaderBoxHover() {
       const handleLogOut = () => {
             logoutMutation.mutate()
       }
+      const initial = user?.email?.charAt(0).toUpperCase() ?? '?'
 
       return (
             <>
-                  <ul className=' min-w-[250px] bg-color-section-theme shadow-xl gap-2 border border-[var(--border-color-input)] text-text-theme rounded z-20'>
-                        <li className='flex items-center hover:bg-color-main hover:text-[#fff] px-2 py-3'>
-                              <Link to={'/customer/account'} className='w-full h-full flex gap-[8px] items-center'>
-                                    <User size={20} />
-                                    {user ? `Tài khoản: ${user?.fullName || user?.nickName || user.email}` : 'Thông tin tài khoản'}
-                              </Link>
-                        </li>
+                  <div className='w-[260px] bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden'>
+                        {/* Account info */}
+                        <Link
+                              to={'/customer/account'}
+                              className='flex items-center gap-2.5 px-4 py-3.5 border-b border-gray-200  text-text-theme'
+                        >
+                              <div className='w-[34px] h-[34px] rounded-full bg-indigo-50 flex items-center justify-center shrink-0 text-[13px] font-medium text-indigo-600'>
+                                    {initial}
+                              </div>
+                              <div className='min-w-0 text-color-main font-semibold'>
+                                    <p className='text-[11px]  m-0'>Tài khoản</p>
+                                    <p className='text-[13px] font-medium mt-0.5 truncate'>{user?.email}</p>
+                              </div>
+                        </Link>
 
-                        <li className='flex  items-center hover:bg-color-main hover:text-[#fff] px-2 py-3'>
-                              <Link to={'/customer/notification'} className='w-full h-full flex  gap-[8px] items-center'>
-                                    <Bell size={20} />
-                                    Thông báo của tôi
-                              </Link>
-                        </li>
-
-                        <li className='flex items-center hover:bg-color-main hover:text-[#fff] px-2 py-3'>
-                              <Link to={'/customer/order_history'} className='w-full h-full flex gap-[8px] items-center'>
-                                    <ShoppingCart size={20} />
-                                    Đơn hàng của tôi
-                              </Link>
-                        </li>
-
-                        {user && (
-                              <li
-                                    className='flex gap-[8px] items-center px-2 py-3  hover:bg-color-main hover:text-[#fff] hover:cursor-pointer'
-                                    onClick={handleLogOut}
+                        {/* Actions */}
+                        <div className='p-1.5'>
+                              <Link
+                                    to={'/customer/notification'}
+                                    className='flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors'
                               >
-                                    <LogOut size={20}/>
-                                    Đăng xuất
-                              </li>
-                        )}
-                        <p className='thongBao'></p>
-                  </ul>
+                                    <Bell size={17} className='text-gray-500' />
+                                    <span className='text-[13px] text-gray-900'>Thông báo của tôi</span>
+                              </Link>
+                              <Link
+                                    to={'/customer/order_history'}
+                                    className='flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors'
+                              >
+                                    <ShoppingCart size={17} className='text-gray-500' />
+                                    <span className='text-[13px] text-gray-900'>Đơn hàng của tôi</span>
+                              </Link>
+                        </div>
+
+                        {/* Logout */}
+                        <div className='p-1.5 border-t border-gray-200'>
+                              <button
+                                    onClick={handleLogOut}
+                                    className='w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg hover:bg-red-50 transition-colors text-left'
+                              >
+                                    <LogOut size={17} className='text-red-600' />
+                                    <span className='text-[13px] text-red-600'>Đăng xuất</span>
+                              </button>
+                        </div>
+                  </div>
             </>
       )
 }

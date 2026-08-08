@@ -22,9 +22,9 @@ const ProductMedium = (props: TProps) => {
       return (
             <Link
                   to={`/product/${product._id}`}
-                  className='w-full h-full  flex flex-col  gap-[10px] border-[1px] border-[var(--border-color-input)]  rounded-lg bg-color-section-theme text-text-theme hover:shadow-xl p-1'
+                  className='w-full h-full  flex flex-col  gap-[10px] border-[1px] border-[var(--border-color-input)]  rounded-lg bg-color-section-theme text-text-theme hover:shadow-xl p-1 px-2'
             >
-                  <div className='relative w-full h-[60%] p-[8px]'>
+                  <div className='relative w-full h-[70%] p-[8px]'>
                         <img src={product.product_thumb_image?.secure_url} className='object-contain w-full h-[77%] rounded-t-lg' alt='' />
                         <div className=' absolute bottom-[15px] left-0 px-[10px] flex  gap-[5px]'>
                               {TikiBest && <img src={TikiBestLogo} className='w-[60px]' alt='logo-tiki-best' />}
@@ -33,9 +33,17 @@ const ProductMedium = (props: TProps) => {
                   </div>
                   <div className='px-[10px] gap-[7px] flex-1 flex flex-col '>
                         <span className='w-[95%] break-words  line-clamp-2 text-[12px] font-normal'>{product.product_name}</span>
-                        <Rate disabled allowHalf defaultValue={product.product_votes} className='text-[12px]' />
                   </div>
-                  <span className='px-[10px] flex-1 break-words  text-[14px] font-medium mt-auto flex items-end'>{product.product_price} VNĐ</span>
+
+                  <div className='flex justify-between'>
+                        <span className='px-[10px] flex-1 break-words  text-[14px] font-medium mt-auto flex items-end'>
+                              {product.product_price} VNĐ
+                        </span>
+                        <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
+                              <span className='text-[14px]'>{product.product_votes}</span>
+                              <Rate defaultValue={1} count={1} className='text-[14px] ' />
+                        </div>
+                  </div>
                   <div className='h-[40px] flex items-center gap-[8px] px-[10px] pt-[4px] border-t-[1px]  border-[var(--border-color-input)]'>
                         {ship ? (
                               <img src={logoNow} className='hidden xl:inline w-[30px] h-[16px] rounded-xl' alt='' />

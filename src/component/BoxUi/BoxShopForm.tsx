@@ -99,40 +99,91 @@ const BoxShopForm = (props: TProps) => {
 
       return (
             <Portal>
-                  <div className='fixed inset-0 bg-[rgba(0,0,0,.75)] h-screen flex items-center justify-center z-[998]'>
-                        <div className='animate-authBox  h-max  mx-[10px] xl:mx-0   '>
+                  <div className='fixed inset-0 z-[998] flex min-h-screen items-center justify-center bg-black/75 px-4 py-6 backdrop-blur-[2px]'>
+                        <div className='animate-authBox w-full max-w-[760px]'>
                               <FormProvider {...form}>
-                                    <div className='relative   pr-[10px'>
+                                    <div className='relative overflow-hidden rounded-2xl border border-blue-500/20 bg-[#0b111b] text-text-theme shadow-[0_30px_90px_rgba(0,0,0,0.55)]'>
+                                          {/* Header */}
+                                          <div className='flex items-center justify-between border-b border-slate-800 bg-gradient-to-r from-[#0d1b32] via-[#0b1628] to-[#0b111b] px-5 py-4 xl:px-6'>
+                                                <div>
+                                                      <h2 className='text-lg font-semibold text-white'>
+                                                            {modeForm === 'UPDATE'
+                                                                  ? 'Chỉnh sửa thông tin cửa hàng'
+                                                                  : 'Đăng kí thông tin cửa hàng'}
+                                                      </h2>
+
+                                                      <p className='mt-1 text-xs text-slate-400'>
+                                                            Cập nhật hình đại diện, tên và mô tả cửa hàng của bạn.
+                                                      </p>
+                                                </div>
+
+                                                <button
+                                                      type='button'
+                                                      onClick={() => onClose(false)}
+                                                      className='flex h-9 w-9 items-center justify-center rounded-xl border border-slate-700 bg-slate-900/60 text-slate-400 transition hover:border-slate-600 hover:bg-slate-800 hover:text-white'
+                                                      aria-label='Đóng'
+                                                >
+                                                      <X size={18} />
+                                                </button>
+                                          </div>
+
                                           <form
                                                 spellCheck={false}
-                                                className='px-[20px] flex flex-row flex-wrap w-[600px] overflow-y-auto  max-w-[90vw] max-h-[80vh]  bg-color-section-theme rounded-lg text-text-theme gap-[20px]'
                                                 onSubmit={form.handleSubmit(onSubmit)}
+                                                className='grid max-h-[82vh] grid-cols-1 overflow-y-auto xl:grid-cols-[250px_minmax(0,1fr)]'
                                           >
-                                                <div className='w-full xl:w-[40%] h-full bg-color-section-theme pb-[16px] xl:pb-0 cursor-pointer'>
-                                                      <div className='flex flex-col items-center mt-[30px]'>
-                                                            <div
-                                                                  className='relative w-[150px] h-[150px] flex flex-col items-center justify-center bg-color-section-theme rounded-full border-[6px] border-color-main'
-                                                                  onClick={onClickAvatar}
-                                                            >
-                                                                  {preview && (
-                                                                        <img
-                                                                              src={preview}
-                                                                              className='w-full h-full rounded-full'
-                                                                              alt='avatar'
-                                                                        />
-                                                                  )}
+                                                {/* Avatar */}
+                                                <div className='border-b border-slate-800 bg-[#0d131d] px-5 py-6 xl:border-b-0 xl:border-r xl:px-6 xl:py-7'>
+                                                      <div className='flex h-full flex-col items-center'>
+                                                            <p className='mb-4 self-start text-sm font-medium text-slate-300'>
+                                                                  Ảnh đại diện
+                                                            </p>
 
-                                                                  {!preview && <Camera size={30} className='text-color-main' />}
-                                                            </div>
+                                                            <button
+                                                                  type='button'
+                                                                  onClick={onClickAvatar}
+                                                                  className='group relative flex h-[148px] w-[148px] items-center justify-center overflow-hidden rounded-full border-4 border-blue-600 bg-slate-900 shadow-[0_16px_35px_rgba(37,99,235,0.18)]'
+                                                            >
+                                                                  {preview ? (
+                                                                        <>
+                                                                              <img
+                                                                                    src={preview}
+                                                                                    className='h-full w-full object-cover'
+                                                                                    alt='avatar'
+                                                                              />
+
+                                                                              <div className='absolute inset-0 flex items-center justify-center bg-black/0 transition group-hover:bg-black/35'>
+                                                                                    <Camera
+                                                                                          size={26}
+                                                                                          className='scale-90 text-white opacity-0 transition group-hover:scale-100 group-hover:opacity-100'
+                                                                                    />
+                                                                              </div>
+                                                                        </>
+                                                                  ) : (
+                                                                        <div className='flex flex-col items-center gap-2 text-blue-500'>
+                                                                              <Camera size={32} />
+                                                                              <span className='text-xs'>Chọn ảnh</span>
+                                                                        </div>
+                                                                  )}
+                                                            </button>
+
+                                                            <p className='mt-4 text-center text-xs leading-5 text-slate-500'>
+                                                                  Nên dùng ảnh vuông, rõ nét.
+                                                                  <br />
+                                                                  JPG, PNG hoặc WEBP.
+                                                            </p>
 
                                                             {preview && (
                                                                   <button
-                                                                        className='mt-[20px] p-[12px_14px] rounded-[4px]  bg-color-main opacity-80 hover:opacity-100 text-[#fff] hover:cursor-pointer transition-all duration-300'
+                                                                        type='button'
+                                                                        className='mt-4 inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-blue-500/40 bg-blue-500/10 px-4 text-sm font-medium text-blue-400 transition hover:bg-blue-500/20'
                                                                         onClick={onResetAvatar}
                                                                   >
-                                                                        Chọn lại
+                                                                        <Camera size={16} />
+                                                                        Chọn lại ảnh
                                                                   </button>
                                                             )}
+
                                                             <input
                                                                   type='file'
                                                                   className='hidden'
@@ -146,51 +197,97 @@ const BoxShopForm = (props: TProps) => {
                                                             />
                                                       </div>
                                                 </div>
-                                                <div className='w-full xl:w-[60%] flex-1 h-full py-[16px]   flex flex-col items-center gap-[20px] bg-color-section-theme'>
-                                                      <header>Đăng kí thông tin về cửa hàng</header>
-                                                      <div className='flex flex-col gap-[8px] w-[100%]'>
-                                                            <label htmlFor='shop_name'>Tên Shop</label>
+
+                                                {/* Form fields */}
+                                                <div className='flex flex-col gap-5 px-5 py-6 xl:px-7 xl:py-7'>
+                                                      <div className='flex flex-col gap-2'>
+                                                            <label
+                                                                  htmlFor='shop_name'
+                                                                  className='text-sm font-medium text-slate-300'
+                                                            >
+                                                                  Tên Shop
+                                                            </label>
+
                                                             <input
                                                                   type='text'
                                                                   placeholder='Nhập tên shop'
                                                                   id='shop_name'
-                                                                  className='w-full h-[40px] p-[12px_24px] bg-color-section-theme rounded outline-none border-[1px] border-[var(--border-color-input)]'
+                                                                  className='h-11 w-full rounded-xl border border-slate-700 bg-[#10151d] px-4 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10'
                                                                   {...form.register('shop_name', {
-                                                                        required: { value: true, message: 'Tên shop là bắt buộc' },
-                                                                        minLength: { value: 3, message: 'Tối thiểu 3 kí tự' },
-                                                                        maxLength: { value: 150, message: 'Tối thiểu 150 kí tự' },
+                                                                        required: {
+                                                                              value: true,
+                                                                              message: 'Tên shop là bắt buộc',
+                                                                        },
+                                                                        minLength: {
+                                                                              value: 3,
+                                                                              message: 'Tối thiểu 3 kí tự',
+                                                                        },
+                                                                        maxLength: {
+                                                                              value: 150,
+                                                                              message: 'Tối thiểu 150 kí tự',
+                                                                        },
                                                                   })}
                                                             />
+
+                                                            {form.formState.errors.shop_name?.message && (
+                                                                  <span className='text-xs text-red-400'>
+                                                                        {form.formState.errors.shop_name.message}
+                                                                  </span>
+                                                            )}
+                                                      </div>
+
+                                                      <div className='flex flex-1 flex-col gap-2'>
+                                                            <label
+                                                                  htmlFor='shop_description'
+                                                                  className='text-sm font-medium text-slate-300'
+                                                            >
+                                                                  Mô tả cửa hàng
+                                                            </label>
+
                                                             <Controller
                                                                   control={form.control}
                                                                   name='shop_description'
                                                                   render={({ field }) => (
                                                                         <TextArea
-                                                                              rows={10}
+                                                                              id='shop_description'
+                                                                              rows={9}
                                                                               {...field}
                                                                               placeholder='Nhập mô tả của shop'
+                                                                              className='shop-description-textarea'
                                                                               style={{
-                                                                                    backgroundColor: 'var(--color-section-theme)',
-                                                                                    border: '1px solid var(--border-color-input)',
-                                                                                    color: 'var(--text-theme)',
+                                                                                    backgroundColor: '#10151d',
+                                                                                    border: '1px solid #334155',
+                                                                                    color: '#fff',
+                                                                                    borderRadius: '12px',
+                                                                                    padding: '12px 14px',
+                                                                                    resize: 'vertical',
                                                                               }}
-                                                                        ></TextArea>
+                                                                        />
                                                                   )}
                                                             />
+
+                                                            <p className='text-xs leading-5 text-slate-500'>
+                                                                  Mô tả ngắn gọn về cửa hàng, sản phẩm và phong cách phục vụ.
+                                                            </p>
                                                       </div>
-                                                      <button className='ml-auto w-max flex items-center gap-[16px] p-[12px_14px]  bg-color-main opacity-80 hover:opacity-100 text-[#fff] rounded-md  hover:cursor-pointer transition-all duration-300'>
-                                                            {modeForm === 'UPDATE' ? 'Cập nhập' : 'Đăng kí'}
-                                                            {registerShopMutation.isPending && <BoxLoading />}
-                                                      </button>
+
+                                                      {/* Footer actions */}
+                                                      <div className='mt-1 flex flex-col-reverse gap-3 border-t border-slate-800 pt-5 sm:flex-row sm:justify-end'>
+                                                            <button
+                                                                  type='button'
+                                                                  onClick={() => onClose(false)}
+                                                                  className='h-10 rounded-xl border border-slate-700 px-5 text-sm font-medium text-slate-300 transition hover:bg-slate-800 hover:text-white'
+                                                            >
+                                                                  Hủy
+                                                            </button>
+
+                                                            <button className='inline-flex h-10 min-w-[120px] items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 text-sm font-medium text-white shadow-[0_8px_20px_rgba(37,99,235,0.20)] transition hover:bg-blue-500'>
+                                                                  {modeForm === 'UPDATE' ? 'Cập nhập' : 'Đăng kí'}
+                                                                  {registerShopMutation.isPending && <BoxLoading />}
+                                                            </button>
+                                                      </div>
                                                 </div>
                                           </form>
-
-                                          <button
-                                                className='absolute top-[-10%] text-[#fff] right-[0px] w-[50px] py-[5px] rounded-[4px]  bg-color-main hover:border-transparent hover:text-white min-w-[100px] flex justify-center items-center'
-                                                onClick={() => onClose(false)}
-                                          >
-                                                Đóng
-                                          </button>
                                     </div>
                               </FormProvider>
                         </div>

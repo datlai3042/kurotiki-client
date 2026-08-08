@@ -25,7 +25,7 @@ const CustomerUserAddress = () => {
                   {openFormAddress && (
                         <Portal>
                               <div className='fixed inset-0 bg-[var(--bg-overlay)] h-screen flex items-center justify-center z-[998]'>
-                                    <div className='animate-authBox  min-w-[575px]'>
+                                    <div className='animate-authBox bg-color-section-theme  min-w-[575px]'>
                                           <FormAddress iconClose={<X />} onClose={setOpenFormAddress} />
                                     </div>
                               </div>

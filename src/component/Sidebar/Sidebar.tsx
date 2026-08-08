@@ -108,59 +108,70 @@ function Sidebar(props: TProps) {
 
       return (
             <>
-                  {showSideBar && queryMedia && (
-                        <div
-                              onClick={() => {
-                                    dispatch(toDoHideSideBar())
-                                    styleEffect.showSideBar = 'hidden'
-                              }}
-                              className='w-full h-full fixed inset-0 bg-[rgba(0,0,0,.75)] z-[19] mt-[75px]'
-                        ></div>
-                  )}
-                  <div
-                        className={`${styleEffect.showSideBar} bg-color-section-theme hide-scroll border-r-[1px] border-[var(--border-color-input)] md:border-none rounded-md  fixed md:sticky  w-[180px] xl:w-[230px] min-w-[230px] top-[65px] md:top-[70px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
-                  >
-                        <div className='flex flex-col gap-[0px] bg-transparent h-max mb-[50px] text-text-theme'>
-                              <div className='flex flex-col gap-[10px] h-max p-[16px] bg-color-section-theme rounded-[4px] '>
-                                    <h3 className='text-[14px] font-semibold bg-color-main text-[#fff] flex justify-center p-[10px] rounded-md'>Danh mục sản phẩm</h3>
-                                    <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
-                                          {arrayCategory.map((category) => (
-                                                <li key={category.href}>
-                                                      <Link to={category.href} className='flex  gap-[8px] w-full h-[40px] items-center hover:bg-color-main rounded-md hover:text-[#fff] px-[6px]'>
-                                                            <img src={category.image} className='w-[30px] ' alt='catelogy' />
-                                                            <span>{category.label}</span>
-                                                      </Link>
-                                                </li>
-                                          ))}
-                                    </ul>
-                              </div>
-
-                              <div className='flex flex-col gap-[10px] h-max p-[16px]  bg-color-section-theme   rounded-xl'>
-                                    <h3 className='text-[14px] font-semibold  flex justify-center bg-color-main text-[#fff] p-[10px] rounded-md'>Nổi bật</h3>
-                                    <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
-                                          {arrayPopular.map((category) => (
-                                                <li key={category.href}>
-                                                      <Link to={category.href} className='flex  gap-[8px] w-full h-[50px] items-center  hover:bg-color-main rounded-md hover:text-[#fff] px-[6px]'>
-                                                            <img src={category.image} className='w-[30px] ' alt='catelogy' />
-                                                            <span>{category.label}</span>
-                                                      </Link>
-                                                </li>
-                                          ))}
-                                    </ul>
-                              </div>
-
-                              <div className='mb-[20px]  p-[12px]'>
-
-                                    <Link
-                                    to={'/customer/register-sell'}
-                                    className='w-full  flex items-center rounded p-[8px]  gap-[8px] text-slate-500 mt-[-20px] mb-[20px] hover:bg-color-main hover:text-[#fff]'
+                  {showSideBar &&  (
+                        <>
+                              <div
+                                    onClick={() => {
+                                          dispatch(toDoHideSideBar())
+                                          styleEffect.showSideBar = 'hidden'
+                                    }}
+                                    className='w-full h-full fixed inset-0 bg-[rgba(0,0,0,.75)] z-[19] mt-[65px] md:mt-[60px]'
+                              ></div>
+                              <div
+                                    className={`${styleEffect.showSideBar} bg-color-section-theme hide-scroll border-r-[1px] border-[var(--border-color-input)] md:border-none   fixed left-0  w-[180px] xl:w-[350px] min-w-[350px] top-[65px] md:top-[60px] max-h-screen overflow-y-scroll z-[20]  text-[14px] `}
                               >
-                                    <Store />
-                                    <span>Bán hàng cùng Tiki</span>
-                              </Link>
+                                    <div className='w-full flex flex-col gap-[0px] bg-transparent h-max mb-[50px] text-text-theme'>
+                                          <div className='flex flex-col gap-[28px] h-max p-[16px] bg-color-section-theme rounded-[4px] '>
+                                                <h3 className='w-full text-[14px] font-semibold bg-color-main text-[#fff] flex  p-[12px] rounded-md'>
+                                                      Danh mục sản phẩm
+                                                </h3>
+                                                <ul className='w-full min-h-[250px] h-max flex flex-col gap-[20px]'>
+                                                      {arrayCategory.map((category) => (
+                                                            <li key={category.href}>
+                                                                  <Link
+                                                                        to={category.href}
+                                                                        className='flex  gap-[16px] w-full h-[40px] items-center hover:bg-color-main text-[15px] rounded-md hover:text-[#fff] px-[6px]'
+                                                                  >
+                                                                        <img src={category.image} className='w-[40px] ' alt='catelogy' />
+                                                                        <span>{category.label}</span>
+                                                                  </Link>
+                                                            </li>
+                                                      ))}
+                                                </ul>
+                                          </div>
+
+                                          <div className='flex flex-col gap-[10px] h-max p-[16px]  bg-color-section-theme   rounded-xl'>
+                                                <h3 className='text-[14px] font-semibold  flex justify-center bg-color-main text-[#fff] p-[10px] rounded-md'>
+                                                      Nổi bật
+                                                </h3>
+                                                <ul className='w-full min-h-[250px] h-max flex flex-col gap-[4px]'>
+                                                      {arrayPopular.map((category) => (
+                                                            <li key={category.href}>
+                                                                  <Link
+                                                                        to={category.href}
+                                                                        className='flex  gap-[8px] w-full h-[50px] items-center  hover:bg-color-main rounded-md hover:text-[#fff] px-[6px]'
+                                                                  >
+                                                                        <img src={category.image} className='w-[30px] ' alt='catelogy' />
+                                                                        <span>{category.label}</span>
+                                                                  </Link>
+                                                            </li>
+                                                      ))}
+                                                </ul>
+                                          </div>
+
+                                          <div className='mb-[20px]  p-[12px]'>
+                                                <Link
+                                                      to={'/customer/register-sell'}
+                                                      className='w-full  flex items-center rounded p-[8px]  gap-[8px] text-slate-500 mt-[-20px] mb-[20px] hover:bg-color-main hover:text-[#fff]'
+                                                >
+                                                      <Store />
+                                                      <span>Bán hàng cùng Tiki</span>
+                                                </Link>
+                                          </div>
+                                    </div>
                               </div>
-                        </div>
-                  </div>
+                        </>
+                  )}
             </>
       )
 }

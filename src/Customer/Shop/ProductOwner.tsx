@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import DeleteProduct from './components/DeleteProduct'
 import { TProductDetail } from '../../types/product/product.type'
+import { ExternalLink, Pencil, Trash2 } from 'lucide-react'
+import { Rate } from 'antd'
 
 type TProps = {
       product: TProductDetail
@@ -17,35 +19,77 @@ const ProductOwner = (props: TProps) => {
       }
 
       return (
-            <div className='flex w-[47%] md:w-[200px] flex-col gap-[16px] bg-color-section-theme rounded-lg items-center py-[16px]'>
-                  <Link to={`/product/${product?._id}`} className='w-[150px] h-[150px]'>
+            <div className='group flex w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme text-text-theme shadow-sm transition-all duration-300 hover:-translate-y-[2px] hover:border-blue-500/40 sm:w-[calc(50%-8px)] xl:w-[300px]'>
+                  {/* Product image */}
+                  <Link
+                        to={`/product/${product?._id}`}
+                        className='relative flex h-[230px] w-full items-center justify-center overflow-hidden bg-color-section-theme p-4'
+                  >
                         <img
                               key={product?._id}
                               src={product?.product_thumb_image?.secure_url || ''}
-                              className='w-full h-full object-contain'
+                              className='h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]'
                               alt='product'
                         />
                   </Link>
-                  <Link
-                        to={`/product/${product?._id}`}
-                        className='relative group w-[150px] h-[30px] p-[12px_8px] flex items-center justify-center bg-color-section-theme text-text-theme border-[1px] border-[var(--border-color-input)] rounded font-medium overflow-hidden hover:text-white hover:border-transparent  before:absolute before:right-0 before:bottom-0 before:w-0 before:bg-color-main before:h-0 hover:before:h-full hover:before:w-full before:transition-all before:duration-500 '
-                  >
-                        <button className=' absolute z-[2]  transition-all duration-500'>Link sản phẩm</button>
-                  </Link>
 
-                  <Link
-                        to={`/product/update/${product?._id}`}
-                        className='relative group w-[150px] h-[30px] p-[12px_8px] flex items-center justify-center bg-color-section-theme text-text-theme border-[1px] border-[var(--border-color-input)] rounded font-medium overflow-hidden hover:text-white hover:border-transparent  before:absolute before:left-0 before:bottom-0 before:w-0 before:bg-[#0c67fe] before:h-0 hover:before:h-full hover:before:w-full before:transition-all before:duration-500 '
-                  >
-                        <button className=' absolute z-[2]  transition-all duration-500'>Chỉnh sửa sản phẩm</button>
-                  </Link>
-                  {/* <Link to={`/product/update-book/${product?._id}`}>Chỉnh sửa sản phẩm</Link> */}
-                  <button
-                        className='bg-red-800 text-[#fff] rounded opacity-90 hover:opacity-100 w-[150px] h-[30px] p-[12px_8px] flex items-center justify-center'
-                        onClick={handleControllModalDeleteProduct}
-                  >
-                        Xóa sản phẩm
-                  </button>
+                  {/* Product info */}
+                  <div className='flex min-h-[205px] flex-1 flex-col p-4'>
+                        <Link
+                              to={`/product/${product?._id}`}
+                              className='line-clamp-2 min-h-[42px] text-sm font-semibold leading-5 text-text-theme transition hover:text-blue-500'
+                        >
+                              {product?.product_name}
+                        </Link>
+
+                        <div className=' text-lg font-semibold text-blue-500'>{product?.product_price?.toLocaleString('vi-VN')}đ</div>
+
+                        <div className='mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-400'>
+                              <span>
+                                    Tồn kho: <b className='font-medium text-text-theme'>{product?.product_available ?? 0}</b>
+                              </span>
+
+                              <span className='h-3 w-px bg-[var(--border-color-input)]' />
+
+                              <span>
+                                    Đã bán: <b className='font-medium text-text-theme'>{product?.product_is_bought ?? 0}</b>
+                              </span>
+
+                               <span className='h-3 w-px bg-[var(--border-color-input)]' />
+
+                              <span className='flex items-center gap-1'>
+                                    Đánh giá: <b className='font-medium text-text-theme'>{product?.product_votes ?? 0}</b>
+                                     <Rate defaultValue={1} count={1} className='text-[14px] ' />
+                              </span>
+                        </div>
+
+                        {/* Keep actions at the bottom and prevent wrapping */}
+                        <div className='mt-auto grid grid-cols-[1fr_1fr_auto] gap-2 border-t border-[var(--border-color-input)] pt-4'>
+                              <Link
+                                    to={`/product/${product?._id}`}
+                                    className='inline-flex h-9 min-w-0 items-center justify-center gap-1 rounded-lg border border-[var(--border-color-input)] px-2 text-[11px] font-medium text-text-theme transition hover:border-blue-500 hover:text-blue-500'
+                              >
+                                    <ExternalLink size={13} strokeWidth={1.8} className='shrink-0' />
+                                    <span className='truncate'>Link sản phẩm</span>
+                              </Link>
+
+                              <Link
+                                    to={`/product/update/${product?._id}`}
+                                    className='inline-flex h-9 min-w-0 items-center justify-center gap-1 rounded-lg border border-[var(--border-color-input)] px-2 text-[11px] font-medium text-text-theme transition hover:border-blue-500 hover:text-blue-500'
+                              >
+                                    <Pencil size={13} strokeWidth={1.8} className='shrink-0' />
+                                    <span className='truncate'>Chỉnh sửa</span>
+                              </Link>
+
+                              <button
+                                    className='inline-flex h-9 shrink-0 items-center justify-center gap-1 rounded-lg bg-red-600 px-3 text-[11px] font-medium text-white transition hover:bg-red-500'
+                                    onClick={handleControllModalDeleteProduct}
+                              >
+                                    <Trash2 size={13} strokeWidth={1.8} />
+                                    Xóa
+                              </button>
+                        </div>
+                  </div>
 
                   {modalDeleteProduct && (
                         <DeleteProduct product_id={product?._id as string} setModalDeleteProduct={setModalDeleteProduct} />

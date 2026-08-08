@@ -30,10 +30,10 @@ const Input = <FormType extends FieldValues>(props: TProps<FormType>) => {
 
       return (
             <div style={style} className='flex flex-col gap-[6[x]]'>
-                  <div className='flex items-center p-[10px_0px]  w-full border-[1px]  border-border-page-color bg-background-page-color  h-max gap-[6px]  rounded-[8px] '>
+                  <div className='flex items-center p-[10px_0px]  w-full border-[1px]  border-[var(--border-color-input)] bg-background-page-color  h-max gap-[6px]  rounded-[8px] '>
                         <div className='p-[10px] w-[90px] flex-center'>{icon ? icon : <Info />}</div>
 
-                        <div className='flex flex-col gap-[2px]   w-full'>
+                        <div className='flex flex-col gap-[5px]   w-full'>
                               {!unActiveLabel && (
                                     <label
                                           style={{
@@ -55,7 +55,7 @@ const Input = <FormType extends FieldValues>(props: TProps<FormType>) => {
                                           },
                                     })}
                                     onFocus={() => setFocus(true)}
-                                    className='inline-block  input-form w-full  p-[2px] pr-[12px] text-[14px]  opacity-100 text-text-theme  font-semibold outline-transparent bg-transparent  placeholder:opacity-100 '
+                                    className='inline-block  input-form w-full  p-[2px] pr-[12px] text-[14px]  opacity-100 text-text-theme  font-semibold outline-transparent bg-transparent border-none  placeholder:opacity-100 '
                                     placeholder={`Nhập ${placeholder} của bạn`}
                               />
                         </div>

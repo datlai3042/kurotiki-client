@@ -21,35 +21,42 @@ const CommentStatistic = (props: TProps) => {
       }, [avg, totalComment, detailComment])
 
       return (
-            <div className='w-[330px] h-max flex items-center py-[16px] px-[20px]'>
-                  <div className='w-full min-h-[100px] h-max flex flex-col gap-[20px]'>
-                        <div className=''>
+            <div className='w-[330px] h-max flex items-center py-[20px] px-[20px]'>
+                  <div className='w-full min-h-[100px] h-max flex flex-col gap-[8px]'>
+                        <div className='flex gap-1  font-semibold items-center '>
+                              <span className='text-[14px] '>Tổng quan</span>
+                              <span>-</span>
                               <span className='text-[15px]  font-extrabold'>Khách hàng đánh giá</span>
                         </div>
-                        <div className=''>
-                              <span className='text-[14px]  font-semibold'>Tổng quan</span>
-                        </div>
-                        <div className='w-full min-h-[70px] h-max flex flex-col gap-[2px] '>
+
+                       <div className='py-2'>
+                         <div className='w-full min-h-[70px] h-max flex flex-col gap-[2px] '>
                               <div className='flex items-center gap-[8px] flex-1'>
                                     <span className='text-[28px]  font-semibold'>{avg.toFixed(1)}</span>
                                     <Rate disabled allowHalf value={avg} className='' />
                               </div>
-                              <div className='h-max text-[16px] t'>({totalComment} đánh giá)</div>
+                              <div className='h-max text-[16px] '>({totalComment} đánh giá)</div>
                         </div>
-                        <div className='w-full min-h-[60px] h-max flex flex-col gap-[6px]'>
-                              {detailComment.map((comment) => (
-                                    <div className='w-full flex items-center gap-[16px]' key={comment._id}>
-                                          <Rate disabled defaultValue={comment._id} className='text-[10px] xl:text-[12px]' />
-                                          <div className='w-[30%] xl:w-[50%] h-[10px] rounded-lg bg-[rgb(245_245_250)] ' ref={lineRef}>
+                        {detailComment && detailComment.length > 0 && (
+                              <div className='w-full  h-max flex flex-col gap-[6px]'>
+                                    {detailComment.map((comment) => (
+                                          <div className='w-full flex items-center gap-[16px]' key={comment._id}>
+                                                <Rate disabled defaultValue={comment._id} className='text-[10px] xl:text-[12px]' />
                                                 <div
-                                                      style={{ width: (width / totalComment) * comment.comment_count }}
-                                                      className=' h-[10px] rounded-lg bg-blue-600'
-                                                ></div>
+                                                      className='w-[30%] xl:w-[50%] h-[10px] rounded-lg bg-[rgb(245_245_250)] '
+                                                      ref={lineRef}
+                                                >
+                                                      <div
+                                                            style={{ width: (width / totalComment) * comment.comment_count }}
+                                                            className=' h-[10px] rounded-lg bg-blue-600'
+                                                      ></div>
+                                                </div>
+                                                <span>{comment.comment_count}</span>
                                           </div>
-                                          <span>{comment.comment_count}</span>
-                                    </div>
-                              ))}
-                        </div>
+                                    ))}
+                              </div>
+                        )}
+                       </div>
                   </div>
             </div>
       )

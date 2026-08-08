@@ -75,9 +75,9 @@ const BoxModalImage = (props: TProps) => {
 
       return (
             <Portal>
-                  <div className=' fixed z-[200] inset-0 bg-[rgba(0,0,0,.93)] flex flex-col content-between min-h-screen h-max px-[24px]'>
-                        <div className='relative w-full h-[30%]  lg:h-[70%] mt-[100px] xl:mt-[24px]'>
-                              <div className='w-full h-full flex justify-center items-center'>
+                  <div className=' fixed z-[200] inset-0 bg-[rgba(0,0,0,.98)] flex flex-col justify-center content-between min-h-screen h-max px-[24px]'>
+                        <div className='relative w-full h-[30%] flex-1 flex justify-center  lg:h-[70%] mt-[100px] xl:mt-[24px]'>
+                              <div className='w-full  flex justify-center items-center'>
                                     <div className='w-[250px] h-[250px] xl:w-[480px] xl:h-[480px] overflow-x-hidden'>
                                           <div className='w-full h-full flex     ' ref={wrapperRef}>
                                                 {secure_url.map((image) => (
@@ -125,7 +125,7 @@ const BoxModalImage = (props: TProps) => {
                               </div>
                         </div>
 
-                        <div className='modelImage w-[340px] lg:w-[1000px] min-h-[200px] h-[280px] overflow-auto xl:h-max mx-auto my-[20px] flex flex-col gap-[8px]'>
+                        <div className='modelImage w-[340px] lg:w-[1000px] min-h-[200px] h-[280px] overflow-auto xl:h-max mx-auto my-[20px] !mt-auto flex flex-col gap-[8px]'>
                               <p className='text-[20px] text-white pb-[2px] border-b-[3px] border-blue-600 max-w-max'>
                                     Hình ảnh từ Tiki ({secure_url.length})
                               </p>

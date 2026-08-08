@@ -21,6 +21,8 @@ import CommentService from '../../apis/comment.service'
 import ProductSkeleton from './ProductSkeleton'
 import Footer from '../../component/Footer/Footer'
 import { ProductType, TProductDetail, TProductFull } from '../../types/product/product.type'
+import DatDeveloper from '../../component/AuthorBox/DatDeveloper'
+import Breadcrumb from '../../component/BoxUi/Breadcrumb'
 
 export type TImage = {
       secure_url: string
@@ -110,25 +112,27 @@ const Product = () => {
       return (
             <div className='flex flex-col w-full text-[12px] text-text-theme gap-[20px]'>
                   <div className=' w-full flex flex-col gap-[4px] '>
+                       
                         {getProductWithId.data?.data && (
-                              <div className='flex items-center gap-[4px] p-[12px_20px_10px_0px] text-[20px] font-extrabold '>
-                                    <Link to='/'>Trang chủ</Link>
-
-                                    <ChevronRight size={16} />
-                                    <Link to={`/${product?.product_type}`}>{renderType(product?.product_type as ProductType)}</Link>
-                                    <ChevronRight size={16} />
-                                    <Link to={`/${product?.product_type}`}>{product?.attribute.type}</Link>
-                              </div>
+                              <Breadcrumb
+                                    items={[
+                                          { label: 'Trang chủ', to: '/' },
+                                          {
+                                                label: renderType(product?.product_type as ProductType) as string,
+                                                to: `/${product?.product_type}`,
+                                          },
+                                          { label: product?.attribute.type as string},
+                                    ]}
+                              />
                         )}
-
                         {getProductWithId.isSuccess && product && (
-                              <div className='  flex gap-[16px] xl:gap-[12px] xl:mt-0'>
+                              <div className='  flex gap-[16px] xl:gap-[16px] xl:mt-0'>
                                     <div className='w-full xl:w-[74%] flex flex-col gap-[12px]'>
-                                          <div className='top w-full min-h-[1000px] h-max flex flex-col xl:flex-row gap-[12px]'>
-                                                <div className='xl:w-[40%] static xl:sticky top-[32px] xl:top-[70px] bg-color-section-theme px-[3px] pt-[16px] pb-[24px] rounded-lg  h-max flex flex-col gap-[16px] '>
+                                          <div className='top w-full min-h-[1000px] h-max flex flex-col  gap-[18px]'>
+                                                <div className=' static  bg-color-section-theme px-[3px] pt-[16px] pb-[24px] rounded-lg  h-max flex flex-row-reverse  gap-[16px] '>
                                                       <ProductDetail product={product} isSuccess={getProductWithId.isSuccess} />
                                                 </div>
-                                                <div className='xl:w-[60%]  min-h-[500px] h-max mt-[20px] xl:mt-0 rounded-lg '>
+                                                <div className='  min-h-[500px] relative z-100 bg-color-gap-empty h-max mt-[20px] xl:mt-0 rounded-lg '>
                                                       <ProductIntro
                                                             product={product}
                                                             totalComment={totalComment || 0}
@@ -136,21 +140,22 @@ const Product = () => {
                                                       />
                                                 </div>
                                           </div>
-                                          <div className='flex flex-col gap-[10px] comment w-full min-h-[1000px] h-max  bg-color-section-theme rounded-lg  pb-[50px]'>
+                                          <div className='flex flex-col gap-[10px]  comment w-full min-h-[1000px] h-max  bg-color-section-theme rounded-lg  pb-[50px]'>
                                                 <CommentStatistic
                                                       avg={avg || vote || product.product_votes}
                                                       totalComment={totalComment || 0}
                                                       detailComment={detailComment || []}
                                                 />
                                                 <CommentImageAll product_id={product._id} />
-                                                <div className='w-full mt-[16px]'>
+                                                <div className='w-full'>
                                                       <CommentMe product={product} ownerProduct={product?.shop_id?.owner._id} />
                                                 </div>
                                                 <Comment product_id={product?._id} />
                                           </div>
                                     </div>
-                                    <div className='hidden xl:flex w-[40%] xl:w-[26%] sticky top-[100px] xl:top-[70px] h-max pb-[15px] bg-color-section-theme  rounded-md'>
+                                    <div className='hidden xl:flex w-[40%] xl:w-[26%] sticky top-[100px] xl:top-[96px] h-max   flex-col gap-[10px]   rounded-md'>
                                           <ProductPay product={product} />
+                                          <DatDeveloper />
                                     </div>
                               </div>
                         )}

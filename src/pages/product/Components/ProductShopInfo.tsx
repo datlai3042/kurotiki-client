@@ -5,7 +5,7 @@ import ShopLogo from '../../../component/Content/assets/img/Label/offical.png'
 import { Rate } from 'antd'
 import { useQuery } from '@tanstack/react-query'
 import ShopApi from '../../../apis/shop.api'
-import { Store } from 'lucide-react'
+import { BadgeCheck, Store, ExternalLink } from 'lucide-react'
 
 type TProps = {
       product_id?: string
@@ -20,32 +20,69 @@ const ProductShopInfo = (props: TProps) => {
                   {shop && (
                         <Link
                               to={`/shop/${shop?._id}`}
-                              className='w-full min-h-[130px] h-full bg-color-section-theme text-text-theme rounded-lg flex flex-col gap-[16px] p-[16px]'
+                              className='group flex h-full min-h-[260px] w-full flex-col overflow-hidden rounded-2xl border border-slate-700/60 bg-[#17191d] text-text-theme shadow-[0_12px_35px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-[2px] hover:border-blue-500/35 hover:shadow-[0_18px_45px_rgba(0,0,0,0.28)]'
                         >
-                              <h4 className='text-[16px] font-semibold'>Thông tin nhà bán</h4>
-                              <div className='flex flex-row xl:flex-col gap-[12px]'>
-                                    <div className='flex flex-1 gap-[8px]'>
+                              {/* Shop banner */}
+                              <div className='relative flex-1 overflow-hidden bg-gradient-to-br from-blue-600/20 via-slate-900 to-slate-950'>
+                                    <img
+                                          src={shop?.shop_avatar?.secure_url || shop.shop_avatar_default}
+                                          className='absolute inset-0 h-full w-full scale-110 object-cover opacity-30 blur-[1px]'
+                                          alt='shop cover'
+                                    />
+
+                                    <div className='absolute inset-0 bg-gradient-to-t from-[#17191d] via-[#17191d]/50 to-transparent' />
+
+                                    <div className='absolute bottom-3 left-4 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border-2 border-white/80 bg-white shadow-lg'>
                                           <img
                                                 src={shop?.shop_avatar?.secure_url || shop.shop_avatar_default}
-                                                className=' w-[40px] h-[40px] rounded-full'
+                                                className='h-full w-full object-cover'
                                                 alt='shop avatar'
                                           />
-                                          <div className='flex  flex-col gap-[6px] xl:gap-[4px]'>
-                                                <div className='w-max flex  flex-col-reverse xl:flex-row gap-[10px]'>
-                                                      <span className='font-medium text-[14px]'>{shop.shop_name}</span>
-                                                      <img src={ShopLogo} className='object-contain w-[64px]' alt='label logo' />
+                                    </div>
+                              </div>
+
+                              {/* Shop info */}
+                              <div className='flex flex-1 flex-col px-4 pb-4 pt-3'>
+                                    <p className='mb-2 text-[11px] font-medium uppercase tracking-[0.08em] text-slate-500'>
+                                          Thông tin nhà bán
+                                    </p>
+
+                                    <div className='flex min-w-0 items-start justify-between gap-3'>
+                                          <div className='min-w-0'>
+                                                <div className='flex flex-wrap items-center gap-2'>
+                                                      <h4 className='truncate text-sm font-semibold text-slate-100'>{shop.shop_name}</h4>
+
+                                                      <div className='flex items-center gap-1 rounded-full bg-blue-500/10 px-2 py-1 text-[10px] font-medium text-blue-400'>
+                                                            <BadgeCheck size={12} />
+                                                            OFFICIAL
+                                                      </div>
                                                 </div>
-                                                <div className='flex items-center gap-[6px] w-max'>
-                                                      <Rate disabled allowHalf value={shop.shop_vote || 4.5} className='text-[12px]' />
-                                                      <span className='text-[13px] xl:text-[14px]'>
-                                                            ({shop.shop_count_total_vote} đánh giá)
-                                                      </span>
+
+                                                <div className='mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-400'>
+                                                      <div className='flex items-center gap-1.5'>
+                                                            <Rate
+                                                                  disabled
+                                                                  allowHalf
+                                                                  value={shop.shop_vote || 4.5}
+                                                                  className='text-[11px]'
+                                                            />
+                                                      </div>
+
+                                                      <span className='h-1 w-1 rounded-full bg-slate-600' />
+
+                                                      <span>{shop.shop_count_total_vote} đánh giá</span>
                                                 </div>
-                                                <div className='mt-[8px] self-start justify-self-start flex flex-col gap-[12px]'>
-                                                      <button className='min-w-[60px] w-max h-[30px]  text-[13px] gap-[6px] p-[8px] border-[1px] border-[var(--border-color-input)] hover:border-transparent hover:bg-color-main flex items-center justify-center rounded-md'>
-                                                            <Store size={14} className='mt-[-1px]'/> Xem shop
-                                                      </button>
-                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div className='mt-4 flex items-center gap-2'>
+                                          <div className='flex h-9 flex-1 items-center justify-center gap-2 rounded-xl border border-slate-700 bg-[#12151a] text-xs font-medium text-slate-200 transition group-hover:border-blue-500/50 group-hover:text-blue-400'>
+                                                <Store size={14} />
+                                                Xem shop
+                                          </div>
+
+                                          <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-slate-700 bg-[#12151a] text-slate-400 transition group-hover:border-blue-500/50 group-hover:text-blue-400'>
+                                                <ExternalLink size={14} />
                                           </div>
                                     </div>
                               </div>

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ProductApi from '../../apis/product.api'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import ProductItemMini from './Components/ProductItemMini'
@@ -8,6 +8,7 @@ import { TProductDetail } from '../../types/product/product.type'
 type TProps = {
       product: TProductDetail
 }
+const ELEMENT_PAGE = 12
 
 const ProductSimiliar = (props: TProps) => {
       const { product } = props
@@ -36,6 +37,7 @@ const ProductSimiliar = (props: TProps) => {
                   wrapperListProductsRef.current.style.transition = `all 1s`
             }
       }
+      const [calcAutoCols, setCalcAutoCols] = useState<number>(0)
 
       const handleClickPrev = () => {
             if (wrapperListProductsRef.current) {
@@ -50,7 +52,7 @@ const ProductSimiliar = (props: TProps) => {
             }
       }
       const productData = allProduct.data?.data.metadata.products
-      const totalPage = Math.ceil(Number(productData?.length) / 8)
+      const totalPage = Math.ceil(Number(productData?.length) / 12)
       const styleEffect = {
             buttonPrev: count === 1 ? 'md:hidden' : 'md:flex',
             buttonNext: totalPage === count ? 'md:hidden' : 'md:flex',
@@ -60,11 +62,13 @@ const ProductSimiliar = (props: TProps) => {
                   return check ? 'bg-blue-400 rounded-[999px]' : 'bg-slate-400 rounded-[999px]'
             },
       }
-      
-      const page1 = productData?.slice(0, 8)
-      const page2 = productData?.slice(8, 16)
-      const page3 = productData?.slice(16, 24)
-      const page4 = productData?.slice(24, 32)
+      useEffect(() => {
+            setCalcAutoCols(((wrapperListProductsRef.current?.getBoundingClientRect().width || 500) - 18 * 6) / ELEMENT_PAGE)
+      }, [count])
+      const page1 = productData?.slice(0, ELEMENT_PAGE)
+      const page2 = productData?.slice(ELEMENT_PAGE, ELEMENT_PAGE * 2)
+      const page3 = productData?.slice(ELEMENT_PAGE * 2, ELEMENT_PAGE * 3)
+      const page4 = productData?.slice(ELEMENT_PAGE * 3, ELEMENT_PAGE * 4)
 
       return (
             <div className='relative h-full overflow-hidden flex flex-col gap-[16px] mx-[16px] py-[24px]'>
@@ -74,24 +78,36 @@ const ProductSimiliar = (props: TProps) => {
                               Không có thông tin các sản phẩm khác
                         </div>
                   )}
-                  {productData && productData.length > 0 &&(
+                  {productData && productData.length > 0 && (
                         <div
                               className='flex xl:w-full  xl:gap-0    overflow-auto md:overflow-visible pb-[8px]'
                               ref={wrapperListProductsRef}
                         >
-                              <div className=' w-max xl:min-w-full    grid grid-flow-col auto-cols-[130px] auto-rows-[220px] grid-cols-[130px] xl:grid-cols-4 grid-rows-[220px_220px] gap-[18px] '>
+                              <div
+                                    style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
+                                    className=' w-max xl:min-w-full    grid grid-flow-col auto-rows-[220px]  xl:grid-cols-6 grid-rows-[220px_220px] gap-[18px] '
+                              >
                                     {page1 && page1?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                               </div>
 
-                              <div className=' w-max xl:min-w-full    grid grid-flow-col auto-cols-[130px] auto-rows-[220px] grid-cols-[130px] xl:grid-cols-4 grid-rows-[220px_220px] gap-[18px] '>
+                              <div
+                                    style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
+                                    className=' w-max xl:min-w-full    grid grid-flow-col auto-rows-[220px]  xl:grid-cols-6 grid-rows-[220px_220px] gap-[18px] '
+                              >
                                     {page2 && page2?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                               </div>
 
-                              <div className=' w-max xl:min-w-full    grid grid-flow-col auto-cols-[130px] auto-rows-[220px] grid-cols-[130px] xl:grid-cols-4 grid-rows-[220px_220px] gap-[18px] '>
+                              <div
+                                    style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
+                                    className=' w-max xl:min-w-full    grid grid-flow-col auto-rows-[220px]  xl:grid-cols-6 grid-rows-[220px_220px] gap-[18px] '
+                              >
                                     {page3 && page3?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                               </div>
 
-                              <div className=' w-max xl:min-w-full    grid grid-flow-col auto-cols-[130px] auto-rows-[220px] grid-cols-[130px] xl:grid-cols-4 grid-rows-[220px_220px] gap-[18px] '>
+                              <div
+                                    style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
+                                    className=' w-max xl:min-w-full    grid grid-flow-col auto-rows-[220px]  xl:grid-cols-6 grid-rows-[220px_220px] gap-[18px] '
+                              >
                                     {page4 && page4?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                               </div>
                         </div>
@@ -115,23 +131,34 @@ const ProductSimiliar = (props: TProps) => {
                         </div>
                   )} */}
 
-                  {productData &&  productData.length > 0 && (
+                  {productData && productData.length > 0 && (
                         <>
-                              <button
-                                    className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[30%]  bg-[#ffffff]  rounded-full shadow-3xl`}
-                                    onClick={handleClickPrev}
-                                    disabled={styleEffect.disButtonPrev || allProduct.isPending}
-                              >
-                                    <ChevronLeft size={28} color='blue' />
-                              </button>
-
-                              <button
-                                    className={`${styleEffect.buttonNext} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[30%] bg-[#ffffff]  rounded-full shadow-3xl `}
-                                    onClick={handleClickNext}
-                                    disabled={styleEffect.disButtonNext || allProduct.isPending}
-                              >
-                                    <ChevronRight size={26} color='blue' />
-                              </button>
+                              <>
+                                    {styleEffect.disButtonPrev || allProduct.isPending ? (
+                                          <></>
+                                    ) : (
+                                          <button
+                                                className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[30%]  bg-[#ffffff]  rounded-full shadow-3xl`}
+                                                onClick={handleClickPrev}
+                                                disabled={styleEffect.disButtonPrev || allProduct.isPending}
+                                          >
+                                                <ChevronLeft size={28} color='blue' />
+                                          </button>
+                                    )}
+                              </>
+                              <>
+                                    {styleEffect.disButtonNext || allProduct.isPending ? (
+                                          <></>
+                                    ) : (
+                                          <button
+                                                className={`${styleEffect.buttonNext} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[30%] bg-[#ffffff]  rounded-full shadow-3xl `}
+                                                onClick={handleClickNext}
+                                                disabled={styleEffect.disButtonNext || allProduct.isPending}
+                                          >
+                                                <ChevronRight size={26} color='blue' />
+                                          </button>
+                                    )}
+                              </>
                         </>
                   )}
             </div>

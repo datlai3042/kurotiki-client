@@ -67,114 +67,226 @@ const CartItem = (props: TProps) => {
       // if (!product.product_id.s) return null
       return (
             <div
-                  className=' flex flex-col gap-[32px] bg-color-section-theme text-text-theme p-[0px_12px_16px] text-[13px]'
+                  className='overflow-hidden border-b border-[var(--border-color-input)] bg-color-section-theme text-text-theme last:border-b-0'
                   key={product._id}
             >
-                  <div className='w-full flex  py-[24px] flex-wrap gap-[10px]  items-center justify-between'>
-                        <div className='flex gap-[12px]  items-center'>
-                              {/* <Checkbox disabled={styleEffect.readOnly} /> */}
-                              {/* <Home />
-                        <ChevronRight className='hidden xl:block' /> */}
-                              <img
-                                    src={shop.shop_avatar?.secure_url || product.shop_id.shop_avatar_default || ''}
-                                    className='h-[30px] w-[30px] xl:w-[40px] '
-                                    alt='shop_avatar'
-                              />
-                              <Link to={`/shop/${product.shop_id._id}`} className='block xl:flex gap-[4px] w-full group'>
-                                    <span>Cửa hàng:</span>
-                                    <span className='text-color-main font-semibold group-hover:underline'>{shop.shop_name}</span>
-                              </Link>
-                        </div>
-
-                        <span className='ml-[43px]'>{DateTimeFromString(product.cart_date)}</span>
-                  </div>
-                  <div className='w-full flex flex-col  gap-[40px]'>
-                        <div className='w-full flex  flex-col xl:flex-row gap-[30px] min-h-[230px] h-max xl:min-h-[80px]'>
+                  {/* Desktop row - styled like the generated order-management mockup */}
+                  <div className='hidden min-h-[122px] w-full rounded  gap-5 px-5 py-4 xl:grid xl:grid-cols-[28px_86px_minmax(0,1.35fr)_220px_180px_170px]'>
+                        {/* Select */}
+                        <div className='flex items-center justify-center'>
                               {pathname === '/cart' && (
                                     <Checkbox
                                           disabled={styleEffect.readOnly}
-                                          className='z-[5] block'
+                                          className='z-[5]'
                                           checked={select}
                                           onChange={changeSelect}
                                     />
                               )}
-                              <Link className='inline-block h-[250px] xl:h-[80px]' to={`/product/${product.product_id._id}`}>
-                                    <img
-                                          src={product.product_id.product_thumb_image.secure_url}
-                                          className='max-w-full max-h-full h-full'
-                                          alt='product'
-                                    />{' '}
-                              </Link>
-                              <div
-                                    className={`${styleEffect.product_not_avaiable} flex-1 flex  flex-col   gap-[12px]  content-between justify-between  text-text-theme`}
+                        </div>
+
+                        {/* Product image */}
+                        <Link
+                              to={`/product/${product.product_id._id}`}
+                              className='flex h-[86px] w-[86px] items-center justify-center overflow-hidden rounded-lg border border-[var(--border-color-input)] bg-white/95 p-1'
+                        >
+                              <img
+                                    src={product.product_id.product_thumb_image.secure_url}
+                                    className='h-full w-full rounded-md object-contain'
+                                    alt='product'
+                              />
+                        </Link>
+
+                        {/* Product / shop info */}
+                        <div className={`${styleEffect.product_not_avaiable} min-w-0`}>
+                              <Link
+                                    to={`/product/${product.product_id._id}`}
+                                    className=' text-[14px] font-semibold text-text-theme transition hover:text-blue-500'
                               >
-                                    <div className='w-full flex justify-between'>
-                                          <span className='font-semibold'>{product.product_id.product_name}</span>
+                                    {product.product_id.product_name}
+                              </Link>
 
-                                          <div className='ml-auto flex items-center h-max xl:h-full  xl:my-0'>
-                                                <WrapperCountProduct
-                                                      readOnly={false}
-                                                      product_id={product.product_id._id}
-                                                      cart_quantity={product.quantity}
-                                                      product={product}
-                                                      modeAction='EDIT'
-                                                />
-                                          </div>
-                                    </div>
-                                    <div className='w-full flex justify-between'>
-                                          <div className='flex gap-[8px] items-center'>
-                                                <span>Giá gốc: </span>
-                                                <BoxMoney name='VND' money={product.product_id.product_price} />
-                                          </div>
+                              <Link
+                                    to={`/shop/${product.shop_id._id}`}
+                                    className='mt-2 flex min-w-0 items-center gap-2 text-[13px] text-slate-400 transition hover:text-blue-500'
+                              >
+                                    <img
+                                          src={shop.shop_avatar?.secure_url || product.shop_id.shop_avatar_default || ''}
+                                          className='h-5 w-5 shrink-0 rounded object-cover'
+                                          alt='shop_avatar'
+                                    />
+                                    <span className='truncate'>{shop.shop_name}</span>
+                              </Link>
 
-                                          <div className=' flex items-center gap-[8px] h-max xl:h-full  xl:my-0 text-color-main text-[20px]'>
-                                                <BoxMoney name='VNĐ' money={product.quantity * product.product_id.product_price} />
-                                          </div>
-                                    </div>
-                                    <span>Thể loại: Sách</span>
-                                    <span>Giao vào ngày mai</span>
-                                    <div className='flex flex-col xl:flex-row xl:items-center gap-[8px] xl:w-[80%]'>
-                                          <p className='flex gap-[16px] xl:gap-[8px] items-center'>
-                                                <span>Giao tại nhà: {AddressTypeText}</span>
-                                          </p>
-                                          <span className='hidden xl:inline'>-</span>
-                                          <span>Địa chỉ {product.cart_address.address_text}</span>
-                                    </div>
-                                    {!product.product_id.product_state && (
-                                          <span className='text-red-700 font-semibold text-[16px]'>Sản phẩm ngừng kinh doanh</span>
-                                    )}
+                              <p className='mt-1.5 text-[12px] text-slate-500'>
+                                    1 sản phẩm trong giỏ
+                              </p>
+
+                              {!product.product_id.product_state && (
+                                    <span className='mt-2 inline-flex rounded-full bg-red-500/10 px-2 py-1 text-[11px] font-medium text-red-400'>
+                                          Sản phẩm ngừng kinh doanh
+                                    </span>
+                              )}
+                        </div>
+
+                        {/* Quantity + date */}
+                        <div className='border-l border-[var(--border-color-input)] pl-5'>
+                              <div className='mb-2 inline-flex rounded-full bg-amber-500/10 px-2.5 py-1 text-[11px] font-extrabold text-[#fcab43]'>
+                                    Trong giỏ hàng
+                              </div>
+
+                              <p className='mb-2 text-[12px] text-slate-400'>
+                                    Thêm lúc {DateTimeFromString(product.cart_date)}
+                              </p>
+
+                              <div className='flex items-center gap-2'>
+                                    <span className='text-[12px] text-slate-500'>Số lượng</span>
+                                    <WrapperCountProduct
+                                          readOnly={false}
+                                          product_id={product.product_id._id}
+                                          cart_quantity={product.quantity}
+                                          product={product}
+                                          modeAction='EDIT'
+                                    />
                               </div>
                         </div>
 
-                        <div className='hidden xl:block'>
-                              <div className=' flex flex-wrap flex-col xl:flex-row justify-between ml-0 xl:ml-[16px]  gap-[24px] xl:gap-[16px]'>
-                                    <div className='w-full flex flex-col xl:flex-row xl:items-center justify-end gap-[8px] '>
-                                          <div className='w-max'>
-                                                <BoxButton
-                                                      content='Cập nhập địa chỉ khác'
-                                                      onClick={() => setOpenBoxConfirmUpdateAddress(true)}
-                                                />
-                                                {openBoxCofirmUpdateAddress && (
-                                                      <BoxConfirmAddress
-                                                            setOpenModal={setOpenBoxConfirmUpdateAddress}
-                                                            product_id={product.product_id._id}
-                                                            mode='Update'
-                                                            cart_item={product}
-                                                      />
-                                                )}
-                                          </div>
-                                    </div>
+                        {/* Price */}
+                        <div className='border-l border-[var(--border-color-input)] pl-5'>
+                              <p className='text-[12px] text-slate-400'>Tổng tiền</p>
+
+                              <div className='mt-1 text-[20px] font-semibold text-text-theme'>
+                                    <BoxMoney
+                                          name='VNĐ'
+                                          money={product.quantity * product.product_id.product_price}
+                                    />
+                              </div>
+
+                              <div className='mt-1 text-[12px] text-slate-500'>
+                                    Đơn giá{' '}
+                                    <span className='text-slate-400'>
+                                          <BoxMoney name='VND' money={product.product_id.product_price} />
+                                    </span>
+                              </div>
+                        </div>
+
+                        {/* Action */}
+                        <div className='flex flex-col items-end gap-2'>
+                              <BoxButton
+                                    content='Cập nhập địa chỉ khác'
+                                    onClick={() => setOpenBoxConfirmUpdateAddress(true)} 
+                                    className='!h-max'
+                              />
+
+                              {openBoxCofirmUpdateAddress && (
+                                    <BoxConfirmAddress
+                                          setOpenModal={setOpenBoxConfirmUpdateAddress}
+                                          product_id={product.product_id._id}
+                                          mode='Update'
+                                          cart_item={product}
+                                    />
+                              )}
+
+                              <div className='flex max-w-[170px] items-center gap-1 text-right text-[11px] leading-4 text-slate-500'>
+                                    <span className='truncate'>
+                                          {AddressTypeText} · {product.cart_address.address_text}
+                                    </span>
                               </div>
                         </div>
                   </div>
 
-                  <button
-                        onClick={() => setOpenModelDetail(true)}
-                        className='block xl:hidden p-[6px] bg-color-main text-[#fff] opacity-80 hover:opacity-100'
-                  >
-                        Xem chi tiết
-                  </button>
-                  {openModelDetail && <CartItemDetail product={product} setOpenModel={setOpenModelDetail} />}
+                  {/* Mobile / tablet */}
+                  <div className='flex flex-col gap-4 p-4 xl:hidden'>
+                        <div className='flex items-start gap-3'>
+                              {pathname === '/cart' && (
+                                    <Checkbox
+                                          disabled={styleEffect.readOnly}
+                                          className='z-[5] mt-1'
+                                          checked={select}
+                                          onChange={changeSelect}
+                                    />
+                              )}
+
+                              <Link
+                                    to={`/product/${product.product_id._id}`}
+                                    className='flex h-[82px] w-[82px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[var(--border-color-input)] bg-white p-1'
+                              >
+                                    <img
+                                          src={product.product_id.product_thumb_image.secure_url}
+                                          className='h-full w-full rounded-lg object-contain'
+                                          alt='product'
+                                    />
+                              </Link>
+
+                              <div className='min-w-0 flex-1'>
+                                    <Link
+                                          to={`/product/${product.product_id._id}`}
+                                          className='line-clamp-2 text-sm font-semibold text-text-theme'
+                                    >
+                                          {product.product_id.product_name}
+                                    </Link>
+
+                                    <Link
+                                          to={`/shop/${product.shop_id._id}`}
+                                          className='mt-1.5 block truncate text-xs text-blue-500'
+                                    >
+                                          {shop.shop_name}
+                                    </Link>
+
+                                    <p className='mt-1 text-xs text-slate-500'>
+                                          {DateTimeFromString(product.cart_date)}
+                                    </p>
+                              </div>
+                        </div>
+
+                        <div className='flex items-center justify-between border-t border-[var(--border-color-input)] pt-3'>
+                              <WrapperCountProduct
+                                    readOnly={false}
+                                    product_id={product.product_id._id}
+                                    cart_quantity={product.quantity}
+                                    product={product}
+                                    modeAction='EDIT'
+                              />
+
+                              <div className='text-right'>
+                                    <p className='text-xs text-slate-500'>Tổng tiền</p>
+                                    <div className='text-base font-semibold text-blue-500'>
+                                          <BoxMoney
+                                                name='VNĐ'
+                                                money={product.quantity * product.product_id.product_price}
+                                          />
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div className='flex gap-2'>
+                              <button
+                                    onClick={() => setOpenBoxConfirmUpdateAddress(true)}
+                                    className='flex-1 rounded-xl border border-blue-500/60 px-3 py-2.5 text-sm font-medium text-blue-500'
+                              >
+                                    Đổi địa chỉ
+                              </button>
+
+                              <button
+                                    onClick={() => setOpenModelDetail(true)}
+                                    className='flex-1 rounded-xl bg-blue-600 px-3 py-2.5 text-sm font-medium text-white'
+                              >
+                                    Xem chi tiết
+                              </button>
+                        </div>
+
+                        {openBoxCofirmUpdateAddress && (
+                              <BoxConfirmAddress
+                                    setOpenModal={setOpenBoxConfirmUpdateAddress}
+                                    product_id={product.product_id._id}
+                                    mode='Update'
+                                    cart_item={product}
+                              />
+                        )}
+                  </div>
+
+                  {openModelDetail && (
+                        <CartItemDetail product={product} setOpenModel={setOpenModelDetail} />
+                  )}
             </div>
       )
 }

@@ -18,7 +18,7 @@ const ProductSmall = (props: TProps) => {
                   to={`product/${product._id}`}
                   className='w-full h-full  flex flex-col  gap-[10px] border-[1px] border-[var(--border-color-input)]  rounded-lg bg-color-section-theme text-text-theme p-1'
             >
-                  <div className='relative w-full h-[60%]'>
+                  <div className='relative w-full h-[57%]'>
                         <img src={product.product_thumb_image?.secure_url} className='object-contain w-full h-[85%] rounded-t-lg' alt='' />
                   </div>
                   <div className='px-[10px] gap-[7px] flex-1 flex flex-col '>

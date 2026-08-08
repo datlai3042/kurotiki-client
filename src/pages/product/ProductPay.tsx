@@ -70,13 +70,11 @@ const ProductPay = (props: TProps) => {
             }
 
             if (user._id === product.shop_id.owner._id) {
-
                   dispatch(addToast({ type: 'WARNNING', message: 'Không thể thêm sản phẩm của chính mình', id: Math.random().toString() }))
                   return
             }
 
             if (!Boolean(cartCurrent.cart_current_address)) {
-
                   dispatch(addToast({ id: Math.random().toString(), type: 'WARNNING', message: 'Vui lòng chọn địa chỉ trước khi thêm' }))
                   setDisableBtn(true)
                   return
@@ -86,7 +84,6 @@ const ProductPay = (props: TProps) => {
             //       console.log({ cartCurrent })
             //       return
             // }
-
 
             const formData = new FormData()
             formData.append('product_id', product._id)
@@ -133,19 +130,22 @@ const ProductPay = (props: TProps) => {
       }, [cartMutation.isSuccess, cartMutation.data?.data, dispatch, queryClient])
 
       return (
-            <section className='w-full h-full flex flex-col gap-[16px] p-[12px] text-[12px] xl:text-[14px]'>
-                  <div className='flex flex-col xl:flex-row items-center gap-[8px] pb-[15px] border-b-[1px] border-[var(--border-color-input)]'>
+            <section className='rounded-lg  w-full h-full flex flex-col gap-[16px] p-[20px_22px] text-[12px] xl:text-[14px] bg-color-section-theme'>
+                  <div className='flex justify-between'>
+                        <span className='font-extrabold'>Cửa hàng</span>
+                        <ProductLabel content='Official' />
+                  </div>
+                  <div className='flex flex-col xl:flex-row  gap-[12px] pb-[15px] border-b-[1px] border-[var(--border-color-input)]'>
                         <img
                               src={product.shop_id.shop_avatar?.secure_url || product.shop_id.shop_avatar_default}
-                              className='w-[40px] h-[40px] rounded-md'
+                              className='w-[70px] h-[70px] object-cover object-center rounded-[4px]'
                               alt=''
                         />
-                        <div className='flex-1 flex flex-col content-center py-[2px] gap-[8px] '>
+                        <div className='flex-1 flex flex-col content-center py-[2px]  gap-[3px]'>
                               <div className='flex flex-col lg:flex-row gap-[8px] items-center transition-all duration-500'>
-                                    <span className='font-bold'>{product.shop_id.shop_name}</span>
-                                    <ProductLabel content='Official' />
+                                    <span className='font-bold text-[12.9px]'>{product.shop_id.shop_name}</span>
                               </div>
-                              <div className='flex flex-col lg:flex-row items-center gap-[6px] transition-all duration-500'>
+                              <div className='flex flex-col lg:flex-row items-center text-[11.5px] opacity-90 gap-[6px] transition-all duration-500'>
                                     <div className='flex gap-[8px] items-center'>
                                           <span>4.5</span>
                                           <Rate defaultValue={1} count={1} className='w-max text-[13px]' disabled style={{ width: 2 }} />
@@ -154,9 +154,9 @@ const ProductPay = (props: TProps) => {
                               </div>
                         </div>
                   </div>
-                  <div className='flex flex-col gap-[12px]'>
-                        <span className='font-bold'>Số lượng</span>
-                        <img src={product.product_thumb_image.secure_url} className='w-[40px] h-[40px]' alt='' />
+                  <div className='flex justify-between items-center gap-[12px]'>
+                        {/* <span className='font-bold'>Số lượng</span> */}
+                        <img src={product.product_thumb_image.secure_url} className='w-[40px] h-[40px] object-cover' alt='' />
                         <div className='flex gap-[8px] max-w-max h-[30px]'>
                               <button
                                     className='flex items-center justify-center p-[6px] border-[1px] border-slate-400 min-w-[36px] h-full text-[20px] rounded-md'
@@ -194,9 +194,9 @@ const ProductPay = (props: TProps) => {
                               </button>
                         </div>
                   </div>
-                  <div className='font-bold flex flex-col gap-[8px] text-[14px] xl:text-[18px]'>
-                        <span className=''>Tạm tính</span>
-                        <p className='w-full flex gap-[4px] items-center  text-[16px] xl:text-[24px]'>
+                  <div className='font-bold flex justify-between items-center  gap-[8px] text-[14px] xl:text-[18px] mt-[10px]'>
+                        <span className='whitespace-pre'>Tạm tính</span>
+                        <p className='w-full flex gap-[4px] items-center justify-end  text-[16px] xl:text-[24px]'>
                               <span className='min-w-[70px] xl:min-w-max  max-w-[180px] truncate'>
                                     {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
                                           .format(product.product_price * (productQuantity ? productQuantity : 0))
@@ -205,7 +205,7 @@ const ProductPay = (props: TProps) => {
                               <span className='hidden xl:inline ml-[-2px]'>VNĐ</span>
                         </p>
                   </div>
-                  <div className='w-full h-max flex flex-col gap-[8px]'>
+                  <div className='w-full h-max mt-[10px] flex flex-col gap-[8px]'>
                         <button
                               onClick={handleClickBuy}
                               className='w-full h-[45px] flex items-center justify-center bg-red-600 text-white rounded-md'

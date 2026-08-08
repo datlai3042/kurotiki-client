@@ -3,136 +3,283 @@ import { useDispatch, useSelector } from 'react-redux'
 import { removeToast } from '../../Redux/toast'
 import { RootState } from '../../store'
 import { ShieldAlert, ShieldCheck, ShieldX, X } from 'lucide-react'
-import { DateTime } from 'luxon'
-import { localDateTime } from '../../constant/local'
 import { TToast } from '../Context/ToastContext'
+
 type TProps = {
       toast: TToast
 }
 
+/**
+ * Không cần sửa component cha.
+ *
+ * Parent vẫn giữ nguyên:
+ *
+ * {toasts.map((toast) => (
+ *      <ToastDemo key={toast.id} toast={toast} />
+ * ))}
+ *
+ * Cách hoạt động:
+ * - Tối đa 4 toast được hiển thị cùng lúc.
+ * - KHÔNG gộp message.
+ * - Mỗi lỗi / thông báo là một toast độc lập.
+ * - Toast thứ 5 trở đi nằm trong queue và return null.
+ * - Toast trong queue CHƯA chạy timer.
+ * - Khi một toast visible biến mất, toast kế tiếp tự xuất hiện.
+ */
+
+const MAX_VISIBLE_TOAST = 6
+
+type RegistryItem = {
+      instanceId: string
+      toastId: string
+      order: number
+}
+
+const toastRegistry = new Map<string, RegistryItem>()
+const registryListeners = new Set<() => void>()
+
+let toastOrder = 0
+
+const emitRegistryChange = () => {
+      registryListeners.forEach((listener) => listener())
+}
+
+const subscribeRegistry = (listener: () => void) => {
+      registryListeners.add(listener)
+
+      return () => {
+            registryListeners.delete(listener)
+      }
+}
+
+const getVisibleInstanceIds = () => {
+      return Array.from(toastRegistry.values())
+            .sort((a, b) => a.order - b.order)
+            .slice(0, MAX_VISIBLE_TOAST)
+            .map((item) => item.instanceId)
+}
+
 const ToastDemo = (props: TProps) => {
       const { toast } = props
+
       const dispatch = useDispatch()
       const timerToast = useSelector((state: RootState) => state.toast.timerToast)
-      const timeOut = useRef<NodeJS.Timeout>()
-      const timeInterval = useRef<NodeJS.Timeout>()
-      const now = new Date()
-      // const token = JSON.parse(localStorage.getItem('token') as string)
-      const [show, setShow] = useState(true)
+
+      const instanceIdRef = useRef(`toast-${toast.id}-${Math.random().toString(36).slice(2)}`)
+      const orderRef = useRef(++toastOrder)
+
+      const timeoutRef = useRef<NodeJS.Timeout>()
+      const intervalRef = useRef<NodeJS.Timeout>()
+      const timerStartedRef = useRef(false)
+
+      const [, forceRegistryRender] = useState(0)
       const [time, setTime] = useState(timerToast)
       const [showDetail, setShowDetail] = useState(false)
 
-      const handleControllCloseToast = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, id: string) => {
-            e.stopPropagation()
-            dispatch(removeToast({ id }))
+      const instanceId = instanceIdRef.current
+
+      useEffect(() => {
+            const unsubscribe = subscribeRegistry(() => {
+                  forceRegistryRender((prev) => prev + 1)
+            })
+
+            toastRegistry.set(instanceId, {
+                  instanceId,
+                  toastId: toast.id,
+                  order: orderRef.current,
+            })
+
+            emitRegistryChange()
+
+            return () => {
+                  toastRegistry.delete(instanceId)
+                  emitRegistryChange()
+                  unsubscribe()
+            }
+      }, [instanceId, toast.id])
+
+      const visibleInstanceIds = getVisibleInstanceIds()
+      const isVisible = visibleInstanceIds.includes(instanceId)
+
+      const clearTimers = () => {
+            if (timeoutRef.current) {
+                  clearTimeout(timeoutRef.current)
+                  timeoutRef.current = undefined
+            }
+
+            if (intervalRef.current) {
+                  clearInterval(intervalRef.current)
+                  intervalRef.current = undefined
+            }
+      }
+
+      const removeCurrentToast = () => {
+            dispatch(removeToast({ id: toast.id }))
+      }
+
+      const startTimer = (seconds: number) => {
+            clearTimers()
+
+            const safeTime = Math.max(seconds, 0)
+
+            timeoutRef.current = setTimeout(() => {
+                  removeCurrentToast()
+            }, safeTime * 1000)
+
+            intervalRef.current = setInterval(() => {
+                  setTime((prev) => {
+                        if (prev <= 1) {
+                              if (intervalRef.current) {
+                                    clearInterval(intervalRef.current)
+                                    intervalRef.current = undefined
+                              }
+
+                              return 0
+                        }
+
+                        return prev - 1
+                  })
+            }, 1000)
       }
 
       useEffect(() => {
-            timeOut.current = setTimeout(() => {
-                  dispatch(removeToast({ id: toast.id }))
-            }, timerToast * 1000)
+            // Toast đang nằm trong queue:
+            // không render và cũng không chạy countdown.
+            if (!isVisible) {
+                  clearTimers()
+                  timerStartedRef.current = false
+                  return
+            }
 
-            timeInterval.current = setInterval(() => {
-                  setTime((prev) => (prev -= 1))
-            }, 1000)
+            // Khi toast từ queue được đẩy lên vùng visible
+            // thì countdown mới bắt đầu từ đầu.
+            if (!timerStartedRef.current) {
+                  setTime(timerToast)
+                  startTimer(timerToast)
+                  timerStartedRef.current = true
+            }
 
             return () => {
-                  clearTimeout(timeOut.current)
-                  clearInterval(timeInterval.current)
+                  clearTimers()
             }
-      }, [])
+
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [isVisible])
+
+      const handleCloseToast = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+            e.stopPropagation()
+
+            clearTimers()
+            removeCurrentToast()
+      }
 
       const handleOnMouseEnter = () => {
-            clearInterval(timeInterval.current)
-            clearTimeout(timeOut.current)
+            if (!isVisible) return
+
+            clearTimers()
             setShowDetail(true)
       }
 
       const handleOnMouseLeave = () => {
-            timeOut.current = setTimeout(() => {
-                  dispatch(removeToast({ id: toast.id }))
-                  setShow(false)
-            }, time * 1000)
+            if (!isVisible) return
 
-            timeInterval.current = setInterval(() => {
-                  setTime((prev) => (prev -= 1))
-            }, 1000)
+            startTimer(time)
             setShowDetail(false)
       }
 
       const styleEffect = {
-            type_toast:
+            border:
+                  toast.type === 'SUCCESS' ? 'border-emerald-500/25' : toast.type === 'ERROR' ? 'border-red-500/25' : 'border-amber-500/25',
+
+            iconBox:
                   toast.type === 'SUCCESS'
-                        ? '   text-blue-900 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)] shadow-blue-700 border-[2px] border-blue-500'
+                        ? 'bg-emerald-500/10 text-emerald-400'
                         : toast.type === 'ERROR'
-                        ? ' text-red-900 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)] shadow-red-700  border-[2px] border-red-500'
-                        : '  text-orange-900 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)] shadow-orange-700  border-[2px] border-orange-500',
-            type_toast_icon: toast.type === 'SUCCESS' ? '#2563eb' : toast.type === 'ERROR' ? ' rgb(239 68 68)' : 'rgb(249 115 22)',
-            widthToastContainer: 'min-w-[250px]',
-            bgBoxTime: toast.type === 'SUCCESS' ? ' bg-blue-500' : toast.type === 'ERROR' ? ' bg-red-500' : ' bg-orange-500',
-            textColor: toast.type === 'SUCCESS' ? ' bg-blue-500 ' : toast.type === 'ERROR' ? ' bg-red-500' : ' bg-orange-500',
+                        ? 'bg-red-500/10 text-red-400'
+                        : 'bg-amber-500/10 text-amber-400',
+
+            progress: toast.type === 'SUCCESS' ? 'bg-emerald-500' : toast.type === 'ERROR' ? 'bg-red-500' : 'bg-amber-500',
+
+            dot: toast.type === 'SUCCESS' ? 'bg-emerald-400' : toast.type === 'ERROR' ? 'bg-red-400' : 'bg-amber-400',
+
+            title: toast.type === 'SUCCESS' ? 'Thành công' : toast.type === 'ERROR' ? 'Có lỗi xảy ra' : 'Thông báo',
+
+            countdown:
+                  toast.type === 'SUCCESS'
+                        ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+                        : toast.type === 'ERROR'
+                        ? 'border-red-500/30 bg-red-500/10 text-red-300'
+                        : 'border-amber-500/30 bg-amber-500/10 text-amber-300',
+      }
+
+      if (!isVisible) {
+            return null
       }
 
       return (
-            <>
-                  {show && (
-                        <div
-                              onMouseEnter={handleOnMouseEnter}
-                              onMouseLeave={handleOnMouseLeave}
-                              className={`${styleEffect.type_toast} animate-toastAnimation min-w-[250px] max-w-[300px] bg-[#ffffff] pt-[8px] px-[6px] xl:pt-[16px] py-[24px] xl:px-[12px]   relative    h-max   rounded-lg transition-all duration-1000  flex items-center justify-center`}
-                        >
-                              <span
-                                    style={{ width: `${276 / Math.ceil(time)}px` }}
-                                    className={`${styleEffect.type_toast}  absolute top-[0px] left-0   h-[3px] transition-all duration-300`}
-                              ></span>
+            <div
+                  onMouseEnter={handleOnMouseEnter}
+                  onMouseLeave={handleOnMouseLeave}
+                  className={`${styleEffect.border} animate-toastAnimation relative w-[340px] max-w-[calc(100vw-24px)] overflow-hidden rounded-[12px] border bg-[#151922] text-text-theme  transition-all duration-300`}
+            >
+                  <span
+                        style={{
+                              width: `${Math.max(0, Math.min(100, timerToast > 0 ? (time / timerToast) * 100 : 0))}%`,
+                        }}
+                        className={`${styleEffect.progress} absolute left-0 top-0 h-[3px] transition-[width] duration-1000 ease-linear`}
+                  />
 
-                              <span
-                                    style={{ width: `${276 / Math.ceil(time)}px` }}
-                                    className={`${styleEffect.type_toast}  absolute bottom-[0px] left-0   h-[3px] transition-all duration-1000`}
-                              ></span>
-
-                              <div className='w-full flex gap-[8px] mt-[10px] items-center'>
-                                    <div className='flex flex-col gap-[8px] h-max text-[13px]'>
-                                          <div className=' flex gap-[8px] items-center'>
-                                                <span>
-                                                      {toast.type === 'SUCCESS' ? (
-                                                            <ShieldCheck size={32} />
-                                                      ) : toast.type === 'ERROR' ? (
-                                                            <ShieldX size={32} />
-                                                      ) : (
-                                                            <ShieldAlert size={32} />
-                                                      )}
-                                                </span>
-                                                {toast.message}
-                                          </div>
-                                          {toast.subMessage && toast?.subMessage?.length > 0 && (
-                                                <div className='flex flex-col gap-[8px] mx-[8px] mb-[12px]'>
-                                                      {toast.subMessage.map((sub) => (
-                                                            <div className='relative flex items-center gap-[8px]' key={sub}>
-                                                                  <span
-                                                                        className={`${styleEffect.bgBoxTime} min-w-[8px] min-h-[8px] rounded-full`}
-                                                                  ></span>
-                                                                  <span className='max-w-full break-words'>{sub}</span>
-                                                            </div>
-                                                      ))}
-                                                </div>
-                                          )}
-                                    </div>
-                              </div>
-                              <span
-                                    className={`${styleEffect.textColor} !text-white absolute flex justify-center items-center bottom-[5px] animate-pulse right-[5px] w-[24px] h-[24px] p-[4px] text-[12px] rounded-full border-[2px] `}
-                              >
-                                    {time}
-                              </span>
-                              <span
-                                    onClick={(e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => handleControllCloseToast(e, toast.id)}
-                                    className={`absolute flex justify-center items-center top-[5px] animate-pulse right-[5px] w-[30px] h-[30px] p-[4px] text-[11px]  cursor-pointer`}
-                              >
-                                    <X color={`${styleEffect.type_toast_icon}`} />
-                              </span>
+                  <div className='flex gap-3 px-4 pb-4 pt-4'>
+                        <div className={`${styleEffect.iconBox} flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px]`}>
+                              {toast.type === 'SUCCESS' ? (
+                                    <ShieldCheck size={21} strokeWidth={1.9} />
+                              ) : toast.type === 'ERROR' ? (
+                                    <ShieldX size={21} strokeWidth={1.9} />
+                              ) : (
+                                    <ShieldAlert size={21} strokeWidth={1.9} />
+                              )}
                         </div>
-                  )}
-            </>
+
+                        <div className='min-w-0 flex-1 pr-7'>
+                              <p className='text-[13px] font-semibold text-white '>{styleEffect.title}</p>
+
+                              <p className='mt-1 break-words text-[13px] leading-5 text-slate-300'>{toast.message}</p>
+
+                              {toast.subMessage && toast.subMessage.length > 0 && (
+                                    <div className='mt-3 space-y-2 border-t border-white/[0.06] pt-3'>
+                                          {toast.subMessage.map((sub) => (
+                                                <div className='flex items-start gap-2 text-[12px] leading-5 text-slate-400' key={sub}>
+                                                      <span className={`${styleEffect.dot} mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full`} />
+
+                                                      <span className='min-w-0 break-words'>{sub}</span>
+                                                </div>
+                                          ))}
+                                    </div>
+                              )}
+                        </div>
+
+                        <button
+                              type='button'
+                              aria-label='Đóng thông báo'
+                              onClick={handleCloseToast}
+                              className='absolute right-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition hover:bg-white/[0.06] hover:text-white'
+                        >
+                              <X size={17} />
+                        </button>
+                  </div>
+
+                  <div className='flex items-center justify-between border-t border-white/[0.06] bg-black/[0.06] px-4 py-2'>
+                        <span className='text-[11px] text-slate-500'>
+                              {showDetail ? 'Tạm dừng khi đang rê chuột' : 'Thông báo sẽ tự đóng'}
+                        </span>
+
+                        <span
+                              className={`${styleEffect.countdown} flex h-6 min-w-6 items-center justify-center rounded-full border px-1.5 text-[11px] font-semibold`}
+                        >
+                              {Math.max(time, 0)}
+                        </span>
+                  </div>
+            </div>
       )
 }
 

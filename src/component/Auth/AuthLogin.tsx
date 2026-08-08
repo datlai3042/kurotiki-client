@@ -1,6 +1,6 @@
 import React, { SetStateAction, useEffect, useRef, useState } from 'react'
 import { TModeAuth } from './AuthWrapper'
-import { Eye, EyeOff, LockKeyhole, MailCheck, ShieldX } from 'lucide-react'
+import { LockKeyhole, MailCheck } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -41,20 +41,18 @@ const loginSchema = z.object({
 export type TloginZodSchema = z.infer<typeof loginSchema>
 
 const AuthLogin = (props: TProps) => {
-      //Mode Login | register
       const { setModeAuth } = props
       const [toast, setShowToast] = useState(false)
       const countRef = useRef(0)
-      //state type password
       const [typePassword, setTypePassword] = useState<'password' | 'text'>('password')
       const queryClient = useQueryClient()
-      //react-hook-form
+
       const {
             register,
             handleSubmit,
             formState: { errors },
             watch,
-      } = useForm<TloginZodSchema>({
+      } = useForm({
             defaultValues,
             resolver: zodResolver(loginSchema),
       })
@@ -73,7 +71,6 @@ const AuthLogin = (props: TProps) => {
                   queryClient.invalidateQueries()
             },
             onError: async (error: unknown) => {
-                  //@[shape] :: error.response.data.error
                   if (checkAxiosError<TErrorAxios>(error)) {
                         if (
                               error?.response?.status === 404 &&
@@ -101,7 +98,6 @@ const AuthLogin = (props: TProps) => {
             retry: 1,
       })
 
-      //change type passsword
       const handleShowHidePassword = () => {
             if (typePassword === 'password') {
                   setTypePassword('text')
@@ -127,12 +123,26 @@ const AuthLogin = (props: TProps) => {
       }, [errors, dispatch])
 
       return (
-            <div className=' flex flex-col items-center rounded-md gap-[24px] px-[24px] py-[48px] min-w-[450px] bg-[#fff] text-[#000]'>
-                  <div className='mb- w-full flex gap-[4px] text-left gradient-app-name'>
-                        <h1 className='text-4xl font-black  mb-1'>Welcome back :)</h1>
+            <div className='flex w-full flex-col px-6 py-10 sm:px-8 lg:px-10'>
+                  <div className='mb-8'>
+                        <span className='inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600 dark:bg-blue-500/10 dark:text-blue-400'>
+                              Chào mừng trở lại
+                        </span>
+
+                        <h1 className='mt-4 text-3xl font-semibold tracking-[-0.03em] text-slate-900 dark:text-white'>
+                              Đăng nhập tài khoản
+                        </h1>
+
+                        <p className='mt-2 text-sm leading-6 text-slate-500'>
+                              Đăng nhập để tiếp tục mua sắm và quản lý tài khoản của bạn.
+                        </p>
                   </div>
 
-                  <form className='flex flex-1 flex-col gap-[16px] mt-[12px] w-full' noValidate onSubmit={handleSubmit(onSubmit)}>
+                  <form
+                        className='flex w-full flex-col gap-5'
+                        noValidate
+                        onSubmit={handleSubmit(onSubmit)}
+                  >
                         <Input<TloginZodSchema>
                               FieldKey='email'
                               placeholder='Email'
@@ -140,9 +150,9 @@ const AuthLogin = (props: TProps) => {
                               register={register}
                               error={errors}
                               watch={watch}
-                                                            icon={<MailCheck />}
-                              
+                              icon={<MailCheck />}
                         />
+
                         <Input<TloginZodSchema>
                               FieldKey='password'
                               placeholder='Mật khẩu'
@@ -151,28 +161,31 @@ const AuthLogin = (props: TProps) => {
                               error={errors}
                               watch={watch}
                               icon={<LockKeyhole />}
-
                         />
-                        <div className=' mt-[8px] flex flex-col gap-[13px]'>
-                              <div className=' flex gap-[10px]'>
-                                    <button
-                                          type='submit'
-                                          disabled={authLogin.isPending && Object.keys(errors).length > 0}
-                                          title={Object.keys(errors).length > 0 ? 'Vui lòng nhập thông tin hợp lệ' : `Đăng nhập`}
-                                          className='!w-[150px] font-semibold text-[15px] flex items-center justify-center text-[#fff] gap-[6px] !h-[46px] !bg-[var(--color-main)] !rounded-[999px]'
-                                    >
-                                          Đăng nhập
-                                          {authLogin.isPending && <BoxLoading />}
-                                    </button>
 
-                                    <button
-                                          onClick={() => setModeAuth('Register')}
-                                          className='!bg-background-page-color hover:!bg-[#36a420] border-[1px] !text-[#333] hover:!text-[#fff] hover:border-border-page-color font-semibold text-[15px] !h-[46px]  !rounded-[999px] !w-[150px] '
-                                    >
-                                          Đăng kí
-                                    </button>
-                              </div>
+                        <button
+                              type='submit'
+                              disabled={authLogin.isPending && Object.keys(errors).length > 0}
+                              title={Object.keys(errors).length > 0 ? 'Vui lòng nhập thông tin hợp lệ' : 'Đăng nhập'}
+                              className='mt-2 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(37,99,235,0.22)] transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60'
+                        >
+                              Đăng nhập
+                              {authLogin.isPending && <BoxLoading />}
+                        </button>
+
+                        <div className='flex items-center gap-3 py-1'>
+                              <div className='h-px flex-1 bg-slate-200 dark:bg-slate-700' />
+                              <span className='text-xs text-slate-400'>hoặc</span>
+                              <div className='h-px flex-1 bg-slate-200 dark:bg-slate-700' />
                         </div>
+
+                        <button
+                              type='button'
+                              onClick={() => setModeAuth('Register')}
+                              className='h-12 w-full rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-600 dark:border-slate-700 dark:bg-[#121720] dark:text-slate-200'
+                        >
+                              Tạo tài khoản mới
+                        </button>
                   </form>
             </div>
       )

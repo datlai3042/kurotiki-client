@@ -21,10 +21,10 @@ const ProductSimplify = (props: TProps) => {
                   <div className='px-[6px] pb-0 xl:pb-[7px] flex-1 flex flex-col gap-[4px]  justify-between'>
                         <span className='w-[80%] break-words  line-clamp-2 text-[11px]'>{product.product_name}</span>
                         <span className='flex-1 break-words line-clamp-2 text-[15px] font-medium'>{product.product_price}</span>
-                        <div className='flex items-center gap-[8px] pt-[4px] border-t-[1px] border-[var(--border-color-input)]'>
+                        {/* <div className='flex items-center gap-[8px] pt-[4px] border-t-[1px] border-[var(--border-color-input)]'>
                               <img src={logoSun} className='hidden xl:inline w-[30px] h-[16px] rounded-xl' alt='' />
                               <span className='text-[11px]'>Giao chiều mai</span>
-                        </div>
+                        </div> */}
                   </div>
             </Link>
       )

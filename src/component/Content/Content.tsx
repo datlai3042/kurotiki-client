@@ -20,14 +20,15 @@ const Content = () => {
       const pathName = useLocation().pathname
       //  md:w-[calc(100%-235px)]
       return (
-            <div className='   w-full md:w-[calc(100%-235px)] h-max flex flex-col gap-[14px] '>
+            <div className='   w-full    h-max flex flex-col gap-[14px] '>
                   {/* <div className=' hidden 2xl:gap-6 2xl:flex'>
                         <SliderProducts hinhAnhSlider={hinhAnhSlider} height={300} delay={1} />
                         <Banner />
                   </div> */}
-
-                  <div className='w-full p-[20px_0px_16px] h-[400px]   rounded-[4px]'>
-                        <SliderProductV2 />
+                  <div className='w-full '>
+                        <div className='w-full p-[20px_0px_16px] h-[480px]   rounded-[4px]'>
+                              <SliderProductV2 />
+                        </div>
                   </div>
 
                   {/* <SectionProduct

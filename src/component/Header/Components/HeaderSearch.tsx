@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import HeaderResultSearch from './HeaderResultSearch'
-import { Search } from 'lucide-react'
+import { Search, X } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { onShowOverload } from '../../../Redux/uiSlice'
 import { RootState } from '../../../store'
@@ -8,8 +8,8 @@ import { useLocation } from 'react-router-dom'
 
 const HeaderSeacrhInput = () => {
       const [showSearch, setShowSearch] = useState(false)
-      const [textDelay, setTextDelay] = useState<string>('')
-      const [text, setText] = useState<string>('')
+      const [textDelay, setTextDelay] = useState('')
+      const [text, setText] = useState('')
 
       const divRef = useRef<HTMLDivElement>(null)
       const inputRef = useRef<HTMLInputElement | null>(null)
@@ -75,42 +75,60 @@ const HeaderSeacrhInput = () => {
       }, [showOverload])
 
       return (
-            <div className='flex min-h-[80%]  border border-[var(--border-color-input)] text-text-theme rounded-lg' ref={divRef}>
-                  <div className='relative grow  h-full pl-4'>
-                        <form className='h-full  flex gap-4' spellCheck={false}>
-                              <div className='basis-[3%]   flex items-center'>
-                                    <Search />
-                              </div>
-                              <div className='grow ' onClick={() => setShowSearch((prev) => !prev)}>
-                                    <input
-                                          ref={inputRef}
-                                          type='text'
-                                          value={text}
-                                          className='w-full h-full outline-none border-none rounded-lg bg-color-section-theme border-[.1rem] border-[var(--border-color-input)]'
-                                          placeholder='Bạn tìm gì hôm nay'
-                                          onChange={onChangeSearch}
-                                          onClick={() => {
-                                                if (showSearch) {
-                                                      dispatch(onShowOverload({ overload: false }))
-                                                      return
-                                                }
-                                                dispatch(onShowOverload({ overload: true }))
-                                          }}
-                                          onBlur={() => {}}
-                                    />
-                              </div>
-                              {/* <div className='hidden xl:flex group basis-[25%]  lg:basis-[28%] 2xl:basis-[11%]   items-center transition-all duration-200 before:content-["|"] before:text-gray-300 before:text-2xl: opacity-80 hover:before:opacity-0 hover:bg-sky-700 '>
+            <div
+                  ref={divRef}
+                  className={`relative flex h-[44px] min-h-[44px] w-full items-center rounded-xl border bg-color-section-theme text-text-theme transition-all duration-200 ${
+                        showSearch
+                              ? 'border-blue-500 shadow-[0_0_0_3px_rgba(59,130,246,0.10)]'
+                              : 'border-[var(--border-color-input)] hover:border-slate-400'
+                  }`}
+            >
+                  <form className='flex h-full w-full items-center' spellCheck={false}>
+                        <div className='flex h-full w-11 shrink-0 items-center justify-center text-slate-500'>
+                              <Search size={20} strokeWidth={1.8} />
+                        </div>
+
+                        <div
+                              className='relative h-full min-w-0 flex-1'
+                              onClick={() => setShowSearch((prev) => !prev)}
+                        >
+                              <input
+                                    ref={inputRef}
+                                    type='text'
+                                    value={text}
+                                    className='h-full w-full border-none bg-transparent pr-10 text-sm text-text-theme outline-none placeholder:text-slate-400'
+                                    placeholder='Bạn tìm gì hôm nay'
+                                    onChange={onChangeSearch}
+                                    onClick={() => {
+                                          if (showSearch) {
+                                                dispatch(onShowOverload({ overload: false }))
+                                                return
+                                          }
+                                          dispatch(onShowOverload({ overload: true }))
+                                    }}
+                                    onBlur={() => {}}
+                              />
+
+                              {text && (
                                     <button
-                                          type='submit'
-                                          className=' text-sm w-full h-full text-center text-sky-800 group-hover:text-sky-100'
-                                          disabled
+                                          type='button'
+                                          onClick={(e) => {
+                                                e.stopPropagation()
+                                                setText('')
+                                                inputRef.current?.focus()
+                                          }}
+                                          className='absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200'
+                                          aria-label='Xóa tìm kiếm'
                                     >
-                                          Tìm kiếm
+                                          <X size={16} />
                                     </button>
-                              </div> */}
-                        </form>
-                        {showSearch && <HeaderResultSearch text={textDelay} onReset={onReset} />}
-                  </div>
+                              )}
+                        </div>
+                  </form>
+
+                  {showSearch && (
+                        <HeaderResultSearch text={textDelay} onReset={onReset} />
+                  )}
             </div>
       )
 }

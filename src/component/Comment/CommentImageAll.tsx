@@ -52,7 +52,7 @@ const CommentImageAll = (props: TProps) => {
       return (
             <>
                   {getAllCommentImage.isSuccess && getAllCommentImage.data.data.metadata.comment_images.length > 0 && (
-                        <div className=' my-[25px] xl:min-h-[120px] p-[16px_20px] h-max flex flex-col gap-[16px]'>
+                        <div className=' p-[0px_20px] h-max flex flex-col gap-[16px]'>
                               <h4 className='text-[18px] font-semibold '>Tất cả hình ảnh</h4>
                               {getAllCommentImage.isSuccess && (
                                     <div className='relative w-full  flex  gap-[16px] min-h-[60px] overflow-auto'>

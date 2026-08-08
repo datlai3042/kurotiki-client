@@ -108,7 +108,7 @@ const Payment = () => {
                                     )}
 
                                     {stateOrder && dataOrder && (
-                                          <div className='animate-mountComponent w-full xl:w-[70%] mb-[20px] bg-color-section-theme p-[20px] h-max'>
+                                          <div className='animate-mountComponent w-full xl:w-[70%] mb-[20px] bg-color-section-theme rounded-xl p-[20px] h-max'>
                                                 <div className=' max-w-full min-h-[400px] h-max mx-auto'>
                                                       <PaymentInvoice carts={dataOrder.products} orders={dataOrder} />
                                                 </div>

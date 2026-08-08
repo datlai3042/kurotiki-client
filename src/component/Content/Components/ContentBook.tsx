@@ -68,7 +68,7 @@ const ContentBook = () => {
 
       return (
             <div className='max-w-full w-full h-[456px] bg-[var(--bg-color-product-wrapper)] text-text-theme rounded-lg p-[12px] flex flex-col gap-[16px]'>
-                  <h3 className='text-color-main font-semibold'>Các sản phẩm về sách</h3>
+                  <h3 className=' font-semibold'>Các sản phẩm về sách</h3>
 
                   <div className=''>
                         <div className=' max-w-full flex gap-[20px] min-h-[40px]  overflow-auto md:overflow-hidden'>

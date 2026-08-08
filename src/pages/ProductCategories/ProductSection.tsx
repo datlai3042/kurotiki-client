@@ -12,8 +12,6 @@ import BoxLoading from '../../component/BoxUi/BoxLoading'
 
 type TProps = {
       product_type: ProductType
-      // products: TProductDetail[]
-      // onIncreasePage: () => void
 }
 
 const ProductSection = (props: TProps) => {
@@ -42,68 +40,78 @@ const ProductSection = (props: TProps) => {
       }
 
       return (
-            <div className='w-full min-h-full h-max'>
+            <div className='h-max min-h-full w-full'>
                   {products && products.length > 0 && (
                         <>
-                              <div className='grid grid-cols-2 xl:grid-cols-4 grid-rows-[450px] gap-[12px] auto-rows-[450px] '>
+                              <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4'>
                                     {products.map((product, index) => (
                                           <Link
                                                 to={`/product/${product._id}`}
                                                 key={product._id}
-                                                className='bg-color-section-theme p-[12px] flex flex-col gap-[20px] rounded-md border-[1px] border-[var(--border-color-input)] hover:shadow-lg'
+                                                className='group flex min-h-[390px] flex-col overflow-hidden rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme transition duration-300 hover:-translate-y-[2px] hover:border-blue-500/40 hover:shadow-[0_14px_35px_rgba(0,0,0,0.20)]'
                                           >
-                                                <div className='w-full h-[40%] xl:h-[50%] flex justify-center '>
+                                                <div className='flex h-[220px] w-full items-center justify-center bg-color-section-theme p-4'>
                                                       <img
                                                             src={product.product_thumb_image?.secure_url}
-                                                            className='xw-full min-h-full max-h-full h-full'
-                                                            alt='product '
+                                                            className='h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]'
+                                                            alt='product'
                                                       />
                                                 </div>
-                                                <div className='flex-1 flex flex-col gap-[10px]'>
-                                                      <p className=' text-[20px] font-extrabold'>
+
+                                                <div className='flex flex-1 flex-col p-4'>
+                                                      <p className='line-clamp-2 min-h-[42px] text-sm font-medium leading-5 text-text-theme'>
+                                                            {product.product_name}
+                                                      </p>
+
+                                                      <p className='mt-2 truncate text-xs text-slate-500'>{product.shop_id.shop_name}</p>
+
+                                                      <p className='mt-3 text-lg font-semibold text-blue-500'>
                                                             {new Intl.NumberFormat('vi-VN', {
                                                                   style: 'currency',
                                                                   currency: 'VND',
                                                             }).format(product.product_price)}
                                                       </p>
-                                                      <div className='flex flex-col gap-[8px] text-[16px]'>
-                                                            <p>{product.shop_id.shop_name}</p>
-                                                            <p className='break-all truncate'>{product.product_name}</p>
-                                                            <div className='flex flex-col xl:flex-row gap-[8px] text-[14px] xl:items-center'>
-                                                                  <Rate
-                                                                        disabled
-                                                                        defaultValue={product.product_votes}
-                                                                        style={{ fontSize: 14 }}
-                                                                  />
 
-                                                                  <p>Đã bán {product.product_is_bought}</p>
+                                                      <div className='mt-2 flex flex-wrap justify-between items-center gap-2 text-xs '>
+                                                            <span className='text-slate-500'>Đã bán {product.product_is_bought}</span>
+
+                                                            <div className='flex items-center gap-1'>
+                                                                  <span>{product.product_votes}</span>
+                                                                  <Rate
+                                                                        count={1}
+                                                                        style={{ fontSize: 12 }}
+                                                                        defaultValue={1}
+                                                                  />
                                                             </div>
+
                                                       </div>
-                                                </div>
-                                                <div className='self-end w-full text-[13px] flex items-center py-[4px] border-t-[1px] border-[var(--border-color-input)]'>
-                                                      <p className='w-full flex flex-col xl:flex-row xl:items-center justify-between'>
-                                                            <span className='hidden xl:inline-block'>Giao vào {convertWeekday(d)}</span>
-                                                            <span>{convertDateToString(d)}</span>
-                                                      </p>
+
+                                                      <div className='mt-2 border-t border-[var(--border-color-input)] pt-3 text-[11px] text-slate-500'>
+                                                            <p className='flex flex-col justify-between gap-1 xl:flex-row xl:items-center'>
+                                                                  <span className='hidden xl:inline-block'>
+                                                                        Giao vào {convertWeekday(d)}
+                                                                  </span>
+                                                                  <span>{convertDateToString(d)}</span>
+                                                            </p>
+                                                      </div>
                                                 </div>
                                           </Link>
                                     ))}
                               </div>
-                              <div className='mt-[30px] w-full h-max flex justify-center'>
+
+                              <div className='mt-6 flex h-max w-full justify-center'>
                                     <button
-                                          className='  min-w-[180px] px-[16px] w-max h-[40px] bg-color-section-theme border-[1px] border-blue-500 text-blue-500 flex items-center justify-center rounded-lg hover:bg-blue-50 hover:text-blue-500'
+                                          className='flex h-11 min-w-[180px] items-center justify-center rounded-xl border border-blue-500/60 bg-color-section-theme px-5 text-sm font-medium text-blue-400 transition hover:bg-blue-500/10'
                                           onClick={() => onIncreasePage()}
                                     >
                                           {getProductCategory.hasNextPage ? 'Xem thêm' : 'Hết dữ liệu sản phẩm'}
-                                          {/* {(getProductCategory.isPending || getProductCategory.isFetchingNextPage) && (
-                                                <BoxLoading color='text-[#fff]' />
-                                          )} */}
                                     </button>
                               </div>
                         </>
                   )}
+
                   {products && products.length === 0 && (
-                        <div className='w-full h-[300px] bg-color-section-theme text-text-theme flex items-center justify-center text-[28px] font-extrabold'>
+                        <div className='flex h-[300px] w-full items-center justify-center rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme text-xl font-semibold text-text-theme'>
                               Không tìm thấy sản phẩm
                         </div>
                   )}

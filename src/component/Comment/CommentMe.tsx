@@ -90,7 +90,7 @@ const CommentMe = (props: TProps) => {
       const comment = getMeCommentQuery.data?.data.metadata.comment
 
       return (
-            <div>
+            <div className='py-[40px]'>
                   {getMeCommentQuery.data?.data.metadata.comment && comment && (
                         <div className='relative px-[20px]' id={'comment_me'}>
                               <CommentItem comment={comment} />

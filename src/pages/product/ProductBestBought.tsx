@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ProductApi from '../../apis/product.api'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import ProductItemMini from './Components/ProductItemMini'
-const ELEMENT_PAGE = 4
+const ELEMENT_PAGE = 6
 
 const ProductBestBought = () => {
       const getAllProductBest = useQuery({
@@ -14,6 +14,8 @@ const ProductBestBought = () => {
       const wrapperListProductsRef = useRef<HTMLDivElement>(null)
       const PositionScrollCurrent = useRef<number>(0)
       const [count, setCount] = useState(1)
+
+      const [calcAutoCols, setCalcAutoCols] = useState<number>(0)
 
       const handleClickNext = () => {
             if (wrapperListProductsRef.current) {
@@ -38,6 +40,10 @@ const ProductBestBought = () => {
             }
       }
 
+      useEffect(() => {
+            setCalcAutoCols(((wrapperListProductsRef.current?.getBoundingClientRect().width || 500) - 18 * 6) / ELEMENT_PAGE)
+      }, [count])
+
       const productAllPage = getAllProductBest.data?.data.metadata.products
 
       const _page1 = productAllPage?.slice(0, ELEMENT_PAGE * 1)
@@ -45,7 +51,7 @@ const ProductBestBought = () => {
       const _page3 = productAllPage?.slice(ELEMENT_PAGE * 2, ELEMENT_PAGE * 3)
       const _page4 = productAllPage?.slice(ELEMENT_PAGE * 3, ELEMENT_PAGE * 4)
 
-      const totalPage = Math.floor(Number(productAllPage?.length) / 4)
+      const totalPage = Math.floor(Number(productAllPage?.length) / 6)
       const styleEffect = {
             buttonPrev: count === 1 ? 'md:hidden' : 'md:flex',
             buttonNext: totalPage === count ? 'md:hidden' : 'md:flex',
@@ -55,24 +61,35 @@ const ProductBestBought = () => {
                   return check ? 'bg-blue-400 rounded-[999px]' : 'bg-slate-400 rounded-[999px]'
             },
       }
-
       return (
             <div className='relative min-h-[320px] h-max bg-color-section-theme rounded-lg flex flex-col gap-[16px] p-[16px] overflow-hidden'>
-                  <h4 className='text-[16px] font-medium px-[12px] xl:px-0'>Tiki best</h4>
+                  <h4 className='text-[16px] font-semibold px-[12px] xl:px-0'>Tiki best</h4>
 
                   <div className=' flex  w-full    overflow-auto md:overflow-visible pb-[8px] ' ref={wrapperListProductsRef}>
-                        <div className='   xl:min-w-full  w-max grid grid-flow-col auto-cols-[130px] auto-rows-[225px] grid-cols-[130px] xl:grid-cols-[130px] grid-rows-[225px] gap-[18px] '>
+                        <div
+                              style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
+                              className='   xl:min-w-full  w-max grid grid-flow-col  auto-rows-[225px]  grid-rows-[225px] gap-[18px] '
+                        >
                               {_page1 && _page1?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                         </div>
 
-                        <div className='   xl:min-w-full w-max   grid grid-flow-col auto-cols-[130px] auto-rows-[225px] grid-cols-[130px] xl:grid-cols-[130px] grid-rows-[225px] gap-[18px] '>
+                        <div
+                              style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
+                              className='   xl:min-w-full w-max   grid grid-flow-col  auto-rows-[225px]  grid-rows-[225px] gap-[18px] '
+                        >
                               {_page2 && _page2?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                         </div>
-                        <div className='   xl:min-w-full   grid grid-flow-col auto-cols-[130px] auto-rows-[225px] grid-cols-[130px] xl:grid-cols-[130px] grid-rows-[225px] gap-[18px] '>
+                        <div
+                              style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
+                              className='   xl:min-w-full   grid grid-flow-col  auto-rows-[225px]  grid-rows-[225px] gap-[18px] '
+                        >
                               {_page3 && _page3?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                         </div>
 
-                        <div className='   xl:min-w-full   grid grid-flow-col auto-cols-[130px] auto-rows-[225px] grid-cols-[130px] xl:grid-cols-[130px] grid-rows-[225px] gap-[18px] '>
+                        <div
+                              style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
+                              className='   xl:min-w-full   grid grid-flow-col  auto-rows-[225px]  grid-rows-[225px] gap-[18px] '
+                        >
                               {_page4 && _page4?.map((product) => <ProductItemMini product={product} key={product._id} />)}
                         </div>
                   </div>
@@ -84,22 +101,28 @@ const ProductBestBought = () => {
                                     <p className={`${styleEffect.onActive(index + 1 === count)} w-[40px] h-full`} key={index}></p>
                               ))}
                   </div>
-
-                  <button
-                        className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[30%]  bg-[#ffffff]  rounded-full shadow-3xl`}
-                        onClick={handleClickPrev}
-                        disabled={styleEffect.disButtonPrev || getAllProductBest.isPending}
-                  >
-                        <ChevronLeft size={28} color='blue' />
-                  </button>
-
-                  <button
-                        className={`${styleEffect.buttonNext} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[30%] bg-[#ffffff]  rounded-full shadow-3xl `}
-                        onClick={handleClickNext}
-                        disabled={styleEffect.disButtonNext || getAllProductBest.isPending}
-                  >
-                        <ChevronRight size={26} color='blue' />
-                  </button>
+                  {styleEffect.disButtonPrev || getAllProductBest.isPending ? (
+                        <> </>
+                  ) : (
+                        <button
+                              className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[30%]  bg-[#ffffff]  rounded-full shadow-3xl`}
+                              onClick={handleClickPrev}
+                              disabled={styleEffect.disButtonPrev || getAllProductBest.isPending}
+                        >
+                              <ChevronLeft size={28} color='blue' />
+                        </button>
+                  )}
+                  {styleEffect.disButtonNext || getAllProductBest.isPending ? (
+                        <></>
+                  ) : (
+                        <button
+                              className={`${styleEffect.buttonNext} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[30%] bg-[#ffffff]  rounded-full shadow-3xl `}
+                              onClick={handleClickNext}
+                              disabled={styleEffect.disButtonNext || getAllProductBest.isPending}
+                        >
+                              <ChevronRight size={26} color='blue' />
+                        </button>
+                  )}
             </div>
       )
 }

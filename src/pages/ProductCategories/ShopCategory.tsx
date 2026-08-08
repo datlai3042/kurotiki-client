@@ -1,13 +1,9 @@
 import React, { useRef, useState } from 'react'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Store } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import ShopApi from '../../apis/shop.api'
 import { ProductType } from '../../types/product/product.type'
 import { Link } from 'react-router-dom'
-// import { shopData } from './books/utils/shopImageData'
-
-// import shop_thumb1 from '../assets/img/ShopCategory/thumb1png.png'
-// import shop_thumb2 from '../assets/img/ShopCategory/thum2png.png'
 
 type TProps = {
       product_type: ProductType
@@ -54,48 +50,73 @@ const ShopCategory = (props: TProps) => {
       }
 
       return (
-            <div className='relative w-full h-[200px] rounded  xl:overflow-hidden'>
-                  <div className=' flex gap-[16px] h-full w-full overflow-scroll xl:overflow-visible' ref={wrapperRef}>
+            <section className='relative w-full overflow-hidden'>
+                  <div className='bg-color-section-theme flex items-center justify-between border-b border-[var(--border-color-input)] px-5 py-4'>
+                        <div className='flex items-center gap-2'>
+                              <Store size={17} className='text-blue-500' />
+                              <h3 className='text-[16px] font-semibold text-text-theme'>Cửa hàng nổi bật</h3>
+                        </div>
+
+                        <span className='text-xs text-blue-500'>Xem tất cả</span>
+                  </div>
+
+                  <div
+                        className='flex min-h-[170px] w-full gap-3 overflow-x-auto px-4 py-4 xl:overflow-visible'
+                        ref={wrapperRef}
+                  >
                         {shops?.map((shop) => (
-                              <div key={shop._id} className='flex gap-[18px] min-w-[100%]  xl:min-w-[50%]'>
-                                    <div className='relative w-[36%] xl:w-[36%] flex  items-center justify-center overflow-hidden'>
+                              <Link
+                                    to={`/shop/${shop._id}`}
+                                    key={shop._id}
+                                    className='group flex min-w-[260px] items-center gap-3 rounded-xl border border-[var(--border-color-input)]  bg-color-section-theme p-3 transition hover:border-blue-500/40 hover:bg-blue-500/5 xl:min-w-[calc(25%-10px)]'
+                              >
+                                    <div className='relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-slate-800'>
                                           <div
                                                 style={{
-                                                      backgroundImage: `url(${shop.shop_avatar?.secure_url || shop.shop_avatar_default}) `,
-                                                      filter: 'blur(10px)',
+                                                      backgroundImage: `url(${shop.shop_avatar?.secure_url || shop.shop_avatar_default})`,
+                                                      backgroundSize: 'cover',
+                                                      backgroundPosition: 'center',
+                                                      filter: 'blur(8px)',
                                                 }}
-                                                className='min-w-full w-full h-full'
-                                          ></div>
+                                                className='absolute inset-0 opacity-60'
+                                          />
+
                                           <img
                                                 src={shop.shop_avatar?.secure_url || shop.shop_avatar_default}
-                                                className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-1 w-[70px] h-[70px] xl:w-[140px] xl:h-[140px] rounded'
+                                                className='absolute inset-0 m-auto h-14 w-14 rounded-lg object-cover'
                                                 alt='avatar_shop'
                                           />
                                     </div>
-                                    <Link to={`/shop/${shop._id}`} className='w-[60%] flex flex-col justify-center'>
-                                          <h4>
-                                                Cửa hàng: <span className='underline font-bold'>{shop.shop_name}</span>{' '}
+
+                                    <div className='min-w-0'>
+                                          <h4 className='truncate text-sm font-semibold text-text-theme transition group-hover:text-blue-400'>
+                                                {shop.shop_name}
                                           </h4>
-                                    </Link>
-                              </div>
+
+                                          <p className='mt-1 text-xs text-slate-500'>
+                                                Gian hàng nổi bật
+                                          </p>
+                                    </div>
+                              </Link>
                         ))}
                   </div>
+
                   <button
-                        className='absolute  left-[0px]  bg-color-main h-[60px] w-[36px] top-[50%] translate-y-[-50%] hidden xl:flex items-center justify-center shadow-lg'
+                        className='absolute left-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#1c2635] text-white shadow-lg transition hover:bg-blue-600 disabled:opacity-30 xl:flex'
                         onClick={onTranslatePrev}
                         disabled={countTranslate === 1}
                   >
-                        <ArrowLeft size={20} color='white' />
+                        <ArrowLeft size={18} />
                   </button>
+
                   <button
-                        className='absolute  right-[0px]  bg-color-main h-[60px] w-[36px] top-[50%] translate-y-[-50%] hidden xl:flex items-center justify-center shadow-lg'
+                        className='absolute right-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#1c2635] text-white shadow-lg transition hover:bg-blue-600 disabled:opacity-30 xl:flex'
                         onClick={onTranslateNext}
                         disabled={countTranslate === ShopCount}
                   >
-                        <ArrowRight size={20} color='white' />
+                        <ArrowRight size={18} />
                   </button>
-            </div>
-            // <div className='w-[50%] bg-blue-800'></div>
+            </section>
       )
 }
 

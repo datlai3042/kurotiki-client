@@ -9,19 +9,24 @@ type TProps = {
 
 const FilterWrapper = (props: TProps) => {
       const { product_type } = props
-      const [openFilter, setOpenFilter] = useState<boolean>(false)
+      const [openFilter, setOpenFilter] = useState(false)
 
       return (
-            <div className='w-full h-full flex items-center'>
+            <div className='flex h-full w-full items-center'>
                   <button
-                        className='xl:ml-[32px] min-w-[100px] w-max flex items-center justify-center gap-[4px] h-[40px] bg-color-section-theme text-text-theme rounded-[999px] px-[32px] border-[1px] border-[var(--border-color-input)]'
+                        className='flex h-10 min-w-[150px] items-center justify-center gap-2 rounded-xl border border-[var(--border-color-input)] bg-color-section-theme px-4 text-sm font-medium text-text-theme transition hover:border-blue-500 hover:text-blue-400'
                         onClick={() => setOpenFilter(true)}
                   >
-                        <Filter />
+                        <Filter size={17} />
                         <span>Lọc sản phẩm</span>
                   </button>
 
-                  {openFilter && <BoxFilterProduct product_type={product_type} onClose={setOpenFilter} />}
+                  {openFilter && (
+                        <BoxFilterProduct
+                              product_type={product_type}
+                              onClose={setOpenFilter}
+                        />
+                  )}
             </div>
       )
 }

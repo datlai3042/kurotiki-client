@@ -1,5 +1,5 @@
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
-import React, { useEffect, useRef, useState } from 'react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import React, { useRef, useState } from 'react'
 import { ProductType } from '../../../types/product/product.type'
 import FeaturedCategoryItem from './FeaturedCategoryItem'
 
@@ -41,14 +41,20 @@ const FeaturedCategory = (props: TProps) => {
                   setCountTranslate((prev) => prev - 1)
             }
       }
+
       const productsLength = 12 / 6
 
       return (
-            <div className='relative max-w-full overflow-hidden h-[270px] py-[12px] bg-color-section-theme text-text-theme flex flex-col '>
-                  <h2 className='h-[18%] xl:h-[20%] px-[16px] text-[20px] '>Danh mục nổi bật</h2>
-                  <div className=' flex-1 flex w-full overflow-x-hidden '>
+            <section className='relative flex h-[220px] max-w-full flex-col overflow-hidden rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme text-text-theme shadow-sm'>
+                  <div className='flex items-center justify-between px-5 pb-2 pt-4'>
+                        <h2 className='text-[17px] font-semibold'>Danh mục nổi bật</h2>
+
+                        <span className='text-xs text-blue-500'>Khám phá nhanh</span>
+                  </div>
+
+                  <div className='flex min-h-0 flex-1 items-center overflow-hidden px-4'>
                         <div
-                              className='w-full flex gap-[28px] xl:gap-[8px] overflow-scroll xl:overflow-visible bg-color-section-theme  snap-x snap-mandatory xl:snap-none'
+                              className='flex w-full gap-4 overflow-x-auto bg-transparent pb-2 snap-x snap-mandatory xl:gap-5 xl:overflow-visible xl:snap-none'
                               ref={wrapperRef}
                         >
                               <FeaturedCategoryItem />
@@ -56,20 +62,21 @@ const FeaturedCategory = (props: TProps) => {
                   </div>
 
                   <button
-                        className='absolute bottom-[80px] disabled:cursor-not-allowed  left-[10px] w-[40px] h-[40px] bg-color-main rounded-full hidden xl:flex items-center justify-center shadow-lg'
+                        className='absolute left-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#1c2635] text-white shadow-lg transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-30 xl:flex'
                         onClick={onTranslatePrev}
                         disabled={countTranslate === 1}
                   >
-                        <ArrowLeft size={20} color='white' />
+                        <ArrowLeft size={18} />
                   </button>
+
                   <button
-                        className='absolute bottom-[80px] disabled:cursor-not-allowed  right-[10px] w-[40px] h-[40px] bg-color-main rounded-full hidden xl:flex items-center justify-center shadow-lg'
+                        className='absolute right-3 top-1/2 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#1c2635] text-white shadow-lg transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-30 xl:flex'
                         onClick={onTranslateNext}
                         disabled={countTranslate === productsLength}
                   >
-                        <ArrowRight size={20} color='white' />
+                        <ArrowRight size={18} />
                   </button>
-            </div>
+            </section>
       )
 }
 

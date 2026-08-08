@@ -42,8 +42,8 @@ const SliderProductV2 = () => {
 
       const styleEffect = {
             onActive: (check: boolean) => {
-                  if (check) return 'w-[24px] rounded-[999px] bg-blue-600 h-[2px]'
-                  return 'w-[16px] rounded-[999px] bg-slate-300 h-[2px]'
+                  if (check) return 'w-[24px] rounded-[999px] bg-blue-600 h-[10px]'
+                  return 'w-[16px] rounded-[999px] bg-slate-300 h-[10px]'
             },
       }
       const debounceResize = useDebouncedCallback(() => {
@@ -113,7 +113,7 @@ const SliderProductV2 = () => {
             }
       }, [])
       return (
-            <div className='relative z-[999] group w-full h-full  '>
+            <div className='relative group w-full h-full  '>
                   <div className='w-full h-full  overflow-x-hidden'>
                         <div className='min-w-full w-full  flex h-full gap-[12px] ' ref={wrapperRef}>
                               {arrayImage.map((img) => (
@@ -126,7 +126,7 @@ const SliderProductV2 = () => {
                               ))}
                         </div>
                   </div>
-                  <div className='absolute left-[50%] translate-x-[-50%] bottom-[-25px] w-[150px] h-[20px] flex items-center justify-center gap-[6px]'>
+                  <div className='absolute left-[50%] translate-x-[-50%]  w-[150px] h-[30px] flex items-center justify-center gap-[6px]'>
                         {Array(LIMIT)
                               .fill(0)
                               .map(

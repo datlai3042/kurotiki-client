@@ -49,6 +49,7 @@ export const ShopAnalysisTopBuy = () => {
       const shopQuery = useQuery({ queryKey: ['shop-product-top-buy'], queryFn: () => ShopApi.getShopProductTopBuy() })
       const reportShop = shopQuery.data?.data.metadata?.reportShop || {}
       const productKey = Object.keys(reportShop)
+      console.log({reportShop, productKey})
       return (
             <>
                   {productKey?.map((rp, index) => (

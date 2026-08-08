@@ -48,7 +48,7 @@ const Comment = (props: TProps) => {
       }
 
       return (
-            <div className='relative h-full bg-color-section-theme flex flex-col gap-[20px] px-[20px]'>
+            <div className='relative h-full bg-color-section-theme flex flex-col  px-[20px]'>
                   <CommentFilter
                         product_id={product_id}
                         page={pageFilter}
@@ -56,7 +56,10 @@ const Comment = (props: TProps) => {
                         setPage={setPageFilter}
                         onModeFilter={onModeFilter}
                   />
+                  <div className='w-full flex flex-col gap-[50px] mt-[10px]'>
+
                   {getAllCommentQuery.isSuccess && comments.map((comment) => <CommentItem key={comment._id} comment={comment} />)}
+                  </div>
                   {comments.length === 0 && (
                         <div className='w-full h-[400px] flex items-center justify-center text-[20px] font-semibold'>
                               <div className='w-full h-full flex flex-col items-center gap-[16px]'>

@@ -30,7 +30,9 @@ export type UserResponse = {
       fullName: string
       nickName: string
       avatar: UserAvatar
-      avatar_url_default: 'https://res.cloudinary.com/demonodejs/image/upload/v1705389477/static/o5gxkgehijtg9auirdje.jpg'
+      avatar_url_default: 'https://res.cloudinary.com/demonodejs/image/upload/v1705389477/static/o5gxkgehijtg9auirdje.jpg',
+      avatar_default_url?: string
+
       avatar_used: UserAvatarUsed[]
       isOpenShop?: boolean
       createdAt: Date

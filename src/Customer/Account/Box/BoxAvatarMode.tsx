@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useRef } from 'react'
 import { customerAccountReducer, initialValue } from '../../../reducer/customer.reducer'
 import { RootState } from '../../../store'
 import { useDispatch, useSelector } from 'react-redux'
-import { Eye, Image, Pencil, Trash2 } from 'lucide-react'
+import { Camera, Eye, Image, Pencil, Trash2 } from 'lucide-react'
 import Portal from '../../../component/Portal'
 import ModelAvatarSee from '../models/ModelAvatarSee'
 import ModelAvatarUpdate from '../models/ModelAvatarUpdate'
@@ -58,16 +58,21 @@ const BoxAvatarMode = (props: TProps) => {
 
       const handleControllmodelAvatarSee = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
             e.stopPropagation()
+            e.preventDefault()
             modeDispatch({ type: 'OPEN_MODE_AVATAR_SEE', payload: { modeAvatarSee: true } })
       }
 
       const handleControllmodelAvatarUpdate = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
             e.stopPropagation()
+            e.preventDefault()
+
             modeDispatch({ type: 'OPEN_MODE_AVATAR_UPDATE', payload: { modeAvatarUpdate: true } })
       }
 
       const handleControllmodelAvatarDelete = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
             e.stopPropagation()
+            e.preventDefault()
+
             modeDispatch({ type: 'OPEN_MODE_AVATAR_DELETE', payload: { modeAvatarDelete: true } })
       }
 
@@ -91,52 +96,65 @@ const BoxAvatarMode = (props: TProps) => {
                   }}
             >
                   <div className='relative'>
-                        <img
-                              src={AvatartSource?.avatar || AvatartSource.avatar_default || ''}
-                              alt='user_avatar'
-                              className={`${styleEffect.widthImage} ${styleEffect.heightImage} object-contain rounded-full border-[4px] border-cyan-200 `}
-                        />
-
-                        <div className='absolute bottom-[10px] right-[4px] w-[20px] h-[20px] bg-color-main cursor-pointer rounded-full flex items-center justify-center'>
-                              <Pencil className=' text-[#fff]' size={12} />
+                        <div className='relative w-28 h-28 mx-auto md:mx-0 outline-[5px] outline rounded-full outline-[#bad7ffba]'>
+                              <div className='rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-xl'>
+                                    <img
+                                          src={AvatartSource?.avatar || AvatartSource.avatar_default || ''}
+                                          alt='user_avatar'
+                                          className={` object-contain rounded-full `}
+                                    />
+                              </div>
+                              <button className='absolute bottom-0 right-0 bg-white border border-gray-200 rounded-full p-1.5 shadow-sm hover:bg-gray-50'>
+                                    <Camera size={16} className='text-gray-600' />
+                              </button>
                         </div>
 
                         {/* @box avatar action*/}
                         {state.boxModeAvatar && (
                               <>
                                     <div
-                                          className='absolute z-[10] top-[70%] left-[50%] translate-x-[-50%]  shadow-2xl shadow-blue-700 bg-color-section-theme rounded-md w-[250px] h-[150px] max-h-auto '
+                                          className='absolute z-[10] top-[110%] left-[50%] translate-x-[-50%]  shadow-2xl shadow-blue-700 bg-color-section-theme rounded-md w-[224px]  max-h-auto '
                                           ref={refModelAvatar}
                                     >
                                           <div className='relative z-[500]'>
-                                                <span className='clip-path-modelAvatar absolute w-[20px] h-[13.5px] border-[1px] border-[var(--border-color-input)] border-b-0  bg-color-section-theme top-[-13px] left-[50%] translate-x-[-50%]'></span>
+                                                {/* <span className='clip-path-modelAvatar absolute w-[20px] h-[13.5px] border-[1px] border-[var(--border-color-input)] border-b-0  bg-color-section-theme top-[-13px] left-[50%] translate-x-[-50%]'></span> */}
                                                 {/* @ list avatar action*/}
                                                 <ul className='h-full'>
                                                       {/* @ modeAvater::see */}
                                                       <li
-                                                            className='cursor-pointer flex items-center w-full h-[50px] px-[20px] hover:bg-color-main hover:text-[#fff] gap-[8px]'
+                                                            className='cursor-pointer flex  w-full  p-[7px_16px] hover:bg-color-main hover:text-[#fff] gap-[12px]'
                                                             onClick={handleControllmodelAvatarSee}
                                                       >
                                                             {/* <img src='' alt='' /> */}
-                                                            <Image />
-                                                            <span>Xem ảnh đại diện</span>
+                                                            <Image size={20} className='mt-1'/>
+                                                            <div className='flex flex-col  gap-[2px] flex-1'>
+                                                                  <span className='font-medium'>Xem ảnh đại diện</span>
+                                                                  <span className='text-[11px] opacity-80'>Xem ảnh hiện tại</span>
+                                                            </div>
                                                       </li>
 
                                                       {/* @ modeAvatar::update */}
                                                       <li
-                                                            className='cursor-pointer flex items-center w-full h-[50px] px-[20px] hover:bg-color-main hover:text-[#fff] gap-[8px]'
+                                                            className='cursor-pointer flex  w-full  p-[7px_16px] hover:bg-color-main hover:text-[#fff] gap-[12px]'
                                                             onClick={handleControllmodelAvatarUpdate}
                                                       >
-                                                            <Eye />
-                                                            <span>Cập nhập ảnh đại diện</span>
+                                                            <Eye size={20} className='mt-1'/>
+
+                                                            <div className='flex flex-col  gap-[2px] flex-1'>
+                                                                  <span className='font-medium'>Cập nhật ảnh đại diện</span>
+                                                                  <span className='text-[11px] opacity-80'>Chọn ảnh mới từ thiết bị</span>
+                                                            </div>
                                                       </li>
                                                       {/* @ modeAvater::delete*/}
                                                       <li
-                                                            className='cursor-pointer flex items-center w-full h-[50px] px-[20px] hover:bg-color-main hover:text-[#fff] gap-[8px]'
+                                                            className='cursor-pointer flex  w-full  p-[7px_16px] hover:bg-color-main hover:text-[#fff] gap-[12px]'
                                                             onClick={handleControllmodelAvatarDelete}
                                                       >
-                                                            <Trash2 />
-                                                            <span>Xóa ảnh đại diện</span>
+                                                            <Trash2 size={20} className='mt-1 text-red-600'/>
+                                                            <div className='flex flex-col  gap-[2px] flex-1'>
+                                                                  <span className='font-medium'>Xóa ảnh đại diện</span>
+                                                                  <span className='text-[11px] opacity-80'>Xóa ảnh và đặt lại mặc định</span>
+                                                            </div>
                                                       </li>
                                                 </ul>
                                           </div>

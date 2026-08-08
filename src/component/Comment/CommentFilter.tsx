@@ -5,6 +5,7 @@ import CommentService, { GetAllCommentParam } from '../../apis/comment.service'
 import { fetchComment } from '../../Redux/comment.slice'
 import { useDispatch } from 'react-redux'
 import { LIMIT } from './Comment'
+import { Rate } from 'antd'
 
 type FilterVote = {
       isSelectImage: boolean
@@ -118,18 +119,18 @@ const CommentFilter = (props: TProps) => {
             onActive: (isActive: boolean) => {
                   if (isActive) return 'bg-blue-50 border-blue-600 text-blue-600'
 
-                  return 'bg-transparent border-gray-400 text-slate-600'
+                  return 'bg-transparent border-[var(--border-color-input)] text-text-theme'
             },
       }
 
       return (
-            <div className='w-full min-h-[90px] h-max  flex flex-col gap-[20px] bg-color-section-theme text-text-theme border-t-[2px] border-[var(--border-color-input)] py-[16px]'>
-                  <p className='ml-[2px] text-[15px] font-medium'>Lọc theo</p>
-                  <div className='w-full flex overflow-auto items-center justify-between gap-[14px] xl:gap-0 py-[20px]'>
+            <div className='w-full min-h-[90px] h-max  flex flex-col gap-[10px] bg-color-section-theme text-text-theme border-t-[2px] border-[var(--border-color-input)] py-[16px]'>
+                  <p className='ml-[2px] text-[15px] font-medium'>Lọc bình luận</p>
+                  <div className='w-full flex overflow-auto items-center  gap-[12px]  '>
                         <button
                               className={`${styleEffect.onActive(
                                     filterVote.isSelectTime,
-                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px] flex items-center justify-center gap-[6px] p-[6px_8px]  w-max border-[1px] rounded-[999px]`}
+                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff]  flex items-center justify-center gap-[6px] p-[6px_6px]  w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetActive('isSelectTime')
                               }}
@@ -140,7 +141,7 @@ const CommentFilter = (props: TProps) => {
                         <button
                               className={`${styleEffect.onActive(
                                     filterVote.isSelectImage,
-                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
+                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff]   flex items-center justify-center gap-[6px] p-[6px_6px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetActive('isSelectImage')
                               }}
@@ -151,52 +152,72 @@ const CommentFilter = (props: TProps) => {
                         <button
                               className={`${styleEffect.onActive(
                                     storege.includes(5),
-                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
+                              )}  hover:bg-color-main min-w-[60px] hover:text-[#fff]   flex items-center justify-center gap-[6px] p-[6px_6px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetFilterVote(5)
                               }}
                         >
-                              {storege.includes(5) && <Check size={18} />}5 sao
+                              {storege.includes(5) && <Check size={18} />}
+                              <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
+                                    <span className='text-[14px]'>{5}</span>
+                                    <Rate defaultValue={1} count={1} className='text-[14px] ' />
+                              </div>
                         </button>
                         <button
                               className={`${styleEffect.onActive(
                                     storege.includes(4),
-                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
+                              )}  hover:bg-color-main min-w-[60px] hover:text-[#fff]   flex items-center justify-center gap-[6px] p-[6px_6px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetFilterVote(4)
                               }}
                         >
-                              {storege.includes(4) && <Check size={18} />}4 sao
+                              {storege.includes(4) && <Check size={18} />}
+                              <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
+                                    <span className='text-[14px]'>{4}</span>
+                                    <Rate defaultValue={1} count={1} className='text-[14px] ' />
+                              </div>
                         </button>
                         <button
                               className={`${styleEffect.onActive(
                                     storege.includes(3),
-                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
+                              )}  hover:bg-color-main min-w-[60px] hover:text-[#fff]   flex items-center justify-center gap-[6px] p-[6px_6px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetFilterVote(3)
                               }}
                         >
-                              {storege.includes(3) && <Check size={18} />}3 sao
+                              {storege.includes(3) && <Check size={18} />}
+                              <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
+                                    <span className='text-[14px]'>{3}</span>
+                                    <Rate defaultValue={1} count={1} className='text-[14px] ' />
+                              </div>
                         </button>
                         <button
                               className={`${styleEffect.onActive(
                                     storege.includes(2),
-                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[6px_8px] w-max border-[1px] rounded-[999px]`}
+                              )}  hover:bg-color-main min-w-[60px] hover:text-[#fff]   flex items-center justify-center gap-[6px] p-[6px_6px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetFilterVote(2)
                               }}
                         >
-                              {storege.includes(2) && <Check size={18} />}2 sao
+                              {storege.includes(2) && <Check size={18} />}
+                               <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
+                                    <span className='text-[14px]'>{2}</span>
+                                    <Rate defaultValue={1} count={1} className='text-[14px] ' />
+                              </div>
                         </button>
                         <button
                               className={`${styleEffect.onActive(
                                     storege.includes(1),
-                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[8px_6px] w-max border-[1px] rounded-[999px]`}
+                              )}  hover:bg-color-main min-w-[60px] hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[8px_6px] w-max border-[1px] rounded-[999px]`}
                               onClick={() => {
                                     onSetFilterVote(1)
                               }}
                         >
-                              {storege.includes(1) && <Check size={18} />}1 sao
+                              {storege.includes(1) && <Check size={18} />}
+                               <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
+                                    <span className='text-[14px]'>{1}</span>
+                                    <Rate defaultValue={1} count={1} className='text-[14px] ' />
+                              </div>
                         </button>
                   </div>
             </div>

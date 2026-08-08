@@ -18,5 +18,6 @@ export type ShopResponse = {
       shop_products: TProductDetail[]
       shop_description: string
       shop_count_product: number
-      shop_order: CartProduct[]
+      shop_order: CartProduct[],
+      shop_order_count: number
 }

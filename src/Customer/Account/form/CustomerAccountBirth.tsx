@@ -1,4 +1,5 @@
 import { Select } from 'antd'
+import { Calendar, Check } from 'lucide-react'
 import moment from 'moment'
 import { memo, useCallback, useMemo } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -81,7 +82,7 @@ giá trị mặc định không bị sữa đổi -> true
 
       return (
             <div className='ml-[0px] flex-1 flex flex-col  gap-[10px] lg:items-start  w-full lg:justify-start'>
-                  <div className='flex flex-col gap-[20px] xl:gap-0 sm:flex-row'>
+                  <div className='flex flex-col w-full justify-between gap-[20px] xl:gap-0 sm:flex-row'>
                         <Controller
                               control={control}
                               name='birth.day'
@@ -99,7 +100,7 @@ giá trị mặc định không bị sữa đổi -> true
                               render={({ field: { onChange: onChangeHookForm } }) => (
                                     <Select
                                           defaultValue={daySelectDefault}
-                                          style={{ borderRadius: '2px', padding: '0px 6px 0px 6px', height: 35, marginTop: -6 }}
+                                          style={{ borderRadius: '2px', padding: '0px 6px 0px 6px', height: 35, marginTop: -6, flex: 1 }}
                                           className='w-full xl:w-[110px]'
                                           options={dayAntd}
                                           onChange={(value) => {
@@ -127,7 +128,7 @@ giá trị mặc định không bị sữa đổi -> true
                               render={({ field: { onChange: onChangeHookForm } }) => (
                                     <Select
                                           defaultValue={monthSelectDefault}
-                                          style={{ borderRadius: '2px', padding: '0px 6px 0px 6px', height: 35, marginTop: -6 }}
+                                          style={{ borderRadius: '2px', padding: '0px 6px 0px 6px', height: 35, marginTop: -6, flex: 1 }}
                                           className='w-full xl:w-[110px]'
                                           options={monthAntd}
                                           onChange={(value) => {
@@ -154,8 +155,9 @@ giá trị mặc định không bị sữa đổi -> true
                               }}
                               render={({ field: { onChange: onChangeHookForm } }) => (
                                     <Select
+                                    suffixIcon={<Calendar size={16} />}
                                           defaultValue={yearSelectDefault}
-                                          style={{ borderRadius: '2px', padding: '0px 6px 0px 6px', height: 35, marginTop: -6 }}
+                                          style={{ borderRadius: '2px', padding: '0px 6px 0px 6px', height: 35, marginTop: -6, flex: 1 }}
                                           className='w-full xl:w-[110px]'
                                           options={yearAntd}
                                           onChange={(value) => {

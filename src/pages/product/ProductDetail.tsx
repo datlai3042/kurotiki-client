@@ -54,27 +54,27 @@ const ProductDetail = (props: TProps) => {
 
 
       const styleEffect = {
-            isActive: 'border-[2px] border-blue-600',
+            isActive: 'border-[1px] border-blue-600',
       }
 
       return (
             <React.Fragment>
-                  <div className='basis-[20%] md:basis-[35%] h-max flex justify-center rounded-xl p-[12px]  '>
+                  <div className=' flex-1  h-full flex justify-center rounded-xl p-[12px]  '>
                         <img
                               src={product!.product_thumb_image.secure_url}
-                              className='cursor-pointer object-cover object-top w-[90%] h-[360px] min-h-[240px] xl:min-h-[360px] xl:max-h-[360px]  transition-all duration-700 rounded-lg'
+                              className='cursor-pointer object-cover object-top w-[460px] h-[400px] min-h-[240px] xl:min-h-[360px] max-h-[600px] xl:h-full  transition-all duration-700 rounded-lg'
                               alt='product'
                               ref={image}
                               onClick={handleOpenModal}
                         />
                   </div>
-                  <div className='flex px-[14px] gap-[8px] flex-wrap md:flex-nowrap rounded-lg'>
+                  <div className='flex flex-col px-[14px] gap-[16px] flex-wrap md:flex-nowrap rounded-lg'>
                         {imageArray.map((image) => (
                               <img
                                     src={image.secure_url}
                                     className={`${
-                                          imageActive === image.secure_url ? styleEffect.isActive : 'border-[2px] border-[var(--border-color-input)] object-contain'
-                                    }  w-[47%] xl:w-[55px] xl:h-[55px] md:w-[60px] md:h-[80px]  rounded p-[4px]  object-contain`}
+                                          imageActive === image.secure_url ? styleEffect.isActive : 'border-[1px] border-[var(--border-color-input)] object-contain hover:border-blue-600'
+                                    }  w-[47%] xl:w-[110px] xl:h-[110px] md:w-[60px] md:h-[90px]  rounded p-[4px]  object-cover`}
                                     alt='product_sub'
                                     key={image.secure_url}
                                     onMouseLeave={handleMouseLeave}

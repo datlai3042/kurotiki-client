@@ -11,7 +11,7 @@ const OrderHistory = () => {
       })
 
       return (
-            <div className='flex flex-col w-full min-h-[500px] h-max bg-color-section-theme  gap-[30px]'>
+            <div className='flex flex-col w-full min-h-[500px] rounded-2xl h-max bg-color-section-theme  gap-[30px]'>
                   {getMyOrder.isSuccess &&
                         getMyOrder.data.data.metadata.order &&
                         getMyOrder.data.data.metadata.order?.order_products &&
