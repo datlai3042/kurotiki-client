@@ -86,6 +86,10 @@ const Product = () => {
                                           cart_current_address_ward: address_default.address_ward,
                                           cart_current_address_district: address_default.address_district,
                                           cart_current_address_province: address_default.address_province,
+
+                                          cart_current_address_receiver_name: address_default?.address_receiver_name || '',
+                                          cart_current_address_receiver_tel: address_default?.address_receiver_tel || '',
+                                          cart_current_address_email_vat: address_default?.address_email_vat || '',
                                     }),
                               )
                         }
@@ -112,7 +116,6 @@ const Product = () => {
       return (
             <div className='flex flex-col w-full text-[12px] text-text-theme gap-[20px]'>
                   <div className=' w-full flex flex-col gap-[4px] '>
-                       
                         {getProductWithId.data?.data && (
                               <Breadcrumb
                                     items={[
@@ -121,7 +124,7 @@ const Product = () => {
                                                 label: renderType(product?.product_type as ProductType) as string,
                                                 to: `/${product?.product_type}`,
                                           },
-                                          { label: product?.attribute.type as string},
+                                          { label: product?.attribute.type as string },
                                     ]}
                               />
                         )}
@@ -129,10 +132,10 @@ const Product = () => {
                               <div className='  flex gap-[16px] xl:gap-[16px] xl:mt-0'>
                                     <div className='w-full xl:w-[74%] flex flex-col gap-[12px]'>
                                           <div className='top w-full min-h-[1000px] h-max flex flex-col  gap-[18px]'>
-                                                <div className=' static  bg-color-section-theme px-[3px] pt-[16px] pb-[24px] rounded-lg  h-max flex flex-row-reverse  gap-[16px] '>
+                                                <div className=' static  bg-color-section-theme px-[3px] pt-[16px] pb-[24px] rounded-lg  h-max flex flex-col-reverse md:flex-row-reverse  gap-[16px] '>
                                                       <ProductDetail product={product} isSuccess={getProductWithId.isSuccess} />
                                                 </div>
-                                                <div className='  min-h-[500px] relative z-100 bg-color-gap-empty h-max mt-[20px] xl:mt-0 rounded-lg '>
+                                                <div className='  min-h-[500px] relative z-100 bg-color-gap-empty h-max mt-0 rounded-lg '>
                                                       <ProductIntro
                                                             product={product}
                                                             totalComment={totalComment || 0}
@@ -153,7 +156,7 @@ const Product = () => {
                                                 <Comment product_id={product?._id} />
                                           </div>
                                     </div>
-                                    <div className='hidden xl:flex w-[40%] xl:w-[26%] sticky top-[100px] xl:top-[96px] h-max   flex-col gap-[10px]   rounded-md'>
+                                    <div className='hidden xl:flex w-[40%] xl:w-[26%] sticky top-[100px] xl:top-[150px] h-max   flex-col gap-[10px]   rounded-md'>
                                           <ProductPay product={product} />
                                           <DatDeveloper />
                                     </div>

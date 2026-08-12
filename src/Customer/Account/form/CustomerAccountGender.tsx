@@ -16,7 +16,7 @@ const CustomerAccountGender = () => {
       const [gender, setGender] = useState<keyof TGender>(user?.gender || 'Male')
 
       return (
-            <div className='w-[70%] text-left  flex-1 flex-col sm:flex-row'>
+            <div className='w-full xl:w-[70%] text-left  flex-1 flex-col sm:flex-row'>
                   <Controller
                         control={control}
                         name='gender'

@@ -6,7 +6,8 @@ import axiosCustom from './http'
 export type TModeChangeQuantityProductCart = {
       product_id?: string
       mode: 'INCREASE' | 'DECREASE' | 'INPUT'
-      quantity: number
+      quantity: number,
+      cart_item_id?: string
 }
 
 class CartService {
@@ -41,7 +42,7 @@ class CartService {
             return axiosCustom.get<{ metadata: { carts: CartResponse } }>('/v1/api/cart/cart-pay')
       }
 
-      static async deleteCart({ product_id }: { product_id: string }) {
+      static async deleteCart({ product_id, cart_item_id }: { product_id: string, cart_item_id: string }) {
             return axiosCustom.delete<{ metadata: { message: string } }>(`/v1/api/cart/cart-delete/${product_id}`)
       }
 

@@ -30,7 +30,6 @@ const BoxConfirmAddress = (props: TProps) => {
       const queryClient = useQueryClient()
 
       const address_default = (user?.user_address && user?.user_address.filter((address) => address.address_default === true)) || ''
-
       const updateAddressCart = useMutation({
             mutationKey: ['/v1/api/cart/update-cart'],
             mutationFn: ({ product_id, address_full }: { product_id: string; address_full: Address }) =>
@@ -91,7 +90,6 @@ const BoxConfirmAddress = (props: TProps) => {
                   )
                   return
             }
-
             if (mode === 'User') {
                   const addressSelector = user?.user_address.find((address) => address._id === valueAddress) as UserAddress
                   setAddressDefaultMutation.mutate({ _id: addressSelector._id })
@@ -106,6 +104,9 @@ const BoxConfirmAddress = (props: TProps) => {
                         address_full: {
                               // cart_current_product_id: product_id as string,
                               address_street: renderStringAddressDetailV2(addressSelector as UserAddress) || '',
+                              address_receiver_name: addressSelector?.address_receiver_name || '',
+                              address_receiver_tel: addressSelector?.address_receiver_tel || '',
+                              address_email_vat: addressSelector?.address_email_vat || '',
 
                               address_text: renderStringAddressDetailV2(addressSelector as UserAddress) || '',
                               type: addressSelector?.type as AddressType,
@@ -122,6 +123,7 @@ const BoxConfirmAddress = (props: TProps) => {
                                     code: addressSelector.address_province.code,
                                     text: addressSelector.address_province.text,
                               },
+                              _id: addressSelector?._id,
                         },
                   })
                   return
@@ -135,6 +137,10 @@ const BoxConfirmAddress = (props: TProps) => {
                               cart_current_address: renderStringAddressDetailV2(address_default as UserAddress) || '',
                               cart_current_address_type: address_default?.type as AddressType,
                               cart_current_address_id: address_default._id,
+                              cart_current_address_receiver_name: address_default?.address_receiver_name || '',
+                              cart_current_address_receiver_tel: address_default?.address_receiver_tel || '',
+                              cart_current_address_email_vat: address_default?.address_email_vat || '',
+
                               cart_current_address_ward: {
                                     code: address_default.address_ward.code,
                                     text: address_default.address_ward.text,
@@ -217,7 +223,6 @@ const BoxConfirmAddress = (props: TProps) => {
                                           {user?.user_address.map((address, index) => {
                                                 const isSelected = valueAddress === address._id
                                                 const addressType = renderAddressType(address.type)
-
                                                 return (
                                                       <label
                                                             key={address._id}
@@ -244,14 +249,29 @@ const BoxConfirmAddress = (props: TProps) => {
                                                                         )}
 
                                                                         <p className='min-w-0 text-[14px] font-semibold leading-5 text-[#f1f5f9]'>
-                                                                              {renderStringAddressDetailV2(address)!.replace('Địa chỉ:', '') || ''}
+                                                                              {renderStringAddressDetailV2(address)!.replace(
+                                                                                    'Địa chỉ:',
+                                                                                    '',
+                                                                              ) || ''}
                                                                         </p>
                                                                   </div>
 
                                                                   <div className='mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-[#98a2b3]'>
-                                                                        <span className='font-medium text-[#cbd5e1]'>{receiverName}</span>
+                                                                        <span className='font-medium text-[#cbd5e1]'>
+                                                                              {address?.address_receiver_name ||
+                                                                                    'Chưa thiết lập người nhận'}
+                                                                        </span>
                                                                         <span className='h-1 w-1 rounded-full bg-[#667085]' />
-                                                                        <span>{receiverPhone}</span>
+                                                                        <span>
+                                                                              {address?.address_receiver_tel || 'Chưa thiết lập SĐT nhận'}
+                                                                        </span>
+
+                                                                        <span className='h-1 w-1 rounded-full bg-[#667085]' />
+
+                                                                        <div className='flex gap-x-2'>
+                                                                              <span>Email nhận hóa đơn điện tử: </span>
+                                                                              <span>{address?.address_email_vat || 'null'}</span>
+                                                                        </div>
                                                                   </div>
 
                                                                   {addressType && (

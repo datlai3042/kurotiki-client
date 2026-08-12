@@ -65,15 +65,15 @@ const ProductCare = () => {
       const products = allProduct.data?.data.metadata.products
 
       return (
-            <div className='relative group  flex-1  h-max max-w-full px-0 xl:px-[18px]'>
+            <div className='relative group flex-1 h-max max-w-full px-3 sm:px-4'>
                   <div className='w-full  overflow-hidden'>
                         {products && products?.length > 0 && (
-                              <div className='gap-[20px] xl:gap-[16px] w-full flex  h-full  pb-[8px] ' ref={wrapperListProductsRef}>
+                              <div className='flex h-full w-full gap-3 pb-1 sm:gap-4' ref={wrapperListProductsRef}>
                                     {products &&
                                           products.map((product) => (
                                                 <div
                                                       style={{ flexBasis: widthElemnet, flexShrink: 0 }}
-                                                      className='h-full'
+                                                      className='h-full py-1'
                                                       key={product._id}
                                                 >
                                                       <ProductSimplify product={product} />

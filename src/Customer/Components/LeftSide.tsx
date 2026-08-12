@@ -129,7 +129,7 @@ const LeftSide = ({
 
       const isActive = (path: string) => location.pathname === path
       return (
-            <div ref={containerRef} className='sticky mb-[10px] py-[20px] top-[75px] hidden xl:block   text-text-theme'>
+            <div className='sticky mb-[10px] py-[20px] top-[75px] hidden xl:block   text-text-theme'>
                   <div className=' flex items-center gap-[12px] overflow-x-hidden' title={`Account ${user?.email}` || ''}>
                         {user ? (
                               <>
@@ -178,24 +178,28 @@ const LeftSide = ({
                                                             className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm transition-all ${
                                                                   active
                                                                         ? 'bg-blue-50 font-medium text-blue-600'
-                                                                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                                                                        : ' hover:bg-gray-50 text-text-theme hover:text-blue-600'
                                                             }`}
                                                       >
                                                             <span
                                                                   className={`flex shrink-0 items-center ${
-                                                                        active ? 'text-blue-600' : 'text-gray-500'
+                                                                        active
+                                                                              ? 'text-blue-600 dark:text-[#60A5FA]'
+                                                                              : ''
                                                                   }`}
                                                             >
                                                                   {item.icon}
                                                             </span>
 
-                                                            <span className='flex-1'>{item.label}</span>
+                                                            <span className='flex-1 '>{item.label}</span>
 
                                                             {item.children && (
                                                                   <ChevronDown
                                                                         size={16}
                                                                         className={`transition-transform ${
-                                                                              active ? 'rotate-180 text-blue-500' : 'text-gray-400'
+                                                                              active
+                                                                                    ? 'rotate-180 text-blue-500 dark:text-[#60A5FA]'
+                                                                                    : 'text-text-theme hover:text-blue-600'
                                                                         }`}
                                                                   />
                                                             )}
@@ -213,7 +217,7 @@ const LeftSide = ({
                                                                                           className={`flex w-full items-center gap-2 rounded-r-lg px-3 py-2.5 text-sm transition-colors ${
                                                                                                 childActive
                                                                                                       ? 'bg-blue-50 font-medium text-blue-600'
-                                                                                                      : 'text-gray-500 hover:bg-gray-50 hover:text-blue-600'
+                                                                                                      : 'text-text-theme  hover:text-blue-600    '
                                                                                           }`}
                                                                                     >
                                                                                           <span
@@ -224,7 +228,13 @@ const LeftSide = ({
                                                                                                 }`}
                                                                                           />
 
-                                                                                          <span className='text-gray-400'>
+                                                                                          <span
+                                                                                                className={
+                                                                                                      childActive
+                                                                                                            ? 'text-blue-500 dark:text-[#60A5FA]'
+                                                                                                            : ''
+                                                                                                }
+                                                                                          >
                                                                                                 {child.icon}
                                                                                           </span>
 
@@ -239,18 +249,17 @@ const LeftSide = ({
                                           )
                                     })}
                               </ul>
-
-                              <div className='bg-blue-50 relative rounded-2xl p-4 border border-blue-100'>
-                                    <p className='font-semibold text-gray-800 text-sm mb-1'>Bạn cần hỗ trợ?</p>
-                                    <p className='text-xs text-gray-500 mb-3 leading-relaxed w-[60%]'>Đội ngũ Tiki luôn sẵn sàng giúp bạn 24/7</p>
-                                    <button className='flex items-center gap-1 bg-white border border-blue-200 text-blue-600 text-xs font-medium px-3 py-2 rounded-lg hover:bg-blue-100'>
-                                          Liên hệ ngay <ChevronRight size={14} />
-                                    </button>
-                                    <div className='flex justify-end absolute bottom-[-40px] right-[-20px] w-[150px] h-[170px]'>
-                                          <img src={'/support-headset.png'} alt='Bảo mật tài khoản' className='w-full' draggable={false} />
-                                    </div>
-                              </div>
                         </nav>
+                  </div>
+                  <div className='mt-5 bg-blue-50 relative rounded-2xl p-4 border border-blue-100'>
+                        <p className='font-semibold text-gray-800 text-sm mb-1'>Bạn cần hỗ trợ?</p>
+                        <p className='text-xs text-gray-500 mb-3 leading-relaxed w-[60%]'>Đội ngũ Tiki luôn sẵn sàng giúp bạn 24/7</p>
+                        <button className='flex items-center gap-1 bg-white border border-blue-200 text-blue-600 text-xs font-medium px-3 py-2 rounded-lg hover:bg-blue-100'>
+                              Liên hệ ngay <ChevronRight size={14} />
+                        </button>
+                        <div className='flex justify-end absolute bottom-[-40px] right-[-20px] w-[150px] h-[170px]'>
+                              <img src={'/support-headset.png'} alt='Bảo mật tài khoản' className='w-full' draggable={false} />
+                        </div>
                   </div>
             </div>
       )

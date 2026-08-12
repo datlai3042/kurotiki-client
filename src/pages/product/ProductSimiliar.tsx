@@ -8,10 +8,14 @@ import { TProductDetail } from '../../types/product/product.type'
 type TProps = {
       product: TProductDetail
 }
+
 const ELEMENT_PAGE = 12
 
-const ProductSimiliar = (props: TProps) => {
-      const { product } = props
+const ProductSimiliar = ({ product }: TProps) => {
+      const [count, setCount] = useState(1)
+      const [showMobileHint, setShowMobileHint] = useState(true)
+
+      const mobileScrollRef = useRef<HTMLDivElement>(null)
 
       const allProduct = useQuery({
             queryKey: ['get-all-product', product._id, product.product_type],
@@ -24,142 +28,184 @@ const ProductSimiliar = (props: TProps) => {
             staleTime: 1000 * 60 * 5,
       })
 
-      const wrapperListProductsRef = useRef<HTMLDivElement>(null)
-      const PositionScrollCurrent = useRef<number>(0)
-      const [count, setCount] = useState(1)
+      const productData = allProduct.data?.data.metadata.products || []
+      const totalPage = Math.ceil(productData.length / ELEMENT_PAGE)
+
+      const pages = Array.from({ length: totalPage }, (_, index) =>
+            productData.slice(index * ELEMENT_PAGE, (index + 1) * ELEMENT_PAGE),
+      )
 
       const handleClickNext = () => {
-            if (wrapperListProductsRef.current) {
-                  setCount((prev) => prev + 1)
-                  const width = wrapperListProductsRef.current.getBoundingClientRect().width
-                  PositionScrollCurrent.current = PositionScrollCurrent.current - width
-                  wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
-                  wrapperListProductsRef.current.style.transition = `all 1s`
-            }
+            if (count >= totalPage) return
+            setCount((prev) => prev + 1)
       }
-      const [calcAutoCols, setCalcAutoCols] = useState<number>(0)
 
       const handleClickPrev = () => {
-            if (wrapperListProductsRef.current) {
-                  setCount((prev) => prev - 1)
-
-                  const width = wrapperListProductsRef.current.getBoundingClientRect().width
-                  PositionScrollCurrent.current = PositionScrollCurrent.current + width
-
-                  // console.log(Math.trunc(width))
-                  wrapperListProductsRef.current.style.transform = `translate3d(${PositionScrollCurrent.current}px, 0,0)`
-                  wrapperListProductsRef.current.style.transition = `all 1s`
-            }
+            if (count <= 1) return
+            setCount((prev) => prev - 1)
       }
-      const productData = allProduct.data?.data.metadata.products
-      const totalPage = Math.ceil(Number(productData?.length) / 12)
-      const styleEffect = {
-            buttonPrev: count === 1 ? 'md:hidden' : 'md:flex',
-            buttonNext: totalPage === count ? 'md:hidden' : 'md:flex',
-            disButtonPrev: count === 1 ? true : false,
-            disButtonNext: totalPage === count ? true : false,
-            onActive: (check: boolean) => {
-                  return check ? 'bg-blue-400 rounded-[999px]' : 'bg-slate-400 rounded-[999px]'
-            },
+
+      const updateMobileHint = () => {
+            const el = mobileScrollRef.current
+            if (!el) return
+
+            const isAtEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8
+            setShowMobileHint(!isAtEnd)
       }
+
+      const handleMobileNext = () => {
+            const el = mobileScrollRef.current
+            if (!el) return
+
+            el.scrollBy({
+                  left: Math.max(el.clientWidth * 0.75, 150),
+                  behavior: 'smooth',
+            })
+      }
+
       useEffect(() => {
-            setCalcAutoCols(((wrapperListProductsRef.current?.getBoundingClientRect().width || 500) - 18 * 6) / ELEMENT_PAGE)
-      }, [count])
-      const page1 = productData?.slice(0, ELEMENT_PAGE)
-      const page2 = productData?.slice(ELEMENT_PAGE, ELEMENT_PAGE * 2)
-      const page3 = productData?.slice(ELEMENT_PAGE * 2, ELEMENT_PAGE * 3)
-      const page4 = productData?.slice(ELEMENT_PAGE * 3, ELEMENT_PAGE * 4)
+            setShowMobileHint(true)
+      }, [product._id])
 
       return (
-            <div className='relative h-full overflow-hidden flex flex-col gap-[16px] mx-[16px] py-[24px]'>
-                  <p className='text-[16px] font-semibold'>Sản phẩm tương tự</p>
-                  {productData && productData.length === 0 && (
-                        <div className='w-full min-h-full h-full flex items-center justify-center text-[20px] font-semibold text-text-theme bg-color-section-theme rounded-lg'>
+            <div className='relative mx-[16px] flex h-full flex-col gap-[16px] overflow-hidden py-[24px]'>
+                  <div className='flex items-center justify-between gap-[12px]'>
+                        <p className='text-[16px] font-semibold'>Sản phẩm tương tự</p>
+
+                        {productData.length > 2 && (
+                              <button
+                                    type='button'
+                                    onClick={handleMobileNext}
+                                    className='flex shrink-0 items-center gap-[2px] rounded-full border border-blue-400/40 bg-blue-500/10 px-[8px] py-[4px] text-[11px] font-medium text-blue-400 xl:hidden'
+                              >
+                                    Vuốt xem thêm
+                                    <ChevronRight size={13} />
+                              </button>
+                        )}
+                  </div>
+
+                  {!allProduct.isPending && productData.length === 0 && (
+                        <div className='flex min-h-[220px] w-full items-center justify-center rounded-lg bg-color-section-theme text-[20px] font-semibold text-text-theme'>
                               Không có thông tin các sản phẩm khác
                         </div>
                   )}
-                  {productData && productData.length > 0 && (
-                        <div
-                              className='flex xl:w-full  xl:gap-0    overflow-auto md:overflow-visible pb-[8px]'
-                              ref={wrapperListProductsRef}
-                        >
-                              <div
-                                    style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
-                                    className=' w-max xl:min-w-full    grid grid-flow-col auto-rows-[220px]  xl:grid-cols-6 grid-rows-[220px_220px] gap-[18px] '
-                              >
-                                    {page1 && page1?.map((product) => <ProductItemMini product={product} key={product._id} />)}
+
+                  {productData.length > 0 && (
+                        <>
+                              {/* MOBILE / TABLET */}
+                              <div className='relative xl:hidden'>
+                                    <div
+                                          ref={mobileScrollRef}
+                                          onScroll={updateMobileHint}
+                                          className='
+                                                flex
+                                                snap-x
+                                                snap-mandatory
+                                                items-stretch
+                                                gap-[12px]
+                                                overflow-x-auto
+                                                pb-[10px]
+                                                pr-[52px]
+                                                [scrollbar-width:none]
+                                                [&::-webkit-scrollbar]:hidden
+                                          '
+                                    >
+                                          {productData.map((item) => (
+                                                <div
+                                                      key={item._id}
+                                                      className='
+                                                            w-[140px]
+                                                            min-w-[140px]
+                                                            snap-start
+                                                            sm:w-[160px]
+                                                            sm:min-w-[160px]
+                                                      '
+                                                >
+                                                      <ProductItemMini product={item} />
+                                                </div>
+                                          ))}
+                                    </div>
+
+                                    {productData.length > 2 && showMobileHint && (
+                                          <>
+                                                <div className='pointer-events-none absolute bottom-[10px] right-0 top-0 z-10 w-[54px] bg-gradient-to-l from-color-section-theme via-color-section-theme/80 to-transparent' />
+
+                                                <button
+                                                      type='button'
+                                                      onClick={handleMobileNext}
+                                                      aria-label='Xem thêm sản phẩm'
+                                                      className='absolute right-[6px] top-1/2 z-20 flex h-[34px] w-[34px] -translate-y-1/2 items-center justify-center rounded-full border border-blue-300/60 bg-blue-500 text-white shadow-lg'
+                                                >
+                                                      <ChevronRight size={20} />
+                                                </button>
+                                          </>
+                                    )}
                               </div>
 
-                              <div
-                                    style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
-                                    className=' w-max xl:min-w-full    grid grid-flow-col auto-rows-[220px]  xl:grid-cols-6 grid-rows-[220px_220px] gap-[18px] '
-                              >
-                                    {page2 && page2?.map((product) => <ProductItemMini product={product} key={product._id} />)}
+                              {/* DESKTOP */}
+                              <div className='relative hidden overflow-hidden xl:block'>
+                                    <div
+                                          className='flex transition-transform duration-500 ease-in-out'
+                                          style={{
+                                                transform: `translate3d(-${(count - 1) * 100}%, 0, 0)`,
+                                          }}
+                                    >
+                                          {pages.map((page, pageIndex) => (
+                                                <div
+                                                      key={pageIndex}
+                                                      className='grid h-full w-full min-w-full grid-cols-6 grid-rows-2 gap-[18px]'
+                                                >
+                                                      {page.map((item) => (
+                                                            <ProductItemMini product={item} key={item._id} />
+                                                      ))}
+                                                </div>
+                                          ))}
+                                    </div>
                               </div>
+                        </>
+                  )}
 
-                              <div
-                                    style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
-                                    className=' w-max xl:min-w-full    grid grid-flow-col auto-rows-[220px]  xl:grid-cols-6 grid-rows-[220px_220px] gap-[18px] '
-                              >
-                                    {page3 && page3?.map((product) => <ProductItemMini product={product} key={product._id} />)}
-                              </div>
-
-                              <div
-                                    style={{ gridAutoColumns: calcAutoCols, gridTemplateColumns: calcAutoCols }}
-                                    className=' w-max xl:min-w-full    grid grid-flow-col auto-rows-[220px]  xl:grid-cols-6 grid-rows-[220px_220px] gap-[18px] '
-                              >
-                                    {page4 && page4?.map((product) => <ProductItemMini product={product} key={product._id} />)}
-                              </div>
+                  {/* DESKTOP PAGINATION */}
+                  {totalPage > 1 && (
+                        <div className='absolute bottom-[10px] left-1/2 hidden h-[3px] -translate-x-1/2 justify-center gap-[8px] xl:flex'>
+                              {Array.from({ length: totalPage }).map((_, index) => (
+                                    <button
+                                          type='button'
+                                          key={index}
+                                          onClick={() => setCount(index + 1)}
+                                          aria-label={`Trang ${index + 1}`}
+                                          className={`h-full w-[40px] rounded-full ${
+                                                index + 1 === count ? 'bg-blue-400' : 'bg-slate-400'
+                                          }`}
+                                    />
+                              ))}
                         </div>
                   )}
 
-                  <div className='absolute bottom-[10px] left-[50%] translate-x-[-50%] flex justify-center min-w-[180px] w-max h-[3px] gap-[8px]  '>
-                        {Array(totalPage || 1)
-                              .fill(0)
-                              .map((_, index) => (
-                                    <p className={`${styleEffect.onActive(index + 1 === count)} w-[40px] h-full`} key={index}></p>
-                              ))}
-                  </div>
+                  {/* DESKTOP PREV */}
+                  {count > 1 && !allProduct.isPending && (
+                        <button
+                              type='button'
+                              className='absolute left-0 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-xl xl:flex'
+                              onClick={handleClickPrev}
+                              disabled={count <= 1}
+                              aria-label='Sản phẩm trước'
+                        >
+                              <ChevronLeft size={28} className='text-blue-600' />
+                        </button>
+                  )}
 
-                  {/* {allProduct.isPending && (
-                        <div className='flex xl:w-full  xl:gap-0    overflow-scroll xl:overflow-visible ' ref={wrapperListProductsRef}>
-                              <div className=' w-max xl:min-w-full mx-[50px] xl:mx-0 grid grid-flow-col auto-cols-[130px] auto-rows-[230px] grid-cols-[130px] xl:grid-cols-4 grid-rows-[230px_230px] gap-[18px] '>
-                                    {Array(8)
-                                          .fill(0)
-                                          ?.map((_, index) => <div className='animate-pulse bg-slate-400' key={index}></div>)}
-                              </div>
-                        </div>
-                  )} */}
-
-                  {productData && productData.length > 0 && (
-                        <>
-                              <>
-                                    {styleEffect.disButtonPrev || allProduct.isPending ? (
-                                          <></>
-                                    ) : (
-                                          <button
-                                                className={`${styleEffect.buttonPrev} hidden xl:flex  absolute top-[50%] left-[0px] translate-y-[30%]  bg-[#ffffff]  rounded-full shadow-3xl`}
-                                                onClick={handleClickPrev}
-                                                disabled={styleEffect.disButtonPrev || allProduct.isPending}
-                                          >
-                                                <ChevronLeft size={28} color='blue' />
-                                          </button>
-                                    )}
-                              </>
-                              <>
-                                    {styleEffect.disButtonNext || allProduct.isPending ? (
-                                          <></>
-                                    ) : (
-                                          <button
-                                                className={`${styleEffect.buttonNext} hidden xl:flex absolute top-[50%] right-[0px] translate-y-[30%] bg-[#ffffff]  rounded-full shadow-3xl `}
-                                                onClick={handleClickNext}
-                                                disabled={styleEffect.disButtonNext || allProduct.isPending}
-                                          >
-                                                <ChevronRight size={26} color='blue' />
-                                          </button>
-                                    )}
-                              </>
-                        </>
+                  {/* DESKTOP NEXT */}
+                  {count < totalPage && !allProduct.isPending && (
+                        <button
+                              type='button'
+                              className='absolute right-0 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-xl xl:flex'
+                              onClick={handleClickNext}
+                              disabled={count >= totalPage}
+                              aria-label='Sản phẩm tiếp theo'
+                        >
+                              <ChevronRight size={28} className='text-blue-600' />
+                        </button>
                   )}
             </div>
       )

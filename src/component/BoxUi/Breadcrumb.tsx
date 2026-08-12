@@ -21,14 +21,14 @@ import { ChevronRight, Home } from 'lucide-react'
  */
 export default function Breadcrumb({ items = [] }: { items: { label: string; to?: string }[] }) {
       return (
-            <div className='flex items-center gap-[8px] py-[16px] text-[16px]  text-text-theme'>
+            <div className='flex items-center gap-[8px] py-[8px] text-[16px]  text-text-theme'>
                   {items.map((item, index) => {
                         const isFirst = index === 0
                         const isLast = index === items.length - 1
 
                         return (
                               <span key={item.label} className='flex items-center gap-[8px]'>
-                                    {isFirst && <Home size={15} className='text-text-theme opacity-70 hover:opacity-100' />}
+                                    {/* {isFirst && <Home size={15} className='text-text-theme opacity-70 hover:opacity-100' />} */}
 
                                     {isLast ? (
                                           <span className='font-extrabold  text-text-theme'>{item.label}</span>

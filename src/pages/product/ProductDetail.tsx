@@ -52,7 +52,6 @@ const ProductDetail = (props: TProps) => {
             // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [isSuccess, product])
 
-
       const styleEffect = {
             isActive: 'border-[1px] border-blue-600',
       }
@@ -68,20 +67,67 @@ const ProductDetail = (props: TProps) => {
                               onClick={handleOpenModal}
                         />
                   </div>
-                  <div className='flex flex-col px-[14px] gap-[16px] flex-wrap md:flex-nowrap rounded-lg'>
-                        {imageArray.map((image) => (
-                              <img
-                                    src={image.secure_url}
-                                    className={`${
-                                          imageActive === image.secure_url ? styleEffect.isActive : 'border-[1px] border-[var(--border-color-input)] object-contain hover:border-blue-600'
-                                    }  w-[47%] xl:w-[110px] xl:h-[110px] md:w-[60px] md:h-[90px]  rounded p-[4px]  object-cover`}
-                                    alt='product_sub'
-                                    key={image.secure_url}
-                                    onMouseLeave={handleMouseLeave}
-                                    onMouseEnter={() => handleMouseEnter(image.secure_url)}
-                                    onClick={() => handleClickImage(image.secure_url as string)}
-                              />
-                        ))}
+                  <div className='flex flex-col gap-[8px]'>
+                        <div
+                              className='
+                  flex
+                  flex-nowrap
+                  gap-[12px]
+                  overflow-x-auto
+                  px-[14px]
+                  pb-[4px]
+
+                  md:flex-col
+                  md:flex-nowrap
+                  md:overflow-visible
+                  md:gap-[16px]
+
+                  [scrollbar-width:none]
+                  [&::-webkit-scrollbar]:hidden
+            '
+                        >
+                              {imageArray.map((image) => (
+                                    <img
+                                          src={image.secure_url}
+                                          className={`
+                              ${
+                                    imageActive === image.secure_url
+                                          ? styleEffect.isActive
+                                          : 'border-[1px] border-[var(--border-color-input)] hover:border-blue-600'
+                              }
+
+                              h-[90px]
+                              w-[90px]
+                              min-w-[90px]
+                              shrink-0
+                              snap-start
+                              rounded
+                              object-contain
+                              p-[4px]
+
+                              md:h-[90px]
+                              md:w-[60px]
+                              md:min-w-[60px]
+
+                              xl:h-[110px]
+                              xl:w-[110px]
+                              xl:min-w-[110px]
+                        `}
+                                          alt='product_sub'
+                                          key={image.secure_url}
+                                          onMouseLeave={handleMouseLeave}
+                                          onMouseEnter={() => handleMouseEnter(image.secure_url)}
+                                          onClick={() => handleClickImage(image.secure_url as string)}
+                                    />
+                              ))}
+                        </div>
+
+                        {imageArray.length > 3 && (
+                              <div className='flex items-center justify-center gap-[4px] text-[11px] text-slate-400 md:hidden'>
+                                    <span>Vuốt ngang để xem thêm</span>
+                                    <span>→</span>
+                              </div>
+                        )}
                   </div>
 
                   {openModal && <BoxModalImage setOpenModal={setOpenModal} secure_url={imageArray} imageActive={imageActive} />}

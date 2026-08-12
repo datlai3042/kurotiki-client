@@ -19,7 +19,7 @@ const PaymentInvoice = ({ carts, orders }: { carts: CartProduct[]; orders: Order
 
       return (
             <div className='flex flex-col  mx-auto gap-[50px] '>
-                  <div className='bg-white border border-gray-200 rounded-xl p-10 flex flex-col items-center text-center'>
+                  <div className='bg-color-section-theme border-[var(--border-color-input)] rounded-xl p-10 flex flex-col items-center text-center'>
                         <div className='w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mb-5'>
                               <Check size={28} className='text-green-600' />
                         </div>
@@ -29,7 +29,7 @@ const PaymentInvoice = ({ carts, orders }: { carts: CartProduct[]; orders: Order
                         <div className='flex gap-2.5'>
                               <button
                                     onClick={() => reactToPrintFn()}
-                                    className='flex items-center gap-1.5 border border-gray-300 px-4 py-2.5 rounded-md text-sm hover:bg-gray-50 transition-colors'
+                                    className='flex items-center hover:text-black gap-1.5 border border-[var(--border-color-input)] px-4 py-2.5 rounded-md text-sm hover:bg-gray-50 transition-colors'
                               >
                                     <Printer size={15} />
                                     In hóa đơn
@@ -43,7 +43,7 @@ const PaymentInvoice = ({ carts, orders }: { carts: CartProduct[]; orders: Order
                               </button>
                         </div>
 
-                        <div className='w-full mt-8 pt-6 border-t border-gray-200 text-left'>
+                        <div className='w-full mt-8 pt-6 border-t border-[var(--border-color-input)] text-left'>
                               <p className='text-xs text-gray-400 mb-1.5'>Mã đơn hàng</p>
                               <p className='text-sm font-medium'>{orders._id}</p>
                         </div>

@@ -18,6 +18,9 @@ export interface UserAddress {
       type: 'Home' | 'Company' | 'Private'
       address_default: boolean
       address_creation_time: Date
+      address_receiver_name?: string
+      address_receiver_tel?: string
+      address_email_vat?: string
 }
 
 export type UserResponse = {

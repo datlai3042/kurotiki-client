@@ -19,7 +19,7 @@ const ProductOwner = (props: TProps) => {
       }
 
       return (
-            <div className='group flex w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme text-text-theme shadow-sm transition-all duration-300 hover:-translate-y-[2px] hover:border-blue-500/40 sm:w-[calc(50%-8px)] xl:w-[300px]'>
+            <div className='group flex w-full min-w-0 flex-col overflow-hidden rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme text-text-theme shadow-sm transition-all duration-300 hover:-translate-y-[2px] hover:border-blue-500/40 sm:w-[calc(50%-8px)] xl:w-[260px]'>
                   {/* Product image */}
                   <Link
                         to={`/product/${product?._id}`}

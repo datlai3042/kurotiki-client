@@ -18,13 +18,20 @@ export type CartCurrent = {
             code: string
             text: string
       }
+      _id?:string
       cart_current_product_id: string
       cart_current_address_id: string
+     cart_current_address_receiver_name: string,
+      cart_current_address_receiver_tel: string,
+      cart_current_address_email_vat?: string,
 }
 
 const cart_current: CartCurrent = {
       cart_current_address_type: 'Home',
       cart_current_address: '',
+      cart_current_address_receiver_name: '',
+      cart_current_address_receiver_tel: '',
+      cart_current_address_email_vat: '',
       cart_current_address_ward: { code: '', text: '' },
       cart_current_address_district: { code: '', text: '' },
       cart_current_address_province: { code: '', text: '' },
@@ -49,6 +56,12 @@ const cartSlice = createSlice({
                   state.cart_current.cart_current_address_ward = payload.payload.cart_current_address_ward
                   state.cart_current.cart_current_address_district = payload.payload.cart_current_address_district
                   state.cart_current.cart_current_address_province = payload.payload.cart_current_address_province
+                  state.cart_current.cart_current_address_receiver_name = payload.payload?.cart_current_address_receiver_name
+                  state.cart_current.cart_current_address_receiver_tel = payload.payload?.cart_current_address_receiver_tel
+                  state.cart_current.cart_current_address_email_vat = payload.payload?.cart_current_address_email_vat
+
+
+
             },
 
             resetAddressProduct: (state) => {

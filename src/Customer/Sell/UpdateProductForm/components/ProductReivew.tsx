@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ProductForm } from '../../../../types/product/product.type'
-import BoxButtonCircle from '../../../../component/BoxUi/BoxButtonCircle'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ImageIcon, Package, ShoppingBag } from 'lucide-react'
 import { useDebouncedCallback } from '@mantine/hooks'
+
 type TProps = {
       productFormImage: {
             secure_url: string
@@ -11,136 +11,159 @@ type TProps = {
       info: ProductForm
       buttonSubmit: React.ReactNode
 }
-const ProductReivew = (props: TProps) => {
-      const { productFormImage, info, buttonSubmit } = props
 
-      const renderActive = (state: boolean) => (!state ? 'text-color-main' : 'font-bold text-[14px]')
+const ProductReivew = ({ productFormImage, info, buttonSubmit }: TProps) => {
+      const hasName = Boolean(info?.product_name)
+      const hasPrice = Boolean(info?.product_price)
+      const hasDescription = Boolean(info?.attribute?.description)
 
       return (
-            <div className='sticky mb-[10px] max-w-[360px] w-[360px] top-[100px] hidden md:flex   flex-col gap-[16px] text-text-theme'>
-                  <span className='font-bold text-[16px] text-color-main'>Tổng quan sản phẩm</span>
-                  {productFormImage.length > 0 && <ProductFormSliderPreview arrayImage={[...productFormImage]} />}
-                  <div className='flex flex-col gap-[12px]'>
-                        <div className='flex justify-between items-center'>
-                              <span
-                                    title={info?.product_name}
-                                    className={`${renderActive(!!info?.product_name)} max-w-[80%] text-color-main truncate text-[20px]`}
-                              >
-                                    {info?.product_name || '[Chưa có tên sản phẩm]'}
-                              </span>
+            <div className='hidden w-full max-w-[400px] flex-col gap-4 text-text-theme md:flex'>
+                  <div className='overflow-hidden rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme shadow-[0_8px_28px_rgba(0,0,0,0.06)]'>
+                        {/* Preview image */}
+                        <div className='relative aspect-[4/3] w-full overflow-hidden border-b border-[var(--border-color-input)] bg-slate-500/[0.035]'>
+                              {productFormImage.length > 0 ? (
+                                    <ProductFormSliderPreview arrayImage={[...productFormImage]} />
+                              ) : (
+                                    <div className='flex h-full w-full flex-col items-center justify-center gap-3 text-slate-400'>
+                                          <div className='flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-500/10'>
+                                                <ImageIcon size={26} strokeWidth={1.6} />
+                                          </div>
+
+                                          <div className='text-center'>
+                                                <p className='text-[13px] font-medium text-text-theme'>Chưa có hình ảnh</p>
+                                                <p className='mt-1 text-[11px] text-slate-500'>Ảnh sản phẩm sẽ hiển thị tại đây</p>
+                                          </div>
+                                    </div>
+                              )}
                         </div>
-                        <div>
-                              <span className={`${renderActive(!!info?.product_price)} text-green-500`}>
-                                    {info?.product_price || '[Chưa có giá sản phẩm]'}
-                              </span>
+
+                        {/* Product info */}
+                        <div className='p-4'>
+                              <div className='flex items-start justify-between gap-3'>
+                                    <div className='min-w-0 flex-1'>
+                                          <p className='text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400'>
+                                                Tên sản phẩm
+                                          </p>
+
+                                          <h3
+                                                title={info?.product_name}
+                                                className={`mt-1 line-clamp-2 text-[16px] font-semibold leading-6 ${
+                                                      hasName ? 'text-text-theme' : 'italic text-slate-400'
+                                                }`}
+                                          >
+                                                {info?.product_name || 'Chưa có tên sản phẩm'}
+                                          </h3>
+                                    </div>
+
+                                    <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500'>
+                                          <Package size={17} />
+                                    </div>
+                              </div>
+
+                              <div className='mt-4 rounded-xl border border-[var(--border-color-input)] bg-slate-500/[0.025] p-3'>
+                                    <p className='text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400'>Giá bán</p>
+
+                                    <p className={`mt-1 text-[20px] font-bold ${hasPrice ? 'text-emerald-500' : 'text-slate-400'}`}>
+                                          {hasPrice ? `${Number(info.product_price).toLocaleString('vi-VN')} ₫` : 'Chưa có giá sản phẩm'}
+                                    </p>
+                              </div>
+
+                              <div className='mt-4'>
+                                    <p className='text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400'>Mô tả</p>
+
+                                    <p
+                                          className={`mt-1 max-h-[110px] overflow-y-auto pr-1 text-[12px] leading-5 ${
+                                                hasDescription ? 'text-slate-500' : 'italic text-slate-400'
+                                          }`}
+                                    >
+                                          {info?.attribute?.description || 'Chưa có mô tả sản phẩm'}
+                                    </p>
+                              </div>
+
+                              <div className='mt-4 flex items-center justify-between rounded-xl border border-[var(--border-color-input)] px-3 py-2.5'>
+                                    <div className='flex items-center gap-2'>
+                                          <div className='flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500'>
+                                                <ShoppingBag size={15} />
+                                          </div>
+
+                                          <div>
+                                                <p className='text-[10px] text-slate-400'>Tồn kho</p>
+                                                <p className='text-[12px] font-semibold text-text-theme'>
+                                                      {info?.product_available || 0} sản phẩm
+                                                </p>
+                                          </div>
+                                    </div>
+
+                                    <span
+                                          className={`rounded-full px-2.5 py-1 text-[10px] font-semibold ${
+                                                Number(info?.product_available || 0) > 0
+                                                      ? 'bg-emerald-500/10 text-emerald-500'
+                                                      : 'bg-slate-500/10 text-slate-400'
+                                          }`}
+                                    >
+                                          {Number(info?.product_available || 0) > 0 ? 'Có hàng' : 'Chưa có hàng'}
+                                    </span>
+                              </div>
+
+                              <div className='mt-4'>{buttonSubmit}</div>
                         </div>
-                        <span
-                              className={`${renderActive(
-                                    !!info?.attribute?.description,
-                              )} max-h-[160px] pr-[16px] text-justify overflow-auto`}
-                        >
-                              {info?.attribute?.description || '[Chưa có mô tả sản phẩm]'}
-                        </span>
                   </div>
-                  {buttonSubmit}
             </div>
       )
 }
 
 type PropsSliderImages = {
-      arrayImage: { secure_url: string; public_id: string }[]
+      arrayImage: {
+            secure_url: string
+            public_id: string
+      }[]
 }
 
-const ProductFormSliderPreview = (props: PropsSliderImages) => {
-      const { arrayImage } = props
+const ProductFormSliderPreview = ({ arrayImage }: PropsSliderImages) => {
       const wrapperRef = useRef<HTMLDivElement>(null)
-      const timer = useRef<NodeJS.Timeout | null>(null)
-      const [newPosition, setNewPosition] = useState<number>(0)
-      const [indexImage, setIndexImage] = useState<number>(0)
-      const delay = 4000
-      const LIMIT = 1
+      const timer = useRef<ReturnType<typeof setInterval> | null>(null)
+      const [indexImage, setIndexImage] = useState(0)
+
+      const moveTo = (index: number, animated = true) => {
+            if (!wrapperRef.current) return
+
+            wrapperRef.current.style.transform = `translateX(-${index * 100}%)`
+            wrapperRef.current.style.transition = animated ? 'transform .35s ease' : 'none'
+      }
+
       const onClickNext = () => {
-            if (wrapperRef.current) {
-                  const width = wrapperRef.current?.getBoundingClientRect().width * -1
-                  const pos = newPosition + width
-                  wrapperRef.current.style.transform = `translateX(${pos}px)`
-                  wrapperRef.current.style.transition = 'all 1s'
-                  setNewPosition(pos)
-                  setIndexImage((prev) => prev + 1)
-            }
+            if (indexImage >= arrayImage.length - 1) return
+            setIndexImage((prev) => prev + 1)
       }
 
       const onClickPrev = () => {
-            if (wrapperRef.current) {
-                  const width = wrapperRef.current?.getBoundingClientRect().width * 1
-                  const pos = newPosition + width
-                  wrapperRef.current.style.transform = `translateX(${pos}px)`
-                  wrapperRef.current.style.transition = 'all 1s'
-                  setNewPosition(pos)
-                  setIndexImage((prev) => prev - 1)
-            }
+            if (indexImage <= 0) return
+            setIndexImage((prev) => prev - 1)
       }
 
-      const styleEffect = {
-            onActive: (check: boolean) => {
-                  if (check) return 'w-[16px] rounded-[999px] bg-blue-600 h-[16px]'
-                  return 'w-[16px] rounded-[999px] bg-slate-300 h-[16px]'
-            },
-      }
       const debounceResize = useDebouncedCallback(() => {
-            clearInterval(timer.current as NodeJS.Timeout)
-
-            if (wrapperRef.current) {
-                  timer.current = setInterval(() => {
-                        if (indexImage === LIMIT) {
-                              if (wrapperRef.current) {
-                                    const width = wrapperRef.current?.getBoundingClientRect().width * 1
-
-                                    const pos = 0
-                                    wrapperRef.current.style.transform = `translateX(${pos}px)`
-                                    wrapperRef.current.style.transition = 'all 0s'
-                                    setNewPosition(pos)
-                                    setIndexImage(0)
-                              }
-                              return
-                        }
-
-                        if (wrapperRef.current) {
-                              const width = wrapperRef.current?.getBoundingClientRect().width * -1
-                              const pos = newPosition + width
-                              wrapperRef.current.style.transform = `translateX(${pos}px)`
-                              wrapperRef.current.style.transition = 'all 1s'
-                              setNewPosition(pos)
-                              setIndexImage((prev) => prev + 1)
-                        }
-                  }, delay)
-            }
+            moveTo(indexImage, false)
       }, 100)
+
       useEffect(() => {
-            if (indexImage === 0) {
-                  if (wrapperRef.current) {
-                        const width = wrapperRef.current?.getBoundingClientRect().width * 1
+            moveTo(indexImage)
+      }, [indexImage])
 
-                        const pos = 0
-                        wrapperRef.current.style.transform = `translateX(${pos}px)`
-                        wrapperRef.current.style.transition = 'all 1s'
-                        setNewPosition(pos)
-                  }
-                  return
-            }
+      useEffect(() => {
+            if (arrayImage.length <= 1) return
 
-            if (wrapperRef.current) {
-                  const width = wrapperRef.current?.getBoundingClientRect().width * -1
-                  const pos = width * indexImage
-                  wrapperRef.current.style.transform = `translateX(${pos}px)`
-                  wrapperRef.current.style.transition = 'all .4s'
-                  setNewPosition(pos)
-            }
+            timer.current = setInterval(() => {
+                  setIndexImage((prev) => {
+                        if (prev >= arrayImage.length - 1) return 0
+                        return prev + 1
+                  })
+            }, 4000)
 
             return () => {
-                  clearInterval(timer.current as NodeJS.Timeout)
+                  if (timer.current) clearInterval(timer.current)
             }
-      }, [indexImage, LIMIT])
+      }, [arrayImage.length])
 
       useEffect(() => {
             window.addEventListener('resize', debounceResize)
@@ -148,54 +171,61 @@ const ProductFormSliderPreview = (props: PropsSliderImages) => {
             return () => {
                   window.removeEventListener('resize', debounceResize)
             }
-      }, [])
+      }, [debounceResize])
+
+      useEffect(() => {
+            if (indexImage >= arrayImage.length) {
+                  setIndexImage(Math.max(arrayImage.length - 1, 0))
+            }
+      }, [arrayImage.length, indexImage])
+
       return (
-            <div className='relative group w-full h-full flex flex-col gap-[20px] '>
-                  <div className='w-full h-full  overflow-x-hidden'>
-                        <div className='w-[420px]  flex h-[240px]  ' ref={wrapperRef}>
-                              {arrayImage.map((img) => (
-                                    <img
-                                          src={img.secure_url}
-                                          key={img.public_id}
-                                          className=' w-[420px] min-w-[420px]  h-full object-cover rounded-[6px] object-center'
-                                          alt=''
-                                    />
-                              ))}
-                        </div>
+            <div className='group relative h-full w-full overflow-hidden'>
+                  <div ref={wrapperRef} className='flex h-full w-full'>
+                        {arrayImage.map((img) => (
+                              <div key={img.public_id} className='h-full min-w-full'>
+                                    <img src={img.secure_url} className='h-full w-full object-contain' alt='product preview' />
+                              </div>
+                        ))}
                   </div>
-                  <div className='  h-[20px] flex items-center justify-center gap-[10px]'>
-                        {Array(arrayImage.length)
-                              .fill(0)
-                              .map(
-                                    (_, index) => (
+
+                  {arrayImage.length > 1 && (
+                        <>
+                              <button
+                                    type='button'
+                                    onClick={onClickPrev}
+                                    disabled={indexImage === 0}
+                                    className='absolute left-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100 disabled:cursor-default disabled:opacity-20'
+                                    aria-label='Ảnh trước'
+                              >
+                                    <ChevronLeft size={18} />
+                              </button>
+
+                              <button
+                                    type='button'
+                                    onClick={onClickNext}
+                                    disabled={indexImage === arrayImage.length - 1}
+                                    className='absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100 disabled:cursor-default disabled:opacity-20'
+                                    aria-label='Ảnh tiếp theo'
+                              >
+                                    <ChevronRight size={18} />
+                              </button>
+
+                              <div className='absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-black/45 px-2.5 py-1.5 backdrop-blur-sm'>
+                                    {arrayImage.map((_, index) => (
                                           <button
-                                                onClick={() => setIndexImage(index)}
-                                                className={`${styleEffect.onActive(indexImage === index)}`}
+                                                type='button'
                                                 key={index}
-                                          ></button>
-                                    ),
-                                    // <button className={`${styleEffect.onActive(indexImage === 2)}`}></button>
-                                    // <button className={`${styleEffect.onActive(indexImage === 3)}`}></button>
-                              )}
-                  </div>
-
-                  <BoxButtonCircle
-                        className='hidden group-hover:flex bg-color-main text-[#fff] absolute top-[50%] translate-x-[-50%] left-[0px]'
-                        width={30}
-                        height={30}
-                        icon={<ChevronLeft className='#fff' />}
-                        onClick={onClickPrev}
-                        disabled={indexImage === 0}
-                  />
-
-                  <BoxButtonCircle
-                        className='hidden group-hover:flex  bg-color-main text-[#fff] absolute top-[50%] translate-x-[-50%] right-[-32px]'
-                        width={30}
-                        height={30}
-                        icon={<ChevronRight className='#fff' />}
-                        onClick={onClickNext}
-                        disabled={indexImage + 1 === arrayImage.length}
-                  />
+                                                onClick={() => setIndexImage(index)}
+                                                className={`h-1.5 rounded-full transition-all ${
+                                                      indexImage === index ? 'w-5 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/80'
+                                                }`}
+                                                aria-label={`Xem ảnh ${index + 1}`}
+                                          />
+                                    ))}
+                              </div>
+                        </>
+                  )}
             </div>
       )
 }

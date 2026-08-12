@@ -1,11 +1,12 @@
 import { useMutation } from '@tanstack/react-query'
-import { Check } from 'lucide-react'
+import { Check, MoreHorizontal } from 'lucide-react'
 import React, { SetStateAction, useCallback, useEffect, useState } from 'react'
 import CommentService, { GetAllCommentParam } from '../../apis/comment.service'
 import { fetchComment } from '../../Redux/comment.slice'
 import { useDispatch } from 'react-redux'
 import { LIMIT } from './Comment'
 import { Rate } from 'antd'
+import BoxResponsiveOverflow, { BoxResponsiveFlowClose } from '../BoxUi/BoxResponsiveFlow'
 
 type FilterVote = {
       isSelectImage: boolean
@@ -122,15 +123,31 @@ const CommentFilter = (props: TProps) => {
                   return 'bg-transparent border-[var(--border-color-input)] text-text-theme'
             },
       }
-
+      const categories = [
+            {
+                  id: 1,
+            },
+            {
+                  id: 2,
+            },
+            {
+                  id: 3,
+            },
+            {
+                  id: 4,
+            },
+            {
+                  id: 5,
+            },
+      ]
       return (
             <div className='w-full min-h-[90px] h-max  flex flex-col gap-[10px] bg-color-section-theme text-text-theme border-t-[2px] border-[var(--border-color-input)] py-[16px]'>
-                  <p className='ml-[2px] text-[15px] font-medium'>Lọc bình luận</p>
-                  <div className='w-full flex overflow-auto items-center  gap-[12px]  '>
+                  <p className='ml-[2px] text-[15px] font-semibold'>Lọc bình luận</p>
+                  <div className='flex w-full items-center gap-[12px] overflow-hidden'>
                         <button
                               className={`${styleEffect.onActive(
                                     filterVote.isSelectTime,
-                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff]  flex items-center justify-center gap-[6px] p-[6px_6px]  w-max border-[1px] rounded-[999px]`}
+                              )} flex h-[36px] min-w-[90px] shrink-0 items-center justify-center gap-[6px] rounded-full border-[1px] p-[6px] hover:bg-color-main hover:text-white md:min-w-[120px]`}
                               onClick={() => {
                                     onSetActive('isSelectTime')
                               }}
@@ -138,10 +155,11 @@ const CommentFilter = (props: TProps) => {
                               {filterVote.isSelectTime && <Check size={18} />}
                               Mới nhất
                         </button>
+
                         <button
                               className={`${styleEffect.onActive(
                                     filterVote.isSelectImage,
-                              )} min-w-[120px] hover:bg-color-main hover:text-[#fff]   flex items-center justify-center gap-[6px] p-[6px_6px] w-max border-[1px] rounded-[999px]`}
+                              )} flex h-[36px] min-w-[105px] shrink-0 items-center justify-center gap-[6px] rounded-full border-[1px] p-[6px] hover:bg-color-main hover:text-white md:min-w-[120px]`}
                               onClick={() => {
                                     onSetActive('isSelectImage')
                               }}
@@ -149,76 +167,88 @@ const CommentFilter = (props: TProps) => {
                               {filterVote.isSelectImage && <Check size={18} />}
                               Có hình ảnh
                         </button>
-                        <button
-                              className={`${styleEffect.onActive(
-                                    storege.includes(5),
-                              )}  hover:bg-color-main min-w-[60px] hover:text-[#fff]   flex items-center justify-center gap-[6px] p-[6px_6px] w-max border-[1px] rounded-[999px]`}
-                              onClick={() => {
-                                    onSetFilterVote(5)
-                              }}
-                        >
-                              {storege.includes(5) && <Check size={18} />}
-                              <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
-                                    <span className='text-[14px]'>{5}</span>
-                                    <Rate defaultValue={1} count={1} className='text-[14px] ' />
-                              </div>
-                        </button>
-                        <button
-                              className={`${styleEffect.onActive(
-                                    storege.includes(4),
-                              )}  hover:bg-color-main min-w-[60px] hover:text-[#fff]   flex items-center justify-center gap-[6px] p-[6px_6px] w-max border-[1px] rounded-[999px]`}
-                              onClick={() => {
-                                    onSetFilterVote(4)
-                              }}
-                        >
-                              {storege.includes(4) && <Check size={18} />}
-                              <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
-                                    <span className='text-[14px]'>{4}</span>
-                                    <Rate defaultValue={1} count={1} className='text-[14px] ' />
-                              </div>
-                        </button>
-                        <button
-                              className={`${styleEffect.onActive(
-                                    storege.includes(3),
-                              )}  hover:bg-color-main min-w-[60px] hover:text-[#fff]   flex items-center justify-center gap-[6px] p-[6px_6px] w-max border-[1px] rounded-[999px]`}
-                              onClick={() => {
-                                    onSetFilterVote(3)
-                              }}
-                        >
-                              {storege.includes(3) && <Check size={18} />}
-                              <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
-                                    <span className='text-[14px]'>{3}</span>
-                                    <Rate defaultValue={1} count={1} className='text-[14px] ' />
-                              </div>
-                        </button>
-                        <button
-                              className={`${styleEffect.onActive(
-                                    storege.includes(2),
-                              )}  hover:bg-color-main min-w-[60px] hover:text-[#fff]   flex items-center justify-center gap-[6px] p-[6px_6px] w-max border-[1px] rounded-[999px]`}
-                              onClick={() => {
-                                    onSetFilterVote(2)
-                              }}
-                        >
-                              {storege.includes(2) && <Check size={18} />}
-                               <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
-                                    <span className='text-[14px]'>{2}</span>
-                                    <Rate defaultValue={1} count={1} className='text-[14px] ' />
-                              </div>
-                        </button>
-                        <button
-                              className={`${styleEffect.onActive(
-                                    storege.includes(1),
-                              )}  hover:bg-color-main min-w-[60px] hover:text-[#fff] h-[36px]  flex items-center justify-center gap-[6px] p-[8px_6px] w-max border-[1px] rounded-[999px]`}
-                              onClick={() => {
-                                    onSetFilterVote(1)
-                              }}
-                        >
-                              {storege.includes(1) && <Check size={18} />}
-                               <div className='text-yellow-500 flex items-center font-semibold gap-[3px]'>
-                                    <span className='text-[14px]'>{1}</span>
-                                    <Rate defaultValue={1} count={1} className='text-[14px] ' />
-                              </div>
-                        </button>
+
+                        {/* QUAN TRỌNG:
+          BoxResponsiveOverflow chỉ được sử dụng phần width còn lại
+      */}
+                        <div className='min-w-0 flex-1 overflow-hidden'>
+                              <BoxResponsiveOverflow
+                                    itemContainerClassName='justify-normal'
+                                    items={categories}
+                                    gap={14}
+                                    className='w-full'
+                                    itemClassName='shrink-0'
+                                    getKey={(category) => category.id}
+                                    renderItem={(category) => (
+                                          <button
+                                                className={`${styleEffect.onActive(
+                                                      storege.includes(category.id),
+                                                )} flex h-[36px] w-[60px] min-w-[60px] items-center justify-center gap-[4px] rounded-full border-[1px] p-[6px] hover:bg-color-main hover:text-white`}
+                                                onClick={() => {
+                                                      onSetFilterVote(category.id)
+                                                }}
+                                          >
+                                                {storege.includes(category.id) && <Check size={16} />}
+
+                                                <div className='flex items-center gap-[3px] font-semibold text-yellow-500'>
+                                                      <span className='text-[14px]'>{category.id}</span>
+
+                                                      <Rate defaultValue={1} count={1} disabled className='text-[14px] text-yellow-500' />
+                                                </div>
+                                          </button>
+                                    )}
+                                    renderMore={({ open, hiddenCount }: any) => (
+                                          <button
+                                                type='button'
+                                                onClick={open}
+                                                className='flex h-[36px] w-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-full border border-dashed border-blue-400 bg-blue-50 text-blue-500 dark:border-blue-500/50 dark:bg-blue-500/10'
+                                                aria-label={`Xem thêm ${hiddenCount} bộ lọc`}
+                                          >
+                                                <MoreHorizontal size={19} />
+                                          </button>
+                                    )}
+                                    renderExpanded={({ items, close }: any) => (
+                                          <BoxResponsiveFlowClose
+                                                open
+                                                onClose={close}
+                                                title={
+                                                      <div>
+                                                            <h3 className='text-base font-bold dark:text-white'>Lọc theo đánh giá</h3>
+
+                                                            <p className='mt-0.5 text-xs text-slate-500'>Chọn mức sao muốn hiển thị</p>
+                                                      </div>
+                                                }
+                                          >
+                                                <div className='grid grid-cols-3 gap-x-4 gap-y-4'>
+                                                      {items.map((category: (typeof categories)[0]) => (
+                                                            <button
+                                                                  key={category.id}
+                                                                  className={`${styleEffect.onActive(
+                                                                        storege.includes(category.id),
+                                                                  )} flex h-[36px] items-center justify-center gap-[6px] rounded-full border-[1px] p-[8px_6px] hover:bg-color-main hover:text-white`}
+                                                                  onClick={() => {
+                                                                        onSetFilterVote(category.id)
+                                                                  }}
+                                                            >
+                                                                  {storege.includes(category.id) && <Check size={18} />}
+
+                                                                  <div className='flex items-center gap-[3px] font-semibold text-yellow-500'>
+                                                                        <span className='text-[14px]'>{category.id}</span>
+
+                                                                        <Rate
+                                                                              defaultValue={1}
+                                                                              count={1}
+                                                                              disabled
+                                                                              className='text-[14px] text-yellow-500'
+                                                                        />
+                                                                  </div>
+                                                            </button>
+                                                      ))}
+                                                </div>
+                                          </BoxResponsiveFlowClose>
+                                    )}
+                              />
+                        </div>
                   </div>
             </div>
       )

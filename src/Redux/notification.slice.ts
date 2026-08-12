@@ -34,7 +34,10 @@ const initialState: NotificationState = {
             cache: [],
             page: 1
       },
-
+      COMMON: {
+            cache: [],
+            page: 1
+      },
 }
 
 const notificationSlice = createSlice({

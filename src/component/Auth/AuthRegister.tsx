@@ -96,7 +96,7 @@ const AuthRegister = (props: TProps) => {
                               Bắt đầu ngay
                         </span>
 
-                        <h1 className='mt-4 text-3xl font-semibold tracking-[-0.03em] text-slate-900 dark:text-white'>
+                        <h1 className='mt-4 text-3xl font-semibold tracking-[-0.03em] text-slate-900 '>
                               Tạo tài khoản
                         </h1>
 

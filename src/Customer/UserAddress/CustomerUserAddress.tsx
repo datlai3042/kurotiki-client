@@ -1,4 +1,4 @@
-import { MapPinOff, Plus, X } from 'lucide-react'
+import { ChevronRight, MapPinOff, Plus, X } from 'lucide-react'
 import React, { useState } from 'react'
 import BoxButton from '../../component/BoxUi/BoxButton'
 import FormAddress from '../../forms/FormAddress'
@@ -14,13 +14,46 @@ const CustomerUserAddress = () => {
       const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
 
       return (
-            <div className='w-full  py-[8px] flex flex-col gap-[20px] bg-color-section-theme'>
+            <div className='w-full   flex flex-col gap-[20px] '>
                   <button
-                        className=' py-[8px] mx-[10px] bg-color-main text-[#fff] opacity-90 hover:opacity-100 flex items-center justify-center gap-[8px] border-[1px] border-dotted border-[var(--border-color-input)]'
+                        type='button'
                         onClick={() => setOpenFormAddress((prev) => !prev)}
+                        className='
+            group
+            flex
+            w-full
+            items-center
+            justify-between
+            rounded-xl
+            border
+            border-dashed
+            border-blue-500/30
+            bg-blue-500/[0.04]
+            px-4
+            py-3
+            text-left
+            transition
+            hover:border-blue-500/60
+            hover:bg-blue-500/[0.08]
+      '
                   >
-                        <Plus />
-                        <span>{`${openFormAddress ? 'Ẩn Form' : 'Thêm địa chỉ'}`}</span>
+                        <div className='flex items-center gap-3'>
+                              <div className='flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500 transition group-hover:bg-blue-500 group-hover:text-white'>
+                                    <Plus size={18} />
+                              </div>
+
+                              <div>
+                                    <p className='text-sm font-semibold text-text-theme'>
+                                          {openFormAddress ? 'Ẩn biểu mẫu địa chỉ' : 'Thêm địa chỉ mới'}
+                                    </p>
+
+                                    <p className='mt-0.5 text-[11px] text-slate-500'>
+                                          {openFormAddress ? 'Thu gọn phần nhập thông tin' : 'Thêm địa chỉ nhận hàng mới vào tài khoản'}
+                                    </p>
+                              </div>
+                        </div>
+
+                        <ChevronRight size={18} className={`text-slate-400 transition ${openFormAddress ? 'rotate-90' : ''}`} />
                   </button>
                   {openFormAddress && (
                         <Portal>
@@ -32,20 +65,7 @@ const CustomerUserAddress = () => {
                         </Portal>
                   )}
 
-                  {user.user_address.length === 0 && (
-                        <div className='w-full flex flex-col gap-[24px] justify-center items-center py-[50px] bg-color-section-theme'>
-                              <header className='w-full h-max flex justify-center gap-[16px] '>
-                                    <MapPinOff />
-                                    <span>Bạn chưa thêm bất kì địa chỉ nào, nhấn vào "Thêm địa chỉ" để cập nhập nhé</span>
-                              </header>
-                              <div className='h-[40px]'>
-                                    <BoxButton
-                                          content={`${openFormAddress ? 'Ẩn Form' : 'Thêm địa chỉ'}`}
-                                          onClick={() => setOpenFormAddress((prev) => !prev)}
-                                    />
-                              </div>
-                        </div>
-                  )}
+                 
                   {user.user_address.length > 0 &&
                         user.user_address.map((address, index) => {
                               return <AddressItem key={address._id} address={address} index={index} />

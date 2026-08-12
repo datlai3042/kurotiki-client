@@ -75,7 +75,7 @@ module.exports = {
 				},
 
 				showSideBar: {
-					"0%": { transform: "translateX(-300px)" },
+					"0%": { transform: "translateX(100%)" },
 					"100%": { transform: "translateX(0px)" },
 				},
 				hideSideBar: {

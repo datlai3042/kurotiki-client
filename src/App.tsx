@@ -28,6 +28,7 @@ function App() {
       useEffect(() => {}, [boxLogin])
       const dispatch = useDispatch()
       const router = useLocation()
+      
 
       const user = useSelector((state: RootState) => state.authentication.user)
       const cartRouter = router.pathname.startsWith('/cart')

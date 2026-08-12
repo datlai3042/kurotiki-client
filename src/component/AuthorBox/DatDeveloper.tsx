@@ -12,7 +12,7 @@ export default function DatDeveloper() {
       }
 
       return (
-            <div className='w-full flex items-center justify-center p-6 bg-[#0d1117] rounded-md'>
+            <div className='w-full h-full flex  justify-center  bg-[#0d1117] rounded-md'>
                   <div
                         className='relative w-full max-w-md rounded-xl border border-[#21262d] bg-[#0d1117] overflow-hidden shadow-[0_0_0_1px_rgba(247,223,30,0.05)]'
                         style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace" }}

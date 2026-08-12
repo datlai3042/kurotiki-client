@@ -14,22 +14,15 @@ const HeaderSeacrhInput = () => {
       const divRef = useRef<HTMLDivElement>(null)
       const inputRef = useRef<HTMLInputElement | null>(null)
       const timer = useRef<NodeJS.Timeout>()
-
       const location = useLocation()
-
       const dispatch = useDispatch()
       const showOverload = useSelector((state: RootState) => state.uiSlice.showOverload)
-
-      const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-            const { value } = event.target
-            setText(value)
-      }
 
       const onReset = useCallback(() => {
             setText('')
             setShowSearch(false)
             dispatch(onShowOverload({ overload: false }))
-      }, [])
+      }, [dispatch])
 
       useEffect(() => {
             if (location.pathname !== '/') {
@@ -39,74 +32,65 @@ const HeaderSeacrhInput = () => {
             }
       }, [location, dispatch])
 
-      const controllShowResultSearch = useCallback((e: MouseEvent) => {
-            if (divRef.current && !divRef.current.contains(e.target as Node)) {
-                  setShowSearch(false)
-                  dispatch(onShowOverload({ overload: false }))
-            }
-      }, [])
+      const controllShowResultSearch = useCallback(
+            (e: MouseEvent) => {
+                  if (divRef.current && !divRef.current.contains(e.target as Node)) {
+                        setShowSearch(false)
+                        dispatch(onShowOverload({ overload: false }))
+                  }
+            },
+            [dispatch],
+      )
 
       useEffect(() => {
-            if (!showSearch) {
-                  document.removeEventListener('click', controllShowResultSearch)
-            }
-            if (showSearch) {
-                  document.addEventListener('click', controllShowResultSearch)
-            }
-            return () => {
-                  document.removeEventListener('click', controllShowResultSearch)
-            }
+            if (showSearch) document.addEventListener('click', controllShowResultSearch)
+            return () => document.removeEventListener('click', controllShowResultSearch)
       }, [controllShowResultSearch, showSearch])
 
       useEffect(() => {
-            timer.current = setTimeout(() => {
-                  setTextDelay(text)
-            }, 1000)
-
+            timer.current = setTimeout(() => setTextDelay(text), 1000)
             return () => clearTimeout(timer.current)
       }, [text])
 
       useEffect(() => {
-            if (showOverload) {
-                  document.body.style.overflow = 'hidden'
-            } else {
-                  document.body.style.overflow = 'unset'
-            }
+            document.body.style.overflow = showOverload ? 'hidden' : 'unset'
       }, [showOverload])
+
+      const openSearch = () => {
+            setShowSearch(true)
+            dispatch(onShowOverload({ overload: true }))
+      }
 
       return (
             <div
                   ref={divRef}
-                  className={`relative flex h-[44px] min-h-[44px] w-full items-center rounded-xl border bg-color-section-theme text-text-theme transition-all duration-200 ${
+                  className={`relative flex h-[40px] w-full items-center overflow-visible rounded-lg border bg-white transition-all duration-200 dark:bg-color-section-theme ${
                         showSearch
-                              ? 'border-blue-500 shadow-[0_0_0_3px_rgba(59,130,246,0.10)]'
-                              : 'border-[var(--border-color-input)] hover:border-slate-400'
+                              ? 'border-[#1677ff] shadow-[0_0_0_2px_rgba(22,119,255,0.08)]'
+                              : 'border-[#d7dde8] hover:border-[#9ebcf7] dark:border-[var(--border-color-input)]'
                   }`}
             >
-                  <form className='flex h-full w-full items-center' spellCheck={false}>
-                        <div className='flex h-full w-11 shrink-0 items-center justify-center text-slate-500'>
-                              <Search size={20} strokeWidth={1.8} />
+                  <form
+                        className='flex h-full w-full items-center'
+                        spellCheck={false}
+                        onSubmit={(event) => {
+                              event.preventDefault()
+                              openSearch()
+                        }}
+                  >
+                        <div className='flex h-full w-11 shrink-0 items-center justify-center text-[#6b7a90]'>
+                              <Search size={18} strokeWidth={1.8} />
                         </div>
 
-                        <div
-                              className='relative h-full min-w-0 flex-1'
-                              onClick={() => setShowSearch((prev) => !prev)}
-                        >
+                        <div className='relative h-full min-w-0 flex-1'>
                               <input
                                     ref={inputRef}
                                     type='text'
                                     value={text}
-                                    className='h-full w-full border-none bg-transparent pr-10 text-sm text-text-theme outline-none placeholder:text-slate-400'
-                                    placeholder='Bạn tìm gì hôm nay'
-                                    onChange={onChangeSearch}
-                                    onClick={() => {
-                                          if (showSearch) {
-                                                dispatch(onShowOverload({ overload: false }))
-                                                return
-                                          }
-                                          dispatch(onShowOverload({ overload: true }))
-                                    }}
-                                    onBlur={() => {}}
+                                    className='h-full w-full border-none bg-transparent pr-9 text-[13px] text-[#25324b] outline-none placeholder:text-[#8d9aaf] dark:text-text-theme'
+                                    placeholder='Bạn tìm gì hôm nay?'
+                                    onChange={(event) => setText(event.target.value)}
+                                    onFocus={openSearch}
                               />
 
                               {text && (
@@ -117,18 +101,24 @@ const HeaderSeacrhInput = () => {
                                                 setText('')
                                                 inputRef.current?.focus()
                                           }}
-                                          className='absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200'
+                                          className='absolute right-1 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100'
                                           aria-label='Xóa tìm kiếm'
                                     >
-                                          <X size={16} />
+                                          <X size={15} />
                                     </button>
                               )}
                         </div>
+
+                        <button
+                              type='submit'
+                              className='mr-[3px] flex h-[34px] shrink-0 items-center gap-1.5 rounded-md bg-[#0b62db] px-3 sm:px-4 text-[12px] font-semibold text-white transition hover:bg-[#0757c8]'
+                        >
+                              <Search size={14} strokeWidth={2} />
+                              <span className='hidden md:inline'>Tìm kiếm</span>
+                        </button>
                   </form>
 
-                  {showSearch && (
-                        <HeaderResultSearch text={textDelay} onReset={onReset} />
-                  )}
+                  {showSearch && <HeaderResultSearch text={textDelay} onReset={onReset} />}
             </div>
       )
 }

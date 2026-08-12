@@ -68,7 +68,6 @@ const AuthLogin = (props: TProps) => {
             onSuccess: (res) => {
                   dispatch(doCloseBoxLogin())
                   dispatch(fetchUser({ user: res.data.metadata.user }))
-                  queryClient.invalidateQueries()
             },
             onError: async (error: unknown) => {
                   if (checkAxiosError<TErrorAxios>(error)) {
@@ -129,7 +128,7 @@ const AuthLogin = (props: TProps) => {
                               Chào mừng trở lại
                         </span>
 
-                        <h1 className='mt-4 text-3xl font-semibold tracking-[-0.03em] text-slate-900 dark:text-white'>
+                        <h1 className='mt-4 text-3xl font-semibold tracking-[-0.03em] text-slate-900'>
                               Đăng nhập tài khoản
                         </h1>
 
@@ -139,7 +138,7 @@ const AuthLogin = (props: TProps) => {
                   </div>
 
                   <form
-                        className='flex w-full flex-col gap-5'
+                        className='flex w-full flex-col gap-5 '
                         noValidate
                         onSubmit={handleSubmit(onSubmit)}
                   >

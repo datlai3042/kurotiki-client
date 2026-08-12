@@ -1,108 +1,105 @@
-import React, { memo } from 'react'
-
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { MapPin, Menu } from 'lucide-react'
 import HeaderActions from './Components/HeaderActions'
-import HeaderTagsLocation from './Components/HeaderTagsLocation'
 import HeaderLogoToggle from './Components/HeaderLogoToggle'
 import HeaderSeacrhInput from './Components/HeaderSearch'
-import { Link } from 'react-router-dom'
+import { getAddressDefault, renderStringAddressDetailV2 } from '../../utils/address.util'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { UserResponse } from '../../types/user.type'
-import { getAddressDefault, renderStringAddressDetailV2 } from '../../utils/address.util'
 import { toDoHideSideBar, toDoShowSideBar } from '../../Redux/uiSlice'
+import { ui } from '../../Customer/Sell/RegisterProductForm/ProductFormUpload'
 
 function Header() {
-      const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
       useEffect(() => {
             window.scrollTo(0, 0)
       }, [])
-
+      const user = useSelector((state: RootState) => state.authentication.user) as UserResponse
       const address_default = (user?.user_address && user?.user_address.filter((address) => address.address_default === true)) || ''
+      const location =
+            (getAddressDefault(user?.user_address) && `${address_default ? renderStringAddressDetailV2(address_default[0]) : ''}`) || ''
       const uiSlice = useSelector((state: RootState) => state.uiSlice.showSideBar)
       const dispatch = useDispatch()
       const onShowSideBarAction = () => {
-            // dispatch(onShowSideBar({ showSideBar: showSideBar }))
-
             return uiSlice ? dispatch(toDoHideSideBar()) : dispatch(toDoShowSideBar())
       }
-
       return (
-            <>
-                  <div
-                        className={`fixed text-text-theme  top-0 left-0 w-full z-[100] bg-color-section-theme border-b-[1px] border-solid border-[var(--border-color-input)]`}
-                  >
-                        <div className='h-[65px] md:h-[80px] py-2 px-[10px] gap-[24px]  flex items-center  mx-auto  xl:max-w-[1360px]'>
-                              <div className='max-w-[200px] flex items-center'>
-                                    <HeaderLogoToggle />
-                              </div>
-                              <div className='ml-[215px] grow flex-1 xl:flex-auto flex justify-center h-full gap-[12px]'>
-                                    <div className='flex w-[35vw] flex-col justify-center '>
-                                          <HeaderSeacrhInput />
-                                          {/* <HeaderTagsLocation /> */}
-                                    </div>
-                                    <div className='whitespace-pre flex lg:flex-col justify-center  ml-auto h-full'>
-                                          <HeaderActions />
-                                          {/**
-                                       *     <div
-                                                id=''
-                                                className='text-[11px] hidden xl:flex items-center   flex-grow-1  justify-space  '
-                                                title={`${address_default ? renderStringAddressDetailV2(address_default[0]) : ' ...'}`}
-                                          >
-                                                <div className=' flex items-center gap-[.2rem]'>
-                                                      <img
-                                                            src='https://salt.tikicdn.com/ts/upload/88/5c/9d/f5ee506836792eb7775e527ef8350a44.png'
-                                                            alt='Location'
-                                                            width={20}
-                                                            height={2}
-                                                            className='mr-[4px]'
-                                                      />
-                                                      <span>[THIẾT LẬP ĐỊA CHỈ GIAO HÀNG]</span>
-                                                </div>
-
-                                                <div className='mx-[6px] text-[11px] '>
-                                                      {getAddressDefault(user?.user_address) ? (
-                                                            <p className='flex gap-[8px]'>
-                                                                  <span>Giao đến</span>
-                                                                  <span className='underline  font-bold'>
-                                                                        {address_default
-                                                                              ? renderStringAddressDetailV2(address_default[0])
-                                                                              : ''}
-                                                                  </span>
-                                                            </p>
-                                                      ) : (
-                                                            <p className='flex gap-[4px] '>
-                                                                  <Link className='underline' to={'/customer/account/address'}>
-                                                                        Thiết lập
-                                                                  </Link>
-                                                            </p>
-                                                      )}
-                                                </div>
-                                          </div>
-                                       * 
-                                       */}
-                                    </div>
-
-                                    {/* <div className='hidden md:flex cursor-pointer  items-center' onClick={onShowSideBarAction}>
-                                          <svg
-                                                xmlns='http://www.w3.org/2000/svg'
-                                                fill='none'
-                                                viewBox='0 0 24 24'
-                                                strokeWidth={1.5}
-                                                stroke='currentColor'
-                                                className='w-8 h-8 lg:w-9 lg:h-9'
-                                          >
-                                                <path
-                                                      strokeLinecap='round'
-                                                      strokeLinejoin='round'
-                                                      d='M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5'
-                                                />
-                                          </svg>
-                                    </div> */}
-                              </div>
+            <header className='fixed left-0 top-0 z-[100] w-full border-b border-[#edf0f5] bg-white text-[#1d2b45] shadow-[0_1px_3px_rgba(15,23,42,0.03)] dark:border-[var(--border-color-input)] dark:bg-color-section-theme dark:text-text-theme'>
+                  {/* Desktop utility bar */}
+                  <div className='hidden h-[24px] bg-[#0b62db] text-white lg:block'>
+                        <div className='mx-auto flex h-full max-w-[1480px] items-center justify-end gap-5 px-6 text-[10px] font-medium'>
+                              <span>TikiNOW</span>
+                              <span>Tiki Trading</span>
+                              <span>Chăm sóc khách hàng</span>
                         </div>
                   </div>
-            </>
+
+                  {/* Main row: mobile = logo/actions, tablet+ = full row */}
+                  <div className='mx-auto max-w-[1480px] px-3 sm:px-4 lg:px-0'>
+                        <div className='flex h-[58px] items-center gap-2 sm:h-[64px] md:gap-4 lg:gap-6'>
+                              <div className='flex shrink-0 items-center md:w-[120px] lg:w-[145px]'>
+                                    <HeaderLogoToggle />
+                              </div>
+                              {user && location.length >0 && (
+                                    <div className='hidden min-w-0 items-center gap-2 text-[11px] text-[#66748a] lg:flex lg:w-[180px] lg:shrink-0'>
+                                          <MapPin size={16} strokeWidth={1.7} className='shrink-0 text-[#557399]' />
+                                          <div title={location} className='min-w-0 leading-[14px] cursor-pointer'>
+                                                <div>Giao đến:</div>
+                                                <button className='max-w-[150px] truncate font-medium text-[#25324b] dark:text-text-theme'>
+                                                      {location}
+                                                </button>
+                                          </div>
+                                    </div>
+                              )}
+
+                              <div className='hidden min-w-0 flex-1 sm:block'>
+                              
+                                    <HeaderSeacrhInput />
+                              </div>
+
+                              <div className='ml-auto shrink-0'>
+                                    <HeaderActions />
+                              </div>
+                        </div>
+
+                        {/* Mobile search gets its own full-width row */}
+                        <div className='pb-3 sm:hidden'>
+                              <HeaderSeacrhInput />
+                        </div>
+                  </div>
+
+                  {/* Only desktop gets the large navigation row */}
+                  <nav className='hidden h-[46px] border-t border-[#f3f5f8] lg:block dark:border-[var(--border-color-input)]'>
+                        <div className='mx-auto flex h-full max-w-[1480px] items-center gap-8 overflow-hidden px-6 lg:px-0 text-[11px] font-semibold'>
+                              <button
+                                    onClick={onShowSideBarAction}
+                                    className='flex h-[34px] min-w-[190px] shrink-0 items-center gap-2 rounded-lg bg-[#1677ff] px-4 text-white shadow-[0_3px_8px_rgba(22,119,255,0.18)]'
+                              >
+                                    <Menu size={17} strokeWidth={2} />
+                                    <span>Danh mục sản phẩm</span>
+                              </button>
+                              <Link to='/' className='shrink-0 text-[#1677ff]'>
+                                    Trang chủ
+                              </Link>
+                              <a href='#flash-sale' className='shrink-0 transition hover:text-[#1677ff]'>
+                                    Flash Sale
+                              </a>
+                              <a href='#tiki-card' className='shrink-0 transition hover:text-[#1677ff]'>
+                                    Tiki Card
+                              </a>
+                              <a href='#ma-giam-gia' className='shrink-0 transition hover:text-[#1677ff]'>
+                                    Mã giảm giá
+                              </a>
+                              <a href='#doi-tac' className='shrink-0 transition hover:text-[#1677ff]'>
+                                    Ưu đãi đối tác
+                              </a>
+                              <a href='#ban-hang' className='shrink-0 transition hover:text-[#1677ff]'>
+                                    Bán hàng cùng Tiki
+                              </a>
+                        </div>
+                  </nav>
+            </header>
       )
 }
 

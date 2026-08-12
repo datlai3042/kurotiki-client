@@ -31,7 +31,7 @@ const OrderComment = () => {
       }
 
       return (
-            <div className='relative min-h-[600px] w-full rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme text-text-theme shadow-[0_8px_30px_rgba(15,23,42,0.05)]'>
+            <div className='relative min-h-[600px] w-full rounded-2xl  bg-color-section-theme text-text-theme '>
                   {/* Header */}
                   <div className='flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-color-input)] px-5 py-4'>
                         <div className='flex items-center gap-3'>

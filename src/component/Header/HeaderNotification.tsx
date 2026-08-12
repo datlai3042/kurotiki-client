@@ -1,23 +1,22 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { Bell } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
-import NotificationService, { NotificationType } from '../../apis/notification.service'
-import { convertDateToStringFull } from '../../utils/date.utils'
 import { useLocation, useMatch } from 'react-router-dom'
-import NotificationProduct from './Components/NotificationProduct'
 import NotificationShop from './NotificationShop'
-import NotificationSystem from './Components/NotificationSystem'
 import { useDispatch, useSelector } from 'react-redux'
-import { onAddPageNotification, onSocketAddNotification } from '../../Redux/notification.slice'
-import { NotificationAttribute } from '../../types/notification.type'
-import { RootState } from '../../store'
 import { useInViewport } from '@mantine/hooks'
-import NotificationSkeleton from '../../Customer/CustomerNotification/NotificationSkeleton'
 import { v4 } from 'uuid'
 import { Tabs } from 'antd'
-import NotificationUser from './Components/NotificationUser'
+import NotificationService, { NotificationType } from '../../apis/notification.service'
+import NotificationSkeleton from '../../Customer/CustomerNotification/NotificationSkeleton'
+import { onAddPageNotification } from '../../Redux/notification.slice'
+import { RootState } from '../../store'
+import { LIMIT } from '../Comment/Comment'
 import NotificationEmpty from './Components/NotificationEmpty'
-const LIMIT = 20
+import NotificationProduct from './Components/NotificationProduct'
+import NotificationSystem from './Components/NotificationSystem'
+import NotificationUser from './Components/NotificationUser'
+
 
 const items: { key: NotificationType; value: NotificationType; label: string }[] = [
       { key: 'USER', value: 'USER', label: 'Cá nhân' },
@@ -36,7 +35,7 @@ const HeaderNotification = () => {
       const notificationCache = useSelector((state: RootState) => state.notifcation[tab])
       const { ref, inViewport } = useInViewport()
       const countRef = useRef<number | null>(null)
-      const {pathname} = useLocation()
+      const { pathname } = useLocation()
       // const getMyNotification = useQuery({
       //       queryKey: ['/v1/api/notification/get-my-notification'],
       //       queryFn: () => NotificationService.getMyNotification({ page: 1, limit: 20, type: 'SHOP' }),
@@ -61,7 +60,7 @@ const HeaderNotification = () => {
       }
 
       useEffect(() => {
-            if(showNotification) {
+            if (showNotification) {
                   setShowNotification(false)
             }
       }, [pathname])
@@ -120,12 +119,55 @@ const HeaderNotification = () => {
 
       return (
             <div ref={boxNotificationRef} className='relative'>
-                  <div className='relative w-max h-max cursor-pointer'>
-                        <Bell color='blue' size={20} onClick={onControllShowNotification} />
-                        <div className='absolute top-[-14px] right-[-4px] w-[20px] h-[20px] text-[10px] bg-red-500 text-white rounded-full flex items-center justify-center'>
-                              {countRef.current ? (countRef.current >= 99 ? '99+' : countRef.current) : 0}
-                        </div>
-                  </div>
+                  <button
+                        type='button'
+                        onClick={onControllShowNotification}
+                        className='
+            relative flex h-10 w-10
+            items-center justify-center
+            rounded-xl
+            transition-colors
+            
+            text-[#19a3ff]
+            dark:text-slate-300
+            dark:hover:bg-blue-500/10
+            dark:hover:text-blue-400
+      '
+                        aria-label='Thông báo'
+                  >
+                        <Bell size={21} strokeWidth={1.8} stroke='rgb(25, 163, 255)' className='' />
+
+                        {!!countRef.current && (
+                              <span
+                                    className='
+                        absolute
+                        -right-1
+                        top-0
+
+                        flex
+                        h-[16px]
+                        min-w-[16px]
+                        items-center
+                        justify-center
+
+                        rounded-full
+                        bg-[#ff424e]
+                        px-[4px]
+
+                        text-[9px]
+                        font-semibold
+                        leading-none
+                        text-white
+
+                        ring-2
+                        ring-white
+                        dark:ring-color-section-theme
+                  '
+                              >
+                                    {countRef.current > 99 ? '99+' : countRef.current}
+                              </span>
+                        )}
+                  </button>
                   {showNotification && (
                         <div
                               onClick={() => setShowNotification(false)}

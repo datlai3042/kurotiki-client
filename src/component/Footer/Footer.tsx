@@ -23,6 +23,7 @@ import zalo from './assets/img/others/zalo.png'
 import Qr from './assets/img/others/qr.png'
 import ios from './assets/img/others/IOS.png'
 import androi from './assets/img/others/androi.png'
+import DatDeveloper from '../AuthorBox/DatDeveloper'
 
 const mock = [
       {
@@ -82,7 +83,7 @@ const Footer = ({ ...props }: IProps) => {
 
       return (
             <div
-            style={{lineHeight: 1.6}}
+                  style={{ lineHeight: 1.6 }}
                   className=' h-auto  border-1 border-[var(--border-color-input)] bg-color-section-theme text-text-theme rounded-lg'
                   {...props}
             >
@@ -119,12 +120,21 @@ const Footer = ({ ...props }: IProps) => {
                                     </div>
                                     <h3 className='footer-title  !text-text-theme'>{mock[2].subTitle}</h3>
                                     <div className='flex gap-1 items-center'>
-                                          <img src={boCT_1} alt='Bộ công thương' className='w-[20%] h-[45px]' />
+                                          {/* <img src={boCT_1} alt='Bộ công thương' className='w-[20%] h-[45px]' /> */}
                                           <img src={boCT_2} alt='Bộ công thương' className='w-[50%] h-[55px]' />
-                                          <img src={boCT_3} alt='Bộ công thương' className='w-[20%] h-[45px]' />
+                                          {/* <img src={boCT_3} alt='Bộ công thương' className='w-[20%] h-[45px]' /> */}
+                                    </div>
+                                    <div className='basis-1/5 flex flex-col gap-y-2'>
+                                         
+                                          <div className='h-[45px]'>
+                                                <h3 className='footer-title  !text-text-theme'>{mock[3].subTitle}</h3>
+                                          </div>
+                                          <div className='w-[85px]'>
+                                                <img src={tikiNow} className='w-full rounded-[4px]' alt='' />
+                                          </div>
                                     </div>
                               </div>
-                              <div className='basis-1/5 flex flex-col gap-y-2'>
+                              {/* <div className='basis-1/5 flex flex-col gap-y-2'>
                                     <h3 className='footer-title  !text-text-theme'>{mock[3].title}</h3>
                                     <div className='basis-2/6 grid grid-cols-4 grid-row-[30px_30px_30px] gap-[16px] relative'>
                                           {mock[3].data.map((item) => (
@@ -159,6 +169,9 @@ const Footer = ({ ...props }: IProps) => {
                                                 <img src={androi} alt='' className='basis-1/2' />
                                           </div>
                                     </div>
+                              </div> */}
+                              <div className='flex-1'>
+                                    <DatDeveloper />
                               </div>
                         </div>
                         <hr />

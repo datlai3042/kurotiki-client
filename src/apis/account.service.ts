@@ -17,7 +17,7 @@ class AccountService {
       }
 
       static async updateInfo(data: any) {
-            return axiosCustom.post('/v1/api/account/update-info', data)
+            return axiosCustom.post<TResponseApi<{ user: UserResponse }>>('/v1/api/account/update-info', data)
       }
 
       static async updateAvatar(data: any) {

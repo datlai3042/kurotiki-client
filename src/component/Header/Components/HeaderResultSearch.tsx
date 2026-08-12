@@ -60,9 +60,9 @@ const HeaderResultSearch = (props: Props) => {
 
       return (
             <>
-                  <div className='absolute left-0 right-0 top-[calc(100%+10px)] z-[9999] w-[80vw] overflow-hidden rounded-2xl border border-slate-200/70 bg-color-section-theme text-text-theme shadow-[0_24px_70px_rgba(15,23,42,0.16)] md:w-full dark:border-slate-700/70'>
+                  <div className='absolute left-0 right-0 top-[calc(100%+10px)] z-[500] w-[80vw] overflow-hidden rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme text-text-theme shadow-[0_24px_70px_rgba(15,23,42,0.16)] md:w-full '>
                         {/* Search suggestions */}
-                        <div className='border-b border-[var(--border-color-input)] px-3 py-3 border-[var(--border-color-input)]'>
+                        <div className='border-b border-[var(--border-color-input)] px-3 py-3 '>
                               {!text && getProductTopSearch.isSuccess && getProductTopSearch.data.data.metadata.products.length === 0 && (
                                     <div className='px-3 py-4 text-sm text-slate-500'>
                                           Hãy nhập từ khóa để tìm kiếm sản phẩm hoặc cửa hàng
@@ -182,7 +182,7 @@ const HeaderResultSearch = (props: Props) => {
                                                       />
                                                 </div>
 
-                                                <span className='line-clamp-2 text-xs leading-5  transition group-hover:text-blue-600  dark:group-hover:text-white  '>
+                                                <span className='line-clamp-2 text-xs leading-5  transition text-text-theme'>
                                                       {category.label}
                                                 </span>
                                           </Link>

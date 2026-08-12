@@ -54,37 +54,50 @@ const ProductIntro = (props: TProps) => {
 
       return (
             <div className='flex flex-col min-h-full h-max gap-[18px] text-[13px]'>
-                  <section className='bg-color-section-theme w-full min-h-[160px] h-auto p-[18px]  rounded-lg'>
-                        <div className='flex flex-col gap-[4px]'>
+                  <section className='bg-color-section-theme w-full min-h-[160px] h-auto p-[18px] rounded-xl border border-[var(--border-color-input)]'>
+                        <div className='flex flex-col gap-[10px]'>
                               <header>
-                                    <div className='flex gap-[12px] flex-col xl:flex-row'>
+                                    <div className='flex flex-col gap-[8px] xl:flex-row xl:items-center xl:gap-[12px]'>
                                           <ProductLabel content='Chính hãng' />
+
                                           {product.product_type === 'Book' && (
-                                                <p>
+                                                <p className='text-[14px]'>
                                                       <span>Tác giả: </span>
                                                       <span className='text-blue-700'>{(product?.attribute as IProductBook).author}</span>
                                                 </p>
                                           )}
                                     </div>
                               </header>
-                              <p className='text-[24px] font-medium'>{product?.product_name}</p>
-                              <div className=' min-h-[16px] h-max  flex flex-row    items-center gap-[8px] text-[16px] my-[6px]'>
+
+                              <p className='text-[24px] font-medium leading-[32px]'>{product?.product_name}</p>
+
+                              <div className='my-[2px] flex min-h-[24px] h-max flex-row flex-wrap items-center gap-[8px] text-[16px]'>
                                     {avg > 0 && <span className='font-semibold'>{avg.toFixed(1)}</span>}
+
                                     {/* {diffrenceBetweenStar(votes)?.map((opacity) => <Star opacity={opacity} />)} */}
+
                                     <Rate disabled allowHalf value={avg || product.product_votes} className='text-[14px]' />
+
                                     <p className='opacity-80'>({totalComment})</p>
-                                    {product.product_is_bought > 0 && <p className='w-[1px] h-[12px] mt-[5px] bg-gray-400'></p>}
-                                    <p className='text-[14px] opacity-80 leading-3 mt-[2px]'>
+
+                                    {product.product_is_bought > 0 && <p className='w-[1px] h-[12px] bg-gray-400'></p>}
+
+                                    <p className='text-[14px] opacity-80 leading-none'>
                                           {product.product_is_bought > 1000 ? 'Đã bán 1000+' : `Đã bán ${product.product_is_bought}` || ''}
                                     </p>
                               </div>
 
-                              <p className='text-[24px]  font-semibold'>
-                                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
-                                          product?.product_price as number,
-                                    )}
-                              </p>
-                              <p className=' text-[14px] opacity-80'>Sản phẩm trong kho: {product.product_available || 0}</p>
+                              <div className='flex flex-col gap-[5px]'>
+                                    <p className='text-[26px] font-semibold'>
+                                          {new Intl.NumberFormat('vi-VN', {
+                                                style: 'currency',
+                                                currency: 'VND',
+                                          }).format(product?.product_price as number)}
+                                    </p>
+
+                                    <p className='text-[14px] opacity-80'>Sản phẩm trong kho: {product.product_available || 0}</p>
+                              </div>
+
                               {!product.product_state && (
                                     <span className='uppercase font-bold text-[20px] my-[6px] text-red-700'>Sản phẩm ngừng kinh doanh</span>
                               )}
@@ -93,14 +106,16 @@ const ProductIntro = (props: TProps) => {
 
                   <ProductPayMoblie product={product} />
 
-                  <section className='bg-color-section-theme w-full min-h-[160px] h-auto p-[18px] rounded-lg'>
-                        <div className='flex flex-col gap-[12px]'>
-                              <p className='[word-spacing:1px] text-[16px]  font-semibold word'>Thông tin vận chuyển</p>
-                              <div className=' min-h-[26px] h-max w-full flex flex-wrap flex-row justify-between'>
-                                    <div className='text-[14px]'>
+                  <section className='bg-color-section-theme w-full min-h-[160px] h-auto p-[18px] rounded-xl border border-[var(--border-color-input)]'>
+                        <div className='flex flex-col gap-[16px]'>
+                              <p className='[word-spacing:1px] text-[16px] font-semibold word'>Thông tin vận chuyển</p>
+
+                              <div className='min-h-[32px] h-max w-full flex flex-row flex-wrap items-start justify-between gap-[10px] pb-[14px] border-b border-[var(--border-color-input)]'>
+                                    <div className='min-w-0 flex-1 text-[14px]'>
                                           {cartCurrent.cart_current_address ? (
-                                                <p className='flex gap-[8px]'>
+                                                <p className='flex flex-wrap gap-x-[8px] gap-y-[4px]'>
                                                       <span>Giao đến</span>
+
                                                       <span className='underline text-color-main font-bold'>
                                                             {cartCurrent.cart_current_address}
                                                       </span>
@@ -109,26 +124,31 @@ const ProductIntro = (props: TProps) => {
                                                 <span>Bạn chưa chọn ví trí giao hàng</span>
                                           )}
                                     </div>
-                                    <button className='text-left text-blue-600' onClick={handleOpenModal}>
+
+                                    <button className='shrink-0 text-left text-blue-600 px-[6px]' onClick={handleOpenModal}>
                                           {getAddressDefault(user?.user_address) ? 'Đổi' : 'Chọn vị trí'}
                                     </button>
                               </div>
 
-                              <div className='w-full h-max flex flex-col gap-[12px]'>
-                                    <div className='flex flex-col gap-[4px] text-[14px]  '>
+                              <div className='w-full h-max grid grid-cols-1 md:grid-cols-2 gap-[10px]'>
+                                    <div className='flex flex-col gap-[8px] rounded-xl border border-[var(--border-color-input)] p-[12px]'>
                                           <div className='flex items-center gap-[8px]'>
                                                 <img src={NowLogo} className='h-[16px] w-[30px]' alt='now' />
-                                                <span className='font-medium'>Giao siêu tốc 2h</span>
+
+                                                <span className='font-medium text-[14px]'>Giao siêu tốc 2h</span>
                                           </div>
-                                          <span className='text-[14px]'>Trước 10h ngày mai</span>
+
+                                          <span className='text-[14px] pl-[38px]'>Trước 10h ngày mai</span>
                                     </div>
 
-                                    <div className='flex flex-col gap-[4px] text-[14px]  '>
+                                    <div className='flex flex-col gap-[8px] rounded-xl border border-[var(--border-color-input)] p-[12px]'>
                                           <div className='flex items-center gap-[8px]'>
                                                 <img src={SunLogo} className='h-[16px] w-[30px]' alt='now' />
-                                                <span className='font-medium'>Giao đúng chiều mai</span>
+
+                                                <span className='font-medium text-[14px]'>Giao đúng chiều mai</span>
                                           </div>
-                                          <span className='text-[14px]'>13h - 18h, {convertDateToString(new Date())}</span>
+
+                                          <span className='text-[14px] pl-[38px]'>13h - 18h, {convertDateToString(new Date())}</span>
                                     </div>
                               </div>
                         </div>

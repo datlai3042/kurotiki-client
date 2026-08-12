@@ -35,6 +35,8 @@ import QueryParams from '../../QueryParams'
 import { RootState } from '../../store'
 import Box from '../BoxUi/Box'
 import AccountInfoPage from '../../Customer/RenderUIVersion'
+import BoxBuild from '../BoxUi/BoxBuild'
+import BoxCommingSoonFunction from '../BoxUi/BoxCommingSoonFunction'
 
 const RouterController = () => {
       const pathHiddenHeader = ['/admin', '/payment', '/box']
@@ -45,9 +47,9 @@ const RouterController = () => {
       const showOverload = useSelector((state: RootState) => state.uiSlice.showOverload)
 
       const styleEffect = {
-            matchPathName: window.location.pathname !== '/payment' ? '  pt-[65px] md:pt-[80px] pb-[45px] md:pb-0' : '',
-            matchPathNameCustomer: pathName.startsWith('/customer') ? 'top-[0px] ' : 'top-[80px] lg:h-[calc(100vh-100px)]',
-            layoutFull: pathName?.startsWith('/customer') ? '' : 'mx-auto max-w-full  xl:max-w-[1360px]',
+            matchPathName: window.location.pathname !== '/payment' ? '  pt-[110px] md:pt-[135px] pb-[75px] md:pb-0' : '',
+            matchPathNameCustomer: pathName.startsWith('/customer') ? 'px-[10px]' : 'md:px-0 top-[135px] lg:h-[calc(100vh-100px)]',
+            layoutFull: pathName?.startsWith('/customer') ? '' : 'mx-auto max-w-full xl:max-w-[1480px] px-2 xl:px-0',
       }
       const uiSlice = useSelector((state: RootState) => state.uiSlice.showSideBar)
 
@@ -59,7 +61,8 @@ const RouterController = () => {
                         className={`${styleEffect.matchPathName} ${styleEffect.layoutFull} z-[1]  flex-1 w-full  items-stretch h-max  flex flex-col md:flex-row gap-[20px]    bg-color-gap-empty 
 `}
                   >
-                        {true && <Sidebar />}
+                        <Sidebar />
+                        {/* {pathName !== '/' && <Sidebar />} */}
                         <Routes>
                               <Route path='/admin' element={<Admin />} />
                               <div id='' className={`${styleEffect.matchPathNameCustomer}  relative  lg:flex  gap-8 `}>
@@ -97,10 +100,12 @@ const RouterController = () => {
                                                 <Route path='shop' element={<ShopWrapper />} />
                                                 <Route path='shop/product-list' element={<ShopProductList />} />
                                                 <Route path='account/address' element={<CustomerUserAddress />} />
-                                                <Route path='shop/top-buy' element={<ShopAnalysisTopBuy />} />
+                                                {/* <Route path='shop/top-buy' element={<ShopAnalysisTopBuy />} />
                                                 <Route path='shop/top-view' element={<ShopAnalysisTopView />} />
-                                                <Route path='shop/top-comment' element={<ShopAnalysisTopComment />} />
-
+                                                <Route path='shop/top-comment' element={<ShopAnalysisTopComment />} /> */}
+                                                <Route path='shop/top-buy' element={<BoxCommingSoonFunction />} />
+                                                <Route path='shop/top-view' element={<BoxCommingSoonFunction />} />
+                                                <Route path='shop/top-comment' element={<BoxCommingSoonFunction />} />
                                                 <Route path='register-sell' element={<RegisterSell />} />
                                           </Route>
                                           <Route path='product/update/:product_id' element={<PermisionProductUpdate />} />
@@ -108,7 +113,14 @@ const RouterController = () => {
                                     </Routes>
                               </div>
 
-                              <Route path='*' element={<NotFound />} />
+                              <Route
+                                    path='*'
+                                    element={
+                                          <div className='w-full flex justify-center items-center bg-color-section-theme rounded-lg'>
+                                                <BoxCommingSoonFunction />
+                                          </div>
+                                    }
+                              />
                         </Routes>
                         {showOverload && <div className='w-full h-full fixed inset-0 bg-[rgba(0,0,0,.75)] z-[500] mt-[60px]'></div>}
                   </div>

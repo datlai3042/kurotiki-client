@@ -1,9 +1,8 @@
-import React, { SetStateAction, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CartProduct, CartResponse } from '../../types/cart.type'
 import BoxMoney from '../../component/BoxUi/BoxMoney'
-import { ChevronUp, ImageOff } from 'lucide-react'
-import { Address } from '../../types/address.type'
+import { ChevronUp, ImageOff, ShoppingBag } from 'lucide-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import OrderService from '../../apis/Order.service'
 import { OrderItem } from '../../types/order.type'
@@ -27,13 +26,13 @@ export type ParamOrderAdd = {
 
 const PaymentCart = (props: TProps) => {
       const { carts, price, product_payment, onOrderSuccess } = props
+
       const productWrapperRef = useRef<HTMLDivElement>(null)
       const queryClient = useQueryClient()
-      const heightElement = useRef<number>(40)
-      const [height, setHeight] = useState<number>(0)
-      const [disable, setDisable] = useState<boolean>(false)
-      const [openSeeProduct, setOpenSeeProduct] = useState<boolean>(false)
       const dispatch = useDispatch()
+
+      const [openSeeProduct, setOpenSeeProduct] = useState(false)
+      const [disable, setDisable] = useState(false)
 
       const onClearEffect = () => {
             queryClient.invalidateQueries({ queryKey: ['v1/api/cart/cart-get-my-cart'] })
@@ -44,19 +43,25 @@ const PaymentCart = (props: TProps) => {
       const orderPaymentMutation = useMutation({
             mutationKey: ['/v1/api/order/order-payment-product'],
             mutationFn: (orders: ParamOrderAdd) => OrderService.orderAddProduct(orders),
+
             onSuccess: (axiosResponse) => {
                   const { message, order_success } = axiosResponse.data.metadata
                   onOrderSuccess({ message, order_success })
                   onClearEffect()
             },
+
             onError: (error: unknown) => {
+                  setDisable(false)
+
                   if (checkAxiosError<{ code: number; message: string; detail: string }>(error)) {
-                        if (
-                              error.response?.data.code === 400 &&
-                              error.response.data.message === 'Bad Request'
-                              // error.response.data.detail === 'Số lượng sản phẩm được chọn nhiều hơn số lượng trong kho'
-                        ) {
-                              dispatch(addToast({ id: Math.random().toString(), type: 'ERROR', message: error.response.data.detail }))
+                        if (error.response?.data.code === 400 && error.response.data.message === 'Bad Request') {
+                              dispatch(
+                                    addToast({
+                                          id: Math.random().toString(),
+                                          type: 'ERROR',
+                                          message: error.response.data.detail,
+                                    }),
+                              )
                         }
                   }
             },
@@ -67,121 +72,164 @@ const PaymentCart = (props: TProps) => {
       }
 
       const handleVerifyBuy = () => {
-            orderPaymentMutation.mutate({ products: product_payment, order_total: price })
+            if (disable || orderPaymentMutation.isPending) return
+
             setDisable(true)
+            orderPaymentMutation.mutate({
+                  products: product_payment,
+                  order_total: price,
+            })
       }
 
       useEffect(() => {
-            if (productWrapperRef.current) {
-                  if (openSeeProduct) {
-                        setHeight(heightElement.current * carts?.cart_products.length + 20 + 24 + 8)
-                  } else {
-                        setHeight(0)
-                  }
+            if (productWrapperRef.current && !openSeeProduct) {
+                  productWrapperRef.current.scrollTop = 0
             }
-      }, [openSeeProduct, carts?.cart_products.length, height])
+      }, [openSeeProduct])
 
       return (
-            <React.Fragment>
-                  <div className='min-h-[230px] xl:min-h-[180px] h-max  transition-all duration-1000 bg-color-section-theme text-text-theme rounded p-[16px] text-[12px]'>
-                        <div className='w-full min-h-[50px]  flex flex-col gap-[6px]'>
-                              <h4>Đơn hàng</h4>
-                              <div className='flex gap-[6px] items-center cursor-pointer'>
-                                    <span>{carts?.cart_products.length} sản phẩm</span>
-                                    <p className='flex gap-[3px] items-center' onClick={controllOpenSeeProduct}>
-                                          <span>Xem thông tin</span>
-                                          <ChevronUp className={`${height ? 'rotate-180' : 'rotate-0'} transition-all duration-300`} />
-                                    </p>
-                              </div>
-                        </div>
+            <div className='overflow-hidden rounded-2xl bg-color-section-theme text-text-theme'>
+                  {/* Header */}
+                  <div className='px-4 pt-4 md:px-5 md:pt-5'>
+                        <div className='flex items-center justify-between'>
+                              <div className='flex items-center gap-2'>
+                                    <div className='flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500/10 text-blue-500'>
+                                          <ShoppingBag size={18} />
+                                    </div>
 
-                        <div className='w-[calc(100%+32px)] ml-[-16px] bg-[var(--border-color-input)] h-[1px] my-[8px] '></div>
-
-                        <div
-                              style={{ height, paddingTop: height > 0 ? 10 : 0, paddingBottom: height > 0 ? 10 : 0 }}
-                              className={` flex flex-col gap-[8px] transition-all duration-100`}
-                              ref={productWrapperRef}
-                        >
-                              {carts?.cart_products.map((product) => {
-                                    return (
-                                          <div key={product.product_id._id} className='flex items-center gap-2.5'>
-                                                <div className='relative shrink-0'>
-                                                      <div className='w-10 h-10 rounded-lg bg-gray-100 overflow-hidden flex items-center justify-center'>
-                                                            {product.product_id.product_thumb_image ? (
-                                                                  <img
-                                                                        src={product.product_id.product_thumb_image.secure_url}
-                                                                        alt={product.product_id.product_name}
-                                                                        className='w-full h-full object-cover'
-                                                                  />
-                                                            ) : (
-                                                                  <ImageOff size={16} className='text-gray-300' />
-                                                            )}
-                                                      </div>
-                                                      <span className='absolute -top-1.5 -right-1.5 bg-white border border-gray-200 rounded-full text-[10px] px-[5px] py-px text-gray-500 leading-tight'>
-                                                            x{product.quantity}
-                                                      </span>
-                                                </div>
-                                                <span className='flex-1 text-xs text-gray-600 truncate'>
-                                                      {product.product_id.product_name}
-                                                </span>
-                                                <span className='shrink-0 text-xs font-medium text-gray-900'>
-                                                      <BoxMoney money={product.quantity * product.product_id.product_price} name='đ' />
-                                                </span>
-                                          </div>
-                                    )
-                              })}
-                              <div className='w-[calc(100%+32px)] ml-[-16px] bg-[var(--border-color-input)] h-[1px] '></div>
-                        </div>
-                        <div className=' bg-color-section-theme  min-h-[150px]  flex-1 w-[calc(100%+32px)] ml-[-16px] px-[16px]'>
-                              <div className='h-[49%]  flex flex-col gap-[8px] xl:gap-[16px] justify-center'>
-                                    <div className='w-full flex  flex-row flex-wrap justify-between'>
-                                          <span>Tạm tính</span>
-                                          <p className='w-max flex gap-[4px] items-center '>
-                                                <span className='w-[130px] xl:w-max  max-w-[180px] truncate'>
-                                                      {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
-                                                            .format(price)
-                                                            .replace('₫', '')}
-                                                </span>
-                                                <span className='ml-[-2px]'>VNĐ</span>
+                                    <div>
+                                          <h4 className='text-sm font-semibold md:text-[15px]'>Đơn hàng</h4>
+                                          <p className='mt-0.5 text-[11px] text-slate-400'>
+                                                {carts?.cart_products.length} sản phẩm
                                           </p>
                                     </div>
-                                    <p className='w-full flex justify-between gap-[16px]'>
-                                          <span>Giảm giá </span>
-                                          <span>-0đ</span>
-                                    </p>
                               </div>
-                              <div className='mt-0 transition-all duration-700 h-[49%] flex flex-col gap-[8px] xl:gap-0 justify-center bg-color-section-theme '>
-                                    <div className='flex   flex-row flex-wrap justify-between gap-[16px]'>
-                                          <span>Tổng tiền</span>
-                                          <BoxMoney name='VNĐ' money={price} />
-                                    </div>
-                                    <span className='block w-full text-right'>(Đã bao gồm VAT nếu có)</span>
-                              </div>
-                              {/* {!orderPaymentMutation.isSuccess && ( */}
-                              {!orderPaymentMutation.isSuccess && (
-                                    <button
-                                          disabled={disable}
-                                          onClick={handleVerifyBuy}
-                                          className='w-full h-[45px] flex items-center gap-[8px] justify-center bg-red-600 text-white rounded-md text-[16px] mt-[16px]'
-                                    >
-                                          Mua hàng {'('}
-                                          {carts?.cart_products.length}
-                                          {')'}
-                                          {orderPaymentMutation.isPending && <BoxLoading />}
-                                    </button>
-                              )}
 
-                              {orderPaymentMutation.isSuccess && (
-                                    <Link
-                                          to={'/'}
-                                          className='w-full h-[45px] flex items-center justify-center bg-color-main text-white rounded-[4px] text-[16px] mt-[16px]'
-                                    >
-                                          Thanh toán thành công, nhấn để quay về
-                                    </Link>
-                              )}
+                              <button
+                                    type='button'
+                                    onClick={controllOpenSeeProduct}
+                                    className='flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-medium text-blue-500 transition-colors hover:bg-blue-500/10'
+                              >
+                                    {openSeeProduct ? 'Thu gọn' : 'Xem thông tin'}
+
+                                    <ChevronUp
+                                          size={16}
+                                          className={`${openSeeProduct ? 'rotate-0' : 'rotate-180'} transition-transform duration-300`}
+                                    />
+                              </button>
                         </div>
                   </div>
-            </React.Fragment>
+
+                  {/* Product list */}
+                  <div
+                        className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                              openSeeProduct ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+                        }`}
+                  >
+                        <div className='overflow-hidden'>
+                              <div
+                                    ref={productWrapperRef}
+                                    className='mt-4 max-h-[260px] overflow-y-auto border-y border-[var(--border-color-input)] px-4 py-3 md:px-5'
+                              >
+                                    <div className='flex flex-col gap-3'>
+                                          {carts?.cart_products.map((product) => (
+                                                <div
+                                                      key={product.product_id._id}
+                                                      className='flex items-center gap-3 rounded-xl bg-[var(--bg-color-theme)]/45 p-2.5'
+                                                >
+                                                      <div className='relative shrink-0'>
+                                                            <div className='flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg border border-[var(--border-color-input)] bg-white'>
+                                                                  {product.product_id.product_thumb_image ? (
+                                                                        <img
+                                                                              src={product.product_id.product_thumb_image.secure_url}
+                                                                              alt={product.product_id.product_name}
+                                                                              className='h-full w-full object-contain'
+                                                                        />
+                                                                  ) : (
+                                                                        <ImageOff size={17} className='text-slate-300' />
+                                                                  )}
+                                                            </div>
+
+                                                            <span className='absolute -right-2 -top-2 flex min-w-6 items-center justify-center rounded-full border border-[var(--border-color-input)] bg-color-section-theme px-1.5 py-0.5 text-[10px] font-semibold text-slate-500 shadow-sm'>
+                                                                  x{product.quantity}
+                                                            </span>
+                                                      </div>
+
+                                                      <div className='min-w-0 flex-1'>
+                                                            <p className='line-clamp-2 text-xs font-medium leading-5 text-text-theme'>
+                                                                  {product.product_id.product_name}
+                                                            </p>
+                                                      </div>
+
+                                                      <div className='shrink-0 text-xs font-semibold'>
+                                                            <BoxMoney
+                                                                  money={product.quantity * product.product_id.product_price}
+                                                                  name='đ'
+                                                            />
+                                                      </div>
+                                                </div>
+                                          ))}
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+
+                  {/* Price summary */}
+                  <div className='px-4 pb-4 pt-4 md:px-5 md:pb-5'>
+                        <div className='flex flex-col gap-3 text-xs'>
+                              <div className='flex items-center justify-between gap-4'>
+                                    <span className='text-slate-400'>Tạm tính</span>
+
+                                    <span className='font-medium text-text-theme'>
+                                          {new Intl.NumberFormat('vi-VN').format(price)} VNĐ
+                                    </span>
+                              </div>
+
+                              <div className='flex items-center justify-between gap-4'>
+                                    <span className='text-slate-400'>Giảm giá</span>
+                                    <span className='font-medium text-green-500'>-0đ</span>
+                              </div>
+                        </div>
+
+                        <div className='my-4 h-px w-full bg-[var(--border-color-input)]' />
+
+                        <div className='flex items-start justify-between gap-4'>
+                              <span className='pt-1 text-sm font-semibold'>Tổng tiền</span>
+
+                              <div className='text-right'>
+                                    <div className='text-lg font-bold text-blue-500'>
+                                          <BoxMoney name='VNĐ' money={price} />
+                                    </div>
+
+                                    <p className='mt-1 text-[10px] text-slate-400'>(Đã bao gồm VAT nếu có)</p>
+                              </div>
+                        </div>
+
+                        {!orderPaymentMutation.isSuccess && (
+                              <button
+                                    type='button'
+                                    disabled={disable || orderPaymentMutation.isPending}
+                                    onClick={handleVerifyBuy}
+                                    className='mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-4 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(220,38,38,0.18)] transition-all hover:bg-red-500 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60'
+                              >
+                                    <span>
+                                          Mua hàng ({carts?.cart_products.length})
+                                    </span>
+
+                                    {orderPaymentMutation.isPending && <BoxLoading />}
+                              </button>
+                        )}
+
+                        {orderPaymentMutation.isSuccess && (
+                              <Link
+                                    to='/'
+                                    className='mt-5 flex h-12 w-full items-center justify-center rounded-xl bg-color-main px-4 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90'
+                              >
+                                    Thanh toán thành công, nhấn để quay về
+                              </Link>
+                        )}
+                  </div>
+            </div>
       )
 }
 

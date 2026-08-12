@@ -1,3 +1,4 @@
+import { ChevronRight } from 'lucide-react'
 import React from 'react'
 
 type Props = {
@@ -8,24 +9,38 @@ type Props = {
       ArrowLeft?: JSX.Element | React.ReactElement
       ArrowRight?: JSX.Element | React.ReactElement
       background?: string
+      description?: string
+      actionText?: string
 }
 
 const SectionProduct = (props: Props) => {
       return (
-            <div
-                  style={{ background: props.background ? props.background : '' }}
-                  className=' text-text-theme rounded-lg flex-col  bg-[var(--bg-color-product-wrapper)]'
+            <section
+                  style={{ background: props.background || undefined }}
+                  className='overflow-hidden rounded-2xl border border-[var(--border-color-input)] bg-color-section-theme text-text-theme shadow-sm'
             >
-                  <div className='2xl:h[20%] 2xl:h-[8%] flex justify-between my-[16px] '>
-                        <div className=' flex justify-between items-center gap-[8px] 2xl:w-full '>
-                              {props.title && props.title}
-                              {props.other && props.other}
+                  <div className='flex items-center justify-between gap-4 px-4 pb-2 pt-4 sm:px-5 sm:pt-5'>
+                        <div className='min-w-0'>
+                              <div className='flex items-center gap-3'>
+                                    {props.title}
+                                    {props.other}
+                              </div>
+                              {props.description && <p className='mt-1 text-xs text-slate-500 dark:text-slate-400'>{props.description}</p>}
                         </div>
-                        <div className=''>{props.ElementRight && props.ElementRight}</div>
+
+                        <div className='shrink-0'>
+                              {props.ElementRight ||
+                                    (props.actionText && (
+                                          <button className='flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-700 sm:text-sm'>
+                                                {props.actionText}
+                                                <ChevronRight size={16} />
+                                          </button>
+                                    ))}
+                        </div>
                   </div>
 
-                  {props.ListProducts && props.ListProducts}
-            </div>
+                  <div className='pb-4'>{props.ListProducts}</div>
+            </section>
       )
 }
 

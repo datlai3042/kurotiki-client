@@ -29,7 +29,7 @@ const Input = <FormType extends FieldValues>(props: TProps<FormType>) => {
       const input_erros: React.ReactNode = error[FieldKey]?.message as ReactNode
 
       return (
-            <div style={style} className='flex flex-col gap-[6[x]]'>
+            <div style={style} className='flex flex-col gap-[6[x]] '>
                   <div className='flex items-center p-[10px_0px]  w-full border-[1px]  border-[var(--border-color-input)] bg-background-page-color  h-max gap-[6px]  rounded-[8px] '>
                         <div className='p-[10px] w-[90px] flex-center'>{icon ? icon : <Info />}</div>
 

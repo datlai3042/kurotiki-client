@@ -24,7 +24,7 @@ type TProps = {
 }
 
 const BoxAvatarMode = (props: TProps) => {
-      const { AvatartSource, widthImage = 'w-[180px] xl:w-[120px]', heightImage = 'h-[180px] xl:h-[120px]', Mode } = props
+      const { AvatartSource, widthImage = 'w-full xl:w-[120px]', heightImage = 'h-[150px] xl:h-[120px]', Mode } = props
 
       // const user = useSelector((state: RootState) => state.authentication.user)
       const [state, modeDispatch] = useReducer(customerAccountReducer, initialValue)
@@ -89,7 +89,7 @@ const BoxAvatarMode = (props: TProps) => {
 
       return (
             <div
-                  className={`${styleEffect.widthImage}  ${styleEffect.heightImage} flex-shrink bg-color-section-theme text-text-theme flex  items-center justify-center  rounded-full mb-[15px]`}
+                  className={`${styleEffect.widthImage}  ${styleEffect.heightImage} flex-shrink bg-color-section-theme text-text-theme flex  items-center justify-center  rounded-full `}
                   onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
                         e.stopPropagation()
                         modeDispatch({ type: 'OPEN_BOX_AVATAR', payload: { boxModeAvatar: true } })
@@ -97,11 +97,11 @@ const BoxAvatarMode = (props: TProps) => {
             >
                   <div className='relative'>
                         <div className='relative w-28 h-28 mx-auto md:mx-0 outline-[5px] outline rounded-full outline-[#bad7ffba]'>
-                              <div className='rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-xl'>
+                              <div className='rounded-full w-full h-full bg-blue-500 flex items-center justify-center text-white font-bold text-xl'>
                                     <img
                                           src={AvatartSource?.avatar || AvatartSource.avatar_default || ''}
                                           alt='user_avatar'
-                                          className={` object-contain rounded-full `}
+                                          className={` object-cover rounded-full w-full h-full `}
                                     />
                               </div>
                               <button className='absolute bottom-0 right-0 bg-white border border-gray-200 rounded-full p-1.5 shadow-sm hover:bg-gray-50'>

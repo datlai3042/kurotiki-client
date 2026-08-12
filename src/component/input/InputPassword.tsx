@@ -28,7 +28,7 @@ const InputPassword = <FormType extends FieldValues>(props: TProps<FormType>) =>
       return (
             <div className='flex flex-col gap-[6px]'>
                   <div className='flex items-center p-[10px_0px]  w-full border-[1px]  border-[var(--border-color-input)] bg-background-page-color  h-max gap-[6px]  rounded-[8px] '>
-                        <div className='p-[10ox] w-[90px] flex-center'>{icon ? icon : <Info />}</div>
+                        <div className='p-[10ox] w-[90px] flex-center '>{icon ? icon : <Info />}</div>
                         <div className='flex flex-col gap-[5px]   w-full  '>
                               {!unActiveLabel && (
                                     <label
@@ -60,7 +60,7 @@ const InputPassword = <FormType extends FieldValues>(props: TProps<FormType>) =>
                                     <button
                                           tabIndex={-1}
                                           type='button'
-                                          className='px-[10px] right-[10px]'
+                                          className='px-[10px] right-[10px] text-white'
                                           onClick={() => setShowPassword((prev) => !prev)}
                                     >
                                           {!showPassword ? <Eye size={18} /> : <EyeOff size={18} />}

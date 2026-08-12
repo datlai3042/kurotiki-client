@@ -158,7 +158,7 @@ const CustomerAccount = () => {
                   <FormProvider {...methods}>
                         <div className=' flex flex-col gap-[12px] xl:w-[70%]'>
                               <form
-                                    className='relative w-full bg-color-section-theme px-[28px] py-[26px]  h-auto flex flex-col gap-[40px]  rounded-md'
+                                    className='relative w-full bg-color-section-theme px-[28px] py-[26px]  h-auto flex flex-col gap-[32px] xl:gap-[40px]  rounded-md'
                                     onSubmit={methods.handleSubmit(onSubmit)}
                                     spellCheck={false}
                               >
@@ -173,7 +173,7 @@ const CustomerAccount = () => {
                                     {/* @change mode with avatar */}
                                     <div className='  data-user flex flex-col lg:flex-row gap-[20px] xl:gap-0 xl:items-center'>
                                           {/* @onClick active mode*/}
-                                          <div className='flex flex-row gap-[48px] flex-wrap  w-full '>
+                                          <div className='flex flex-row gap-[30px] xl:gap-[48px] flex-wrap  w-full '>
                                                 <BoxAvatarMode
                                                       AvatartSource={{
                                                             avatar: user.avatar?.secure_url,
@@ -183,9 +183,9 @@ const CustomerAccount = () => {
                                                 />
                                                 {/* @ form update infomation account */}
                                                 {/* @ formLayout - 1 */}
-                                                <div className='min-h-[90px] flex flex-1 gap-[38px] flex-col '>
+                                                <div className='min-h-[90px] flex flex-1 gap-[24px] xl:gap-[38px] flex-col '>
                                                       {/* @ field::name -> fullname */}
-                                                      <div className='flex justify-between gap-[32px] w-full h-[35%] items-center text-[14px]'>
+                                                      <div className='flex justify-between gap-[32px] w-full xl:h-[35%] items-center text-[14px]'>
                                                             <InputText
                                                                   FieldName='fullName'
                                                                   LabelMessage='Họ và tên'
@@ -197,7 +197,7 @@ const CustomerAccount = () => {
                                                             />
                                                       </div>
                                                       {/* @ field::name -> nickname */}
-                                                      <div className='flex justify-between w-full gap-[32px] h-[35%] items-center text-[14px]'>
+                                                      <div className='flex justify-between w-full gap-[32px] xl:h-[35%] items-center text-[14px]'>
                                                             <InputText
                                                                   FieldName='nickName'
                                                                   LabelMessage='NickName'
@@ -212,7 +212,7 @@ const CustomerAccount = () => {
                                     </div>
                                     {/* @ formLayout - 2 */}
                                     <div className='form_user w-full min-h-[50%] sm:min-h-[40%] xl:h-[40%]  max-h-auto  flex '>
-                                          <div className='flex flex-col w-full gap-[16px] xl:gap-[32px]'>
+                                          <div className='flex flex-col w-full gap-[28px] xl:gap-[32px]'>
                                                 {/* @ field::bob */}
                                                 <div className=' flex flex-col  justify-between w-full   text-[14px] gap-[20px]'>
                                                       <p className='w-max text-left lg:w-[100px]'>Ngày sinh</p>
@@ -224,7 +224,7 @@ const CustomerAccount = () => {
                                                       <CustomerAccountGender />
                                                 </div>
                                                 {/* @ form::action -> submit */}
-                                                <div className='w-full mt-[80px] mb-[24px] xl:mb-0  flex  xl:flex  '>
+                                                <div className='w-full mt-[105px] xl:mt-[80px] mb-[24px] xl:mb-0  flex  xl:flex  '>
                                                       <button
                                                             disabled={updateInfo.isPending}
                                                             className='flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-3 rounded-xl transition-colors'
@@ -259,13 +259,13 @@ const CustomerAccount = () => {
                                     <div className='max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-2'>
                                           <span>© 2024 Tiki.vn - Bảo lưu mọi quyền</span>
                                           <div className='flex items-center gap-4'>
-                                                <a href='#' className='hover:text-blue-600'>
+                                                <a href='#' className='hover:text-blue-600 whitespace-pre'>
                                                       Chính sách bảo mật
                                                 </a>
-                                                <a href='#' className='hover:text-blue-600'>
+                                                <a href='#' className='hover:text-blue-600 whitespace-pre'>
                                                       Quy chế hoạt động
                                                 </a>
-                                                <a href='#' className='hover:text-blue-600'>
+                                                <a href='#' className='hover:text-blue-600 whitespace-pre'>
                                                       Điều khoản sử dụng
                                                 </a>
                                           </div>

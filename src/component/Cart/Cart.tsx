@@ -84,7 +84,7 @@ const Cart = () => {
       return (
             <React.Fragment>
                   <div className='w-full text-[13px] text-text-theme'>
-                        <div className='mx-auto w-full max-w-[1280px] px-3 pb-10 pt-3 sm:px-4 xl:px-5'>
+                        <div className='mx-auto w-full max-w-[1480px] px-3 pb-10 pt-3 sm:px-4 xl:px-0'>
                               <div className='mb-4 flex items-end justify-between gap-4'>
                                     <div>
                                           <h3 className='text-[24px] font-bold tracking-[-0.02em] text-text-theme'>Giỏ hàng</h3>

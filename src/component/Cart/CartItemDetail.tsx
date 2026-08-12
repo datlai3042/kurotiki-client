@@ -27,7 +27,7 @@ const CartItemDetail = (props: TProps) => {
 
       const deleteCartWithProductId = useMutation({
             mutationKey: ['/v1/api/cart/cart-delete/:product_id'],
-            mutationFn: ({ product_id }: { product_id: string }) => CartService.deleteCart({ product_id }),
+            mutationFn: ({ product_id, cart_item_id }: { product_id: string, cart_item_id: string }) => CartService.deleteCart({ product_id, cart_item_id }),
             onSuccess: () => {
                   queryClient.invalidateQueries({
                         queryKey: ['v1/api/cart/cart-get-my-cart'],
@@ -43,8 +43,8 @@ const CartItemDetail = (props: TProps) => {
             },
       })
 
-      const onDeleteCart = ({ product_id }: { product_id: string }) => {
-            deleteCartWithProductId.mutate({ product_id })
+      const onDeleteCart = ({ product_id, cart_item_id }: { product_id: string, cart_item_id: string }) => {
+            deleteCartWithProductId.mutate({ product_id, cart_item_id })
       }
 
       const AddressTypeIcon =

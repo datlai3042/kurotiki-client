@@ -43,7 +43,7 @@ const AuthWrapper = (props: TProps) => {
                               <X size={19} />
                         </button>
 
-                        <div className='relative z-10 flex min-h-[560px] items-center bg-white dark:bg-[#0f131a]'>
+                        <div className='relative z-10 flex min-h-[560px] items-center bg-white '>
                               {modeAuth === 'Login' ? <AuthLogin setModeAuth={setModeAuth} /> : <AuthRegister setModeAuth={setModeAuth} />}
                         </div>
 

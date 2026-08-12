@@ -20,10 +20,10 @@ const ProductShopInfo = (props: TProps) => {
                   {shop && (
                         <Link
                               to={`/shop/${shop?._id}`}
-                              className='group flex h-full min-h-[260px] w-full flex-col overflow-hidden rounded-2xl border border-slate-700/60 bg-[#17191d] text-text-theme shadow-[0_12px_35px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-[2px] hover:border-blue-500/35 hover:shadow-[0_18px_45px_rgba(0,0,0,0.28)]'
+                              className='group flex h-full min-h-[245px] w-full flex-col overflow-hidden rounded-2xl border border-slate-700/60 bg-[#17191d] text-text-theme shadow-[0_12px_35px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-[2px] hover:border-blue-500/35 hover:shadow-[0_18px_45px_rgba(0,0,0,0.28)]'
                         >
                               {/* Shop banner */}
-                              <div className='relative flex-1 overflow-hidden bg-gradient-to-br from-blue-600/20 via-slate-900 to-slate-950'>
+                              <div className='relative h-[90px] overflow-hidden bg-gradient-to-br from-blue-600/20 via-slate-900 to-slate-950'>
                                     <img
                                           src={shop?.shop_avatar?.secure_url || shop.shop_avatar_default}
                                           className='absolute inset-0 h-full w-full scale-110 object-cover opacity-30 blur-[1px]'
@@ -32,7 +32,7 @@ const ProductShopInfo = (props: TProps) => {
 
                                     <div className='absolute inset-0 bg-gradient-to-t from-[#17191d] via-[#17191d]/50 to-transparent' />
 
-                                    <div className='absolute bottom-3 left-4 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border-2 border-white/80 bg-white shadow-lg'>
+                                    <div className='absolute bottom-3 left-4 top-[30px] flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border-2 border-white/80 bg-white shadow-lg'>
                                           <img
                                                 src={shop?.shop_avatar?.secure_url || shop.shop_avatar_default}
                                                 className='h-full w-full object-cover'

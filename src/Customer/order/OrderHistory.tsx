@@ -3,6 +3,7 @@ import OrderService from '../../apis/Order.service'
 import CartEmpty from '../../component/Cart/CartEmpty'
 import OrderHistoryItem from './OrderHistoryItem'
 import BoxLoading from '../../component/BoxUi/BoxLoading'
+import OrderEmpty from './OrderEmpty'
 
 const OrderHistory = () => {
       const getMyOrder = useQuery({
@@ -11,7 +12,7 @@ const OrderHistory = () => {
       })
 
       return (
-            <div className='flex flex-col w-full min-h-[500px] rounded-2xl h-max bg-color-section-theme  gap-[30px]'>
+            <div className='flex flex-col w-full min-h-full rounded-2xl h-max bg-color-section-theme  gap-[30px]'>
                   {getMyOrder.isSuccess &&
                         getMyOrder.data.data.metadata.order &&
                         getMyOrder.data.data.metadata.order?.order_products &&
@@ -20,7 +21,7 @@ const OrderHistory = () => {
                                     <OrderHistoryItem orderItem={order} />
                               </div>
                         ))}
-                  {getMyOrder.isSuccess && !getMyOrder.data.data.metadata.order && <CartEmpty />}
+                  {getMyOrder.isSuccess && !getMyOrder.data.data.metadata.order && <OrderEmpty />}
                   {getMyOrder.isPending && (
                         <div className='h-[300px]'>
                               <BoxLoading />

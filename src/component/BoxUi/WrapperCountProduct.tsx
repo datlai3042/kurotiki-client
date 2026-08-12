@@ -21,12 +21,12 @@ const WrapperCountProduct = (props: TProps) => {
       const [openBoxConfirmDelete, setOpenBoxConfirmDelete] = useState<boolean>(false)
       const deleteCartWithProductId = useMutation({
             mutationKey: ['/v1/api/cart/cart-delete/:product_id'],
-            mutationFn: ({ product_id }: { product_id: string }) => CartService.deleteCart({ product_id }),
+            mutationFn: ({ product_id, cart_item_id }: { product_id: string, cart_item_id: string }) => CartService.deleteCart({ product_id, cart_item_id }),
             onSuccess: () => {
                   queryClient.invalidateQueries({
                         queryKey: ['v1/api/cart/cart-get-my-cart'],
                   })
-
+                  setOpenBoxConfirmDelete(false)
                   queryClient.invalidateQueries({
                         queryKey: ['v1/api/cart/cart-pay'],
                   })
@@ -37,8 +37,8 @@ const WrapperCountProduct = (props: TProps) => {
             },
       })
 
-      const onDeleteCart = ({ product_id }: { product_id: string }) => {
-            deleteCartWithProductId.mutate({ product_id })
+      const onDeleteCart = ({ product_id, cart_item_id }: { product_id: string, cart_item_id: string }) => {
+            deleteCartWithProductId.mutate({ product_id, cart_item_id })
       }
 
       useEffect(() => {
@@ -82,11 +82,11 @@ const WrapperCountProduct = (props: TProps) => {
                   } else {
                         setProductQuantity(mode.quantity)
 
-                        updateCartQuantityBtn.mutate({ ...mode, product_id })
+                        updateCartQuantityBtn.mutate({ ...mode,  cart_item_id: product?._id })
                         return
                   }
             }
-            updateCartQuantityBtn.mutate({ ...mode, product_id })
+            updateCartQuantityBtn.mutate({ ...mode, product_id,  cart_item_id: product?._id  })
       }
 
       useEffect(() => {
@@ -137,7 +137,7 @@ const WrapperCountProduct = (props: TProps) => {
                               ButtonConfrimContent='Xác nhận xóa'
                               onClose={setOpenBoxConfirmDelete}
                               onActive={onDeleteCart}
-                              paramsActive={{ product_id: product!._id }}
+                              paramsActive={{ product_id: product!._id, cart_item_id: product!._id }}
                         />
                   )}
             </>

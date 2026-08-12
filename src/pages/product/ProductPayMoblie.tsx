@@ -94,6 +94,10 @@ const ProductPayMoblie = (props: TProps) => {
                   cart_address: {
                         address_text: cartCurrent.cart_current_address,
                         address_street: cartCurrent.cart_current_address,
+
+                        address_receiver_name: cartCurrent.cart_current_address_receiver_name,
+                        address_receiver_tel: cartCurrent?.cart_current_address_receiver_tel,
+                        address_email_vat: cartCurrent?.cart_current_address_email_vat,
                         address_ward: {
                               code: cartCurrent.cart_current_address_ward.code,
                               text: cartCurrent.cart_current_address_ward.text,
@@ -115,7 +119,6 @@ const ProductPayMoblie = (props: TProps) => {
       useEffect(() => {
             setDisableBtn(false)
       }, [cartCurrent.cart_current_address])
-
 
       useEffect(() => {
             if (cartMutation.isSuccess) {

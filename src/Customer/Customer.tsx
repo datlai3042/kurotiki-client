@@ -98,11 +98,11 @@ const Customer = () => {
       //@element
       return (
             <>
-                  <div className=' text-[14px] max-w-[98vw]  w-[1360px] mx-auto min-h-full flex flex-col  pt-[15px] xl:pt-[0px]  mt-0 '>
+                  <div className=' text-[14px] max-w-[98vw]  xl:w-[1480px] mx-auto min-h-full flex flex-col  pt-[15px] xl:pt-[0px]  mt-0 '>
                         {/* @header */}
 
                         {user ? (
-                              <div className=' w-full flex gap-[2.5%] text-[14px]  text-text-theme'>
+                              <div className=' w-full flex gap-[2%] text-[14px]  text-text-theme'>
                                     {/* @navigate pathname */}
                                     <div className='hidden lg:flex flex-col   xl:w-[22%]'>
                                           {/* <div className='hidden lg:block text-[16px] text-[#66666b] p-[20px_0] '>
@@ -118,14 +118,14 @@ const Customer = () => {
                                     </div>
                                     {/*@ Outlet */}
 
-                                    <div className='w-full px-[16px] lg:px-0 lg:w-[75%] flex flex-col flex-1'>
-                                          <div className='hidden xl:flex justify-between text-[20px] font-semibold  items-center p-[28px_0]'>
+                                    <div className='w-full px-[10x] lg:px-0 lg:w-[75%] flex flex-col flex-1'>
+                                          <div className='hidden xl:flex justify-between text-[20px] font-medium  items-center p-[14px_0]'>
                                                 {textLink?.component || textLink?.text}
                                           </div>
                                           {auth ? (
                                                 <CustomerWrapperItem>
                                                       <div className='w-full flex flex-col gap-[8px]'>
-                                                            <Select
+                                                            {/* <Select
                                                                   value={isSegmentActive?.label || ''}
                                                                   style={{
                                                                         borderRadius: '2px',
@@ -138,7 +138,7 @@ const Customer = () => {
                                                                   onChange={(value) => {
                                                                         router(value)
                                                                   }}
-                                                            />
+                                                            /> */}
                                                             <Outlet />
                                                       </div>
                                                 </CustomerWrapperItem>

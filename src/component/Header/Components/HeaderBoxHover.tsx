@@ -6,7 +6,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Auth from '../../../apis/auth.api'
 import { addToast } from '../../../Redux/toast'
 import { UserResponse } from '../../../types/user.type'
-import { Bell, LogOut, ShoppingCart, User } from 'lucide-react'
+import { Bell, LogOut, Moon, ShoppingCart, Sun, User } from 'lucide-react'
+import { useContext } from 'react'
+import { ThemeContext } from '../../Context/ThemeContext'
 
 function HeaderBoxHover() {
       const navigate = useNavigate()
@@ -34,7 +36,11 @@ function HeaderBoxHover() {
             logoutMutation.mutate()
       }
       const initial = user?.email?.charAt(0).toUpperCase() ?? '?'
+      const { theme, setTheme } = useContext(ThemeContext)
 
+      const handleToggleTheme = () => {
+            setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
+      }
       return (
             <>
                   <div className='w-[260px] bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden'>
@@ -68,6 +74,45 @@ function HeaderBoxHover() {
                                     <ShoppingCart size={17} className='text-gray-500' />
                                     <span className='text-[13px] text-gray-900'>Đơn hàng của tôi</span>
                               </Link>
+
+                              <button
+                                    type='button'
+                                    onClick={handleToggleTheme}
+                                    className='
+            flex w-full items-center justify-between
+            rounded-lg 
+            transition-colors
+            hover:bg-gray-50
+            dark:hover:bg-slate-800
+            text-gray-900
+            hover:text-white
+            p-2.5
+      '
+                              >
+                                    <div className='flex items-center gap-2.5  '>
+                                          {theme === 'dark' ? <Moon size={17} className='' /> : <Sun size={17} className='' />}
+
+                                          <span className='text-[13px]   '>{theme === 'dark' ? 'Chế độ tối' : 'Chế độ sáng'}</span>
+                                    </div>
+
+                                    <div
+                                          className={`
+                  relative h-[22px] w-[40px]
+                  rounded-full transition-colors duration-200
+                  ${theme === 'dark' ? 'bg-blue-600' : 'bg-gray-300'}
+            `}
+                                    >
+                                          <div
+                                                className={`
+                        absolute top-[3px]
+                        h-4 w-4 rounded-full
+                        bg-white shadow-sm
+                        transition-all duration-200
+                        ${theme === 'dark' ? 'left-[21px]' : 'left-[3px]'}
+                  `}
+                                          />
+                                    </div>
+                              </button>
                         </div>
 
                         {/* Logout */}

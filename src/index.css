@@ -75,7 +75,7 @@
       body.light {
             --bg-form-nav: #fff;
             --color-gap-empty: #f5f5fa;
-            --color-main: #3d52a2;
+            --color-main: #2c6dee;
             --bg-scrollbar-thumb-normal: #636363;
             --bg-scrollbar-track-normal: #e9e2e2;
             --bg-answer-option: rgb(180 183 189 / 42%);
@@ -338,7 +338,42 @@ code {
             background-color: var(--sketeton-theme-from);
       }
 }
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 transparent;
+}
 
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 999px;
+
+  /* tạo khoảng hở cho thumb nhìn mảnh hơn */
+  border: 1px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+  background-clip: content-box;
+}
+
+/* bỏ các nút mũi tên trên scrollbar */
+*::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
 /* width */
 
 /* :not(body)::-webkit-scrollbar {

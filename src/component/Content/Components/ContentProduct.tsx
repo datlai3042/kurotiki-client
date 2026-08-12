@@ -18,7 +18,8 @@ import mayAnhCamera from '../../Sidebar/img/danhMuc/mayAnhMayQuayPhim.jpg'
 import oto from '../../Sidebar/img/danhMuc/otoXeMayVaXeDap.jpg'
 import { ShopResponse } from '../../../types/shop.type'
 import BoxLoading from '../../BoxUi/BoxLoading'
-import { Bike, BookOpen, Camera, FlaskConical, Gem, LucideIcon, Smartphone } from 'lucide-react'
+import { Bike, BookOpen, Camera, FlaskConical, Gem, LucideIcon, MoreHorizontal, Smartphone } from 'lucide-react'
+import BoxResponsiveOverflow, { BoxResponsiveFlowClose } from '../../BoxUi/BoxResponsiveFlow'
 
 type TagActiveArray = '/book' | '/food' | '/watch' | '/phone-laptop' | '/camera' | '/honda' | '/'
 const categoryIcons = {
@@ -38,7 +39,44 @@ const arrayCategory: { image: LucideIcon; label: string; href: TagActiveArray }[
       { image: Camera, label: 'Máy ảnh', href: '/camera' },
       { image: Bike, label: 'Xe máy', href: '/honda' },
 ]
-
+const categories = [
+      {
+            id: 'book',
+            name: 'Nhà sách Tiki',
+            icon: <BookOpen size={18} />,
+            path: '/book',
+      },
+      {
+            id: 'food',
+            name: 'Bách hóa Online',
+            icon: <FlaskConical size={18} />,
+            path: '/food',
+      },
+      {
+            id: 'watch',
+            name: 'Đồng hồ và trang sức',
+            icon: <Gem size={18} />,
+            path: '/watch',
+      },
+      {
+            id: 'phone',
+            name: 'Điện thoại và máy tính',
+            icon: <Smartphone size={18} />,
+            path: '/phone-laptop',
+      },
+      {
+            id: 'camera',
+            name: 'Máy ảnh',
+            icon: <Camera size={18} />,
+            path: '/camera',
+      },
+      {
+            id: 'motorbike',
+            name: 'Xe máy',
+            icon: <Bike size={18} />,
+            path: '/honda',
+      },
+]
 const LIMIT = 24
 const ContentProduct = () => {
       const refPos = useRef<HTMLDivElement | null>(null)
@@ -130,43 +168,234 @@ const ContentProduct = () => {
 
       return (
             <div className=' z-[5] w-full min-h-[370px] h-max  flex flex-col gap-[8px]   text-text-theme  xl:p-0'>
-                  <div className='animate-mountComponent  w-full sticky top-[65px] md:top-[60px]   z-[2] ' ref={stickyRef}>
-                        <div className=' w-full   bg-color-section-theme  rounded  border[1px] border-b-[1px] border-[var(--border-color-input)]  flex flex-col gap-[8px] pt-[10px]'>
+                  <div className='animate-mountComponent  w-full sticky top-[105px] md:top-[135px]   z-[2] ' ref={stickyRef}>
+                        <div className=' w-full shadow-[0_12px_12px_-12px_rgba(15,23,42,0.35)]  bg-color-section-theme  rounded  border[1px] border-b-[1px] border-[var(--border-color-input)]  flex flex-col gap-[8px] pt-[10px]'>
                               <h3 className='w-full pl-[20px] font-bold text-[16px]'>Gợi ý hôm nay</h3>
-                              <div className='grow grid  grid-cols-[repeat(3,160px)] auto-cols-[160px] grid-flow-col  xl:grid-flow-row  xl:grid-cols-6  justify-items-center overflow-auto pb-[8px] gap-[12px]'>
-                                    {arrayCategory.map((category) => {
-                                          const isActive = tagActive === category.href
+
+                              <BoxResponsiveOverflow
+                                    items={categories}
+                                    gap={12}
+                                    className='p-[12px_20px]'
+                                    itemClassName='flex-1'
+                                    getKey={(category) => category.id}
+                                    renderItem={(category) => {
+                                          const isActive = tagActive === category.path
 
                                           return (
                                                 <Link
-                                                      to={category.href}
-                                                      key={category.href + category.label}
-                                                      className={`${styleEffect.onActive(
-                                                            tagActive === category.href,
-                                                      )} flex w-full h-full items-center flex-col gap-[8px] py-[18px] rounded-[4px]`}
-                                                      onClick={() => setTagActive(category.href)}
+                                                      to={category.path}
+                                                      key={category.path + category.id}
+                                                      onClick={() => setTagActive(category.path as TagActiveArray)}
+                                                      className={`
+                              group relative flex h-[118px] w-full
+                              flex-col items-center justify-center
+                              overflow-hidden rounded-2xl
+                              border transition-all duration-200
+
+                              ${
+                                    isActive
+                                          ? `
+                                                border-blue-500/50
+                                                bg-gradient-to-b
+                                                from-blue-500/10
+                                                to-blue-500/[0.025]
+                                                shadow-[0_8px_24px_rgba(59,130,246,0.12)]
+                                          `
+                                          : `
+                                                border-[var(--border-color-input)]
+                                                bg-color-section-theme
+                                                hover:-translate-y-[2px]
+                                                hover:border-blue-500/30
+                                                hover:shadow-[0_10px_28px_rgba(0,0,0,0.07)]
+                                          `
+                              }
+                        `}
                                                 >
                                                       <div
-                                                            className={
-                                                                  'w-9 h-9 rounded-full flex items-center justify-center ' +
-                                                                  (isActive ? 'bg-white/15' : 'bg-gray-100')
-                                                            }
+                                                            className={`
+                                    absolute left-1/2 top-0 h-[3px]
+                                    -translate-x-1/2 rounded-b-full
+                                    bg-blue-500 transition-all duration-200
+
+                                    ${isActive ? 'w-10 opacity-100' : 'w-0 opacity-0'}
+                              `}
+                                                      />
+
+                                                      <div
+                                                            className='
+                                    absolute -right-5 -top-5
+                                    h-16 w-16 rounded-full
+                                    bg-blue-500/5
+                                    transition-transform duration-300
+                                    group-hover:scale-150
+                              '
+                                                      />
+
+                                                      <div
+                                                            className={`
+                                    relative z-[1]
+                                    flex h-12 w-12
+                                    items-center justify-center
+                                    rounded-2xl
+                                    transition-all duration-200
+
+                                    ${
+                                          isActive
+                                                ? `
+                                                      bg-blue-500
+                                                      text-white
+                                                      shadow-[0_6px_18px_rgba(59,130,246,0.28)]
+                                                `
+                                                : `
+                                                      bg-blue-500/[0.08]
+                                                      text-blue-500
+                                                      group-hover:bg-blue-500
+                                                      group-hover:text-white
+                                                      group-hover:shadow-[0_6px_18px_rgba(59,130,246,0.2)]
+                                                `
+                                    }
+                              `}
                                                       >
-                                                            <category.image
-                                                                  size={18}
-                                                                  className={isActive ? 'text-white' : 'text-gray-500'}
-                                                            />
+                                                            {category.icon}
                                                       </div>
 
-                                                      <span className='text-[12px]'>{category.label}</span>
+                                                      <span
+                                                            className={`
+                                    relative z-[1]
+                                    mt-3 line-clamp-2
+                                    px-2 text-center
+                                    text-[12px] font-semibold
+                                    leading-[17px]
+                                    transition-colors
+
+                                    ${isActive ? 'text-blue-500' : 'text-slate-500 group-hover:text-text-theme'}
+                              `}
+                                                      >
+                                                            {category.name}
+                                                      </span>
                                                 </Link>
                                           )
-                                    })}
-                              </div>
+                                    }}
+                                    renderMore={({ open, hiddenCount }: any) => (
+                                          <button
+                                                type='button'
+                                                onClick={open}
+                                                className='
+                        group flex h-[118px] w-full flex-col
+                        items-center justify-center
+                        rounded-2xl border border-dashed
+                        border-[var(--border-color-input)]
+                        bg-color-section-theme
+                        transition-all duration-200
+                        hover:-translate-y-[2px]
+                        hover:border-blue-500/40
+                        hover:bg-blue-500/[0.03]
+                        hover:shadow-[0_10px_28px_rgba(0,0,0,0.07)]
+                  '
+                                          >
+                                                <div
+                                                      className='
+                              flex h-12 w-12 items-center justify-center
+                              rounded-2xl bg-blue-500/[0.08]
+                              text-blue-500 transition-all duration-200
+                              group-hover:bg-blue-500
+                              group-hover:text-white
+                              group-hover:shadow-[0_6px_18px_rgba(59,130,246,0.2)]
+                        '
+                                                >
+                                                      <MoreHorizontal size={19} />
+                                                </div>
+
+                                                <span className='mt-3 text-[12px] font-semibold text-slate-500 transition-colors group-hover:text-text-theme'>
+                                                      Xem thêm
+                                                </span>
+
+                                                {hiddenCount > 0 && (
+                                                      <span className='mt-0.5 text-[10px] text-slate-400'>+{hiddenCount} danh mục</span>
+                                                )}
+                                          </button>
+                                    )}
+                                    renderExpanded={({ items, close }: any) => (
+                                          <BoxResponsiveFlowClose
+                                                open
+                                                onClose={close}
+                                                title={
+                                                      <div>
+                                                            <h3 className='text-base font-bold dark:text-white'>Danh mục sản phẩm</h3>
+
+                                                            <p className='mt-0.5 text-xs text-slate-500'>Khám phá tất cả danh mục</p>
+                                                      </div>
+                                                }
+                                          >
+                                                <div className='grid grid-cols-2 gap-3 sm:grid-cols-3'>
+                                                      {items.map((category: (typeof categories)[0]) => {
+                                                            const isActive = tagActive === category.path
+
+                                                            return (
+                                                                  <Link
+                                                                        to={category.path}
+                                                                        key={category.path + category.id}
+                                                                        onClick={() => {
+                                                                              setTagActive(category.path as TagActiveArray)
+                                                                              close()
+                                                                        }}
+                                                                        className={`
+                                                group relative flex min-h-[110px]
+                                                flex-col items-center justify-center
+                                                overflow-hidden rounded-2xl border p-3
+                                                transition-all duration-200
+
+                                                ${
+                                                      isActive
+                                                            ? `
+                                                                  border-blue-500/50
+                                                                  bg-blue-500/[0.08]
+                                                                  text-blue-500
+                                                            `
+                                                            : `
+                                                                  border-[var(--border-color-input)]
+                                                                  bg-color-section-theme
+                                                                  text-text-theme
+                                                                  hover:-translate-y-[2px]
+                                                                  hover:border-blue-500/30
+                                                                  hover:bg-blue-500/[0.03]
+                                                            `
+                                                }
+                                          `}
+                                                                  >
+                                                                        {isActive && (
+                                                                              <div className='absolute left-1/2 top-0 h-[3px] w-9 -translate-x-1/2 rounded-b-full bg-blue-500' />
+                                                                        )}
+
+                                                                        <div
+                                                                              className={`
+                                                      flex h-11 w-11 items-center justify-center
+                                                      rounded-2xl transition-all duration-200
+
+                                                      ${
+                                                            isActive
+                                                                  ? 'bg-blue-500 text-white shadow-[0_6px_18px_rgba(59,130,246,0.25)]'
+                                                                  : 'bg-blue-500/[0.08] text-blue-500 group-hover:bg-blue-500 group-hover:text-white'
+                                                      }
+                                                `}
+                                                                        >
+                                                                              {category.icon}
+                                                                        </div>
+
+                                                                        <span className='mt-2 line-clamp-2 px-2 text-center text-[12px] font-semibold leading-4'>
+                                                                              {category.name}
+                                                                        </span>
+                                                                  </Link>
+                                                            )
+                                                      })}
+                                                </div>
+                                          </BoxResponsiveFlowClose>
+                                    )}
+                              />
                         </div>
                   </div>
                   <div className='    w-full h-max min-h-[360px] '>
-                        <div className=' w-full h-full grid grid-col-2 sm:grid-cols-3 xl:grid-cols-6  grid-row-[360px] grid-flow-row auto-cols-[calc((100%-20px)/2)] xl:auto-cols-[calc((100%-120px)/6)] auto-rows-[360px] gap-[10px]'>
+                        <div className=' w-full h-full grid grid-col-2 sm:grid-cols-3 xl:grid-cols-7  grid-row-[360px] grid-flow-row auto-cols-[calc((100%-20px)/2)] xl:auto-cols-[calc((100%-120px)/7)] auto-rows-[360px] gap-[10px]'>
                               {getAllProduct.isSuccess && (
                                     <>
                                           {shopAdmin && (

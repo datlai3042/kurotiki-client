@@ -6,7 +6,7 @@ import { OrderItem } from '../types/order.type'
 import { TProductDetail } from '../types/product/product.type'
 import axiosCustom from './http'
 
-export type NotificationType = 'PRODUCT' | 'SYSTEM' | 'ADMIN' | 'SHOP' | 'USER'
+export type NotificationType = 'PRODUCT' | 'SYSTEM' | 'ADMIN' | 'SHOP' | 'USER' | 'COMMON'
 
 class NotificationService {
 

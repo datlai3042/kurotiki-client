@@ -95,6 +95,11 @@ const ProductPay = (props: TProps) => {
                   quantity: productQuantity,
                   cart_address: {
                         address_text: cartCurrent.cart_current_address,
+                        _id: cartCurrent?.cart_current_address_id,
+
+                        address_receiver_name: cartCurrent?.cart_current_address_receiver_name,
+                        address_receiver_tel: cartCurrent?.cart_current_address_receiver_tel,
+                        address_email_vat: cartCurrent?.cart_current_address_email_vat,
                         address_street: cartCurrent.cart_current_address,
                         address_ward: {
                               code: cartCurrent.cart_current_address_ward.code,
@@ -111,6 +116,7 @@ const ProductPay = (props: TProps) => {
                         type: cartCurrent.cart_current_address_type,
                   },
             }
+            
             cartMutation.mutate({ cart: payload })
       }
 
@@ -157,9 +163,9 @@ const ProductPay = (props: TProps) => {
                   <div className='flex justify-between items-center gap-[12px]'>
                         {/* <span className='font-bold'>Số lượng</span> */}
                         <img src={product.product_thumb_image.secure_url} className='w-[40px] h-[40px] object-cover' alt='' />
-                        <div className='flex gap-[8px] max-w-max h-[30px]'>
+                        <div className='flex gap-[8px] max-w-max h-[26px]'>
                               <button
-                                    className='flex items-center justify-center p-[6px] border-[1px] border-slate-400 min-w-[36px] h-full text-[20px] rounded-md'
+                                    className='flex items-center justify-center p-[6px] border-[1px] border-slate-300 min-w-[36px] h-full text-[20px] rounded-md'
                                     onClick={handleDecreaseProductQuantity}
                                     disabled={productQuantity === 1 ? true : false}
                               >
@@ -184,10 +190,10 @@ const ProductPay = (props: TProps) => {
                                     }}
                                     value={productQuantity || 0}
                                     type='number'
-                                    className='flex items-center justify-center border-[1px] border-slate-400 w-[40px]  h-full text-[16px] text-center text-black rounded-md'
+                                    className='flex items-center justify-center border-[1px] border-slate-300 w-[40px]  h-full text-[16px] text-center text-black rounded-md'
                               />
                               <button
-                                    className='flex items-center justify-center p-[6px] border-[1px] border-slate-400 min-w-[36px] h-full text-[20px] rounded-md'
+                                    className='flex items-center justify-center p-[6px] border-[1px] border-slate-300 min-w-[36px] h-full text-[20px] rounded-md'
                                     onClick={handleIncreaseProductQuantity}
                               >
                                     +
@@ -214,7 +220,7 @@ const ProductPay = (props: TProps) => {
                         </button>
                         <button
                               disabled={disabledBtn || cartMutation.isPending}
-                              className='w-full h-[45px] flex items-center justify-center bg-white text-blue-600 border-[1px] border-blue-600 rounded-md font-semibold text-[16px]'
+                              className='w-full h-[45px] flex items-center justify-center bg-[#19a3ff] text-white  border-[1px] border-blue-600 rounded-md font-semibold text-[16px]'
                               onClick={handleClickBuy}
                         >
                               Thêm vào giỏ

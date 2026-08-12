@@ -72,7 +72,7 @@ const BoxConfirmDelete = <T,>(props: BoxConfirmDeleteProps<T>) => {
                                           </div>
 
                                           <div className='min-w-0'>
-                                                <h3 className='text-[17px] font-semibold tracking-[-0.01em] text-text-theme'>
+                                                <h3 className='text-[17px] font-semibold tracking-[-0.01em] text-white'>
                                                       Xác nhận xóa sản phẩm
                                                 </h3>
                                                 <p className='mt-1 text-[13px] leading-5 text-slate-400'>
@@ -94,7 +94,7 @@ const BoxConfirmDelete = <T,>(props: BoxConfirmDeleteProps<T>) => {
                               {/* Content */}
                               <div className='px-5 py-5'>
                                     <div className='rounded-xl border border-white/[0.07] bg-white/[0.025] p-4'>
-                                          <div className='text-[14px] leading-6 text-text-theme'>{content}</div>
+                                          <div className='text-[14px] leading-6 text-white'>{content}</div>
 
                                           {subContent && (
                                                 <div className='mt-3 border-t border-white/[0.06] pt-3 text-[13px] leading-5 text-slate-400'>

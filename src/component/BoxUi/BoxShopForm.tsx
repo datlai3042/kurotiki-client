@@ -9,6 +9,7 @@ import BoxLoading from './BoxLoading'
 import { fetchUser } from '../../Redux/authenticationSlice'
 import TextArea from 'antd/es/input/TextArea'
 import Portal from '../Portal'
+import { useNavigate, useRoutes } from 'react-router-dom'
 
 type TForm = {
       shop_name: string
@@ -36,6 +37,7 @@ const BoxShopForm = (props: TProps) => {
 
       const queryClieny = useQueryClient()
       const dispatch = useDispatch()
+      const router = useNavigate()
 
       const form = useForm<TForm>({
             defaultValues: { shop_name: defaultValues.shop_name, shop_description: defaultValues.shop_description },
@@ -74,6 +76,7 @@ const BoxShopForm = (props: TProps) => {
                   })
                   dispatch(addToast({ id: Math.random().toString(), type: 'SUCCESS', message: 'Cập nhập thành công' }))
                   dispatch(fetchUser({ user }))
+                  router('/customer/shop')
                   onClose(false)
             },
       })
